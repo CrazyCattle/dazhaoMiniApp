@@ -14,7 +14,22 @@
   </view>
 
   <view class="scroll-box mt20 bg-f">
-    
+    <view class="scroll-title">
+      课程推荐
+      <view class="c-more">
+        查看更多
+        <view class="arrow-icon">
+          <view class="inner"></view>
+        </view> 
+      </view>
+    </view>
+    <swiper class="scroll-swiper" indicator-dots="{{ indicatorDots }}" autoplay="{{ canautoplay }}" duration="160" display-multiple-items="2" previous-margin="35rpx" next-margin="35rpx" skip-hidden-item-layout="true">
+      <block wx:for="{{imgUrls}}" wx:key="key">
+        <swiper-item class="swiper-item">
+          <image src="{{ item }}" class="slide-image"></image>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
 
   <view class="recommend mt20 bg-f">

@@ -13,6 +13,7 @@ Page({
     ],
     indicatorDots: false,
     autoplay: true,
+    canautoplay: false,
     circular: true,
     interval: 2500,
     duration: 300,
