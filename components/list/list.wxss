@@ -1,0 +1,28 @@
+/* components/list/list.wxss */
+.news-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx;
+}
+.news-list .avatar_img {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.news-list .item-content {
+  display: flex;
+  flex-direction: column;
+  
+  align-content: space-between; 
+  flex: 1;
+  padding-left: 15rpx;
+}
+.news-list .item-content .tit-1 {
+  font-size: 15px;
+  color: #333;
+}
+.news-list .item-content .tit-2 {
+  font-size: 12px;
+  color: #999;
+}

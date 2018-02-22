@@ -1,0 +1,65 @@
+<view class="index bg">
+  <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
+    <block wx:for="{{imgUrls}}" wx:key="key">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="nav-list bg-f">
+    <view class="nav-item" wx:for="{{navList}}" wx:key="key">
+      <image class="img" src="{{item.img}}"></image>
+      <text class="txt">{{item.text}}</text>
+    </view>  
+  </view>
+
+  <view class="scroll-box mt20 bg-f">
+    
+  </view>
+
+  <view class="recommend mt20 bg-f">
+    <view class="tc"><text class="title lh-normal">职位推荐</text></view>
+    <view class="r-list">
+      <view class="r-list-item" wx:for="{{ jobList }}" wx:key="key" wx:for-item="item">
+        <image class="pic" src="{{ item.pic_url }}"></image>
+        <view class="cont">
+          <view class="job lh-normal">{{ item.job }}</view>
+          <view class="company">{{ item.company }}</view>
+          <view class="s-desc"> 
+            <text class="infor lh-normal">{{ item.address }} {{ item.educ }} </text>
+            <text class="infor lh-normal">截止日期：{{ item.data }}</text>
+          </view>
+        </view>
+      </view>
+      <view class="more">
+        查看更多
+        <view class="arrow-icon">
+          <view class="inner"></view>
+        </view> 
+      </view>
+    </view>
+  </view>
+
+  <view class="recommend mt20 bg-f">
+    <view class="tc"><text class="title lh-normal">名企推荐</text></view>
+    <view class="r-list">
+      <view class="r-list-item" wx:for="{{ companyList }}" wx:key="key" wx:for-item="item">
+        <image class="pic" src="{{ item.pic_url }}"></image>
+        <view class="cont">
+          <view class="job lh-normal">{{ item.company }}</view>
+          <view class="company">{{ item.desc }}</view>
+          <view class="s-desc"> 
+            <text class="infor lh-normal">{{ item.address }} {{ item.educ }} </text>
+            <text class="infor lh-normal">截止日期：{{ item.data }}</text>
+          </view>
+        </view>
+      </view>
+      <view class="more">
+        查看更多
+        <view class="arrow-icon">
+          <view class="inner"></view>
+        </view> 
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,8 @@
+<!--components/list/list.wxml-->
+<view class="news-list">
+  <image src="{{ item.author.avatar_url }}" class="avatar_img"></image>
+  <view class="item-content">
+    <view class="tit-1">{{ item.title }}</view>
+    <view class="tit-2">{{ item.last_reply_at }}</view>
+  </view>
+</view>
