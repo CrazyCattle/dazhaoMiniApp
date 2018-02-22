@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/me/me",
-    "pages/information/infor",
-    "pages/course/course"
+    "pages/navIndex/index",
+    "pages/navMe/me",
+    "pages/navInformation/infor",
+    "pages/navCourse/course",
+    "components/loading/loading"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -20,25 +21,25 @@
       {
         "selectedIconPath": "images/nav/nav-index-active.png",
         "iconPath": "images/nav/nav-index.png",
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/navIndex/index",
         "text": "首页"
       },
       {
         "selectedIconPath": "images/nav/nav-course-active.png",
         "iconPath": "images/nav/nav-course.png",
-        "pagePath": "pages/course/course",
+        "pagePath": "pages/navCourse/course",
         "text": "课程"
       },
       {
         "selectedIconPath": "images/nav/nav-infor-active.png",
         "iconPath": "images/nav/nav-infor.png",
-        "pagePath": "pages/information/infor",
+        "pagePath": "pages/navInformation/infor",
         "text": "消息"
       },
       {
         "selectedIconPath": "images/nav/nav-me-active.png",
         "iconPath": "images/nav/nav-me.png",
-        "pagePath": "pages/me/me",
+        "pagePath": "pages/navMe/me",
         "text": "我的"
       }
     ]

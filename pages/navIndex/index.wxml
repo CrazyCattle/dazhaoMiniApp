@@ -41,7 +41,7 @@
           <view class="job lh-normal">{{ item.job }}</view>
           <view class="company">{{ item.company }}</view>
           <view class="s-desc"> 
-            <text class="infor lh-normal">{{ item.address }} {{ item.educ }} </text>
+            <text class="infor lh-normal">{{ item.address }} | {{ item.educ }} </text>
             <text class="infor lh-normal">截止日期：{{ item.data }}</text>
           </view>
         </view>
@@ -64,7 +64,7 @@
           <view class="job lh-normal">{{ item.company }}</view>
           <view class="company">{{ item.desc }}</view>
           <view class="s-desc"> 
-            <text class="infor lh-normal">{{ item.address }} {{ item.educ }} </text>
+            <text class="infor lh-normal">{{ item.address }} | {{ item.educ }} </text>
             <text class="infor lh-normal">截止日期：{{ item.data }}</text>
           </view>
         </view>

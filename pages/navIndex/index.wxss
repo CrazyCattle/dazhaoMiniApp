@@ -33,9 +33,12 @@
 .scroll-box {
   height: 386rpx;
 }
+.scroll-swiper {
+  height: 240rpx;
+}
 .scroll-title {
   display: flex;
-  padding: 25rpx 32rpx 20rpx 40rpx;
+  padding: 40rpx 32rpx 30rpx 40rpx;
   justify-content: space-between;
   align-items: center;
   font-family: 'PingFangSC-Medium';

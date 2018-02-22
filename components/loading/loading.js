@@ -1,13 +1,10 @@
-// components/list/list.js
+// components/loading/loading.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    item: {
-      type: Object,
-      default: {}
-    }
+
   },
 
   /**
