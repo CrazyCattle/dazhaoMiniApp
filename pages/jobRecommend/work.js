@@ -1,22 +1,46 @@
-// pages/index/index.js
+// pages/companyRecommend/company.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    // 轮播
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+    scrollTop: 0,
+    timer: null,
+    mockData: [
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        job: 'JAVA研发工程师',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        job: 'JAVA研发工程师',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        job: 'JAVA研发工程师',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        job: 'JAVA研发工程师',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      }
     ],
-    indicatorDots: false,
-    autoplay: true,
-    canautoplay: false,
-    circular: true,
-    interval: 2500,
-    duration: 300,
     // 职位推荐
     jobList: [
       {
@@ -50,14 +74,10 @@ Page({
         address: '上海',
         educ: '本科',
         data: '2018.01.24'
-      }
-    ],
-
-    // 名企推荐
-    companyList: [
+      },
       {
         pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        job: 'JAVA研发工程师',
         company: '上海脚步网络科技有限公司',
         address: '上海',
         educ: '本科',
@@ -65,7 +85,7 @@ Page({
       },
       {
         pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        job: 'JAVA研发工程师',
         company: '上海脚步网络科技有限公司',
         address: '上海',
         educ: '本科',
@@ -73,7 +93,7 @@ Page({
       },
       {
         pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        job: 'JAVA研发工程师',
         company: '上海脚步网络科技有限公司',
         address: '上海',
         educ: '本科',
@@ -81,7 +101,7 @@ Page({
       },
       {
         pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        job: 'JAVA研发工程师',
         company: '上海脚步网络科技有限公司',
         address: '上海',
         educ: '本科',
@@ -89,16 +109,7 @@ Page({
       }
     ]
   },
-  linkCompany () {
-    wx.navigateTo({
-      url: '../companyRecommend/company'
-    })
-  },
-  linkJob () {
-    wx.navigateTo({
-      url: '../jobRecommend/work'
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -153,5 +164,19 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  lower (e) {
+    console.log(this.data.jobList)
+    wx.showNavigationBarLoading();
+    const self = this
+    if (self.timer) {
+      clearTimeout(self.timer)
+    }
+    self.timer = setTimeout(() => {
+      self.setData({
+        jobList: self.data.jobList.concat(self.data.mockData)
+      })
+      wx.hideNavigationBarLoading()
+    }, 1000)
   }
 })

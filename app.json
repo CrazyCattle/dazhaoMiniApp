@@ -4,7 +4,12 @@
     "pages/navMe/me",
     "pages/navInformation/infor",
     "pages/navCourse/course",
-    "components/loading/loading"
+    "components/loading/loading",
+    "pages/companyRecommend/company",
+    "pages/jobRecommend/work",
+    "pages/course/course",
+    "pages/jobDetail/detail",
+    "pages/companyDetail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

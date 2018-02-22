@@ -7,9 +7,21 @@
     </block>
   </swiper>
   <view class="nav-list bg-f">
-    <view class="nav-item" wx:for="{{navList}}" wx:key="key">
-      <image class="img" src="{{item.img}}"></image>
-      <text class="txt">{{item.text}}</text>
+    <view class="nav-item">
+      <image class="img" src="../../images/index/nav/item_1.png"></image>
+      <text class="txt">课程分类</text>
+    </view>  
+    <view class="nav-item" bindtap="linkCompany">
+      <image class="img" src="../../images/index/nav/item_2.png"></image>
+      <text class="txt">名企推荐</text>
+    </view>  
+    <view class="nav-item">
+      <image class="img" src="../../images/index/nav/item_3.png"></image>
+      <text class="txt">简历中心</text>
+    </view>  
+    <view class="nav-item">
+      <image class="img" src="../../images/index/nav/item_4.png"></image>
+      <text class="txt">求职锦囊</text>
     </view>  
   </view>
 
@@ -46,7 +58,7 @@
           </view>
         </view>
       </view>
-      <view class="more">
+      <view class="more" bindtap="linkJob">
         查看更多
         <view class="arrow-icon">
           <view class="inner"></view>
@@ -69,7 +81,7 @@
           </view>
         </view>
       </view>
-      <view class="more">
+      <view class="more" bindtap="linkCompany">
         查看更多
         <view class="arrow-icon">
           <view class="inner"></view>
