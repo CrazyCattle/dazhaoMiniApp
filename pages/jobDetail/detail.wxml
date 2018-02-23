@@ -1,2 +1,106 @@
-<!--pages/jobDetail/detail.wxml-->
-<text>pages/jobDetail/detail.wxml</text>
+<view class="jobDetail bg">
+  <view class="r-list jobDetail-title bg-f">
+    <view class="r-list-item">
+      <view class="cont">
+        <view class="job lh-normal">JAVA研发工程师 <text class="salary">[8k-12k]</text></view>
+        <view class="infor lh-normal">上海 | 本科 | 计算机软硬件/互联网/…</view>
+        <view class="infor lh-normal">截止日期：2018.01.24</view>
+      </view>
+    </view>
+  </view>
+  <view class="r-list jobDetail-title bg-f">
+    <view class="r-list-item">
+      <image class="pic" src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
+      <view class="cont">
+        <view class="job lh-normal">上海脚步网络科技有限公司</view>
+        <view class="company">[1个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds</view>
+        <view class="s-desc"> 
+          <text class="infor lh-normal">上海 | 本科</text>
+          <text class="infor lh-normal">截止日期：2018.01.24</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="j-row mt20 bg-f">
+    <view class="inner-row">
+      <view class="tit">职位描述：</view>
+      <view class="job-desc">
+        1、搜索广告、品牌广告、展示广告相关业务平台的设计和研发工作；
+      </view>
+      <view class="job-desc">
+        2、负责UC头条产品的日志处理和分析，为业务发展提供数据报表支持 ；
+      </view>
+      <view class="job-desc">
+        3、持续改进商业系统平台的服务架构、核心算法或核心技术等，保证系统高性能、高可用性和高可扩展性。
+      </view>
+    </view>
+    <view class="inner-row">
+      <view class="tit">任职要求：</view>
+      <view class="job-desc">
+        1、本科及以上学历，计算机相关专业； 
+      </view>
+      <view class="job-desc">
+        2、具有互联网公司大型企业软件成功的设计开发经验。有大型商业平台web系统研发经验优先；熟悉性能优化、对架构设计有一定理解者优先； 
+      </view>
+      <view class="job-desc">
+        3、对Java面向对象软件结构有深入理解以及很强的应用能力，理解常用的设计模式；
+      </view>
+      <view class="job-desc">
+        4、能熟练使用MySQL数据库，对数据库表有独立的设计能力。对数据库内部实现机制有比较深刻的理解者优先；
+      </view>
+      <view class="job-desc">
+        5、有责任心、学习能力、执行力、业务理解能力。
+      </view>
+    </view>
+  </view>
+
+  <view class="j-row mt20 bg-f">
+    <view class="inner-row">
+      <view class="tit">工作地点：</view>
+      <view class="job-desc">
+        <view class="address-icon"></view>
+        上海市杨浦区长阳路1687号1408优客工场
+      </view>
+    </view>
+  </view>
+
+  <view class="recommend mt20 bg-f">
+    <view class="tc"><text class="title lh-normal">相似职位</text></view>
+    <view class="r-list">
+      <view class="r-list-item" wx:for="{{ companyList }}" wx:key="key" wx:for-item="item">
+        <image class="pic" src="{{ item.pic_url }}"></image>
+        <view class="cont">
+          <view class="job lh-normal">{{ item.company }}</view>
+          <view class="company">{{ item.desc }}</view>
+          <view class="s-desc"> 
+            <text class="infor lh-normal">{{ item.address }} | {{ item.educ }} </text>
+            <text class="infor lh-normal">截止日期：{{ item.data }}</text>
+          </view>
+        </view>
+      </view>
+      <view class="more" bindtap="linkCompany">
+        查看更多
+        <view class="arrow-icon">
+          <view class="inner"></view>
+        </view> 
+      </view>
+    </view>
+  </view>
+
+  <view class="tab-fun--bottom bg-f">
+    <view class="tab-lf">
+      <view class="fun-btn">
+        <image class="img" src="../../images/share.png"></image>
+        分享
+      </view>
+      <view class="fun-btn">
+        <image class="img" src="../../images/collect.png"></image>
+        收藏
+      </view>
+    </view>
+    <view class="tab-rt send-resume">
+      投递简历
+    </view>
+  </view>
+</view>

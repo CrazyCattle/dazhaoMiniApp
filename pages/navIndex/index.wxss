@@ -97,7 +97,7 @@
 .r-list-item .cont {
   flex: 1;
   height: 140rpx;
-  padding: 28rpx 50rpx 28rpx 0;
+  padding: 32rpx 50rpx 32rpx 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

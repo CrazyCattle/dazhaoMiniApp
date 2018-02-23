@@ -1,18 +1,52 @@
-// pages/jobDetail/detail.js
+// pages/companyRecommend/company.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    // 名企推荐
+    companyList: [
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      }
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(options.id)
   },
 
   /**

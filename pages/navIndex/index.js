@@ -99,6 +99,16 @@ Page({
       url: '../jobRecommend/work'
     })
   },
+  linkCourse () {
+    wx.navigateTo({
+      url: '../course/course'
+    })
+  },
+  linkJobDetail () {
+    wx.navigateTo({
+      url: '../jobDetail/detail?id=123'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
