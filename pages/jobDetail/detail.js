@@ -1,10 +1,21 @@
 // pages/companyRecommend/company.js
+
+// 引入SDK核心类
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.min.js');
+var map;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    // 位置 经纬度
+    address: '',
+    lat: undefined,
+    lng: undefined,
+    // 公司地址
+    companyAddress: '上海市杨浦区长阳路1687号1408优客工场',
     // 名企推荐
     companyList: [
       {
@@ -41,7 +52,44 @@ Page({
       }
     ]
   },
+  linkMap (e) {
+    console.log(e.target.dataset.name)
+    let address = e.target.dataset.name
 
+    // 实例化API核心类
+    this.setData({
+      address: address
+    })
+    map = new QQMapWX({
+      key: 'LSXBZ-ACULK-KVFJZ-AFI56-KPMJF-PLFIP'
+    });
+
+    // 调用接口
+    new Promise((resolve, reject) => {
+      map.geocoder({
+        address: this.data.address,
+        success: (res) => {
+          if (res.status == '0') {
+            this.setData({
+              lat: res.result.location.lat,
+              lng: res.result.location.lng,
+            })
+            resolve({
+              lat: this.data.lat,
+              lng: this.data.lng
+            })
+          }
+        }
+      })
+    }).then((res) => {
+      wx.openLocation({
+        latitude: res.lat,
+        longitude: res.lng,
+        scale: 18,
+        address: this.data.address
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -60,7 +108,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
 
   /**

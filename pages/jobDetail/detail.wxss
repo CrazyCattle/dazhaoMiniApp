@@ -108,6 +108,20 @@
   letter-spacing: 0.04rpx;
   line-height: 50rpx;
 }
+.inner-row .job-desc .icon {
+  width: 20rpx;
+  height: 26rpx;
+  margin-right: 20rpx;
+}
+.inner-row .map {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #47dbe2;
+  text-align: right;
+}
+.linkMap {
+  display: inline-block;
+}
 
 .more {
   display: flex;

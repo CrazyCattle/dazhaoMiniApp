@@ -59,8 +59,16 @@
     <view class="inner-row">
       <view class="tit">工作地点：</view>
       <view class="job-desc">
-        <view class="address-icon"></view>
-        上海市杨浦区长阳路1687号1408优客工场
+        <image class="icon" src="../../images/address.png"></image>
+        {{ companyAddress }}
+      </view>
+      <view class="map">
+        <view class="linkMap" data-name="{{ companyAddress }}" bindtap="linkMap">
+          查看地图
+          <view class="arrow-icon">
+            <view class="inner"></view>
+          </view>
+        </view> 
       </view>
     </view>
   </view>
