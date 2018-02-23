@@ -109,6 +109,11 @@ Page({
       url: '../jobDetail/detail?id=123'
     })
   },
+  linkCompanyDetail () {
+    wx.navigateTo({
+      url: '../companyDetail/detail?id=123'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

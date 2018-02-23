@@ -70,7 +70,7 @@
   <view class="recommend mt20 bg-f">
     <view class="tc"><text class="title lh-normal">名企推荐</text></view>
     <view class="r-list">
-      <view class="r-list-item" wx:for="{{ companyList }}" wx:key="key" wx:for-item="item">
+      <view class="r-list-item" wx:for="{{ companyList }}" wx:key="key" wx:for-item="item"  bindtap="linkCompanyDetail">
         <image class="pic" src="{{ item.pic_url }}"></image>
         <view class="cont">
           <view class="job lh-normal">{{ item.company }}</view>
