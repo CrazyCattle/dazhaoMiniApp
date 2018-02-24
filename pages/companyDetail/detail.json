@@ -1,5 +1,8 @@
 {
   "navigationBarTitleText": "企业详情",
   "navigationBarBackgroundColor": "#fff",
-  "navigationBarTextStyle": "black"
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "mask": "/components/mask/mask"
+  }
 }

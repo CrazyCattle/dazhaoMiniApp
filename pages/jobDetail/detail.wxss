@@ -184,6 +184,9 @@
   line-height: 100%;
   box-sizing: border-box;
 }
+.tab-fun--bottom .tab-lf .fun-btn.active {
+  color: #47dbe2;
+}
 .tab-fun--bottom .tab-lf .fun-btn:first-child {
   padding-right: 50rpx;
   align-items: flex-end;

@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    collected: false,
     // 位置 经纬度
     address: '',
     lat: undefined,
@@ -88,6 +89,16 @@ Page({
         scale: 18,
         address: this.data.address
       })
+    })
+  },
+  collect () {
+    this.setData({
+      collected: !this.data.collected
+    })
+    wx.showToast({
+      title: this.data.collected?'收藏成功':'取消成功',
+      icon: 'none',
+      duration: 2000
     })
   },
   /**

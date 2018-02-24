@@ -155,6 +155,9 @@
   line-height: 100%;
   box-sizing: border-box;
 }
+.tab-fun--bottom .tab-lf .fun-btn.active {
+  color: #47dbe2;
+}
 .tab-fun--bottom .tab-lf .fun-btn:first-child {
   padding-right: 120rpx;
   align-items: flex-end;
@@ -232,4 +235,59 @@
   top: -70rpx;
   left: 0;
   background-image: linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,1))
+}
+
+.share-box {
+  position: fixed;
+  width: 100%;
+  height: 360rpx;
+  bottom: -1rpx;
+  left: 0;
+  transform: translateY(100%);
+  z-index: 2000;
+  box-sizing: border-box;
+  transition: transform .2s ease-in-out;
+}
+.share-box.active {
+  transform: translateY(0);
+}
+.share-box .row {
+  display: flex;
+  padding: 0 40rpx;
+  margin-bottom: 0;
+  align-items: center;
+  height: 130rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  color: #848ca1;
+  position: relative;
+}
+.share-box .row-1::after {
+  content: '';
+  position: absolute;
+  left: 40rpx;
+  bottom: 0;
+  width: 670rpx;
+  height: 0;
+  border-bottom: 1rpx solid #e6e9f3;
+  z-index: 2001;
+}
+.share-box .row .icon {
+  width: 72rpx;
+  height: 72rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+  background:#47dbe2;
+}
+.share-box .row:nth-child(2) .icon {
+  background:#ffa180;
+}
+.share-box .close {
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-family: 'PingFangSC-Medium';
+  font-size: 30rpx;
+  color: #fff;
+  background:#47dbe2;
 }

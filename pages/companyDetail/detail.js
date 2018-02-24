@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showMask: false,
+    collected: false,
     logo: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
     company_name: '上海脚步网络科技有限公司',
     active: 1,
@@ -72,6 +74,24 @@ Page({
       more: !this.data.more
     })
   },
+  share () {
+    this.setData({
+      showMask: !this.data.showMask
+    })
+  },
+  collect () {
+    this.setData({
+      collected: !this.data.collected
+    })
+    wx.showToast({
+      title: this.data.collected?'收藏成功':'取消成功',
+      icon: 'none',
+      duration: 2000
+    })
+  },
+  productImg () {
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -90,7 +110,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
 
   /**
