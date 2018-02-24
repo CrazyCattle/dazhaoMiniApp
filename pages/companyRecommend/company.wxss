@@ -79,9 +79,6 @@
 
 
 .recommend {
-  position: fixed;
-  top: 228rpx;
-  left: 0;
   width: 100%;
   height: calc(100% - 228rpx);
 }

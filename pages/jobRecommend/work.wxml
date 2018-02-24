@@ -1,3 +1,55 @@
+<view class="recommend-head">
+  <view class="search-box bg">
+    <view class="search-input bg-f">
+      <image class="search" src=""></image>搜索公司或职位名称
+    </view>
+  </view>
+  <view class="typefilter-box bg-f">
+    <view class="filter-head">招聘单位类型</view>
+    <swiper class="typefilter" display-multiple-items="4">
+      <swiper-item>
+        <view class="filter-item">
+          <text class="{{ filterType == '0'?'active':'' }}" bindtap="filterData" data-type="0">不限</text>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="filter-item">
+          <text class="{{ filterType == '1'?'active':'' }}" bindtap="filterData" data-type="1">事业单位</text>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="filter-item">
+          <text class="{{ filterType == '2'?'active':'' }}" bindtap="filterData" data-type="2">央企</text>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="filter-item">
+          <text class="{{ filterType == '3'?'active':'' }}" bindtap="filterData" data-type="3">高校招聘</text>
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="filter-item">
+          <text class="{{ filterType == '4'?'active':'' }}" bindtap="filterData" data-type="4">博士后招聘</text>
+        </view>
+      </swiper-item>
+       <swiper-item>
+        <view class="filter-item">
+          <text class="{{ filterType == '5'?'active':'' }}" bindtap="filterData" data-type="5">sadfd</text>
+        </view>
+      </swiper-item> 
+      <swiper-item>
+        <view class="filter-item">
+          <text class="{{ filterType == '6'?'active':'' }}" bindtap="filterData" data-type="6">fkdla</text>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="sort-box">
+    <view class="sort-item">招聘职位类型</view>
+    <view class="sort-item">城市</view>
+    <view class="sort-item">学历</view>
+  </view>
+</view>
 <view class="recommend bg-f">
   <scroll-view scroll-y style="height: 100%;" bindscrolltolower="lower" scroll-top="{{scrollTop}}">
     <view class="r-list">
