@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    filterType: 0,
     scrollTop: 0,
     timer: null,
     mockData: [
@@ -125,7 +126,12 @@ Page({
       }
     ]
   },
-
+  filterData (e) {
+    let type = e.target.dataset.type
+    this.setData({
+      filterType: type
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
