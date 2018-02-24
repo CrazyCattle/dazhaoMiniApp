@@ -2,7 +2,7 @@
   "navigationBarTitleText": "职位推荐",
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
-  "disableScroll": false,
+  "disableScroll": true,
   "usingComponents": {
     "loading": "/components/loading/loading"
   }

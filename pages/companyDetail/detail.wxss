@@ -230,5 +230,6 @@
   width: 100%;
   height: 70rpx;
   top: -70rpx;
+  left: 0;
   background-image: linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,1))
 }
