@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/companyRecommend/company",
     "pages/navIndex/index",
     "pages/navMe/me",
+    "pages/companyRecommend/company",
     "pages/navInformation/infor",
     "pages/navCourse/course",
     "components/loading/loading",
