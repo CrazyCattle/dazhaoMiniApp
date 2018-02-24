@@ -1,9 +1,9 @@
 .recommend {
   position: fixed;
-  top: 0;
+  top: 234rpx;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 234rpx);
 }
 .r-list-item {
   display: flex;
@@ -17,9 +17,6 @@
   flex-direction: column;
   justify-content: space-between;
   border-bottom: 1rpx solid #eaecf3;
-}
-.r-list-item:last-child .cont {
-  border-bottom: none;
 }
 .r-list-item .pic {
   width: 140rpx;

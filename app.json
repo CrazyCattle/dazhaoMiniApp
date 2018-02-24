@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/companyRecommend/company",
     "pages/navIndex/index",
     "pages/navMe/me",
     "pages/navInformation/infor",
     "pages/navCourse/course",
     "components/loading/loading",
-    "pages/companyRecommend/company",
     "pages/jobRecommend/work",
     "pages/course/course",
     "pages/jobDetail/detail",

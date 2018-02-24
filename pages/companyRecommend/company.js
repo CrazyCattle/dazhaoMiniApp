@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    scrollTop: 100,
+    scrollTop: 0,
     timer: null,
     mockData: [
       {
