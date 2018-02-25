@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    active: 0,
     filterType: 0,
     scrollTop: 0,
     timer: null,
@@ -115,6 +116,19 @@ Page({
     this.setData({
       filterType: type
     })
+  },
+  tabFilter (e) {
+    console.log(e.target.dataset.id)
+    let id = e.target.dataset.id
+    if (this.data.active == id) {
+      this.setData({
+        active: 0
+      })
+    } else {
+      this.setData({
+        active: id
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

@@ -75,6 +75,40 @@
   font-size: 24rpx;
   color: #848ca1;
   text-align: center;
+  border-right: 2rpx solid #eaecf3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sort-box .sort-item:last-child {
+  border-right: none;
+}
+
+
+.arrow-icon {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 10rpx;
+  border: 10rpx solid transparent;
+  border-top-color: #b7bcce;
+  position: relative;
+  top: 6rpx;
+  transition: transform .3s linear;
+  transform-origin: 50% 25%;
+}
+.arrow-icon .inner {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 8rpx solid transparent;
+  border-top-color: #f3f4f8;
+  top: -9rpx;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.arrow-icon.active {
+  transform: rotate(180deg);
 }
 
 

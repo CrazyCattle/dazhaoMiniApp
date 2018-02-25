@@ -45,9 +45,24 @@
     </swiper>
   </view>
   <view class="sort-box">
-    <view class="sort-item">招聘职位类型</view>
-    <view class="sort-item">城市</view>
-    <view class="sort-item">学历</view>
+    <view class="sort-item" data-id="1" bindtap="tabFilter">
+      招聘职位类型
+      <view class="arrow-icon {{ active=='1'?'active':'' }}">
+        <view class="inner"></view>
+      </view> 
+    </view>
+    <view class="sort-item" data-id="2" bindtap="tabFilter">
+      城市
+      <view class="arrow-icon {{ active=='2'?'active':'' }}">
+        <view class="inner"></view>
+      </view> 
+    </view>
+    <view class="sort-item" data-id="3" bindtap="tabFilter">
+      学历
+      <view class="arrow-icon {{ active=='3'?'active':'' }}">
+        <view class="inner"></view>
+      </view> 
+    </view>
   </view>
 </view>
 <view class="recommend bg-f">
