@@ -1,0 +1,21 @@
+<view class="recommend bg-f">
+  <scroll-view scroll-y style="height: 100%;" bindscrolltolower="lower" scroll-top="{{scrollTop}}">
+    <view class="r-list">
+      <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item">
+        <view class="cont">
+          <view class="company">
+            <image class="img" src="{{ item.pic_url }}"></image>
+            {{ item.user_name }}
+          </view>
+          <view class="job lh-normal">{{ item.title }}</view>
+          <view class="s-desc"> 
+            <text class="infor lh-normal">{{ item.learning }}人学过</text>
+            <text class="infor lh-normal">时长：{{ item.data }}</text>
+          </view>
+        </view>
+        <image class="pic" src="{{ item.pic_url }}"></image>
+      </view>
+    </view>
+    <loading></loading>
+  </scroll-view>
+</view>

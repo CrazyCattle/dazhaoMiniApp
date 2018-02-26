@@ -5,9 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    placeholderTxt: '搜索公司或职位名称',
+    placeholderTxt: '搜索课程、讲师或关键字',
     focus: false,
-    page: 3,
+    page: 1,
     // page 2 轮播
     imgUrls: [
       'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
@@ -64,6 +64,26 @@ Page({
       page: page
     })
   },
+  linkChildPage () {
+    wx.navigateTo({
+      url: '../courseChild/course'
+    })
+  },
+  linkCollect () {
+    wx.navigateTo({
+      url: '../courseCollection/collect'
+    })
+  },
+  linkRecord () {
+    wx.navigateTo({
+      url: '../courseRecord/record'
+    })
+  },
+  linCourse () {
+    wx.navigateTo({
+      url: '../coursePlay/play'
+    })
+  } ,
   /**
    * 生命周期函数--监听页面加载
    */

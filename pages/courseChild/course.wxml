@@ -1,2 +1,62 @@
-<!--pages/courseChild/course.wxml-->
-<text>pages/courseChild/course.wxml</text>
+<view class="course-raiders bg-f">
+  <view class="course-raiders-head tc">求职攻略系列课程</view>
+  <view class="course-raiders-desc">
+  害怕面试官的不苟言笑？担心面试题的刁钻难搞？不怕，看完这个视频你会发现HR都是好（H）人（R）。害怕面试官的不苟言笑？担心面试题的刁钻难搞？不怕，看完这个视频你会发现HR都是好（H）人（R）。害怕面试官的不苟言笑？担心面试题的刁钻难搞？这段是二级分类的介绍。
+  </view>
+</view>
+
+<view class="fliter-box mt20 bg-f tc">
+  <view class="tc">
+    <view class="title">求职解读</view>
+    <view class="r-list tl">
+      <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item">
+        <view class="cont">
+          <view class="company">
+            <image class="img" src="{{ item.pic_url }}"></image>
+            {{ item.user_name }}
+          </view>
+          <view class="job lh-normal">{{ item.title }}</view>
+          <view class="s-desc">
+            <text class="infor lh-normal">{{ item.learning }}人学过</text>
+            <text class="infor lh-normal">时长：{{ item.data }}</text>
+          </view>
+        </view>
+        <image class="pic" src="{{ item.pic_url }}"></image>
+      </view>
+      <view class="more" bindtap="linkCourse">
+        查看更多
+        <view class="arrow-icon">
+          <view class="inner"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="fliter-box mt20 bg-f tc">
+  <view class="tc">
+    <view class="title">求职攻略</view>
+    <view class="r-list tl">
+      <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item">
+        <view class="cont">
+          <view class="company">
+            <image class="img" src="{{ item.pic_url }}"></image>
+            {{ item.user_name }}
+          </view>
+          <view class="job lh-normal">{{ item.title }}</view>
+          <view class="s-desc">
+            <text class="infor lh-normal">{{ item.learning }}人学过</text>
+            <text class="infor lh-normal">时长：{{ item.data }}</text>
+          </view>
+        </view>
+        <image class="pic" src="{{ item.pic_url }}"></image>
+      </view>
+    </view>
+    <view class="more" bindtap="linkCourse">
+      查看更多
+      <view class="arrow-icon">
+        <view class="inner"></view>
+      </view>
+    </view>
+  </view>
+</view>

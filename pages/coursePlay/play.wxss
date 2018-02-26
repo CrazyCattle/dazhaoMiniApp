@@ -1,0 +1,148 @@
+.course-video {
+  display: block;
+  width: 100%;
+  height: 420rpx;
+}
+.course-info {
+  padding: 28rpx 40rpx 58rpx;
+}
+.course-info .row {
+  display: flex;
+  justify-content: space-between;
+}
+.course-info .row:nth-child(2) {
+  padding-bottom: 30rpx;
+  border-bottom: 1rpx solid #e6e9f3;
+}
+.course-info .v-tit {
+  margin-bottom: 32rpx;
+  font-family: 'PingFangSC-Semibold';
+  font-weight: bold;
+  font-size: 30rpx;
+  color:#494c4e;
+}
+
+.course-info .v-students,
+.course-info .v-fun {
+  font-size: 24rpx;
+  color:#848ca1;
+} 
+.course-info .v-fun {
+  display: flex;
+  align-items: center;
+}
+.course-info .icon {
+  margin-right: 10rpx;
+}
+.course-info .icon-1 {
+  width: 36rpx;
+  height: 36rpx;
+}
+.course-info .icon-2 {
+  width: 38rpx;
+  height: 32rpx;
+  margin-left: 40rpx;
+}
+
+
+.course-info .row:nth-child(3) {
+  padding-top: 30rpx;
+}
+.v-user-pic {
+  width: 80rpx;
+  height: 80rpx;
+  background-color: #f3f4f8;
+  border-radius: 50%;
+}
+.v-user-infor {
+  flex: 1;
+  padding-left: 10rpx;
+  position: relative;
+}
+.v-user-name {
+  font-family:'PingFangSC-Semibold';
+  font-weight: bold;  
+  font-size: 26rpx;
+  color:#313148;
+}
+.v-user-desc {
+  font-size: 24rpx;
+  color:#848ca1;
+  letter-spacing:0;
+  line-height: 40rpx;
+}
+.v-user-desc.active {
+  height: 80rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.arrow-icon {
+  position: absolute;
+  bottom: -30rpx;
+  right: 15rpx;
+  width: 0;
+  height: 0;
+  margin-top: 5rpx;
+  border: 10rpx solid transparent;
+  border-top-color: #47dbe2;
+  transform-origin: 25% 25%;
+  transition: transform .2s linear;
+}
+.arrow-icon .inner {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -9rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8rpx solid transparent;
+  border-top-color: #fff;
+}
+.arrow-icon.active {
+  transform: rotate(180deg) translateX(-50%);
+}
+
+.fliter-box {
+  padding-top: 20rpx; 
+}
+.fliter-box .title {
+  display: inline-block;
+  margin-bottom: 10rpx;
+  color: #313148;
+  letter-spacing: 0;
+  font-family: 'PingFangSC-Semibold';
+  font-weight: bold;
+  font-size: 26rpx;
+  position: relative;
+}
+
+.fliter-box .title::before, .fliter-box .title::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30rpx;
+  height: 2rpx;
+  background-color: #e6e9f3;
+}
+
+.fliter-box .title::before {
+  left: -40rpx;
+}
+
+.fliter-box .title::after {
+  right: -40rpx;
+}
+
+.fliter-box .course-detail {
+  display: block;
+  width: 674rpx;
+  height: 364rpx;
+  margin: 20rpx auto;
+}
+.fliter-box .course-detail:last-child {
+  padding-bottom: 20rpx;
+}

@@ -1,0 +1,33 @@
+<view class="page-play">
+  <video class="course-video" src="{{ videoSrc }}" controls="{{ controls }}" autoplay="{{ autoplay }}" show-play-btn="{{ showPlayBtn }}" poster="{{ poster }}" show-center-play-btn="showCenterPlayBtn"></video>
+  <view class="course-info bg-f">
+    <view class="row"><text class="v-tit">简历吐槽大会，这里有你的吗？</text></view>
+    <view class="row">
+      <view class="v-students">20人正在学</view>
+      <view class="v-fun">
+        <image class="icon icon-1" src="../../images/collect.png"></image>收藏
+        <image class="icon icon-2" src="../../images/menu.png"></image>目录
+      </view>
+    </view>
+    <view class="row">
+      <image class="v-user-pic" src=""></image>
+      <view class="v-user-infor">
+        <text class="v-user-name">34Learning</text>
+        <view class="v-user-desc {{ !active?'active':'' }}">
+          34Learning是大招一百网的合作伙伴，专注于职业化培训。 在原有线下课堂式培训的基础上，34Lear大招一百网的合作伙伴，专注于职业化培训。 在原有线下课堂式培训的基础上，34Lear
+        </view>
+        <view class="arrow-icon {{ active?'active':'' }}" bindtap="more">
+          <view class="inner"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="fliter-box mt20 bg-f tc">
+    <view class="tc">
+      <view class="title">课程资料</view>
+    </view>
+    <image class="course-detail" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
+    <image class="course-detail" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
+    <image class="course-detail" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg"></image>
+  </view>
+</view>

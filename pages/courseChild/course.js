@@ -5,7 +5,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    courseList: [
+      {
+        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        user_name: 'test saj 1',
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        title: '第一次求职？来看这里',
+        learning: '232',
+        data: '06:16'
+      },
+      {
+        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        user_name: 'test saj 1',
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        title: '简历吐槽大会，这里有你的吗？',
+        learning: '232',
+        data: '06:16'
+      },
+      {
+        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        user_name: 'test saj 1',
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        title: '第一次求职？来看这里',
+        learning: '232',
+        data: '06:16'
+      }
+    ],
   },
 
   /**

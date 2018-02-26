@@ -207,9 +207,6 @@
   left: 40rpx;
   border-bottom: 1rpx solid #eaecf3; 
 }
-.r-list-item:last-child::after {
-  border-bottom: none;
-}
 .r-list-item .cont {
   flex: 1;
   height: 160rpx;

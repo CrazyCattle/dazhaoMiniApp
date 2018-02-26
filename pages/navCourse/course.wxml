@@ -15,18 +15,18 @@
     </view>
   </view>
   
-  <view class="page-1" wx:if="{{ page == '1' }}">
+  <view class="page-1 bg" wx:if="{{ page == '1' }}">
     <view class="fliter-box bg-f tc">
       <view class="tc">
         <view class="title">名企推荐</view>
       </view>
       <text class="tit">优秀企业推荐尽在大招一百网</text>
       <view class="fliter-tab">
-        <view class="item">春招</view>
-        <view class="item">面试</view>
-        <view class="item">求职攻略</view>
-        <view class="item">面试</view>
-        <view class="item">面试择业技巧</view>
+        <view class="item" bindtap="linkChildPage">春招</view>
+        <view class="item" bindtap="linkChildPage">面试</view>
+        <view class="item" bindtap="linkChildPage">求职攻略</view>
+        <view class="item" bindtap="linkChildPage">面试</view>
+        <view class="item" bindtap="linkChildPage">面试择业技巧</view>
       </view>
     </view>
     <view class="fliter-box mt20 bg-f tc">
@@ -79,7 +79,7 @@
     </view>
   </view>
 
-  <view class="page-2" wx:if="{{ page == '2' }}">
+  <view class="page-2 bg" wx:if="{{ page == '2' }}">
     <view class="scroll-box bg-f">
       <view class="scroll-title">
         课程推荐
@@ -102,7 +102,7 @@
       <view class="tc">
         <view class="title">发现好课</view>
         <view class="r-list tl">
-          <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item">
+          <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item" bindtap="linCourse">
             <view class="cont">
               <view class="company">
                 <image class="img" src="{{ item.pic_url }}"></image>
@@ -121,12 +121,12 @@
     </view>
   </view>
 
-  <view class="page-3" wx:if="{{ page == '3' }}">
+  <view class="page-3 bg" wx:if="{{ page == '3' }}">
     <view class="fliter-box mt20 bg-f tc">
       <view class="tc">
         <view class="title">收藏夹</view>
         <view class="r-list tl">
-          <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item">
+          <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item" bindtap="linCourse">
             <view class="cont">
               <view class="company">
                 <image class="img" src="{{ item.pic_url }}"></image>
@@ -140,7 +140,7 @@
             </view>
             <image class="pic" src="{{ item.pic_url }}"></image>
           </view>
-          <view class="more" bindtap="linkCourse">
+          <view class="more" bindtap="linkCollect">
             查看更多
             <view class="arrow-icon">
               <view class="inner"></view>
@@ -168,7 +168,7 @@
             <image class="pic" src="{{ item.pic_url }}"></image>
           </view>
         </view>
-        <view class="more" bindtap="linkCourse">
+        <view class="more" bindtap="linkRecord">
           查看更多
           <view class="arrow-icon">
             <view class="inner"></view>
