@@ -5,11 +5,14 @@
     "pages/navInformation/infor",
     "pages/navCourse/course",
     "pages/companyDetail/detail",
-    "components/loading/loading",
     "pages/companyRecommend/company",
     "pages/jobRecommend/work",
-    "pages/course/course",
-    "pages/jobDetail/detail"
+    "pages/moreCourse/course",
+    "pages/courseChild/course",
+    "pages/jobDetail/detail",
+    "pages/courseCollection/collect",
+    "pages/coursePlay/play",
+    "pages/courseRecord/record"
   ],
   "window": {
     "backgroundTextStyle": "light",
