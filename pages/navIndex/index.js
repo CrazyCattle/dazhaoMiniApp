@@ -101,7 +101,7 @@ Page({
   },
   linkCourse () {
     wx.navigateTo({
-      url: '../course/course'
+      url: '../moreCourse/course'
     })
   },
   linkJobDetail () {

@@ -11,10 +11,23 @@
   color: #848ca1;
   letter-spacing: 0.26rpx;
   border-radius: 2px;
+  position: relative;
 }
+.search-box .search-input .ipt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  opacity: 0;
+  z-index: 1;
+}
+
 .search-box .search {
-  width: 22rpx;
-  height: 22rpx;
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 10rpx;
 }
 .typefilter-box {
   display: flex;

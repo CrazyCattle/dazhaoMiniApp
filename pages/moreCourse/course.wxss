@@ -9,12 +9,13 @@
   display: flex;
   align-items: center;
   border-bottom: 1rpx solid #eaecf3;
+  position: relative;
 }
 .r-list-item:last-child {
   border-bottom: none;
   position: relative;
 }
-.r-list-item::after {
+.r-list-item:last-child::after {
   content: '';
   position: absolute;
   width: 670rpx;

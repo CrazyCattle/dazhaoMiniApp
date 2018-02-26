@@ -6,6 +6,8 @@ Page({
    */
   data: {
     active: 0,
+    placeholderTxt: '搜索公司或职位名称',
+    focus: false,
     filterType: 0,
     scrollTop: 0,
     timer: null,
@@ -145,6 +147,15 @@ Page({
         active: id
       })
     }
+  },
+  iptFocus (e) {
+    this.setData({
+      focus: !this.data.focus
+    })
+  },
+  iptConfirm (e) {
+    // 确定搜索
+    console.log(e.detail.value)
   },
   /**
    * 生命周期函数--监听页面加载

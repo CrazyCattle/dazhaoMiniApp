@@ -1,2 +1,180 @@
-<!--pages/course/course.wxml-->
-<text>pages/course/course.wxml</text>
+<view class="page">
+  <view class="page-head">
+    <view class="search-box bg">
+      <view class="search-input bg-f">
+        <block wx:if="{{ !focus }}">
+          <image class="search" src="../../images/search.png"></image>{{ placeholderTxt}}
+        </block>
+        <input class="ipt" type="text" confirm-type="search" bindfocus="iptFocus" bindblur="iptFocus" bindconfirm="iptConfirm"/>
+      </view>
+    </view>
+    <view class="page-tab tc bg-f">
+      <view class="tab-item {{page=='1'?'active':''}}" data-page="1" bindtap="tabPage">分类</view>
+      <view class="tab-item {{page=='2'?'active':''}}" data-page="2" bindtap="tabPage">推荐</view>
+      <view class="tab-item {{page=='3'?'active':''}}" data-page="3" bindtap="tabPage">收藏/历史</view>
+    </view>
+  </view>
+  
+  <view class="page-1" wx:if="{{ page == '1' }}">
+    <view class="fliter-box bg-f tc">
+      <view class="tc">
+        <view class="title">名企推荐</view>
+      </view>
+      <text class="tit">优秀企业推荐尽在大招一百网</text>
+      <view class="fliter-tab">
+        <view class="item">春招</view>
+        <view class="item">面试</view>
+        <view class="item">求职攻略</view>
+        <view class="item">面试</view>
+        <view class="item">面试择业技巧</view>
+      </view>
+    </view>
+    <view class="fliter-box mt20 bg-f tc">
+      <view class="tc">
+        <view class="title">行业解读</view>
+      </view>
+      <text class="tit">优秀企业推荐尽在大招一百网</text>
+      <view class="fliter-tab">
+        <view class="item">SAP专场</view>
+        <view class="item">汽车行业</view>
+        <view class="item">金融行业</view>
+        <view class="item">医药行业</view>
+        <view class="item">机械行业</view>
+        <view class="item">农业行业</view>
+        <view class="item">SAP专场</view>
+        <view class="item">汽车行业</view>
+        <view class="item">金融行业</view>
+      </view>
+    </view>
+    <view class="fliter-box mt20 bg-f tc">
+      <view class="tc">
+        <view class="title">职业能力</view>
+      </view>
+      <text class="tit">优秀企业推荐尽在大招一百网</text>
+      <view class="fliter-tab">
+        <view class="item">自我认知</view>
+        <view class="item">职业素养</view>
+        <view class="item">金融行业</view>
+        <view class="item">医药行业</view>
+        <view class="item">机械行业</view>
+        <view class="item">农业行业</view>
+        <view class="item">医药行业</view>
+        <view class="item">机械行业</view>
+        <view class="item">农业行业</view>
+      </view>
+    </view>
+    <view class="fliter-box mt20 bg-f tc">
+      <view class="tc">
+        <view class="title">职业探索</view>
+      </view>
+      <text class="tit">优秀企业推荐尽在大招一百网</text>
+      <view class="fliter-tab">
+        <view class="item">专家讲坛</view>
+        <view class="item">就业技能</view>
+        <view class="item">金融行业</view>
+        <view class="item">医药行业</view>
+        <view class="item">机械行业</view>
+        <view class="item">农业行业</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="page-2" wx:if="{{ page == '2' }}">
+    <view class="scroll-box bg-f">
+      <view class="scroll-title">
+        课程推荐
+        <view class="c-more" bindtap="linkCourse">
+          查看更多
+          <view class="arrow-icon">
+            <view class="inner"></view>
+          </view> 
+        </view>
+      </view>
+      <swiper class="scroll-swiper" indicator-dots="{{ indicatorDots }}" autoplay="{{ canautoplay }}" duration="160" display-multiple-items="2" previous-margin="35rpx" next-margin="35rpx" skip-hidden-item-layout="true">
+        <block wx:for="{{imgUrls}}" wx:key="key">
+          <swiper-item class="swiper-item">
+            <image src="{{ item }}" class="slide-image"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="fliter-box mt20 bg-f tc">
+      <view class="tc">
+        <view class="title">发现好课</view>
+        <view class="r-list tl">
+          <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item">
+            <view class="cont">
+              <view class="company">
+                <image class="img" src="{{ item.pic_url }}"></image>
+                {{ item.user_name }}
+              </view>
+              <view class="job lh-normal">{{ item.title }}</view>
+              <view class="s-desc"> 
+                <text class="infor lh-normal">{{ item.learning }}人学过</text>
+                <text class="infor lh-normal">时长：{{ item.data }}</text>
+              </view>
+            </view>
+            <image class="pic" src="{{ item.pic_url }}"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="page-3" wx:if="{{ page == '3' }}">
+    <view class="fliter-box mt20 bg-f tc">
+      <view class="tc">
+        <view class="title">收藏夹</view>
+        <view class="r-list tl">
+          <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item">
+            <view class="cont">
+              <view class="company">
+                <image class="img" src="{{ item.pic_url }}"></image>
+                {{ item.user_name }}
+              </view>
+              <view class="job lh-normal">{{ item.title }}</view>
+              <view class="s-desc"> 
+                <text class="infor lh-normal">{{ item.learning }}人学过</text>
+                <text class="infor lh-normal">时长：{{ item.data }}</text>
+              </view>
+            </view>
+            <image class="pic" src="{{ item.pic_url }}"></image>
+          </view>
+          <view class="more" bindtap="linkCourse">
+            查看更多
+            <view class="arrow-icon">
+              <view class="inner"></view>
+            </view> 
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="fliter-box mt20 bg-f tc">
+      <view class="tc">
+        <view class="title">听课记录</view>
+        <view class="r-list tl">
+          <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item">
+            <view class="cont">
+              <view class="company">
+                <image class="img" src="{{ item.pic_url }}"></image>
+                {{ item.user_name }}
+              </view>
+              <view class="job lh-normal">{{ item.title }}</view>
+              <view class="s-desc"> 
+                <text class="infor lh-normal">{{ item.learning }}人学过</text>
+                <text class="infor lh-normal">时长：{{ item.data }}</text>
+              </view>
+            </view>
+            <image class="pic" src="{{ item.pic_url }}"></image>
+          </view>
+        </view>
+        <view class="more" bindtap="linkCourse">
+          查看更多
+          <view class="arrow-icon">
+            <view class="inner"></view>
+          </view> 
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
