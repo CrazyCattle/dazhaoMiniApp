@@ -104,7 +104,7 @@
 }
 .courst-list .arr {
   position: absolute;
-  top: -20rpx;
+  top: -18rpx;
   right: 65rpx;
   width: 0;
   height: 0;

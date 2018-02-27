@@ -32,6 +32,12 @@ html,body,page {
 .mt20 {
   margin-top: 20rpx;
 }
+.mt40 {
+  margin-top: 40rpx;
+}
+.mt100 {
+  margin-top: 100rpx;
+}
 .mb20 {
   margin-bottom: 20rpx;
 }
@@ -57,3 +63,20 @@ html,body,page {
 .tc { text-align: center; }
 .tl { text-align: left; }
 .tr { text-align: right; }
+
+
+.baseBtn {
+  width: 540rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  border-radius: 34rpx;
+  font-family: 'PingFangSC-Medium';
+  font-size: 26rpx;
+  color:#fff;
+  background-color:#51d3d9;
+  border: 0;
+}
+button::after,
+button::before {
+  border: none;
+}

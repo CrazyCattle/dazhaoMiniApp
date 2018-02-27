@@ -1,2 +1,64 @@
-<!--pages/me/me.wxml-->
-<loading></loading>
+<view class="page-me">
+  <view class="me-head bg-f">
+    <view class="me-head-infor">
+      <image class="me-pic" src="../../images/user_pic.png"></image>
+      <view class="me-desc">
+        <view class="me-name">周新诚</view>
+        <text class="me-educ">华中科技大学 | 通信工程</text>
+      </view>
+
+      <view class="editUser">编辑</view>
+    </view>
+
+    <view class="me-send-box">
+      <view class="me-send">
+        已投递：<text class="num">12</text>
+      </view>
+      <view class="me-review">
+        待面试：<text class="num">12</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="me-setting bg-f">
+    <view class="me-row">
+      <image class="icon rourse" src="../../images/me/course.png"></image>我的课程
+      <view class="arrow-icon">
+        <view class="inner"></view>
+      </view>
+    </view>
+    <view class="me-row">
+      <image class="icon resume" src="../../images/me/resume.png"></image>简历中心
+      <view class="arrow-icon">
+        <view class="inner"></view>
+      </view>
+    </view>
+    <view class="me-row">
+      <image class="icon job" src="../../images/me/job.png"></image>求职锦囊
+      <view class="arrow-icon">
+        <view class="inner"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="me-setting bg-f">
+    <view class="me-row">
+      <image class="icon pwd" src="../../images/me/pwd.png"></image>修改密码
+      <view class="arrow-icon">
+        <view class="inner"></view>
+      </view>
+    </view>
+    <view class="me-row">
+      <image class="icon infor" src="../../images/me/infor.png"></image>建议反馈
+      <view class="arrow-icon">
+        <view class="inner"></view>
+      </view>
+    </view>
+    <view class="me-row">
+      <image class="icon out" src="../../images/me/out.png"></image>退出登录
+      <view class="arrow-icon">
+        <view class="inner"></view>
+      </view>
+    </view>
+  </view>
+</view>
