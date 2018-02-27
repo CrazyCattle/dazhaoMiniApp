@@ -34,16 +34,83 @@
 .course-info .icon {
   margin-right: 10rpx;
 }
-.course-info .icon-1 {
+.v-fun .icon-1 {
   width: 36rpx;
   height: 36rpx;
 }
-.course-info .icon-2 {
+.v-fun .icon-2 {
   width: 38rpx;
   height: 32rpx;
+}
+.v-fun .item {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.v-fun .item.active {
+  color: #47dbe2;
+}
+.v-fun .item:last-child {
   margin-left: 40rpx;
 }
 
+.courst-list {
+  position: absolute;
+  top: 50rpx;
+  right: 0;
+  padding: 30rpx 20rpx 30rpx 60rpx;
+  width: 608rpx;
+  border-radius: 4rpx;
+  background: #fff;
+  box-shadow: 0 0 14px 0 #d6dae4;
+  z-index: 1;
+  box-sizing: border-box;
+  transform-origin: 85% 0%;
+  transform: scale(0,0);
+  transition: transform .2s ease-in-out;
+}
+.courst-list.active {
+  transform: scale(1, 1);
+}
+.courst-list .courst-play-item {
+  font-size: 24rpx;
+  color: #848ca1;
+  line-height: 60rpx;
+  position: relative;
+}
+.courst-list .courst-play-item::before {
+  content: '';
+  position: absolute;
+  left: -30rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12rpx;
+  height: 12rpx;
+  background-color: #47dbe2;
+  border-radius: 50%;
+}
+.courst-list .courst-play-item.active {
+  color: #47dbe2;
+}
+.courst-list .active::before {
+  width: 0;
+  height: 0;
+  left: -28rpx;
+  border: 10rpx solid transparent;
+  border-left-width: 13rpx;
+  border-left-color: #47dbe2;
+  border-radius: 0;
+  background-color: #fff;
+}
+.courst-list .arr {
+  position: absolute;
+  top: -20rpx;
+  right: 65rpx;
+  width: 0;
+  height: 0;
+  border: 10rpx solid transparent;
+  border-bottom-color: #fff;
+}
 
 .course-info .row:nth-child(3) {
   padding-top: 30rpx;

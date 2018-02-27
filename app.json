@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/coursePlay/play",
     "pages/navIndex/index",
     "pages/navMe/me",
     "pages/navInformation/infor",
@@ -11,7 +12,7 @@
     "pages/courseChild/course",
     "pages/jobDetail/detail",
     "pages/courseCollection/collect",
-    "pages/coursePlay/play",
+    
     "pages/courseRecord/record"
   ],
   "window": {

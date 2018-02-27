@@ -1,12 +1,27 @@
 <view class="page-play">
   <video class="course-video" src="{{ videoSrc }}" controls="{{ controls }}" autoplay="{{ autoplay }}" show-play-btn="{{ showPlayBtn }}" poster="{{ poster }}" show-center-play-btn="showCenterPlayBtn"></video>
   <view class="course-info bg-f">
-    <view class="row"><text class="v-tit">简历吐槽大会，这里有你的吗？</text></view>
+    <view class="row">
+      <text class="v-tit">简历吐槽大会，这里有你的吗？</text>
+    </view>
     <view class="row">
       <view class="v-students">20人正在学</view>
       <view class="v-fun">
-        <image class="icon icon-1" src="../../images/collect.png"></image>收藏
-        <image class="icon icon-2" src="../../images/menu.png"></image>目录
+        <view class="item {{ collected?'active':'' }}">
+          <image class="icon icon-1" src="{{ collected?'../../images/collected.png':'../../images/collect.png' }}"></image>收藏
+        </view>
+        <view class="item {{ menuActive?'active':'' }}" bindtap="showMenu">
+          <image class="icon icon-2" src="{{ menuActive?'../../images/menu-active.png':'../../images/menu.png' }}"></image>目录
+
+          <view class="courst-list {{ menuActive?'active':'' }}">
+            <view class="courst-play-item">第一次求职，看这里！</view>
+            <view class="courst-play-item">面试想要不紧张？</view>
+            <view class="courst-play-item active">面试想要通过？先做好自我介绍吧？</view>
+            <view class="courst-play-item">简历吐槽大会，这里有你吗？</view>
+            <view class="courst-play-item">HR告诉你如何应对面试官的疑难问题？</view>
+            <view class="arr"></view>
+          </view>
+        </view>
       </view>
     </view>
     <view class="row">

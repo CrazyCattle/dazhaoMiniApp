@@ -12,11 +12,18 @@ Page({
     showPlayBtn: true,
     showCenterPlayBtn: false,
 
-    active: false
+    active: false,
+    menuActive: false,
+    collected: true
   },
   more () {
     this.setData({
       active: !this.data.active
+    })
+  },
+  showMenu () {
+    this.setData({
+      menuActive: !this.data.menuActive
     })
   },
   /**
