@@ -1,4 +1,4 @@
-// pages/me/me.js
+// pages/resumeList/list.js
 Page({
 
   /**
@@ -7,11 +7,7 @@ Page({
   data: {
   
   },
-  linkLR () {
-    wx.navigateTo({
-      url: '../loginRegister/loginregister'
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

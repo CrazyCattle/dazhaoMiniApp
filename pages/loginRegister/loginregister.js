@@ -1,4 +1,4 @@
-// pages/me/me.js
+// pages/loginRegister/loginregister.js
 Page({
 
   /**
@@ -7,9 +7,14 @@ Page({
   data: {
   
   },
-  linkLR () {
+  linkLogin () {
     wx.navigateTo({
-      url: '../loginRegister/loginregister'
+      url: '../login/login'
+    })
+  },
+  lonkBind () {
+    wx.navigateTo({
+      url: '../bindAccount/account'
     })
   },
   /**

@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/bindAccount/account",
-    "pages/navIndex/index",
     "pages/navMe/me",
+    "pages/navIndex/index",
     "pages/navInformation/infor",
     "pages/navCourse/course",
+    "pages/resumeList/list",
     "pages/login/login",
     "pages/companyDetail/detail",
     "pages/companyRecommend/company",
@@ -15,7 +15,9 @@
     "pages/courseCollection/collect",
     "pages/coursePlay/play",
     "pages/courseRecord/record",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/bindAccount/account",
+    "pages/loginRegister/loginregister"
   ],
   "window": {
     "backgroundTextStyle": "light",

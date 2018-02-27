@@ -3,8 +3,9 @@
     <view class="me-head-infor">
       <image class="me-pic" src="../../images/user_pic.png"></image>
       <view class="me-desc">
-        <view class="me-name">周新诚</view>
-        <text class="me-educ">华中科技大学 | 通信工程</text>
+        <!--<view class="me-name">周新诚</view>
+        <text class="me-educ">华中科技大学 | 通信工程</text>-->
+        <view class="me-name" bindtap="linkLR">登录/注册</view>
       </view>
 
       <view class="editUser">编辑</view>

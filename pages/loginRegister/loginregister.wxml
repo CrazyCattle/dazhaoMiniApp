@@ -1,0 +1,2 @@
+<button formType="submit" class="baseBtn mt100" bindtap="lonkBind">微信登录</button>
+<button formType="submit" class="baseBtn mt100" bindtap="linkLogin">学号/手机号登录</button>

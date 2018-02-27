@@ -20,7 +20,7 @@
     </view>
     <button formType="submit" class="baseBtn mt100">绑定并登录</button>
     <view class="link-register tc mt40">
-      没有账号？ <text class="register">立即注册</text>
+      没有账号？ <text class="register" bindtap="register">立即注册</text>
     </view>
   </form>
 </view>
