@@ -47,24 +47,86 @@
       </swiper-item>
     </swiper>
   </view>
-  <view class="sort-box">
-    <view class="sort-item" data-id="1" bindtap="tabFilter">
+  <view class="sort-box" catchtap="tabFilter">
+    <view class="sort-item" data-id="1">
       招聘职位类型
-      <view class="arrow-icon {{ active=='1'?'active':'' }}">
+      <view class="arrow-icon {{ active=='1'?'active':'' }}" data-id="1">
         <view class="inner"></view>
       </view> 
+
+      <view class="type-filter-box tl {{ active=='1'?'active':'' }}" style="{{ active=='1'?'z-index: 1;':'' }}" catchtap="filterEduc">
+        <scroll-view style="height: 100%;" scroll-y>
+          <view class="type-filter-item" data-edcuc="all">不限</view>
+          <view class="type-filter-item" data-edcuc="zk">市场商务</view>
+          <view class="type-filter-item" data-edcuc="bk">电子电气</view>
+          <view class="type-filter-item" data-edcuc="ss">人事行政</view>
+          <view class="type-filter-item" data-edcuc="bs">外语外贸</view>
+          <view class="type-filter-item" data-edcuc="bs">教育咨询</view>
+          <view class="type-filter-item" data-edcuc="bs">计算机软硬件/互联网/IT</view>
+          <view class="type-filter-item" data-edcuc="ss">人事行政</view>
+          <view class="type-filter-item" data-edcuc="bs">外语外贸</view>
+          <view class="type-filter-item" data-edcuc="bs">教育咨询</view>
+          <view class="type-filter-item" data-edcuc="bs">计算机软硬件/互联网/IT</view> 
+        </scroll-view>
+      </view>
     </view>
-    <view class="sort-item" data-id="2" bindtap="tabFilter">
+    <view class="sort-item" data-id="2">
       城市
-      <view class="arrow-icon {{ active=='2'?'active':'' }}">
+      <view class="arrow-icon {{ active=='2'?'active':'' }}" data-id="2">
         <view class="inner"></view>
       </view> 
     </view>
-    <view class="sort-item" data-id="3" bindtap="tabFilter">
+    <view class="sort-item sort-educ-item" data-id="3">
       学历
-      <view class="arrow-icon {{ active=='3'?'active':'' }}">
+      <view class="arrow-icon {{ active=='3'?'active':'' }}" data-id="3">
         <view class="inner"></view>
       </view> 
+      <view class="educ-filter-box tl {{ active=='3'?'active':'' }}" style="{{ active=='3'?'z-index: 1;':'' }}" catchtap="filterEduc">
+        <view class="educ-filter-item" data-edcuc="all">不限</view>
+        <view class="educ-filter-item" data-edcuc="zk">专科及以上</view>
+        <view class="educ-filter-item" data-edcuc="bk">本科及以上</view>
+        <view class="educ-filter-item" data-edcuc="ss">硕士及以上</view>
+        <view class="educ-filter-item" data-edcuc="bs">博士及以上</view>
+      </view>
+    </view>
+    <view class="city-filter-box tl {{ active=='2'?'active':'' }}" style="{{ active=='2'?'z-index: 1;':'' }}">
+      <scroll-view class="prov" scroll-y style="height: 100%;">
+        <view class="prov-box">
+          <view class="prov-item">不限</view>
+          <view class="prov-item">北京市</view>
+          <view class="prov-item">上海市</view>
+          <view class="prov-item">江苏省</view>
+          <view class="prov-item">浙江省</view>
+          <view class="prov-item">广东省</view>
+          <view class="prov-item">贵州省</view>
+          <view class="prov-item">湖北省</view>
+          <view class="prov-item">湖南省</view>
+          <view class="prov-item">安徽省</view>
+          <view class="prov-item">天津市</view>
+          <view class="prov-item">广东省</view>
+          <view class="prov-item">贵州省</view>
+          <view class="prov-item">湖北省</view>
+          <view class="prov-item">湖南省</view>
+          <view class="prov-item">安徽省</view>
+          <view class="prov-item">天津市</view>
+        </view>
+      </scroll-view>
+      <scroll-view class="city" scroll-y style="height: 100%;">
+        <view class="city-item">不限</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+        <view class="city-item">杭州市</view>
+      </scroll-view>
     </view>
   </view>
 </view>

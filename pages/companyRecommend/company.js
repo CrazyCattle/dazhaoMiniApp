@@ -143,10 +143,19 @@ Page({
         active: 0
       })
     } else {
-      this.setData({
-        active: id
-      })
+      if (id >= 0) {
+        this.setData({
+          active: id
+        })
+      }
     }
+  },
+  filterEduc (e) {
+    // 学历过滤
+    this.setData({
+      active: 0
+    })
+    console.log(this.data.active)
   },
   iptFocus (e) {
     this.setData({
