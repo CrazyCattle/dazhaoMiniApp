@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    page: 2,
+    page: 1,
     fliterType: 'job',
     // page 2
     status: {

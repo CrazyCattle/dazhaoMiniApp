@@ -1,4 +1,4 @@
-// pages/me/me.js
+// pages/userInformation/information.js
 Page({
 
   /**
@@ -7,19 +7,9 @@ Page({
   data: {
   
   },
-  linkLR () {
+  linkEditBasic () {
     wx.navigateTo({
-      url: '../loginRegister/loginregister'
-    })
-  },
-  linkResumeCenter () {
-    wx.navigateTo({
-      url: '../resumeCenter/center'
-    })
-  },
-  editUserInfor () {
-    wx.navigateTo({
-      url: '../userInformation/information'
+      url: '../editBasicInfor/infor'
     })
   },
   /**

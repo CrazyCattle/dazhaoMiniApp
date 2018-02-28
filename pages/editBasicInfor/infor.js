@@ -1,25 +1,23 @@
-// pages/me/me.js
+// pages/editBasicInfor/infor.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    sex: ['请选择性别', '男', '女'] ,
+    index: 0,
+    date: '请选择年月'
   },
-  linkLR () {
-    wx.navigateTo({
-      url: '../loginRegister/loginregister'
-    })
-  },
-  linkResumeCenter () {
-    wx.navigateTo({
-      url: '../resumeCenter/center'
-    })
-  },
-  editUserInfor () {
-    wx.navigateTo({
-      url: '../userInformation/information'
+  listenerPickerSelected: function (e) {
+    //改变index值，通过setData()方法重绘界面
+    this.setData({
+      index: e.detail.value
+    });
+  }, 
+  listenerDatePickerSelected (e) {
+    this.setData({
+      date: e.detail.value
     })
   },
   /**

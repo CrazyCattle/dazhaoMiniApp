@@ -1,11 +1,9 @@
 {
   "pages": [
-    "pages/resumeCenter/center",
     "pages/navIndex/index",
     "pages/navInformation/infor",
     "pages/navCourse/course",
     "pages/navMe/me",
-    
     "pages/login/login",
     "pages/companyDetail/detail",
     "pages/companyRecommend/company",
@@ -18,7 +16,10 @@
     "pages/courseRecord/record",
     "pages/register/register",
     "pages/bindAccount/account",
-    "pages/loginRegister/loginregister"
+    "pages/loginRegister/loginregister",
+    "pages/resumeCenter/center",
+    "pages/editBasicInfor/infor",
+    "pages/userInformation/information"
   ],
   "window": {
     "backgroundTextStyle": "light",

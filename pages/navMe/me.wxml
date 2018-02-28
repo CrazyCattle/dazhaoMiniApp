@@ -8,7 +8,7 @@
         <view class="me-name" bindtap="linkLR">登录/注册</view>
       </view>
 
-      <view class="editUser">编辑</view>
+      <view class="editUser" bindtap='editUserInfor'>编辑</view>
     </view>
 
     <view class="me-send-box">

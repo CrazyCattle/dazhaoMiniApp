@@ -1,6 +1,3 @@
-.me-head {
-
-}
 .me-head-infor {
   display: flex;
   height: 240rpx;
@@ -15,6 +12,7 @@
   width: 150rpx;
   height: 150rpx;
   margin-right: 26rpx;
+  border-radius: 50%;
 }
 .me-head-infor .me-name {
   font-size: 30rpx;
