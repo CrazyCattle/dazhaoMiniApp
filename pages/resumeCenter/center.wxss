@@ -339,32 +339,29 @@
 .send-list {
   height: calc(100% - 345rpx);
 }
-
+.send-list .invi-item:not(:first-child) {
+  margin-top: 20rpx;
+}
 .status {
   display: flex;
   align-items: center;
 }
-
 .status .tips {
   margin-right: 10rpx;
   font-size: 24rpx;
   color: #848ca1;
 }
-
 .status .b-arrow-icon {
   top: 8rpx;
 }
-
 .status .tips.active {
   color: #47dbe2;
 }
-
 .status .arrow-icon.active {
   top: -4rpx;
   transform: rotate(180deg);
   border-top-color: #47dbe2;
 }
-
 .status-row {
   padding: 40rpx;
   flex-direction: column;
@@ -425,8 +422,8 @@
   top: 12rpx;
   transform: translateX(-50%); 
   width: 1rpx;
-  height: calc(100% - 18rpx);
-  background:#51d3d9;
+  height: calc(100% - 20rpx);
+  background: #d6dae4;
 }
 .status-d-row .status-txt {
   position: relative;
@@ -439,6 +436,12 @@
   transform: translate(-50%,-50%);
   width: 12rpx;
   height: 12rpx;
-  background:#51d3d9;
+  background: #d6dae4;
   border-radius: 50%;
 }
+.status-d-row.active::before {
+  background:#51d3d9;
+}
+.status-d-row.active .status-txt::before {
+  background: #51d3d9;
+} 
