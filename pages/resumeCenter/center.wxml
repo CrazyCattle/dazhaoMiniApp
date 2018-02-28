@@ -1,20 +1,31 @@
 <view class="resume-center">
   <view class="center-tab bg-f">
-    <view class="center-tab-item active">在线简历</view>
-    <view class="center-tab-item">
+    <view class="center-tab-item {{page=='1'?'active':''}}" data-page="1" bindtap="tabPage">在线简历</view>
+    <view class="center-tab-item {{page=='2'?'active':''}}" data-page="2" bindtap="tabPage">
       投递箱
-      <view class="notice tc ml20">15</view>
+      <view class="notice tc ml20" data-page="2" bindtap="tabPage">15</view>
     </view>
-    <view class="center-tab-item">邀请函</view>
-    <view class="center-tab-item">收藏夹</view>
+    <view class="center-tab-item {{page=='3'?'active':''}}" data-page="3" bindtap="tabPage">邀请函</view>
+    <view class="center-tab-item {{page=='4'?'active':''}}" data-page="4" bindtap="tabPage">收藏夹</view>
   </view>
 
-  <view class="resume-list">
+  <view class="resume-list" wx:if="{{ page == '1' }}">
     <scroll-view scroll-y style="height: 100%;">
-      <view class="resume-item bg-f">
+      <view class="resume-item active bg-f">
         <view class="item-lf">
           <view class="title">互联网产品实习生</view>
-          <view>上海市 | 互联网产品</view>
+          <view class="desc">上海市 | 互联网产品</view>
+        </view>
+        <view class="item-rt">
+          <text class="editBtn">编辑</text>
+          <text class="editBtn">删除</text>
+        </view>
+      </view>
+
+      <view class="resume-item active bg-f">
+        <view class="item-lf">
+          <view class="title">互联网产品实习生</view>
+          <view class="desc">上海市 | 互联网产品</view>
         </view>
         <view class="item-rt">
           <text class="editBtn">编辑</text>
@@ -25,18 +36,7 @@
       <view class="resume-item bg-f">
         <view class="item-lf">
           <view class="title">互联网产品实习生</view>
-          <view>上海市 | 互联网产品</view>
-        </view>
-        <view class="item-rt">
-          <text class="editBtn">编辑</text>
-          <text class="editBtn">删除</text>
-        </view>
-      </view>
-      
-      <view class="resume-item bg-f">
-        <view class="item-lf">
-          <view class="title">互联网产品实习生</view>
-          <view>上海市 | 互联网产品</view>
+          <view class="desc">上海市 | 互联网产品</view>
         </view>
         <view class="item-rt">
           <text class="editBtn">编辑</text>
@@ -46,7 +46,7 @@
       <view class="resume-item bg-f">
         <view class="item-lf">
           <view class="title">互联网产品实习生</view>
-          <view>上海市 | 互联网产品</view>
+          <view class="desc">上海市 | 互联网产品</view>
         </view>
         <view class="item-rt">
           <text class="editBtn">编辑</text>
@@ -56,7 +56,7 @@
       <view class="resume-item bg-f">
         <view class="item-lf">
           <view class="title">互联网产品实习生</view>
-          <view>上海市 | 互联网产品</view>
+          <view class="desc">上海市 | 互联网产品</view>
         </view>
         <view class="item-rt">
           <text class="editBtn">编辑</text>
@@ -66,7 +66,7 @@
       <view class="resume-item bg-f">
         <view class="item-lf">
           <view class="title">互联网产品实习生</view>
-          <view>上海市 | 互联网产品</view>
+          <view class="desc">上海市 | 互联网产品</view>
         </view>
         <view class="item-rt">
           <text class="editBtn">编辑</text>
@@ -76,7 +76,7 @@
       <view class="resume-item bg-f">
         <view class="item-lf">
           <view class="title">互联网产品实习生</view>
-          <view>上海市 | 互联网产品</view>
+          <view class="desc">上海市 | 互联网产品</view>
         </view>
         <view class="item-rt">
           <text class="editBtn">编辑</text>
@@ -86,7 +86,7 @@
       <view class="resume-item bg-f">
         <view class="item-lf">
           <view class="title">互联网产品实习生</view>
-          <view>上海市 | 互联网产品</view>
+          <view class="desc">上海市 | 互联网产品</view>
         </view>
         <view class="item-rt">
           <text class="editBtn">编辑</text>
@@ -94,5 +94,231 @@
         </view>
       </view>
     </scroll-view>
+  </view>
+
+  <view class="fliter-tab bg-f tc" wx:if="{{ page == '2' }}">
+    <view class="item">全部</view>
+    <view class="item">投递成功</view>
+    <view class="item">被查看</view>
+    <view class="item">通过筛选</view>
+    <view class="item">面试邀请</view>
+    <view class="item">面试结果</view>
+  </view>
+  <view class="invi-list send-list" wx:if="{{ page == '2' }}">
+    <scroll-view scroll-y style="height: 100%;">
+      <view class="invi-item mt20 bg-f">
+        <view class="main">
+          <view class="row">
+            <view class="job">UI设计师</view>
+            <view class="time">2016.12.30</view>
+          </view>
+          <view class="row">
+            <view class="company">上海脚步网络科技有限公司</view>
+            <view class="status">
+              <view class="tips {{ ids=='1'?'active':'' }}" data-ids="1" bindtap='showStatus'>不合适</view>
+              <view class="arrow-icon b-arrow-icon {{ ids=='1'?'active':'' }}" data-ids="1" bindtap='showStatus'>
+                <view class="inner" data-ids="1" bindtap='showStatus'></view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="status-row" wx:if="{{ ids == '1'}}">
+          <view class="status-detail">
+            <text class="status-item active">投递简历</text>
+            <text class="status-item">被查看</text>
+            <text class="status-item">通过筛选</text>
+            <text class="status-item">面试邀请</text>
+            <text class="status-item">面试结构</text>
+            <view class="line">
+              <view class="innerline" style="width: {{ status.seeing }}"></view>
+            </view>
+          </view>
+          <view class="status-d-row">
+            <view class="status-txt">通过查看，您的初选未通过</view>
+            <view class="status-time pt20">2016.12.30 10:54:01</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="invi-list" wx:if="{{ page == '3' }}">
+    <scroll-view scroll-y style="height: 100%;">
+
+      <view class="invi-item mt20 bg-f">
+        <view class="main">
+          <view class="row">
+            <view class="job">UI设计师</view>
+            <view class="time">2016.12.30</view>
+          </view>
+          <view class="row">
+            <view class="company">上海脚步网络科技有限公司</view>
+            <view class="arrow-icon b-arrow-icon" data-id="1" bindtap='showDetail'>
+              <view class="inner" data-id="1" bindtap='showDetail'></view>
+            </view>
+          </view>
+        </view>
+        <view class="row" wx:if="{{ id == '1'}}">
+          <view class="information">你好Simon，欢迎你投递产品部管培生职位</view>
+          <view class="arrow-icon t-arrow-icon">
+            <view class="inner"></view>
+          </view>
+        </view>
+      </view>
+
+      <view class="invi-item mt20 bg-f">
+        <view class="main">
+          <view class="row">
+            <view class="job">UI设计师</view>
+            <view class="time">2016.12.30</view>
+          </view>
+          <view class="row">
+            <view class="company">上海脚步网络科技有限公司</view>
+            <view class="arrow-icon b-arrow-icon" data-id="1" bindtap='showDetail'>
+              <view class="inner" data-id="1" bindtap='showDetail'></view>
+            </view>
+          </view>
+        </view>
+        <view class="row" wx:if="{{ id == '1'}}">
+          <view class="information">你好Simon，欢迎你投递产品部管培生职位</view>
+          <view class="arrow-icon t-arrow-icon">
+            <view class="inner"></view>
+          </view>
+        </view>
+      </view>
+
+      <view class="invi-item mt20 bg-f">
+        <view class="main">
+          <view class="row">
+            <view class="job">UI设计师</view>
+            <view class="time">2016.12.30</view>
+          </view>
+          <view class="row">
+            <view class="company">上海脚步网络科技有限公司</view>
+            <view class="arrow-icon b-arrow-icon" data-id="2" bindtap='showDetail'>
+              <view class="inner" data-id="2" bindtap='showDetail'></view>
+            </view>
+          </view>
+        </view>
+        <view class="row" wx:if="{{ id == '2'}}">
+          <view class="information">你好Simon，欢迎你投递产品部管培imon，欢迎你投递产品部管imon，欢迎你投递产品部管生职位</view>
+          <view class="arrow-icon t-arrow-icon">
+            <view class="inner"></view>
+          </view>
+        </view>
+      </view>
+
+      <view class="invi-item mt20 bg-f">
+        <view class="main">
+          <view class="row">
+            <view class="job">UI设计师</view>
+            <view class="time">2016.12.30</view>
+          </view>
+          <view class="row">
+            <view class="company">上海脚步网络科技有限公司</view>
+            <view class="arrow-icon b-arrow-icon" data-id="1" bindtap='showDetail'>
+              <view class="inner" data-id="1" bindtap='showDetail'></view>
+            </view>
+          </view>
+        </view>
+        <view class="row" wx:if="{{ id == '1'}}">
+          <view class="information">你好Simon，欢迎你投递产品部管培生职位</view>
+          <view class="arrow-icon t-arrow-icon">
+            <view class="inner"></view>
+          </view>
+        </view>
+      </view>
+
+      <view class="invi-item mt20 bg-f">
+        <view class="main">
+          <view class="row">
+            <view class="job">UI设计师</view>
+            <view class="time">2016.12.30</view>
+          </view>
+          <view class="row">
+            <view class="company">上海脚步网络科技有限公司</view>
+            <view class="arrow-icon b-arrow-icon" data-id="2" bindtap='showDetail'>
+              <view class="inner" data-id="2" bindtap='showDetail'></view>
+            </view>
+          </view>
+        </view>
+        <view class="row" wx:if="{{ id == '2'}}">
+          <view class="information">你好Simon，欢迎你投递产品部管培imon，欢迎你投递产品部管imon，欢迎你投递产品部管生职位</view>
+          <view class="arrow-icon t-arrow-icon">
+            <view class="inner"></view>
+          </view>
+        </view>
+      </view>
+
+      <view class="invi-item mt20 bg-f">
+        <view class="main">
+          <view class="row">
+            <view class="job">UI设计师</view>
+            <view class="time">2016.12.30</view>
+          </view>
+          <view class="row">
+            <view class="company">上海脚步网络科技有限公司</view>
+            <view class="arrow-icon b-arrow-icon" data-id="1" bindtap='showDetail'>
+              <view class="inner" data-id="1" bindtap='showDetail'></view>
+            </view>
+          </view>
+        </view>
+        <view class="row" wx:if="{{ id == '1'}}">
+          <view class="information">你好Simon，欢迎你投递产品部管培生职位</view>
+          <view class="arrow-icon t-arrow-icon">
+            <view class="inner"></view>
+          </view>
+        </view>
+      </view>
+
+      <view class="invi-item mt20 bg-f">
+        <view class="main">
+          <view class="row">
+            <view class="job">UI设计师</view>
+            <view class="time">2016.12.30</view>
+          </view>
+          <view class="row">
+            <view class="company">上海脚步网络科技有限公司</view>
+            <view class="arrow-icon b-arrow-icon" data-id="2" bindtap='showDetail'>
+              <view class="inner" data-id="2" bindtap='showDetail'></view>
+            </view>
+          </view>
+        </view>
+        <view class="row" wx:if="{{ id == '2'}}">
+          <view class="information">你好Simon，欢迎你投递产品部管培imon，欢迎你投递产品部管imon，欢迎你投递产品部管生职位</view>
+          <view class="arrow-icon t-arrow-icon">
+            <view class="inner"></view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="collect-filter bg-f" wx:if="{{ page == '4' }}">
+    <view class="filter-tab {{fliterType=='job'?'acitve':''}}" bindtap="changeCokllectFilter" data-type="job">收藏职位</view>
+    <view class="filter-tab {{fliterType=='company'?'acitve':''}}" bindtap="changeCokllectFilter" data-type="company">收藏企业</view>
+  </view>
+  <view class="scroll-list-box pt20" wx:if="{{ page == '4' }}">
+    <view class="scroll-list-box bg-f" wx:if="{{ fliterType == 'job' }}">
+      <scroll-view scroll-y style="height: 100%;">
+        <view class="r-list">
+          <view class="r-list-item" wx:for="{{ jobList }}" wx:key="key" wx:for-item="item">
+            <image class="pic" src="{{ item.pic_url }}"></image>
+            <view class="cont">
+              <view class="job lh-normal">{{ item.job }}</view>
+              <view class="company">{{ item.company }}</view>
+              <view class="s-desc">
+                <text class="infor lh-normal">{{ item.address }} | {{ item.educ }} </text>
+                <text class="infor lh-normal">截止日期：{{ item.data }}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <loading></loading>
+      </scroll-view>
+    </view>
+    <view class="scroll-list-box bg-f" wx:if="{{ fliterType == 'company' }}">
+      11111
+    </view>
   </view>
 </view>
