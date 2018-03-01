@@ -13,6 +13,9 @@
           <picker class="picker" mode="selector" range="{{sex}}" value="{{index}}" bindchange="listenerPickerSelected">
             <view class="inner-picker">{{ sex[index] }}</view>
           </picker>
+          <view class="arrow-icon">
+            <view class="inner"></view>
+          </view>
         </view>
       </view>
       <view class="row">
@@ -21,6 +24,9 @@
           <picker class="picker" bindchange="listenerDatePickerSelected" mode="date" fields="month" start="1970-01" end="2018-02" value="{{date}}">
             <view class="inner-picker">{{date}}</view>
           </picker>
+          <view class="arrow-icon">
+            <view class="inner"></view>
+          </view>
         </view>
       </view>
       <view class="row">
@@ -36,6 +42,6 @@
         </view>
       </view>
     </view>
-    <button formType="submit" placeholder-class="placeholder" class="baseBtn mt100">保存</button>
+    <button formType="submit" placeholder-class="placeholder" class="baseBtn mt60">保存</button>
   </form>
 </view>

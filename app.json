@@ -18,8 +18,10 @@
     "pages/bindAccount/account",
     "pages/loginRegister/loginregister",
     "pages/resumeCenter/center",
+    "pages/userInformation/information",
     "pages/editBasicInfor/infor",
-    "pages/userInformation/information"
+    "pages/editJobExpectation/expect",
+    "pages/editEducation/educ"
   ],
   "window": {
     "backgroundTextStyle": "light",

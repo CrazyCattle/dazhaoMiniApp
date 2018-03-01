@@ -1,4 +1,4 @@
-// pages/userInformation/information.js
+// pages/jobExpectation/expect.js
 Page({
 
   /**
@@ -7,22 +7,7 @@ Page({
   data: {
   
   },
-  linkEditBasic () {
-    wx.navigateTo({
-      url: '../editBasicInfor/infor'
-    })
-  },
-  linkEditEduc () {
-    wx.navigateTo({
-      url: '../editEducation/educ'
-    })
-  },
-  linkJobExpect (e) {
-    let id = e.target.dataset.id
-    wx.navigateTo({
-      url: `../editJobExpectation/expect?id=${id}`
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

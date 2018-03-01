@@ -60,3 +60,26 @@
   border: 8rpx solid transparent;
   border-left-color: #fff;
 }
+
+.addMoreAddress {
+  position: absolute;
+  right: 64rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  border: 1rpx solid #51d3d9;
+  border-radius: 50%;
+  color: #51d3d9;
+}
+
+.delete-box {
+  padding-top: 44rpx;
+}
+.delete {
+  font-size: 28rpx;
+  color: #848ca1;
+  text-decoration: underline;
+}

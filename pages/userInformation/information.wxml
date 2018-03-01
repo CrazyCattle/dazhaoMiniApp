@@ -19,7 +19,7 @@
   </view>
   <view class="edit-row bg-f mt20">
     <view class="edit-title">教育背景</view>
-    <view class="editBtn">编辑</view>
+    <view class="editBtn" bindtap='linkEditEduc'>编辑</view>
     <view class="edit-content">
       <view class="row">学校： 华中科技大学</view>
       <view class="row">学历： 本科</view>
@@ -33,7 +33,7 @@
   <view class="edit-row expect bg-f mt20">
     <view class="edit-title">求职期望</view>
     <view class="edit-content">
-      <view class="editBtn">编辑</view>
+      <view class="editBtn" data-id="1" bindtap='linkJobExpect'>编辑</view>
       <view class="row">目标行业： 互联网</view>
       <view class="row">目标职位： IT / Java研发工程师</view>
       <view class="row">地点： 上海</view>
@@ -42,7 +42,7 @@
       <view class="row">公司性质：不限</view>
     </view>
     <view class="edit-content">
-      <view class="editBtn">编辑</view>
+      <view class="editBtn" data-id="2" bindtap='linkJobExpect'>编辑</view>
       <view class="row">目标行业： 互联网</view>
       <view class="row">目标职位： IT / Java研发工程师</view>
       <view class="row">地点： 上海</view>

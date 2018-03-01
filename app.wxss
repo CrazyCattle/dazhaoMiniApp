@@ -35,6 +35,9 @@ html,body,page {
 .mt40 {
   margin-top: 40rpx;
 }
+.mt60 {
+  margin-top: 60rpx;
+}
 .mt100 {
   margin-top: 100rpx;
 }
