@@ -1,3 +1,6 @@
+.page-login {
+  padding-top: 20rpx;
+}
 .form-box {
   padding-left: 40rpx 
 }

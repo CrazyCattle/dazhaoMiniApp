@@ -1,6 +1,6 @@
 <view class="page-login">
   <form bindsubmit="formSubmit">
-    <view class="form-box bg-f mt20">
+    <view class="form-box bg-f">
 
       <view class="row">
         <view class="row-tit">目标行业：</view>

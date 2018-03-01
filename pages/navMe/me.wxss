@@ -60,7 +60,7 @@
 }
 
 .me-setting {
-  margin-top: 40rpx;
+  margin-top: 25rpx;
   padding-left: 40rpx;
 }
 .me-row {
