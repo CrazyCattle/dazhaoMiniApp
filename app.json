@@ -2,8 +2,8 @@
   "pages": [
     "pages/navIndex/index",
     "pages/navCourse/course",
-    "pages/navMe/me",
     "pages/navInformation/infor",
+    "pages/navMe/me",
     "pages/login/login",
     "pages/companyDetail/detail",
     "pages/companyRecommend/company",
@@ -28,7 +28,8 @@
     "pages/inforStatus/status",
     "pages/enrollmentInvitation/invi",
     "pages/enrollmentRecommend/recommend",
-    "pages/inforNotice/notice"
+    "pages/inforNotice/notice",
+    "pages/inforSetting/setting"
   ],
   "window": {
     "backgroundTextStyle": "light",

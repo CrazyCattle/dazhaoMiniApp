@@ -1,2 +1,18 @@
-<button formType="submit" class="baseBtn mt100" bindtap="lonkBind">微信登录</button>
-<button formType="submit" class="baseBtn mt100" bindtap="linkLogin">学号/手机号登录</button>
+<view class="login-box">
+  <image class="bg" src="../../images/bg.jpg"></image>
+  <view class="login-content">
+    
+    <view class="logo">
+      <image class="logo-img" src="../../images/logo.png"></image>
+    </view>
+
+    <button formType="submit" class="baseBtn" bindtap="lonkBind">微信登录</button>
+    <button formType="submit" class="baseBtn mt40" bindtap="linkLogin">学号/手机号登录</button>
+
+    <view class="tc mt40">
+      <text class="register" bindtap="register">立即注册</text>
+    </view>
+
+    <view class="tip tc">云就业服务平台</view>
+  </view>
+</view>

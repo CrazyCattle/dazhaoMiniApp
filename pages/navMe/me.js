@@ -27,6 +27,11 @@ Page({
       url: '../suggestion/suggestion'
     })
   },
+  linkSetting () {
+    wx.navigateTo({
+      url: '../inforSetting/setting'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

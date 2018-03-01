@@ -13,14 +13,16 @@
 
     <view class="me-send-box">
       <view class="me-send">
-        已投递：<text class="num">12</text>
+        已投递：
+        <text class="num">12</text>
       </view>
       <view class="me-review">
-        待面试：<text class="num">12</text>
+        待面试：
+        <text class="num">12</text>
       </view>
     </view>
   </view>
-  
+
   <view class="me-setting bg-f">
     <view class="me-row">
       <image class="icon rourse" src="../../images/me/course.png"></image>我的课程
@@ -43,6 +45,12 @@
   </view>
 
   <view class="me-setting bg-f">
+    <view class="me-row" bindtap='linkSetting'>
+      <image class="icon pwd" src="../../images/me/notice.png"></image>消息设置
+      <view class="arrow-icon">
+        <view class="inner"></view>
+      </view>
+    </view>
     <view class="me-row">
       <image class="icon pwd" src="../../images/me/pwd.png"></image>修改密码
       <view class="arrow-icon">
