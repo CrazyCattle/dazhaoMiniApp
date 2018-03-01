@@ -1,4 +1,4 @@
-// pages/inforNotice/notice.js
+// pages/inforNoticeDetail/detail.js
 Page({
 
   /**
@@ -7,11 +7,7 @@ Page({
   data: {
   
   },
-  linkDetail () {
-    wx.navigateTo({
-      url: '../inforNoticeDetail/detail'
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

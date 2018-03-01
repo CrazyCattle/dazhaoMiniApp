@@ -29,7 +29,8 @@
     "pages/enrollmentInvitation/invi",
     "pages/enrollmentRecommend/recommend",
     "pages/inforNotice/notice",
-    "pages/inforSetting/setting"
+    "pages/inforSetting/setting",
+    "pages/inforNoticeDetail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

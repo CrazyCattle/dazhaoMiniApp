@@ -1,5 +1,5 @@
 <view class="infor-list">
-  <view class="infor-item active infor-status bg-f">
+  <view class="infor-item active infor-status bg-f" bindtap="linkDetail">
     <view class="item-title">
       <text class="tit">投递进度更新投递进度更新投递进度更新投递进度更新</text>
       <text class="time">14:30</text>
@@ -7,7 +7,7 @@
     <view class="desc">摘要文本摘要文本摘要文本摘要文本摘要文本摘要摘要文本摘要文本摘要文本摘要文本摘要文本摘要文…</view>
     <view class="desc">来源：华中科技大学</view>
   </view>
-  <view class="infor-item infor-status bg-f">
+  <view class="infor-item infor-status bg-f" bindtap="linkDetail">
     <view class="item-title">
       <text class="tit">投递进度更新投递进度度更新</text>
       <text class="time">14:30</text>
@@ -15,7 +15,7 @@
     <view class="desc">企业已经接收到您投递的简历</view>
     <view class="desc">来源：华中科技大学</view>
   </view>
-  <view class="infor-item infor-status bg-f">
+  <view class="infor-item infor-status bg-f" bindtap="linkDetail">
     <view class="item-title">
       <text class="tit">投递进度更新投递进度更新投递进度更新投递进度更新</text>
       <text class="time">14:30</text>
