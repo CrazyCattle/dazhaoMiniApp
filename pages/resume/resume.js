@@ -1,30 +1,15 @@
-// pages/me/me.js
+// pages/resume/resume.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    sendResumeBox: false
   },
-  linkLR () {
-    wx.navigateTo({
-      url: '../loginRegister/loginregister'
-    })
-  },
-  linkResumeCenter () {
-    wx.navigateTo({
-      url: '../resumeCenter/center'
-    })
-  },
-  editUserInfor () {
-    wx.navigateTo({
-      url: '../userInformation/information'
-    })
-  },
-  linkSuggestion () {
-    wx.navigateTo({
-      url: '../suggestion/suggestion'
+  sendresume () {
+    this.setData({
+      sendResumeBox: !this.data.sendResumeBox
     })
   },
   /**

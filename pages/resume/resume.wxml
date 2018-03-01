@@ -1,0 +1,49 @@
+<view class="resume">
+  <view class="resume-box bg-f"></view>
+  <view class="send-box bg-f">
+    <button class="baseBtn" bindtap="sendresume">邮件投递</button>
+  </view>
+
+  <view class="send" wx:if="{{ sendResumeBox }}">
+    <view class="title">简历快速投递</view>
+    <view class="tips">
+      你可以把做好的简历一键投递到心仪公司HR的邮箱备战校招，快人一步！
+    </view>
+    <form>
+      <view class="send-content">
+        <view class="row">
+          <text class="row-title">邮件主题：</text>
+          <view class="ipt-box">
+            <input class="ipt" placeholder-class='placeholder' placeholder='输入邮件主题'></input>
+          </view>
+        </view>
+        <view class="row">
+          <text class="row-title">您的姓名：</text>
+          <view class="ipt-box">
+            <input class="ipt" placeholder-class='placeholder' placeholder='输入您的姓名'></input>
+          </view>
+        </view>
+        <view class="row">
+          <text class="row-title">收件邮箱：</text>
+          <view class="ipt-box">
+            <input class="ipt" placeholder-class='placeholder' placeholder='输入HR收件邮箱'></input>
+          </view>
+        </view>
+        <view class="row">
+          <text class="row-title">发件邮箱：</text>
+          <view class="ipt-box">
+            <input class="ipt" placeholder-class='placeholder' placeholder='输入您的发件邮箱'></input>
+          </view>
+        </view>
+        <view class="row textarea-box">
+          <textarea class="textarea" placeholder-class='placeholder' placeholder='' value="脚步网络科技有限公司HR，您好！我是应聘贵公司房地产招商专员的求职者招妹。我曾做过大招世纪广场投资有限公司的招商招商专员，同同时也做过大招企业发展有限公司的销"></textarea>
+        </view>
+        <view class="row">
+          <button class="btn reset" bindtap="sendresume">取消</button>
+          <button class="btn ok" bindtap="sendresume">投递</button>
+        </view>
+      </view>
+    </form>
+  </view>
+  <mask wx:if="{{ sendResumeBox }}"></mask>
+</view>

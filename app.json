@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/navIndex/index",
-    "pages/navInformation/infor",
     "pages/navCourse/course",
     "pages/navMe/me",
+    "pages/navInformation/infor",
     "pages/login/login",
     "pages/companyDetail/detail",
     "pages/companyRecommend/company",
@@ -21,7 +21,14 @@
     "pages/userInformation/information",
     "pages/editBasicInfor/infor",
     "pages/editJobExpectation/expect",
-    "pages/editEducation/educ"
+    "pages/editEducation/educ",
+    "pages/editResumeBasicInfor/infor",
+    "pages/suggestion/suggestion",
+    "pages/resume/resume",
+    "pages/inforStatus/status",
+    "pages/enrollmentInvitation/invi",
+    "pages/enrollmentRecommend/recommend",
+    "pages/inforNotice/notice"
   ],
   "window": {
     "backgroundTextStyle": "light",

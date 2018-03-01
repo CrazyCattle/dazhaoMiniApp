@@ -1,0 +1,51 @@
+<view class="me-head-infor bg-f mt20">
+  <image class="me-pic" src="../../images/user_pic.png"></image>
+  <view class="me-desc">
+    <view class="me-name">点击更换简历照片</view>
+  </view>
+
+  <view class="save-pic">保存</view>
+</view>
+
+<form bindsubmit="formSubmit">
+  <view class="form-box bg-f mt20">
+    <view class="row">
+      <view class="row-tit">简历名称：</view>
+      <view class="rot-ipt">
+        <input type="text" placeholder-class="placeholder" class="input" placeholder='请输入求职岗位' value='互联网产品岗'></input>
+      </view>
+    </view>
+    <view class="row">
+      <view class="row-tit">姓名：</view>
+      <view class="rot-ipt">
+        <input class="input" placeholder-class="placeholder" placeholder='请输入姓名' value="周新诚"></input>
+      </view>
+    </view>
+    <view class="row">
+      <view class="row-tit">联系电话：</view>
+      <view class="rot-ipt">
+        <input class="input" type="number" placeholder-class="placeholder" placeholder='填写联系电话' value="5454541521"></input>
+      </view>
+    </view>
+    <view class="row">
+      <view class="row-tit">联系邮箱：</view>
+      <view class="rot-ipt">
+        <input class="input" placeholder-class="placeholder" placeholder='填写联系邮箱'></input>
+      </view>
+    </view>
+
+    <view class="row">
+      <view class="row-tit">求职意向：</view>
+      <view class="rot-ipt">
+        <input class="input" placeholder-class="placeholder" value="{{ jobExpect[jobExpectIndex] }}" placeholder='请输入求职意向'></input>
+        <view class="select-exprect">
+          <text>选择求职意向</text>
+          <view class="arrow-icon">
+            <view class="inner"></view>
+          </view>
+          <picker class="picker" mode="selector" range="{{jobExpect}}" value="{{jobExpectIndex}}" bindchange="listenerJobExpect">{{ jobExpect[jobExpectIndex] }}</picker>
+        </view>
+      </view>
+    </view>
+  </view>
+</form>

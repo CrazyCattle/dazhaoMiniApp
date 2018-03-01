@@ -49,7 +49,7 @@
         <view class="inner"></view>
       </view>
     </view>
-    <view class="me-row">
+    <view class="me-row" bindtap='linkSuggestion'>
       <image class="icon infor" src="../../images/me/infor.png"></image>建议反馈
       <view class="arrow-icon">
         <view class="inner"></view>

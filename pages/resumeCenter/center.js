@@ -144,6 +144,16 @@ Page({
       fliterType: type
     })
   },
+  editResumeBasicInfor () {
+    wx.navigateTo({
+      url: '../editResumeBasicInfor/infor?id=1',
+    })
+  },
+  linkResume () {
+    wx.navigateTo({
+      url: '../resume/resume?id=1',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

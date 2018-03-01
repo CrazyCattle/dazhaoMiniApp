@@ -1,4 +1,4 @@
-// pages/me/me.js
+// pages/inforNotice/notice.js
 Page({
 
   /**
@@ -7,26 +7,7 @@ Page({
   data: {
   
   },
-  linkLR () {
-    wx.navigateTo({
-      url: '../loginRegister/loginregister'
-    })
-  },
-  linkResumeCenter () {
-    wx.navigateTo({
-      url: '../resumeCenter/center'
-    })
-  },
-  editUserInfor () {
-    wx.navigateTo({
-      url: '../userInformation/information'
-    })
-  },
-  linkSuggestion () {
-    wx.navigateTo({
-      url: '../suggestion/suggestion'
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

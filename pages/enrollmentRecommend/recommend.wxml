@@ -1,0 +1,34 @@
+<view class="infor-list">
+  <view class="infor-item active infor-xztj bg-f">
+    <view class="item-title">
+      <text class="tit">投递进度更新</text>
+      <text class="time">14:30</text>
+    </view>
+    <view class="desc">职位：Java研发工程师</view>
+    <view class="desc">截止日期：2018/01/26</view>
+  </view>
+  <view class="infor-item infor-xztj bg-f">
+    <view class="item-title">
+      <text class="tit">投递进度更新</text>
+      <text class="time">14:30</text>
+    </view>
+    <view class="desc">职位：Java研发工程师</view>
+    <view class="desc">截止日期：2018/01/26</view>
+  </view>
+  <view class="infor-item infor-xztj bg-f">
+    <view class="item-title">
+      <text class="tit">投递进度更新</text>
+      <text class="time">14:30</text>
+    </view>
+    <view class="desc">职位：Java研发工程师</view>
+    <view class="desc">截止日期：2018/01/26</view>
+  </view>
+  <view class="infor-item infor-xztj bg-f">
+    <view class="item-title">
+      <text class="tit">投递进度更新</text>
+      <text class="time">14:30</text>
+    </view>
+    <view class="desc">职位：Java研发工程师</view>
+    <view class="desc">截止日期：2018/01/26</view>
+  </view>
+</view>

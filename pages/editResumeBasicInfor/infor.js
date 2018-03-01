@@ -1,31 +1,17 @@
-// pages/me/me.js
+// pages/editResumeBasicInfor/infor.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    jobExpect: ['web前端', 'PHP开发'],
+    jobExpectIndex: 0,    
   },
-  linkLR () {
-    wx.navigateTo({
-      url: '../loginRegister/loginregister'
-    })
-  },
-  linkResumeCenter () {
-    wx.navigateTo({
-      url: '../resumeCenter/center'
-    })
-  },
-  editUserInfor () {
-    wx.navigateTo({
-      url: '../userInformation/information'
-    })
-  },
-  linkSuggestion () {
-    wx.navigateTo({
-      url: '../suggestion/suggestion'
-    })
+  listenerJobExpect (e) {
+    this.setData({
+      jobExpectIndex: e.detail.value
+    });
   },
   /**
    * 生命周期函数--监听页面加载

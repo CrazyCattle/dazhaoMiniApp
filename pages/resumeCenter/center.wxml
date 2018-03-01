@@ -11,13 +11,13 @@
 
   <view class="resume-list" wx:if="{{ page == '1' }}">
     <scroll-view scroll-y style="height: 100%;">
-      <view class="resume-item active bg-f">
+      <view class="resume-item active bg-f" bindtap='linkResume'>
         <view class="item-lf">
           <view class="title">互联网产品实习生</view>
           <view class="desc">上海市 | 互联网产品</view>
         </view>
         <view class="item-rt">
-          <text class="editBtn">编辑</text>
+          <text class="editBtn" catchtap='editResumeBasicInfor'>编辑</text>
           <text class="editBtn">删除</text>
         </view>
       </view>
@@ -28,7 +28,7 @@
           <view class="desc">上海市 | 互联网产品</view>
         </view>
         <view class="item-rt">
-          <text class="editBtn">编辑</text>
+          <text class="editBtn" catchtap='editResumeBasicInfor'>编辑</text>
           <text class="editBtn">删除</text>
         </view>
       </view>

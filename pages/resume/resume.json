@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "简历预览",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "mask": "/components/mask/mask"
+  }
+}
