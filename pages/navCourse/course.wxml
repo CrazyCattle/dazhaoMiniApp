@@ -16,65 +16,13 @@
   </view>
   
   <view class="page-1 bg" wx:if="{{ page == '1' }}">
-    <view class="fliter-box bg-f tc">
+    <view class="fliter-box bg-f tc" wx:for="{{ typeArr }}" wx:for-item="item" wx:key="key">
       <view class="tc">
-        <view class="title">名企推荐</view>
+        <view class="title">{{ item.class_name }}</view>
       </view>
-      <text class="tit">优秀企业推荐尽在大招一百网</text>
+      <text class="tit">{{ item.class_intro }}</text>
       <view class="fliter-tab">
-        <view class="item" bindtap="linkChildPage">春招</view>
-        <view class="item" bindtap="linkChildPage">面试</view>
-        <view class="item" bindtap="linkChildPage">求职攻略</view>
-        <view class="item" bindtap="linkChildPage">面试</view>
-        <view class="item" bindtap="linkChildPage">面试择业技巧</view>
-      </view>
-    </view>
-    <view class="fliter-box mt20 bg-f tc">
-      <view class="tc">
-        <view class="title">行业解读</view>
-      </view>
-      <text class="tit">优秀企业推荐尽在大招一百网</text>
-      <view class="fliter-tab">
-        <view class="item">SAP专场</view>
-        <view class="item">汽车行业</view>
-        <view class="item">金融行业</view>
-        <view class="item">医药行业</view>
-        <view class="item">机械行业</view>
-        <view class="item">农业行业</view>
-        <view class="item">SAP专场</view>
-        <view class="item">汽车行业</view>
-        <view class="item">金融行业</view>
-      </view>
-    </view>
-    <view class="fliter-box mt20 bg-f tc">
-      <view class="tc">
-        <view class="title">职业能力</view>
-      </view>
-      <text class="tit">优秀企业推荐尽在大招一百网</text>
-      <view class="fliter-tab">
-        <view class="item">自我认知</view>
-        <view class="item">职业素养</view>
-        <view class="item">金融行业</view>
-        <view class="item">医药行业</view>
-        <view class="item">机械行业</view>
-        <view class="item">农业行业</view>
-        <view class="item">医药行业</view>
-        <view class="item">机械行业</view>
-        <view class="item">农业行业</view>
-      </view>
-    </view>
-    <view class="fliter-box mt20 bg-f tc">
-      <view class="tc">
-        <view class="title">职业探索</view>
-      </view>
-      <text class="tit">优秀企业推荐尽在大招一百网</text>
-      <view class="fliter-tab">
-        <view class="item">专家讲坛</view>
-        <view class="item">就业技能</view>
-        <view class="item">金融行业</view>
-        <view class="item">医药行业</view>
-        <view class="item">机械行业</view>
-        <view class="item">农业行业</view>
+        <view class="item" data-id="{{ citem.class_id }}" bindtap="linkChildPage"  wx:for="{{ item.twolist }}" wx:for-item="citem" wx:key="key">{{ citem.class_name }}</view>
       </view>
     </view>
   </view>

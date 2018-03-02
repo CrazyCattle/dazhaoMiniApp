@@ -1,4 +1,7 @@
-// pages/index/index.js
+import {
+  getIndexCRecommend
+} from '../../api.js';
+
 Page({
 
   /**
@@ -6,11 +9,7 @@ Page({
    */
   data: {
     // 轮播
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
+    imgUrls: [],
     indicatorDots: false,
     autoplay: true,
     canautoplay: false,
@@ -114,11 +113,23 @@ Page({
       url: '../companyDetail/detail?id=123'
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  linkCoursePlay (e) {
+    let id = e.target.dataset.id
+    wx.navigateTo({
+      url: `../coursePlay/play?id=${id}`
+    })
+  },
   onLoad: function (options) {
-    
+    wx.request({
+      url: getIndexCRecommend,
+      success: res => {
+        console.log(res)
+        const { result } = res.data
+        this.setData({
+          imgUrls: result
+        })
+      }
+    })
   },
 
   /**

@@ -1,13 +1,14 @@
-// pages/course/course.js
-Page({
+import { getCClass } from '../../api.js';
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
     placeholderTxt: '搜索课程、讲师或关键字',
     focus: false,
     page: 1,
+
+    // page 1数据
+    typeArr: [],
+
     // page 2 轮播
     imgUrls: [
       'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
@@ -64,9 +65,10 @@ Page({
       page: page
     })
   },
-  linkChildPage () {
+  linkChildPage (e) {
+    let id = e.target.dataset.id
     wx.navigateTo({
-      url: '../courseChild/course'
+      url: `../courseChild/course?id=${id}`
     })
   },
   linkCollect () {
@@ -84,11 +86,27 @@ Page({
       url: '../coursePlay/play'
     })
   } ,
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    wx.request({
+      url: `${getCClass}`,
+      method: 'GET',
+      success: res => {
+        const { error } = res.data
+        if (error == '0') {
+          const { result } = res.data
+          this.setData({
+            typeArr: result
+          })
+        }
+        console.log(res)
+      },
+      fail: err => {
+        throw Error(err);
+      },
+      complete: res => {
+        // console.log(res)
+      }
+    })
   },
 
   /**

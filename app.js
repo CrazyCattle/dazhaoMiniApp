@@ -7,6 +7,29 @@ App({
       withShareTicket: true
     });
 
+
+    let promise = new Promise((resolve, reject) => {
+      wx.login({
+        success: res => {
+          console.log(res);
+          resolve(res.code)
+        }
+      });
+    })
+    promise.then((res1) => {
+      console.log(res1)
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(1111)
+          resolve(res1)
+        }, 23)
+      })
+    }).then((res2) => {
+      console.log(2222)
+      console.log(res2)
+    })
+    
+
     // // 登录
     // new Promise((resolve, reject) => {
     //   wx.login({
@@ -21,7 +44,6 @@ App({
     //     url: `https://www.mohuso.com/port/wxAuthorization?code=${res.code}`,
     //     method: "GET",
     //     success: res => {
-    //       console.log('dfjkasjfkd-------------', res)
     //       // console.log(res.data, res.data.error, res.data.result.openid)
     //       if (res.data.error == "0") {
     //         this.globalData.openid = res.data.result.openid;
@@ -55,10 +77,6 @@ App({
           wx.getUserInfo({
             success: res => {
               console.log(res);
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo;
-              this.globalData.nickname = res.userInfo.nickName;
-              this.globalData.avatar = res.userInfo.avatarUrl;
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -72,15 +90,11 @@ App({
   },
   globalData: {
     userInfo: null,
-    nickname: "",
     openid: wx.getStorage({
       "key":"openid",
       success: (res) => {
         return res
       }
-    }) || '',
-    avatar: "",
-    aboutUser: {},
-    dooruser: ''
+    }) || ''
   }
 });

@@ -1,10 +1,8 @@
-// pages/courseChild/course.js
+import { getSClass } from '../../api.js';
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    class_intro: {},
+    classThree: [],
     courseList: [
       {
         user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
@@ -37,7 +35,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let id = options.id
+
+    wx.request({
+      url: `${getSClass}${id}`,
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        const { error } = res.data
+        if (error == '0') {
+          const { class_intro, classThree } = res.data.result
+          this.setData({
+            class_intro,
+            classThree
+          })
+        }
+      },
+      fail: err => {
+        throw Error(err);
+      },
+      complete: res => {
+        // console.log(res)
+      }
+    })
+    
   },
 
   /**

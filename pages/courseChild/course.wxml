@@ -1,62 +1,32 @@
 <view class="course-raiders bg-f">
-  <view class="course-raiders-head tc">求职攻略系列课程</view>
-  <view class="course-raiders-desc">
-  害怕面试官的不苟言笑？担心面试题的刁钻难搞？不怕，看完这个视频你会发现HR都是好（H）人（R）。害怕面试官的不苟言笑？担心面试题的刁钻难搞？不怕，看完这个视频你会发现HR都是好（H）人（R）。害怕面试官的不苟言笑？担心面试题的刁钻难搞？这段是二级分类的介绍。
-  </view>
+  <view class="course-raiders-head tc">{{ class_intro.class_name }}</view>
+  <view class="course-raiders-desc">{{ class_intro.class_intro }}</view>
 </view>
 
-<view class="fliter-box mt20 bg-f tc">
+<view class="fliter-box mt20 bg-f tc" wx:for="{{ classThree }}" wx:key="key">
   <view class="tc">
-    <view class="title">求职解读</view>
+    <view class="title">{{ item.class_name }}</view>
     <view class="r-list tl">
-      <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item">
+      <view class="r-list-item" wx:for="{{ item.lessons }}" wx:key="key" wx:for-item="lesson">
         <view class="cont">
           <view class="company">
-            <image class="img" src="{{ item.pic_url }}"></image>
-            {{ item.user_name }}
+            <image class="img" src="{{ lesson.teacher_img }}"></image>
+            {{ lesson.teacher_name }}
           </view>
-          <view class="job lh-normal">{{ item.title }}</view>
+          <view class="job lh-normal">{{ lesson.lesson_name }}</view>
           <view class="s-desc">
-            <text class="infor lh-normal">{{ item.learning }}人学过</text>
-            <text class="infor lh-normal">时长：{{ item.data }}</text>
+            <text class="infor lh-normal">{{ lesson.viewCount }}人学过</text>
+            <text class="infor lh-normal">时长：{{ lesson.lesson_alltime }}</text>
           </view>
         </view>
-        <image class="pic" src="{{ item.pic_url }}"></image>
+        <image class="pic" src="{{ lesson.lesson_img }}"></image>
       </view>
-      <view class="more" bindtap="linkCourse">
+      <!-- <view class="more" bindtap="linkCourse">
         查看更多
         <view class="arrow-icon">
           <view class="inner"></view>
         </view>
-      </view>
-    </view>
-  </view>
-</view>
-
-<view class="fliter-box mt20 bg-f tc">
-  <view class="tc">
-    <view class="title">求职攻略</view>
-    <view class="r-list tl">
-      <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item">
-        <view class="cont">
-          <view class="company">
-            <image class="img" src="{{ item.pic_url }}"></image>
-            {{ item.user_name }}
-          </view>
-          <view class="job lh-normal">{{ item.title }}</view>
-          <view class="s-desc">
-            <text class="infor lh-normal">{{ item.learning }}人学过</text>
-            <text class="infor lh-normal">时长：{{ item.data }}</text>
-          </view>
-        </view>
-        <image class="pic" src="{{ item.pic_url }}"></image>
-      </view>
-    </view>
-    <view class="more" bindtap="linkCourse">
-      查看更多
-      <view class="arrow-icon">
-        <view class="inner"></view>
-      </view>
+      </view> -->
     </view>
   </view>
 </view>

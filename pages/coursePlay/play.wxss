@@ -139,7 +139,7 @@
   line-height: 40rpx;
 }
 .v-user-desc.active {
-  height: 80rpx;
+  max-height: 80rpx;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -173,7 +173,7 @@
 }
 
 .fliter-box {
-  padding-top: 20rpx; 
+  padding: 20rpx 0; 
 }
 .fliter-box .title {
   display: inline-block;
@@ -211,5 +211,5 @@
   margin: 20rpx auto;
 }
 .fliter-box .course-detail:last-child {
-  padding-bottom: 20rpx;
+  padding-bottom: 0;
 }

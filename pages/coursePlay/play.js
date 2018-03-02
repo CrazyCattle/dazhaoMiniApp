@@ -1,16 +1,12 @@
-// pages/coursePlay/play.js
+import { getPlayUrl } from '../../api';
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    videoSrc: 'http://200027599.vod.myqcloud.com/200027599_3470c60cc68e11e68b570957a7f62ea8.f30.mp4',
-    poster: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg',
+    // 视频 信息
     controls: true,
     autoplay: false,
     showPlayBtn: true,
     showCenterPlayBtn: false,
+    playInfor: {},
 
     active: false,
     menuActive: false,
@@ -26,59 +22,41 @@ Page({
       menuActive: !this.data.menuActive
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  linkCoursePlay (e) {
+    let curid = e.target.dataset.curid
+    let id = e.target.dataset.id
+    if (curid !== id) {
+      wx.navigateTo({
+        url: `../coursePlay/play?id=${id}`
+      })
+    }
+  },
   onLoad: function (options) {
-  
+    let id = options.id
+    wx.request({
+      url: `${getPlayUrl}${id}`,
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        const { error } = res.data
+        if (error == '0') {
+          const { result } = res.data
+          console.log(result)
+          this.setData({
+            playInfor: result
+          })
+        }
+      },
+      fail: err => {
+        throw Error(err);
+      },
+      complete: res => {
+        // console.log(res)
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
+  onReady: function () {},
+  onShow: function () {},
+  onHide: function () {},
+  onUnload: function () {}
 })

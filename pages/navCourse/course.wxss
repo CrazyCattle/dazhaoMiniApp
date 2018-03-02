@@ -64,6 +64,9 @@
 .fliter-box {
   padding-top: 20rpx; 
 }
+.fliter-box:not(:first-child) {
+  margin-top: 20rpx;
+}
 .fliter-box .title {
   display: inline-block;
   margin-bottom: 10rpx;
