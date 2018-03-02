@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    user_pic: ''
   },
   linkEditBasic () {
     wx.navigateTo({
@@ -21,6 +21,36 @@ Page({
     let id = e.target.dataset.id
     wx.navigateTo({
       url: `../editJobExpectation/expect?id=${id}`
+    })
+  },
+  chooseImg () {
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => {
+        console.log(res)
+        if (res.errMsg == "chooseImage:ok") {
+          this.setData({
+            user_pic: res.tempFilePaths[0]
+          })
+        }
+      },
+      fail: res => {
+        throw Error(res)
+      },
+      complete: res => {
+        // console.log(res)
+      }
+    })
+  },
+  prewImg () {
+    wx.previewImage({
+      current: this.data.user_pic?this.data.user_pic:'../../images/user_pic.png',
+      urls: [this.data.user_pic],
+      success: res => {
+        console.log(res)
+      }
     })
   },
   /**
