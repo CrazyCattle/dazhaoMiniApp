@@ -1,20 +1,16 @@
-import { getCClass } from '../../api.js';
+import { getCClass,getIndexCRecommend } from '../../api.js';
+
+const app = getApp()
 
 Page({
   data: {
     placeholderTxt: '搜索课程、讲师或关键字',
     focus: false,
     page: 1,
-
     // page 1数据
     typeArr: [],
-
     // page 2 轮播
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
+    imgUrls: [],
     indicatorDots: false,
     autoplay: true,
     canautoplay: false,
@@ -59,11 +55,37 @@ Page({
     // 确定搜索
     console.log(e.detail.value)
   },
+  linkCourse () {
+    wx.navigateTo({
+      url: '../moreCourse/course'
+    })
+  },
+  linkCoursePlay (e) {
+    let id = e.target.dataset.id
+    wx.navigateTo({
+      url: `../coursePlay/play?id=${id}`
+    })
+  },
   tabPage (e) {
     let page = e.target.dataset.page
     this.setData({
       page: page
     })
+
+    if (page == 2) {
+      if (!!app.globalData.student_id) {
+        wx.request({
+          url: `${getIndexCRecommend}?stu_id=${app.globalData.student_id}`,
+          success: res => {
+            console.log(res)
+            const { result } = res.data
+            this.setData({
+              imgUrls: result
+            })
+          }
+        })
+      }
+    }
   },
   linkChildPage (e) {
     let id = e.target.dataset.id

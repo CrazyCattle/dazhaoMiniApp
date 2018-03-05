@@ -16,7 +16,7 @@
       <view class="row">
         <view class="row-tit">学校：</view>
         <view class="rot-ipt">
-          <input class="input" confirm-type="done" type="text" placeholder='请选择学校'></input>
+          <input class="input" confirm-type="done" type="text" value="{{ schoolName }}" disabled></input>
         </view>
       </view>
       <view class="row">

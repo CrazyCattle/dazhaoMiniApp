@@ -4,17 +4,17 @@
       <view class="row">
         <view class="row-tit">账号：</view>
         <view class="rot-ipt">
-          <input class="input" placeholder='请输入学号/手机号'></input>
+          <input type="text" class="input" bindblur="inputName"  placeholder='请输入学号/手机号' focus="{{ focus }}"></input>
         </view>
       </view>
       <view class="row">
         <view class="row-tit">密码：</view>
         <view class="rot-ipt">
-          <input class="input" placeholder='请输入密码'></input>
+          <input type="text" password class="input" bindblur="inputPwd" placeholder='请输入密码' focus=" {{ focus }} "></input>
         </view>
       </view>
     </view>
-    <button formType="submit" class="baseBtn mt100">登录</button>
+    <button bindtap="loginIn" class="baseBtn mt100">登录</button>
     <view class="link-register tc mt40">
       没有账号？ <text class="register" bindtap="register">立即注册</text>
     </view>

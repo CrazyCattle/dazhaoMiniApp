@@ -1,13 +1,13 @@
 import {
-  getIndexCRecommend
+  getIndexCRecommend,
+  banner
 } from '../../api.js';
 
-Page({
+const app = getApp()
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
+    student_id: app.globalData.student_id || wx.getStorageSync("student_id") || '',
     // 轮播
     imgUrls: [],
     indicatorDots: false,
@@ -120,16 +120,36 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log(this)
+    wx.setNavigationBarTitle({
+      title: '首页'
+    })
     wx.request({
-      url: getIndexCRecommend,
+      url: `${banner}`,
+      method: 'GET',
       success: res => {
         console.log(res)
-        const { result } = res.data
-        this.setData({
-          imgUrls: result
-        })
+      },
+      fail: res => {
+        throw Error(err)
+      },
+      complete: res =>{
+        // res
       }
     })
+
+    if (!!app.globalData.student_id) {
+      wx.request({
+        url: `${getIndexCRecommend}?stu_id=${app.globalData.student_id}`,
+        success: res => {
+          console.log(res)
+          const { result } = res.data
+          this.setData({
+            imgUrls: result
+          })
+        }
+      })
+    }
   },
 
   /**

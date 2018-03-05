@@ -1,11 +1,11 @@
-// pages/register/register.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    schoolName: wx.getStorageSync('schoolInfo').university_title
   },
   defaultTap () {
     console.log('get code')

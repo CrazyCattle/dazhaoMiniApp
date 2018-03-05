@@ -1,12 +1,21 @@
 //app.js
 App({
+  globalData: {
+    userInfo: null,
+    stud_info: wx.getStorageSync('stud_info') || {},
+    student_id: wx.getStorageSync('student_id') || '',
+    openid: wx.getStorageSync("openid") || '',
+    schoolInfor: wx.getStorageSync('schoolInfor') || ''
+  },
   onLaunch: function() {
-    let self = this;
 
+    console.log(this.globalData.student_id)
+    let self = this;
     wx.showShareMenu({
       withShareTicket: true
     });
 
+    
 
     let promise = new Promise((resolve, reject) => {
       wx.login({
@@ -16,17 +25,26 @@ App({
         }
       });
     })
-    promise.then((res1) => {
-      console.log(res1)
+    promise.then((res) => {
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          console.log(1111)
-          resolve(res1)
-        }, 23)
+        // wx.getStorage({
+        //   "key":"stud_info",
+        //   success: res => {
+        //     resolve(res)
+        //   }
+        // })
+        resolve(1)
       })
-    }).then((res2) => {
-      console.log(2222)
-      console.log(res2)
+    }).then((res) => {
+      return new Promise((resolve, reject) => {
+        // console.log(res.data)
+        // this.globalData.stud_info = res.data
+        // this.globalData.student_id = res.data.student_id
+        // console.log(this.globalData.stud_info, this.globalData.student_id)
+        resolve(1)
+      })
+    }).then((res) => {
+      console.log(res)
     })
     
 
@@ -87,14 +105,5 @@ App({
         }
       }
     });
-  },
-  globalData: {
-    userInfo: null,
-    openid: wx.getStorage({
-      "key":"openid",
-      success: (res) => {
-        return res
-      }
-    }) || ''
   }
 });

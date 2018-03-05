@@ -1,4 +1,4 @@
-const basicUrl = "https://stu.youfuli100.com/api";
+const basicUrl = "https://stu.dazhao100.cn/api";
 
 module.exports = {
   getIndexCRecommend: `${basicUrl}/recommendLesson`, //首页课程推荐列表
@@ -8,5 +8,8 @@ module.exports = {
   getCollect: `${basicUrl}/lessonCollect?num=`, //课程收藏
   getHistory: `${basicUrl}/lessonRecord?num=`, //课程历史
   getPlayUrl: `${basicUrl}/lessonPlay?id=`, //播放页面
-  getNewCourse: `${basicUrl}/lesson?p=` //发现新课程（所有课程）
+  getNewCourse: `${basicUrl}/lesson?p=`, //发现新课程（所有课程）
+  loginIn: `${basicUrl}/UserLogin`, // 登录
+  banner: `${basicUrl}/banner`, //首页banner图
+  schoolInfo: `${basicUrl}/universityInfo` //高校logo，name
 };

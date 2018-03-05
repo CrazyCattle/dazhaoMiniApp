@@ -16,7 +16,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    wx.downloadFile({
+      url: 'http://dazhao100.cn/resume/download?resumes_id=31151',
+      success: res => {
+        console.log(res)
+        if (res.errMsg = "downloadFile:ok" && res.statusCode == 200) {
+          wx.openDocument({
+            filePath: res.tempFilePath,
+            success: res => {
+              console.log('打开文档成功')
+            }
+          })
+        }
+      }
+    })
   },
 
   /**

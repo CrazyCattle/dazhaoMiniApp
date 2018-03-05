@@ -1,7 +1,10 @@
 import { getCRecommend } from "../../api.js";
 
+let app = getApp()
+
 Page({
   data: {
+    student_id: app.globalData.student_id || wx.getStorageSync("student_id") || '',
     curpage: 1,
     canLoadMore: false,
     showLoading: false,
@@ -14,7 +17,7 @@ Page({
   getCRData() {
     return new Promise((resolve, reject) => {
       wx.request({
-        url: `${getCRecommend}${this.data.curpage}`,
+        url: `${getCRecommend}${this.data.curpage}&stu_id=${app.globalData.student_id}`,
         success: res => {
           const { error } = res.data;
           if (error == "0") {
@@ -51,16 +54,19 @@ Page({
     })
   },
   onLoad: function(options) {
-    this.getCRData().then(res => {
-      console.log(res)
-      const { error } = res.data;
-      if (error == "0") {
-        const { list } = res.data.result;
-        this.setData({
-          courseList: list
-        });
-      }
-    });
+    console.log(this.data.student_id)
+    if (!!app.globalData.student_id) {
+      this.getCRData().then(res => {
+        console.log(res)
+        const { error } = res.data;
+        if (error == "0") {
+          const { list } = res.data.result;
+          this.setData({
+            courseList: list
+          });
+        }
+      });
+    }
   },
   onReady: function() {},
   onShow: function() {},

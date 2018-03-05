@@ -1,11 +1,9 @@
-// pages/loginRegister/loginregister.js
-Page({
+import { schoolInfo } from '../../api';
+const app =getApp()
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
-  
+    logoUrl: ''
   },
   linkLogin () {
     wx.navigateTo({
@@ -26,7 +24,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    new Promise((resolve, reject) => {
+      if (!app.globalData.schoolInfo) {
+        wx.request({
+          url: `${schoolInfo}`,
+          method: 'GET', 
+          success: res => {
+            if (res.data.error == '0') {
+              app.globalData.schoolInfo = res.data.result
+              wx.setStorageSync('schoolInfo', res.data.result)
+              resolve(app.globalData.schoolInfo)
+            }
+          },
+          fail: res => {
+            throw Error(err)
+          },
+          complete: () => {
+            // complete
+          }
+        })
+      } else {
+        resolve(app.globalData.schoolInfo)
+      }
+    }).then(res => {
+      this.setData({
+        logoUrl: res.enter_logo
+      })
+    })
   },
 
   /**
