@@ -1,190 +1,84 @@
-// pages/companyRecommend/company.js
-Page({
+import { getHistory } from "../../api";
 
-  /**
-   * 页面的初始数据
-   */
+const app = getApp();
+
+Page({
   data: {
     scrollTop: 0,
     timer: null,
-    mockData: [
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: 'JAVA研发工程师',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: 'JAVA研发工程师',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: 'JAVA研发工程师',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: 'JAVA研发工程师',
-        learning: '232',
-        data: '06:16'
-      }
-    ],
+    curPage: 1,
+    dataExsit: false,
+    showLoading: false,
     // 职位推荐
-    courseList: [
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '第一次求职？来看这里',
-        learning: '232',
-        data: '06:16'
+    courseList: []
+  },
+  linCourse(e) {
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `../coursePlay/play?id=${id}`
+    });
+  },
+  onLoad: function(options) {
+    wx.request({
+      url: `${getHistory}?stu_id=${app.globalData.student_id}&p=${
+        this.data.curPage
+      }`,
+      method: "GET",
+      success: res => {
+        console.log(res);
+        if (res.data.error == "0") {
+          this.setData({
+            courseList: res.data.result,
+            dataExsit: res.data.dataExsit
+          });
+        }
+        if (res.data.dataExsit) {
+          this.setData({
+            curPage: this.data.curPage++
+          });
+        }
       },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '简历吐槽大会，这里有你的吗？',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '第一次求职？来看这里',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '简历吐槽大会，这里有你的吗？这里有你的吗？',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '第一次求职？来看这里',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '简历吐槽大会，这里有你的吗？',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '第一次求职？来看这里',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '简历吐槽大会，这里有你的吗？',
-        learning: '232',
-        data: '06:16'
-      }
-    ]
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+      fail: res => {},
+      complete: res => {}
+    });
   },
   lower(e) {
-    console.log(this.data.courseList)
-    wx.showNavigationBarLoading();
-    const self = this
-    if (self.timer) {
-      clearTimeout(self.timer)
-    }
-    self.timer = setTimeout(() => {
-      self.setData({
-        courseList: self.data.courseList.concat(self.data.mockData)
+    if (this.data.dataExsit) {
+      wx.showNavigationBarLoading();
+      this.setData({
+        showLoading: true
       })
-      wx.hideNavigationBarLoading()
-    }, 1000)
+      const self = this;
+      if (self.timer) {
+        clearTimeout(self.timer);
+      }
+      self.timer = setTimeout(() => {
+        wx.request({
+          url: `${getHistory}?stu_id=${app.globalData.student_id}&p=${
+            this.data.curPage
+          }`,
+          method: "GET",
+          success: res => {
+            console.log(res);
+            if (res.data.error == "0") {
+              this.setData({
+                courseList: this.data.courseList.concat(res.data.result),
+                dataExsit: res.data.dataExsit,
+                showLoading: false
+              });
+              wx.hideNavigationBarLoading();
+            }
+            if (res.data.dataExsit) {
+              this.setData({
+                curPage: this.data.curPage++
+              });
+            }
+          },
+          fail: res => {},
+          complete: res => {}
+        });
+        
+      }, 1000);
+    }
   }
-})
+});

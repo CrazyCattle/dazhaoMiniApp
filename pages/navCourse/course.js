@@ -1,20 +1,23 @@
-import { getCClass } from '../../api.js';
+import { 
+  getCClass,
+  getIndexCRecommend,
+  getCollect,
+  getHistory,
+  getNewCourse
+} from '../../api';
+
+const app = getApp()
 
 Page({
   data: {
+    showLoading: false,
     placeholderTxt: '搜索课程、讲师或关键字',
     focus: false,
     page: 1,
-
     // page 1数据
     typeArr: [],
-
     // page 2 轮播
-    imgUrls: [
-      'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-      'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
+    imgUrls: [],
     indicatorDots: false,
     autoplay: true,
     canautoplay: false,
@@ -22,33 +25,12 @@ Page({
     interval: 2500,
     duration: 300,
     // 发现好课
-    courseList: [
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '第一次求职？来看这里',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '简历吐槽大会，这里有你的吗？',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '第一次求职？来看这里',
-        learning: '232',
-        data: '06:16'
-      }
-    ],
+    courseList: [],
+    curCoursePage: 1,
+    dataExsit: false,
     // page 3
+    courseCollected: [],
+    courseHistory: []
   },
   iptFocus(e) {
     this.setData({
@@ -59,11 +41,104 @@ Page({
     // 确定搜索
     console.log(e.detail.value)
   },
+  linkCourse () {
+    wx.navigateTo({
+      url: '../moreCourse/course'
+    })
+  },
+  linkCoursePlay (e) {
+    let id = e.target.dataset.id
+    wx.navigateTo({
+      url: `../coursePlay/play?id=${id}`
+    })
+  },
   tabPage (e) {
     let page = e.target.dataset.page
     this.setData({
       page: page
     })
+    if (!!app.globalData.student_id) {
+      if (page == 2) {
+        if (!!app.globalData.student_id) {
+          if (this.data.imgUrls.length == 0) {
+            wx.request({
+              url: `${getIndexCRecommend}?stu_id=${app.globalData.student_id}`,
+              success: res => {
+                console.log(res)
+                const { result } = res.data
+                this.setData({
+                  imgUrls: result
+                })
+              }
+            })
+          }
+
+          if (this.data.courseList.length == 0) {
+            wx.request({
+              url: `${getNewCourse}${this.data.curCoursePage}&stu_id=${app.globalData.student_id}`,
+              data: {},
+              method: 'GET',
+              success: res => {
+                console.log(res, '1111111111')
+                const { error } = res.data
+                if (error == '0') {
+                  this.setData({
+                    courseList: res.data.result,
+                    curCoursePage: ++this.data.curCoursePage,
+                    dataExsit: res.data.dataExsit
+                  })
+                }
+              },
+              fail: res => {
+                throw Error(res)
+              },
+              complete: res => {
+                // complete
+              }
+            })
+          }
+        }
+      }
+
+      if (page == 3) {
+        wx.request({
+          url: `${getCollect}?num=3&stu_id=${app.globalData.student_id}`,
+          method: 'GET',
+          success: res => {
+            console.log(res)
+            if (res.data.error == '0') {
+              this.setData({
+                courseCollected: res.data.result
+              })
+            }
+          },
+          fail: res => {
+            throw Error(res)
+          },
+          complete: res => {
+            // complete
+          }
+        })
+        wx.request({
+          url: `${getHistory}?num=3&stu_id=${app.globalData.student_id}`,
+          method: 'GET',
+          success: res => {
+            console.log(res)
+            if (res.data.error == '0') {
+              this.setData({
+                courseHistory: res.data.result
+              })
+            }
+          },
+          fail: res => {
+            throw Error(res)
+          },
+          complete: res => {
+            // complete
+          }
+        })
+      }
+    }
   },
   linkChildPage (e) {
     let id = e.target.dataset.id
@@ -81,9 +156,10 @@ Page({
       url: '../courseRecord/record'
     })
   },
-  linCourse () {
+  linCourse (e) {
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../coursePlay/play'
+      url: `../coursePlay/play?id=${id}`
     })
   } ,
   onLoad: function (options) {
@@ -108,53 +184,36 @@ Page({
       }
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    if ( this.data.page == 2 && this.data.dataExsit) {
+      this.setData({
+        showLoading: true
+      })
+      wx.request({
+        url: `${getNewCourse}${this.data.curCoursePage}&stu_id=${app.globalData.student_id}`,
+        method: 'GET',
+        success: res => {
+          const { error } = res.data
+          if (error == '0') {
+            this.setData({
+              courseList: this.data.courseList.concat(res.data.result),
+              dataExsit: res.data.dataExsit,
+              showLoading: false
+            })
+            if (this.data.dataExsit) {
+              this.setData({
+                curCoursePage: ++this.data.curCoursePage
+              })
+            }
+          }
+        },
+        fail: res => {
+          throw Error(res)
+        },
+        complete: res => {
+          // complete
+        }
+      })
+    }
   }
 })

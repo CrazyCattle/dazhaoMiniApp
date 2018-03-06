@@ -59,6 +59,6 @@ button.getCode {
   z-index: 1;
 }
 button[disabled][type=default] {
-  color: #51d3d9;
-  background-color: #fff;
+  color: #fff;
+  background:#47dbe2;
 }

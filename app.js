@@ -1,32 +1,55 @@
-//app.js
+import {
+  wxAuthorization
+} from 'api';
 App({
+  globalData: {
+    userInfo: null,
+    openid: wx.getStorageSync('openid') || {},
+    stud_info: wx.getStorageSync('stud_info') || {},
+    student_id: wx.getStorageSync('student_id') || '',
+    openid: wx.getStorageSync("openid") || '',
+    schoolInfor: wx.getStorageSync('schoolInfor') || ''
+  },
   onLaunch: function() {
-    let self = this;
 
+    console.log(this.globalData.student_id)
+    let self = this;
     wx.showShareMenu({
       withShareTicket: true
     });
 
+    
 
     let promise = new Promise((resolve, reject) => {
       wx.login({
         success: res => {
           console.log(res);
-          resolve(res.code)
+          resolve(res)
         }
       });
     })
-    promise.then((res1) => {
-      console.log(res1)
+    promise.then((res) => {
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          console.log(1111)
-          resolve(res1)
-        }, 23)
+        wx.request({
+          url: `${wxAuthorization}`,
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          method: 'POST',
+          data: {
+            code: res.code
+          },
+          success: res => {
+            console.log(res)
+            resolve(res)
+          }
+        })
       })
-    }).then((res2) => {
-      console.log(2222)
-      console.log(res2)
+    }).then(res => {
+      if (res.data.error == '0') {
+        this.globalData.openid = res.data.result.openid
+      }
+      wx.setStorageSync('openid', this.globalData.openid)
     })
     
 
@@ -87,14 +110,5 @@ App({
         }
       }
     });
-  },
-  globalData: {
-    userInfo: null,
-    openid: wx.getStorage({
-      "key":"openid",
-      success: (res) => {
-        return res
-      }
-    }) || ''
   }
 });

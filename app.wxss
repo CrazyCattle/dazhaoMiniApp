@@ -92,3 +92,9 @@ button::before {
   color:#848ca1;
   font-family: 'PingFangSC-Regular';
 }
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

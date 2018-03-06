@@ -83,19 +83,18 @@
 }
 
 .resume-item .item-lf {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
+  width: 430rpx;
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .resume-item .item-lf .title {
-  font-size: 30rpx;
-  color: #313148;
-}
-
-.resume-item .item-lf .title {
+  box-sizing: border-box;
+  width: 100%;
+  padding-right: 25rpx;
   font-size: 30rpx;
   color: #313148;
 }

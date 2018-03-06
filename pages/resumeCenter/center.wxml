@@ -11,86 +11,14 @@
 
   <view class="resume-list" wx:if="{{ page == '1' }}">
     <scroll-view scroll-y style="height: 100%;">
-      <view class="resume-item active bg-f" bindtap='linkResume'>
+      <view class="resume-item active bg-f" bindtap='linkResume' wx:for="{{ resumeList }}" wx:key="key">
         <view class="item-lf">
-          <view class="title">互联网产品实习生</view>
-          <view class="desc">上海市 | 互联网产品</view>
+          <view class="title ellipsis">{{ item.title }}</view>
+          <view class="desc">{{item.city}} | {{ item.expectwork }}</view>
         </view>
         <view class="item-rt">
-          <text class="editBtn" catchtap='editResumeBasicInfor'>编辑</text>
-          <text class="editBtn">删除</text>
-        </view>
-      </view>
-
-      <view class="resume-item active bg-f">
-        <view class="item-lf">
-          <view class="title">互联网产品实习生</view>
-          <view class="desc">上海市 | 互联网产品</view>
-        </view>
-        <view class="item-rt">
-          <text class="editBtn" catchtap='editResumeBasicInfor'>编辑</text>
-          <text class="editBtn">删除</text>
-        </view>
-      </view>
-
-      <view class="resume-item bg-f">
-        <view class="item-lf">
-          <view class="title">互联网产品实习生</view>
-          <view class="desc">上海市 | 互联网产品</view>
-        </view>
-        <view class="item-rt">
-          <text class="editBtn">编辑</text>
-          <text class="editBtn">删除</text>
-        </view>
-      </view>
-      <view class="resume-item bg-f">
-        <view class="item-lf">
-          <view class="title">互联网产品实习生</view>
-          <view class="desc">上海市 | 互联网产品</view>
-        </view>
-        <view class="item-rt">
-          <text class="editBtn">编辑</text>
-          <text class="editBtn">删除</text>
-        </view>
-      </view>
-      <view class="resume-item bg-f">
-        <view class="item-lf">
-          <view class="title">互联网产品实习生</view>
-          <view class="desc">上海市 | 互联网产品</view>
-        </view>
-        <view class="item-rt">
-          <text class="editBtn">编辑</text>
-          <text class="editBtn">删除</text>
-        </view>
-      </view>
-      <view class="resume-item bg-f">
-        <view class="item-lf">
-          <view class="title">互联网产品实习生</view>
-          <view class="desc">上海市 | 互联网产品</view>
-        </view>
-        <view class="item-rt">
-          <text class="editBtn">编辑</text>
-          <text class="editBtn">删除</text>
-        </view>
-      </view>
-      <view class="resume-item bg-f">
-        <view class="item-lf">
-          <view class="title">互联网产品实习生</view>
-          <view class="desc">上海市 | 互联网产品</view>
-        </view>
-        <view class="item-rt">
-          <text class="editBtn">编辑</text>
-          <text class="editBtn">删除</text>
-        </view>
-      </view>
-      <view class="resume-item bg-f">
-        <view class="item-lf">
-          <view class="title">互联网产品实习生</view>
-          <view class="desc">上海市 | 互联网产品</view>
-        </view>
-        <view class="item-rt">
-          <text class="editBtn">编辑</text>
-          <text class="editBtn">删除</text>
+          <text class="editBtn" catchtap='editResumeBasicInfor' data-id="{{ item.resumes_id }}" data-lan="{{ item.language }}">编辑</text>
+          <text class="editBtn" data-id="{{ item.resumes_id }}">删除</text>
         </view>
       </view>
     </scroll-view>
@@ -173,7 +101,7 @@
           </view>
         </view>
       </view>
-      
+
       <view class="invi-item bg-f">
         <view class="main">
           <view class="row">

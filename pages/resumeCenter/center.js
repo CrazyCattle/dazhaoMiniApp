@@ -1,12 +1,15 @@
-// pages/resumeList/list.js
-Page({
+import { resumeList } from '../../api';
 
-  /**
-   * 页面的初始数据
-   */
+const app = getApp()
+
+Page({
   data: {
+    student_id: '',
+
     page: 1,
     fliterType: 'job',
+    // page 1
+    resumeList: [],
     // page 2
     status: {
       sending: '0',
@@ -158,7 +161,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(app.globalData.student_id)
+    if (!!app.globalData.student_id) {
+      this.setData({
+        student_id: app.globalData.student_id
+      })
+      wx.request({
+        url: `${resumeList}?stu_id=${app.globalData.student_id}`,
+        method: 'GET',
+        success: res => {
+          console.log(res)
+          const { error } = res.data
+          if (error == '0') {
+            this.setData({
+              resumeList: res.data.listjson
+            })
+          }
+        },
+        fail: res => {
+          throw Error(res)
+        },
+        complete: res => {
+          // res
+        }
+      })
+    }
   },
 
   /**

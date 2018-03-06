@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
-	"appid": "wxf6b0e027b812840b",
-	"projectname": "dazhaoMiniApp",
+	"appid": "wx945ab499fbf3c175",
+	"projectname": "dazhao-app",
 	"condition": {
 		"search": {
 			"current": -1,

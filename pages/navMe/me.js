@@ -1,11 +1,9 @@
-// pages/me/me.js
+let app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    stud_info: {},
+    stud_id: undefined,
+    stud_img: ''
   },
   linkLR () {
     wx.navigateTo({
@@ -32,11 +30,27 @@ Page({
       url: '../inforSetting/setting'
     })
   },
+  loginOut () {
+    wx.removeStorageSync('schoolInfo')
+    wx.removeStorageSync('stud_info')
+    wx.removeStorageSync('student_id')
+    app.globalData.stud_info = ''
+    app.globalData.stud_id = ''
+    wx.reLaunch({
+      url: '../navMe/me'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(app.globalData.stud_info)
+    if (!!app.globalData.stud_info) {
+      this.setData({
+        stud_info: app.globalData.stud_info
+      })
+    }
+    console.log(this.data.stud_info)
   },
 
   /**
