@@ -38,7 +38,7 @@
 }
 .scroll-title {
   display: flex;
-  padding: 40rpx 32rpx 30rpx 40rpx;
+  padding: 40rpx 32rpx 30rpx 35rpx;
   justify-content: space-between;
   align-items: center;
   font-family: 'PingFangSC-Medium';

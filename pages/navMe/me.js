@@ -30,6 +30,16 @@ Page({
       url: '../inforSetting/setting'
     })
   },
+  loginOut () {
+    wx.removeStorageSync('schoolInfo')
+    wx.removeStorageSync('stud_info')
+    wx.removeStorageSync('student_id')
+    app.globalData.stud_info = ''
+    app.globalData.stud_id = ''
+    wx.reLaunch({
+      url: '../navMe/me'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

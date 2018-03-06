@@ -5,8 +5,7 @@ const app = getApp()
 Page({
   data: {
     username: '',
-    password: '',
-    focus: false
+    password: ''
   },
   register () {
     wx.navigateTo({

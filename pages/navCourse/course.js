@@ -1,4 +1,10 @@
-import { getCClass,getIndexCRecommend } from '../../api.js';
+import { 
+  getCClass,
+  getIndexCRecommend,
+  getCollect,
+  getHistory,
+  getNewCourse
+} from '../../api';
 
 const app = getApp()
 
@@ -18,33 +24,10 @@ Page({
     interval: 2500,
     duration: 300,
     // 发现好课
-    courseList: [
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '第一次求职？来看这里',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '简历吐槽大会，这里有你的吗？',
-        learning: '232',
-        data: '06:16'
-      },
-      {
-        user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        user_name: 'test saj 1',
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        title: '第一次求职？来看这里',
-        learning: '232',
-        data: '06:16'
-      }
-    ],
+    courseList: [],
     // page 3
+    courseCollected: [],
+    courseHistory: []
   },
   iptFocus(e) {
     this.setData({
@@ -71,17 +54,68 @@ Page({
     this.setData({
       page: page
     })
+    if (!!app.globalData.student_id) {
+      if (page == 2) {
+        if (!!app.globalData.student_id) {
+          wx.request({
+            url: `${getIndexCRecommend}?stu_id=${app.globalData.student_id}`,
+            success: res => {
+              console.log(res)
+              const { result } = res.data
+              this.setData({
+                imgUrls: result
+              })
+            }
+          })
 
-    if (page == 2) {
-      if (!!app.globalData.student_id) {
+          wx.request({
+            url: `${getNewCourse}1&stu_id=${app.globalData.student_id}`,
+            data: {},
+            method: 'GET',
+            success: res => {
+              console.log(res, '1111111111')
+              const { error } = res.data
+              if (error == '0') {
+                this.setData({
+                  courseList: res.data.result
+                })
+              }
+            },
+            fail: res => {
+              throw Error(res)
+            },
+            complete: res => {
+              // complete
+            }
+          })
+        }
+      }
+
+      if (page == 3) {
         wx.request({
-          url: `${getIndexCRecommend}?stu_id=${app.globalData.student_id}`,
+          url: `${getCollect}3&stu_id=${app.globalData.student_id}`,
+          method: 'GET',
           success: res => {
             console.log(res)
-            const { result } = res.data
-            this.setData({
-              imgUrls: result
-            })
+          },
+          fail: res => {
+            throw Error(res)
+          },
+          complete: res => {
+            // complete
+          }
+        })
+        wx.request({
+          url: `${getHistory}3&stu_id=${app.globalData.student_id}`,
+          method: 'GET',
+          success: res => {
+            console.log(res)
+          },
+          fail: res => {
+            throw Error(res)
+          },
+          complete: res => {
+            // complete
           }
         })
       }
@@ -103,9 +137,10 @@ Page({
       url: '../courseRecord/record'
     })
   },
-  linCourse () {
+  linCourse (e) {
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../coursePlay/play'
+      url: `../coursePlay/play?id=${id}`
     })
   } ,
   onLoad: function (options) {

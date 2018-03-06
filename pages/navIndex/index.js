@@ -9,6 +9,7 @@ Page({
   data: {
     student_id: app.globalData.student_id || wx.getStorageSync("student_id") || '',
     // 轮播
+    banner: [],
     imgUrls: [],
     indicatorDots: false,
     autoplay: true,
@@ -128,7 +129,13 @@ Page({
       url: `${banner}`,
       method: 'GET',
       success: res => {
-        console.log(res)
+        if (res.data.error == '0') {
+          this.setData({
+            banner: res.data.result
+          })
+
+          console.log(this.data.banner)
+        }
       },
       fail: res => {
         throw Error(err)
