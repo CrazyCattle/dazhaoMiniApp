@@ -1,124 +1,114 @@
-import { loginIn } from '../../api';
+import { loginIn } from "../../api";
 
-const app = getApp()
+const app = getApp();
 
 Page({
   data: {
-    username: '',
-    password: ''
+    username: "",
+    password: ""
   },
-  register () {
+  register() {
     wx.navigateTo({
-      url: '../register/register'
-    })
+      url: "../register/register"
+    });
   },
-  inputName (e) {
-    console.log(e.detail)
+  inputName(e) {
+    console.log(e.detail);
     this.setData({
       username: e.detail.value.trim()
-    })
+    });
   },
-  inputPwd (e) {
-    console.log(e.detail)
+  inputPwd(e) {
+    console.log(e.detail);
     this.setData({
       password: e.detail.value.trim()
-    })
+    });
   },
-  loginIn () {
-    console.log('username:' + this.data.username, 'pwd:' + this.data.password)
+  loginIn() {
+    console.log("username:" + this.data.username, "pwd:" + this.data.password);
     if (!this.data.username) {
       wx.showToast({
-        title: '请输入学号/手机号不能为空',
-        icon: 'none',
+        title: "请输入学号/手机号不能为空",
+        icon: "none",
         duration: 1000
-      })
+      });
     } else if (!this.data.password) {
       wx.showToast({
-        title: '密码不能为空',
-        icon: 'none',
+        title: "密码不能为空",
+        icon: "none",
         duration: 1000
-      })
+      });
     } else {
       wx.request({
         url: `${loginIn}`,
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        method: 'POST',
+        method: "POST",
         data: {
           username: this.data.username.trim(),
           password: this.data.password.trim()
         },
-        method: 'POST',
+        method: "POST",
         success: res => {
-          console.log(res)
-          const { error } = res.data
+          console.log(res);
+          const { error } = res.data;
           wx.showToast({
             title: res.data.errortip,
-            icon: 'none',
+            icon: "none",
             duration: 1000
-          })
-          if (error == '0') {
-            wx.setStorageSync('stud_info',app.globalData.stud_info = res.data.listjson)
-            wx.setStorageSync('student_id',app.globalData.student_id = res.data.listjson.student_id)
+          });
+          if (error == "0") {
+            wx.setStorageSync(
+              "stud_info",
+              (app.globalData.stud_info = res.data.listjson)
+            );
+            wx.setStorageSync(
+              "student_id",
+              (app.globalData.student_id = res.data.listjson.student_id)
+            );
             wx.reLaunch({
-              url: '../navMe/me'
-            })
+              url: "../navMe/me"
+            });
           }
         }
-      })
+      });
     }
   },
-  onLoad: function (options) {
-  
-  },
+  onLoad: function(options) {},
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
-  },
+  onHide: function() {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
-  },
+  onUnload: function() {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
-  },
+  onPullDownRefresh: function() {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
-  },
+  onReachBottom: function() {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
-  }
-})
+  onShareAppMessage: function() {}
+});

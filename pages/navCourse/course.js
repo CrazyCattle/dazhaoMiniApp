@@ -28,6 +28,7 @@ Page({
     courseList: [],
     curCoursePage: 1,
     dataExsit: false,
+
     // page 3
     courseCollected: [],
     courseHistory: []
@@ -97,6 +98,7 @@ Page({
               }
             })
           }
+
         }
       }
 
