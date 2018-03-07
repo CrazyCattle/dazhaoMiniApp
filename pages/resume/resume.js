@@ -17,7 +17,7 @@ Page({
    */
   onLoad: function (options) {
     wx.downloadFile({
-      url: 'http://dazhao100.cn/resume/download?resumes_id=31151',
+      url: 'https://static.dazhao100.cn/resume/download?resumes_id=31151',
       success: res => {
         console.log(res)
         if (res.errMsg = "downloadFile:ok" && res.statusCode == 200) {

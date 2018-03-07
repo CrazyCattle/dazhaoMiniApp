@@ -1,9 +1,13 @@
-import { resumeList } from '../../api';
+import { 
+  resumeList,
+  delResume
+ } from '../../api';
 
 const app = getApp()
 
 Page({
   data: {
+    isBack: false,
     student_id: '',
 
     page: 1,
@@ -147,93 +151,113 @@ Page({
       fliterType: type
     })
   },
-  editResumeBasicInfor () {
+  editResumeBasicInfor (e) {
+    let id = e.target.dataset.id
     wx.navigateTo({
-      url: '../editResumeBasicInfor/infor?id=1',
+      url: `../editResumeBasicInfor/infor?id=${id}`,
     })
+  },
+  delResume (e) {
+    new Promise((resolve, reject) => {
+      wx.showModal({
+        title: '确定删除此简历吗？',
+        content: '删除后不可恢复',
+        confirmText: '删除',
+        success: res => {
+          console.log(res)
+          if (res.confirm) {
+            resolve(res.confirm)
+          }
+        }
+      })
+    }).then(res => {
+      if (res) {
+        let resumes_id = e.target.dataset.id
+        wx.request({
+          url: `${delResume}`,
+          data: {
+            resumes_id,
+            stu_id: app.globalData.student_id
+          },
+          method: 'POST',
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          success: res => {
+            console.log(res)
+            if (res.data.error == '0') {
+              this.getResume()
+              wx.showToast({
+                title: res.data.errortip,
+                icon: "none",
+                duration: 1000
+              });
+            }
+          },
+          fail: function () {
+            // fail
+          },
+          complete: function () {
+            // complete
+          }
+        })
+      }
+    })
+    
+    
   },
   linkResume () {
     wx.navigateTo({
       url: '../resume/resume?id=1',
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  getResume () {
+    wx.request({
+      url: `${resumeList}`,
+      method: 'POST',
+      data: {
+        stu_id: app.globalData.student_id
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: res => {
+        console.log(res)
+        const { error } = res.data
+        if (error == '0') {
+          this.setData({
+            resumeList: res.data.listjson
+          })
+        } else if (error == '1') {
+          this.setData({
+            resumeList: []
+          })
+        }
+      },
+      fail: res => {
+        throw Error(res)
+      },
+      complete: res => {
+        // res
+      }
+    })
+  },
   onLoad: function (options) {
     console.log(app.globalData.student_id)
     if (!!app.globalData.student_id) {
       this.setData({
         student_id: app.globalData.student_id
       })
-      wx.request({
-        url: `${resumeList}?stu_id=${app.globalData.student_id}`,
-        method: 'GET',
-        success: res => {
-          console.log(res)
-          const { error } = res.data
-          if (error == '0') {
-            this.setData({
-              resumeList: res.data.listjson
-            })
-          }
-        },
-        fail: res => {
-          throw Error(res)
-        },
-        complete: res => {
-          // res
-        }
-      })
+      this.getResume()
     }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onShow () {
+    console.log(this.data.isBack)
+    if (this.data.isBack) {
+      this.getResume()
+    }
+    this.setData({
+      isBack: true
+    })
   }
 })

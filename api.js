@@ -17,5 +17,8 @@ module.exports = {
   banner: `${basicUrl}/banner`, // 首页banner图
   schoolInfo: `${basicUrl}/universityInfo`, // 高校logo，name
   resumeList: `${basicUrl}/ResumesList`, // 简历列表
+  delResume: `${basicUrl}/ResumesDel`, // 简历删除 resumes_id, stu_id
+  getResumeOne: `${basicUrl}/ResumesOneList`, // 获取单个简历的信息
   resumeBasicEdit: `${basicUrl}/ResumesBasicsEdit`, // 简历基本信息修改 resumes_id，student_id，img，title，truename，mobile，email，expectwork
+  editUserBasicInfo: `${basicUrl}/StudentBasicsEdit`, // 修改用户基本信息 
 };
