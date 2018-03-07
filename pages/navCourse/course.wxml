@@ -89,7 +89,7 @@
             </view>
             <image class="pic" src="{{ item.lesson_img }}"></image>
           </view>
-          <view class="more" bindtap="linkCollect">
+          <view class="more" bindtap="linkCollect" wx:if="{{ courseCollected.length > 3 }}">
             查看更多
             <view class="arrow-icon">
               <view class="inner"></view>
@@ -117,7 +117,7 @@
             <image class="pic" src="{{ item.lesson_img }}"></image>
           </view>
         </view>
-        <view class="more" bindtap="linkRecord">
+        <view class="more" bindtap="linkRecord" wx:if="{{ courseHistory.length > 3 }}">
           查看更多
           <view class="arrow-icon">
             <view class="inner"></view>

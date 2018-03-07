@@ -1,9 +1,12 @@
 import {
   resumeBasicEdit,
-  getResumeOne
+  getResumeOne,
+  jobExpect,
+  jobExpectChild
 } from '../../api';
 
 const app = getApp()
+
 Page({
   data: {
     resume_id: '',
@@ -17,6 +20,11 @@ Page({
     // 简历期望
     jobExpect: ["web前端", "PHP开发"],
     jobExpectIndex: 0,
+
+    multiIndex: [0, 0],
+    multiArray: [[], []],
+    expectOne: [],
+    expectOneC: [],
   },
   chooseImg() {
     wx.chooseImage({
@@ -39,11 +47,35 @@ Page({
   },
   listenerJobExpect(e) {
     this.setData({
-      jobExpectIndex: e.detail.value,
-    });
-    this.setData({
-      user_exprect: this.data.jobExpect[this.data.jobExpectIndex]
+      user_exprect: this.data.multiArray[1][e.detail.value[1]]
     })
+  },
+  bindMultiPickerColumnChange(e) {
+    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+    let c = e.detail.column
+    let v = e.detail.value
+    if (c == '0') {
+      this.data.expectOne.forEach((val, i) => {
+        if (val.tilte == this.data.multiArray[0][v]) {
+          wx.request({
+            url: `${jobExpectChild}&parameter=${val.parameter}`,
+            success: res => {
+              console.log(res)
+              if (res.data.error == '0') {
+                console.log(res.data.listjson)
+                const arr = []
+                res.data.listjson.forEach((v, i) => {
+                  arr.push(v.section)
+                })
+                this.setData({
+                  multiArray: [this.data.expectOneC, arr]
+                })
+              }
+            }
+          })
+        }
+      })
+    }
   },
   iptTitle(e) {
     this.setData({
@@ -71,7 +103,7 @@ Page({
       user_exprect: e.detail.value.trim()
     })
   },
-  submitResumeInfo () {
+  submitResumeInfo() {
     if (!this.data.resumeTitle) {
       wx.showToast({
         title: "简历名称不能为空",
@@ -163,7 +195,7 @@ Page({
       },
       data: {
         resumes_id: id,
-        stu_id: app.globalData.student_id 
+        stu_id: app.globalData.student_id
       },
       success: res => {
         console.log(res)
@@ -179,6 +211,41 @@ Page({
           })
         }
       }
+    })
+
+    new Promise((resolve, reject) => {
+      wx.request({
+        url: `${jobExpect}`,
+        success: res => {
+          if (res.data.error == '0') {
+            const { listjson } = res.data
+            const expectOne = []
+            listjson.forEach((v, i) => {
+              expectOne.push(v.tilte)
+            })
+            this.setData({
+              expectOne: listjson,
+              expectOneC: expectOne
+            })
+            resolve(listjson)
+          }
+        }
+      })
+    }).then(res => {
+      wx.request({
+        url: `${jobExpectChild}&parameter=${res[0].parameter}`,
+        success: res => {
+          if (res.data.error == '0') {
+            const arr = []
+            res.data.listjson.forEach((v, i) => {
+              arr.push(v.section)
+            })
+            this.setData({
+              multiArray: [this.data.expectOneC, arr]
+            })
+          }
+        }
+      })
     })
   }
 });

@@ -20,5 +20,7 @@ module.exports = {
   delResume: `${basicUrl}/ResumesDel`, // 简历删除 resumes_id, stu_id
   getResumeOne: `${basicUrl}/ResumesOneList`, // 获取单个简历的信息
   resumeBasicEdit: `${basicUrl}/ResumesBasicsEdit`, // 简历基本信息修改 resumes_id，student_id，img，title，truename，mobile，email，expectwork
+  jobExpect: `${basicUrl}/IndBase`, // 求职期望 module
+  jobExpectChild: `${basicUrl}/ExampleSection?module=Internship`,
   editUserBasicInfo: `${basicUrl}/StudentBasicsEdit`, // 修改用户基本信息 
 };

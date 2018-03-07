@@ -1,4 +1,10 @@
-import { getPlayUrl } from '../../api';
+import { 
+  getPlayUrl,
+  collect
+} from '../../api';
+
+const app = getApp()
+
 Page({
   data: {
     // 视频 信息
@@ -29,6 +35,33 @@ Page({
       wx.navigateTo({
         url: `../coursePlay/play?id=${id}`
       })
+    }
+  },
+  collectCourse (e) {
+    if (!!app.globalData.student_id) {
+      let id = e.currentTarget.dataset.id
+      wx.request({
+        url: `${collect}?stu_id=${app.globalData.student_id}&lesson_id=${id}`,
+        success: res => {
+          console.log(res)
+          if (res.data.error == '0') {
+            wx.showToast({
+              title: res.data.errortip,
+              icon: "none",
+              duration: 1000
+            });
+            this.setData({
+              collected: !this.data.collected
+            })
+          }
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '登陆后才能收藏',
+        icon: "none",
+        duration: 1000
+      });
     }
   },
   onLoad: function (options) {

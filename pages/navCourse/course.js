@@ -1,4 +1,4 @@
-import { 
+import {
   getCClass,
   getIndexCRecommend,
   getCollect,
@@ -10,6 +10,8 @@ const app = getApp()
 
 Page({
   data: {
+    isBack: false,
+
     showLoading: false,
     placeholderTxt: '搜索课程、讲师或关键字',
     focus: false,
@@ -42,18 +44,18 @@ Page({
     // 确定搜索
     console.log(e.detail.value)
   },
-  linkCourse () {
+  linkCourse() {
     wx.navigateTo({
       url: '../moreCourse/course'
     })
   },
-  linkCoursePlay (e) {
+  linkCoursePlay(e) {
     let id = e.target.dataset.id
     wx.navigateTo({
       url: `../coursePlay/play?id=${id}`
     })
   },
-  tabPage (e) {
+  tabPage(e) {
     let page = e.target.dataset.page
     this.setData({
       page: page
@@ -103,67 +105,73 @@ Page({
       }
 
       if (page == 3) {
-        wx.request({
-          url: `${getCollect}?num=3&stu_id=${app.globalData.student_id}`,
-          method: 'GET',
-          success: res => {
-            console.log(res)
-            if (res.data.error == '0') {
-              this.setData({
-                courseCollected: res.data.result
-              })
-            }
-          },
-          fail: res => {
-            throw Error(res)
-          },
-          complete: res => {
-            // complete
-          }
-        })
-        wx.request({
-          url: `${getHistory}?num=3&stu_id=${app.globalData.student_id}`,
-          method: 'GET',
-          success: res => {
-            console.log(res)
-            if (res.data.error == '0') {
-              this.setData({
-                courseHistory: res.data.result
-              })
-            }
-          },
-          fail: res => {
-            throw Error(res)
-          },
-          complete: res => {
-            // complete
-          }
-        })
+        this.getCollectCourse()
+        this.getHistoryCourse()
       }
     }
   },
-  linkChildPage (e) {
+  getCollectCourse() {
+    wx.request({
+      url: `${getCollect}?num=3&stu_id=${app.globalData.student_id}`,
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        if (res.data.error == '0') {
+          this.setData({
+            courseCollected: res.data.result
+          })
+        }
+      },
+      fail: res => {
+        throw Error(res)
+      },
+      complete: res => {
+        // complete
+      }
+    })
+  },
+  getHistoryCourse() {
+    wx.request({
+      url: `${getHistory}?num=3&stu_id=${app.globalData.student_id}`,
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        if (res.data.error == '0') {
+          this.setData({
+            courseHistory: res.data.result
+          })
+        }
+      },
+      fail: res => {
+        throw Error(res)
+      },
+      complete: res => {
+        // complete
+      }
+    })
+  },
+  linkChildPage(e) {
     let id = e.target.dataset.id
     wx.navigateTo({
       url: `../courseChild/course?id=${id}`
     })
   },
-  linkCollect () {
+  linkCollect() {
     wx.navigateTo({
       url: '../courseCollection/collect'
     })
   },
-  linkRecord () {
+  linkRecord() {
     wx.navigateTo({
       url: '../courseRecord/record'
     })
   },
-  linCourse (e) {
+  linCourse(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: `../coursePlay/play?id=${id}`
     })
-  } ,
+  },
   onLoad: function (options) {
     wx.request({
       url: `${getCClass}`,
@@ -186,8 +194,21 @@ Page({
       }
     })
   },
+  onShow() {
+    console.log(this.data.isBack, this.data.page == '3')
+    if (this.data.isBack) {
+      if (this.data.page == '3') {
+        this.getCollectCourse()
+        this.getHistoryCourse()
+      }
+    }
+    console.log(this.data.page == '3')
+    this.setData({
+      isBack: true
+    })
+  },
   onReachBottom: function () {
-    if ( this.data.page == 2 && this.data.dataExsit) {
+    if (this.data.page == 2 && this.data.dataExsit) {
       this.setData({
         showLoading: true
       })

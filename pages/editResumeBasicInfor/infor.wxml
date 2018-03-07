@@ -38,14 +38,13 @@
     <view class="row">
       <view class="row-tit">求职意向：</view>
       <view class="rot-ipt">
-        <input class="input" placeholder-class="placeholder" value="{{ user_exprect }}" placeholder='请输入求职意向' bindinput="iptExprect"
-          bindchange="iptExprect"></input>
+        <input class="input" placeholder-class="placeholder" value="{{ user_exprect }}" placeholder='请输入求职意向' bindinput="iptExprect" bindchange="iptExprect" disabled></input>
         <view class="select-exprect">
           <text>选择求职意向</text>
           <view class="arrow-icon">
             <view class="inner"></view>
           </view>
-          <picker class="picker" mode="selector" range="{{jobExpect}}" value="{{jobExpectIndex}}" bindchange="listenerJobExpect">{{ jobExpect[jobExpectIndex] }}</picker>
+          <picker class="picker" mode="multiSelector" range="{{multiArray}}" value="{{multiIndex}}" bindchange="listenerJobExpect" bindcolumnchange="bindMultiPickerColumnChange">当前选择：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}</picker>
         </view>
       </view>
     </view>
