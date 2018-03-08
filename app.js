@@ -6,6 +6,7 @@ App({
     userInfo: null,
     openid: wx.getStorageSync('openid') || {},
     stud_info: wx.getStorageSync('stud_info') || {},
+    student_img: wx.getStorageSync('stud_img') || '',
     student_id: wx.getStorageSync('student_id') || '',
     openid: wx.getStorageSync("openid") || '',
     schoolInfor: wx.getStorageSync('schoolInfor') || ''

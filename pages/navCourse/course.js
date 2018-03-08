@@ -210,6 +210,10 @@ Page({
         this.getCollectCourse()
         this.getHistoryCourse()
       }
+
+      this.setData({
+        focus: !this.data.focus
+      })
     }
     console.log(this.data.page == '3')
     this.setData({

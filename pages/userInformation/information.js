@@ -1,11 +1,13 @@
-// pages/userInformation/information.js
-Page({
+import {
+  uploadUserImg
+} from '../../api';
 
-  /**
-   * 页面的初始数据
-   */
+const app = getApp()
+
+Page({
   data: {
-    user_pic: ''
+    user_pic: app.globalData.student_img || '',
+    userImgPath: ''
   },
   linkEditBasic () {
     wx.navigateTo({
@@ -32,7 +34,35 @@ Page({
         console.log(res)
         if (res.errMsg == "chooseImage:ok") {
           this.setData({
-            user_pic: res.tempFilePaths[0]
+            user_pic: res.tempFilePaths[0],
+            userImgPath: res.tempFiles
+          })
+
+          wx.uploadFile({
+            url: `${uploadUserImg}`,
+            header: {
+              "Content-Type": "multipart/form-data"
+            },
+            method: 'POST',
+            filePath: this.data.user_pic,
+            name: 'image',
+            formData: {
+              'file': this.data.userImgPath,
+              'stu_id': app.globalData.student_id
+            },
+            success: res => {
+              const data = JSON.parse(res.data)
+              console.log(data)
+              if (data.error == '0') {
+                app.globalData.student_img = data.originalimg
+                wx.setStorageSync('stud_img', data.originalimg)
+                wx.showToast({
+                  title: data.errortip,
+                  icon: "none",
+                  duration: 1000
+                });
+              }
+            }
           })
         }
       },

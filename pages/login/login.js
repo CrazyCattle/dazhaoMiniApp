@@ -64,6 +64,10 @@ Page({
               (app.globalData.stud_info = res.data.listjson)
             );
             wx.setStorageSync(
+              "stud_img",
+              (app.globalData.stud_img = res.data.listjson.student_img)
+            );
+            wx.setStorageSync(
               "student_id",
               (app.globalData.student_id = res.data.listjson.student_id)
             );

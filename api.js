@@ -23,7 +23,6 @@ module.exports = {
   jobExpect: `${basicUrl}/IndBase`, // 求职期望 module
   jobExpectChild: `${basicUrl}/ExampleSection?module=Internship`,
   editUserBasicInfo: `${basicUrl}/StudentBasicsEdit`, // 修改用户基本信息 
-
-
-  uploadImg: `${basicUrl}/UpdataImg` //上传图片
+  uploadImg: `${basicUrl}/UpdataResumesImg`, //上传单个简历图片
+  uploadUserImg: `${basicUrl}/UpdataStudentImg`, // 上传头像
 };

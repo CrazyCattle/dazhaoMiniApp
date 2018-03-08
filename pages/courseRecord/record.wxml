@@ -5,7 +5,7 @@
         <view class="cont">
           <view class="company">
             <image class="img" src="{{ item.teacher_img }}"></image>
-            {{ item.teacher_truename }}
+            {{ item.teacher_name }}
           </view>
           <view class="job lh-normal">{{ item.lesson_name }}</view>
           <view class="s-desc"> 

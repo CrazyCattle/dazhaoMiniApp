@@ -2,7 +2,7 @@ let app = getApp()
 Page({
   data: {
     stud_info: {},
-    stud_id: undefined,
+    stud_id: '',
     stud_img: ''
   },
   linkLR () {
@@ -34,11 +34,20 @@ Page({
     wx.removeStorageSync('schoolInfo')
     wx.removeStorageSync('stud_info')
     wx.removeStorageSync('student_id')
+    wx.removeStorageSync('student_img')
     app.globalData.stud_info = ''
     app.globalData.student_id = ''
-    wx.reLaunch({
-      url: '../navMe/me'
-    })
+    app.globalData.student_img = ''
+    wx.showToast({
+      title: "退出成功",
+      icon: "none",
+      duration: 1000
+    });
+    let timer = setTimeout(() => {
+      wx.reLaunch({
+        url: '../navMe/me'
+      })
+    }, 300)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -47,7 +56,9 @@ Page({
     console.log(app.globalData.stud_info)
     if (!!app.globalData.stud_info) {
       this.setData({
-        stud_info: app.globalData.stud_info
+        stud_info: app.globalData.stud_info,
+        stud_img: app.globalData.student_img,
+        stud_id: app.globalData.student_id
       })
     }
     console.log(this.data.stud_info)

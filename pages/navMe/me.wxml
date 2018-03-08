@@ -1,7 +1,7 @@
 <view class="page-me">
   <view class="me-head bg-f">
     <view class="me-head-infor">
-      <image class="me-pic" src="{{!!stud_info.student_img?stud_info.student_img:'../../images/user_pic.png'}}"></image>
+      <image class="me-pic" src="{{!!stud_img?stud_img:'../../images/user_pic.png'}}"></image>
       <view class="me-desc">
         <block wx:if="{{ stud_info.student_name }}">
           <view class="me-name">{{ stud_info.student_truename }}</view>
@@ -45,7 +45,7 @@
     </view> -->
   </view>
 
-  <view class="me-setting bg-f">
+  <view class="me-setting bg-f" wx:if="{{ !!stud_id }}">
     <view class="me-row" bindtap='linkSetting'>
       <image class="icon pwd" src="../../images/me/notice.png"></image>消息设置
       <view class="arrow-icon">

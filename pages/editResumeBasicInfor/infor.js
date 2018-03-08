@@ -187,6 +187,7 @@ Page({
     }
   },
   uploadUserImg () {
+    console.log(app.globalData.student_id, this.data.resume_id)
     if (!!this.data.user_pic && (this.data.origin_user_pic !== this.data.user_pic)) {
       wx.uploadFile({
         url: `${uploadImg}`,
@@ -197,10 +198,13 @@ Page({
         filePath: this.data.user_pic,
         name: 'image',
         formData: {
-          'file': this.data.userImgPath
+          'file': this.data.userImgPath,
+          'stu_id': app.globalData.student_id,
+          'resumes_id': this.data.resume_id
         },
         success: res => {
           const data = JSON.parse(res.data)
+          console.log(res)
           if (data.error == '0') {
             wx.showToast({
               title: data.errortip,
