@@ -21,14 +21,15 @@ Page({
   getCode() {
     if (mobileReg.test(this.data.mobile)) {
       let time = 60;
-      this.setData({
-        canGetCode: !this.data.canGetCode
-      });
       wx.request({
         url: `${getAuthCode}${this.data.mobile}`,
         method: 'GET',
         success: res => {
+          console.log(res)
           if (res.data.error == '0') {
+            this.setData({
+              canGetCode: !this.data.canGetCode
+            });
             wx.showToast({
               title: res.data.errortip,
               icon: "none",
@@ -45,6 +46,12 @@ Page({
                 clearInterval(timer);
               }
             }, 1000);
+          } else if (res.data.error == '1') {
+            wx.showToast({
+              title: res.data.errortip,
+              icon: "none",
+              duration: 1000
+            });
           }
         },
         fail: function() {},
@@ -53,7 +60,7 @@ Page({
     } else {
       if (!this.data.mobile) {
         wx.showToast({
-          title: "手机号码格式错误",
+          title: "手机号码不能为空",
           icon: "none",
           duration: 1000
         });

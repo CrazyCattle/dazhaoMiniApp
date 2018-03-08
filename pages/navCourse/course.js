@@ -12,6 +12,9 @@ Page({
   data: {
     isBack: false,
 
+    showCollectMore: false,
+    showHistoryMore: false,
+
     showLoading: false,
     placeholderTxt: '搜索课程、讲师或关键字',
     focus: false,
@@ -39,10 +42,17 @@ Page({
     this.setData({
       focus: !this.data.focus
     })
+    console.log(this.data.focus)
+  },
+  searchChange (e) {
+    console.log(e.detail.value)
+  
   },
   iptConfirm(e) {
-    // 确定搜索
-    console.log(e.detail.value)
+    let keyword = e.detail.value
+    wx.navigateTo({
+      url: `../courseCollection/collect?keyword=${keyword}`
+    })
   },
   linkCourse() {
     wx.navigateTo({
@@ -62,45 +72,42 @@ Page({
     })
     if (!!app.globalData.student_id) {
       if (page == 2) {
-        if (!!app.globalData.student_id) {
-          if (this.data.imgUrls.length == 0) {
-            wx.request({
-              url: `${getIndexCRecommend}?stu_id=${app.globalData.student_id}`,
-              success: res => {
-                console.log(res)
-                const { result } = res.data
+        if (this.data.imgUrls.length == 0) {
+          wx.request({
+            url: `${getIndexCRecommend}?stu_id=${app.globalData.student_id}`,
+            success: res => {
+              console.log(res)
+              const { result } = res.data
+              this.setData({
+                imgUrls: result
+              })
+            }
+          })
+        }
+
+        if (this.data.courseList.length == 0) {
+          wx.request({
+            url: `${getNewCourse}${this.data.curCoursePage}&stu_id=${app.globalData.student_id}`,
+            data: {},
+            method: 'GET',
+            success: res => {
+              console.log(res, '1111111111')
+              const { error } = res.data
+              if (error == '0') {
                 this.setData({
-                  imgUrls: result
+                  courseList: res.data.result,
+                  curCoursePage: ++this.data.curCoursePage,
+                  dataExsit: res.data.dataExsit
                 })
               }
-            })
-          }
-
-          if (this.data.courseList.length == 0) {
-            wx.request({
-              url: `${getNewCourse}${this.data.curCoursePage}&stu_id=${app.globalData.student_id}`,
-              data: {},
-              method: 'GET',
-              success: res => {
-                console.log(res, '1111111111')
-                const { error } = res.data
-                if (error == '0') {
-                  this.setData({
-                    courseList: res.data.result,
-                    curCoursePage: ++this.data.curCoursePage,
-                    dataExsit: res.data.dataExsit
-                  })
-                }
-              },
-              fail: res => {
-                throw Error(res)
-              },
-              complete: res => {
-                // complete
-              }
-            })
-          }
-
+            },
+            fail: res => {
+              throw Error(res)
+            },
+            complete: res => {
+              // complete
+            }
+          })
         }
       }
 
@@ -118,7 +125,8 @@ Page({
         console.log(res)
         if (res.data.error == '0') {
           this.setData({
-            courseCollected: res.data.result
+            courseCollected: res.data.result,
+            showCollectMore: res.data.dataExsit
           })
         }
       },
@@ -138,7 +146,8 @@ Page({
         console.log(res)
         if (res.data.error == '0') {
           this.setData({
-            courseHistory: res.data.result
+            courseHistory: res.data.result,
+            showHistoryMore: res.data.dataExsit
           })
         }
       },

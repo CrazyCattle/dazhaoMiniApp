@@ -16,7 +16,7 @@ Page({
 
     active: false,
     menuActive: false,
-    collected: true
+    collected: false
   },
   more () {
     this.setData({
@@ -67,7 +67,7 @@ Page({
   onLoad: function (options) {
     let id = options.id
     wx.request({
-      url: `${getPlayUrl}${id}`,
+      url: `${getPlayUrl}${id}`+(app.globalData.student_id?`&stu_id=${app.globalData.student_id}`:''),
       method: 'GET',
       success: res => {
         console.log(res)
@@ -76,7 +76,8 @@ Page({
           const { result } = res.data
           console.log(result)
           this.setData({
-            playInfor: result
+            playInfor: result,
+            collected: result.collect
           })
         }
       },

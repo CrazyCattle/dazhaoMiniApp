@@ -120,6 +120,16 @@ Page({
       url: `../coursePlay/play?id=${id}`
     })
   },
+  linkCourseType (e) {
+    wx.switchTab({
+      url: `../navCourse/course`,
+    })
+  },
+  linkResumeCenter() {
+    wx.navigateTo({
+      url: '../resumeCenter/center'
+    })
+  },
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: '首页'

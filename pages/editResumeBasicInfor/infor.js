@@ -2,16 +2,19 @@ import {
   resumeBasicEdit,
   getResumeOne,
   jobExpect,
-  jobExpectChild
+  jobExpectChild,
+  uploadImg
 } from '../../api';
 
 const app = getApp()
 
 Page({
   data: {
+    userImgPath: '',
     resume_id: '',
     // 简历信息
     user_pic: "",
+    origin_user_pic: '',
     resumeTitle: '',
     user_name: '',
     user_phone: '',
@@ -35,7 +38,8 @@ Page({
         console.log(res);
         if (res.errMsg == "chooseImage:ok") {
           this.setData({
-            user_pic: res.tempFilePaths[0]
+            user_pic: res.tempFilePaths[0],
+            userImgPath: res.tempFiles
           });
         }
       },
@@ -170,13 +174,48 @@ Page({
             console.log(res.data)
             console.log(getCurrentPages())
             if (res.data.error == '0') {
-              wx.navigateBack()
+              let timer = setTimeout(() => {
+                wx.navigateBack() 
+                clearTimeout(timer)
+              }, 300)
             }
           }
         },
         fail: res => { },
         complete: res => { }
       })
+    }
+  },
+  uploadUserImg () {
+    if (!!this.data.user_pic && (this.data.origin_user_pic !== this.data.user_pic)) {
+      wx.uploadFile({
+        url: `${uploadImg}`,
+        header: {
+          "Content-Type": "multipart/form-data"  
+        },
+        method: 'POST',
+        filePath: this.data.user_pic,
+        name: 'image',
+        formData: {
+          'file': this.data.userImgPath
+        },
+        success: res => {
+          const data = JSON.parse(res.data)
+          if (data.error == '0') {
+            wx.showToast({
+              title: data.errortip,
+              icon: "none",
+              duration: 1000
+            });
+          }
+        }
+      })
+    } else {
+      wx.showToast({
+        title: "请先选择想要上传的图片",
+        icon: "none",
+        duration: 1000
+      });
     }
   },
   onLoad: function (options) {
@@ -203,6 +242,7 @@ Page({
           const { listjson } = res.data
           this.setData({
             user_pic: listjson.img,
+            origin_user_pic: listjson.img,
             resumeTitle: listjson.title,
             user_name: listjson.truename,
             user_phone: listjson.mobile,

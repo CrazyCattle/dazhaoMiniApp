@@ -3,7 +3,7 @@
   <view class="me-desc">
     <view class="me-name" bindtap="chooseImg">点击更换简历照片</view>
   </view>
-  <view class="save-pic">保存</view>
+  <view class="save-pic" bindtap="uploadUserImg">保存</view>
 </view>
 
 <form bindsubmit="formSubmit">

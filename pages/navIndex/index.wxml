@@ -7,7 +7,7 @@
     </block>
   </swiper>
   <view class="nav-list bg-f">
-    <view class="nav-item">
+    <view class="nav-item" bindtap="linkCourseType">
       <image class="img" src="../../images/index/nav/item_1.png"></image>
       <text class="txt">课程分类</text>
     </view>  
@@ -15,14 +15,14 @@
       <image class="img" src="../../images/index/nav/item_2.png"></image>
       <text class="txt">名企推荐</text>
     </view>  
-    <view class="nav-item">
+    <view class="nav-item" bindtap="linkResumeCenter">
       <image class="img" src="../../images/index/nav/item_3.png"></image>
       <text class="txt">简历中心</text>
     </view>  
-    <view class="nav-item">
+    <!-- <view class="nav-item">
       <image class="img" src="../../images/index/nav/item_4.png"></image>
       <text class="txt">求职锦囊</text>
-    </view>  
+    </view>   -->
   </view>
 
   <view class="scroll-box mt20 bg-f" wx:if="{{ imgUrls.length > 0 }}">

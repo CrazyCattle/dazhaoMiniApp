@@ -35,7 +35,7 @@ Page({
     wx.removeStorageSync('stud_info')
     wx.removeStorageSync('student_id')
     app.globalData.stud_info = ''
-    app.globalData.stud_id = ''
+    app.globalData.student_id = ''
     wx.reLaunch({
       url: '../navMe/me'
     })

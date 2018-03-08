@@ -7,7 +7,7 @@
   <view class="tc">
     <view class="title">{{ item.class_name }}</view>
     <view class="r-list tl">
-      <view class="r-list-item" wx:for="{{ item.lessons }}" wx:key="key" wx:for-item="lesson">
+      <view class="r-list-item" wx:for="{{ item.lessons }}" wx:key="key" wx:for-item="lesson" data-id="{{ lesson.lesson_id }}" bindtap="linkCoursePlay">
         <view class="cont">
           <view class="company">
             <image class="img" src="{{ lesson.teacher_img }}"></image>

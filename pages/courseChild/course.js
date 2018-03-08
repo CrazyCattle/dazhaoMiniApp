@@ -30,10 +30,12 @@ Page({
       }
     ],
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  linkCoursePlay (e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../coursePlay/play?id=${id}`,
+    })
+  },
   onLoad: function (options) {
     let id = options.id
 

@@ -37,12 +37,12 @@
         <view class="inner"></view>
       </view>
     </view>
-    <view class="me-row">
+    <!-- <view class="me-row">
       <image class="icon job" src="../../images/me/job.png"></image>求职锦囊
       <view class="arrow-icon">
         <view class="inner"></view>
       </view>
-    </view>
+    </view> -->
   </view>
 
   <view class="me-setting bg-f">
