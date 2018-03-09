@@ -1,5 +1,5 @@
 <view class="page-userinfor">
-  <view class="me-head-infor bg-f mt20">
+  <view class="me-head-infor bg-f">
     <image class="me-pic" src="{{ user_pic?user_pic:'../../images/user_pic.png' }}" bindtap="chooseImg"></image>
     <view class="me-desc">
       <view class="me-name" bindtap="chooseImg">点击修改头像</view>
@@ -10,27 +10,27 @@
     <view class="edit-title">基本信息</view>
     <view class="editBtn" bindtap='linkEditBasic'>编辑</view>
     <view class="edit-content">
-      <view class="row">姓名： 周新诚</view>
-      <view class="row">性别： 男</view>
-      <view class="row">生日： 1994-01-01</view>
-      <view class="row">手机： 12345678910</view>
-      <view class="row">邮箱： simon.zhou@dazhao100.com</view>
+      <view class="row">姓名： {{ stud_info.student_truename }}</view>
+      <view class="row">性别： {{ stud_info.student_sex }}</view>
+      <view class="row">生日： {{ stud_info.student_birthday }}</view>
+      <view class="row">手机： {{ stud_info.student_mobile }}</view>
+      <view class="row">邮箱： {{ stud_info.student_email }}</view>
     </view>
   </view>
   <view class="edit-row bg-f mt20">
     <view class="edit-title">教育背景</view>
     <view class="editBtn" bindtap='linkEditEduc'>编辑</view>
     <view class="edit-content">
-      <view class="row">学校： 华中科技大学</view>
-      <view class="row">学历： 本科</view>
-      <view class="row">院系： 电子信息与通信学院</view>
-      <view class="row">专业： 通信工程</view>
-      <view class="row">学号： 1234567890</view>
-      <view class="row">入学时间： 2013-09</view>
-      <view class="row">毕业时间： 2017-06</view>
+      <view class="row">学校： {{ schoolInfor.university_title }}</view>
+      <view class="row">学历： {{ stud_info.student_degree_name }}</view>
+      <view class="row">院系： {{ stud_info.faculty_name }}</view>
+      <view class="row">专业： {{ stud_info.major_name }}</view>
+      <view class="row">学号： {{ stud_info.student_name }}</view>
+      <view class="row">入学时间： {{ stud_info.student_stgraduatetwo }}</view>
+      <view class="row">毕业时间： {{ stud_info.student_edgraduate }}</view>
     </view>
   </view>
-  <view class="edit-row expect bg-f mt20">
+  <view class="edit-row expect bg-f mt20" wx:if="{{ hidden }}">
     <view class="edit-title">求职期望</view>
     <view class="edit-content">
       <view class="editBtn" data-id="1" bindtap='linkJobExpect'>编辑</view>

@@ -1,31 +1,34 @@
 import {
-  uploadUserImg
+  uploadUserImg,
+  getUserInfor
 } from '../../api';
 
 const app = getApp()
 
 Page({
   data: {
-    user_pic: app.globalData.student_img || '',
-    userImgPath: ''
+    user_pic: '',
+    stud_info: '',
+    userImgPath: '',
+    schoolInfor: ''
   },
-  linkEditBasic () {
+  linkEditBasic() {
     wx.navigateTo({
       url: '../editBasicInfor/infor'
     })
   },
-  linkEditEduc () {
+  linkEditEduc() {
     wx.navigateTo({
       url: '../editEducation/educ'
     })
   },
-  linkJobExpect (e) {
+  linkJobExpect(e) {
     let id = e.target.dataset.id
     wx.navigateTo({
       url: `../editJobExpectation/expect?id=${id}`
     })
   },
-  chooseImg () {
+  chooseImg() {
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -74,68 +77,24 @@ Page({
       }
     })
   },
-  prewImg () {
+  prewImg() {
     wx.previewImage({
-      current: this.data.user_pic?this.data.user_pic:'../../images/user_pic.png',
+      current: this.data.user_pic ? this.data.user_pic : '../../images/user_pic.png',
       urls: [this.data.user_pic],
-      success: res => {
-        console.log(res)
-      }
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
+    this.setData({
+      user_pic: wx.getStorageSync('stud_img'),
+      stud_info: wx.getStorageSync('stud_info'),
+      schoolInfor: wx.getStorageSync('schoolInfo')
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    this.setData({
+      user_pic: wx.getStorageSync('stud_img'),
+      stud_info: wx.getStorageSync('stud_info'),
+      schoolInfor: wx.getStorageSync('schoolInfo')
+    })
   }
 })

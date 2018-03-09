@@ -5,7 +5,7 @@
       <view class="me-desc">
         <block wx:if="{{ stud_info.student_name }}">
           <view class="me-name">{{ stud_info.student_truename }}</view>
-          <text class="me-educ">华中科技大学 | 通信工程</text>
+          <text class="me-educ">{{ schoolInfor.university_title }} | {{ stud_info.major_name }}</text>
         </block>
         <view wx:else class="me-name" bindtap="linkLR">登录/注册</view>
       </view>

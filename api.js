@@ -25,4 +25,10 @@ module.exports = {
   editUserBasicInfo: `${basicUrl}/StudentBasicsEdit`, // 修改用户基本信息 
   uploadImg: `${basicUrl}/UpdataResumesImg`, //上传单个简历图片
   uploadUserImg: `${basicUrl}/UpdataStudentImg`, // 上传头像
+
+  getUserInfor: `${basicUrl}/UserDetails`, // 获取用户信息
+  getUnvDegree: `${basicUrl}/getUnvDegree`, //获取学历 university_id
+  getfacultyArray: `${basicUrl}/getfacultyArray`,//获取院系 university_id
+  getMajorsArray: `${basicUrl}/getMajorsArray`,//获取专业 faculty_id
+  studentEduEdit: `${basicUrl}/StudentEduEdit`,//学生信息修改
 };
