@@ -1,4 +1,8 @@
-import { schoolInfo } from "../../api";
+import { 
+  schoolInfo,
+  judgeStu
+} from "../../api";
+
 const app = getApp();
 
 Page({
@@ -11,9 +15,26 @@ Page({
     });
   },
   lonkBind() {
-    wx.navigateTo({
-      url: "../bindAccount/account"
-    });
+    wx.request({
+      url: `${judgeStu}`,
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      data: {
+        wxtoken: wx.getStorageSync('openid')
+      },
+      success: res => {
+        console.log(res)
+        if (res.data.error == '1') {
+          wx.navigateTo({
+            url: "../bindAccount/account"
+          });
+        } else {
+        
+        }
+      }
+    })
   },
   register() {
     wx.navigateTo({

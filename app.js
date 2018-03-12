@@ -1,6 +1,7 @@
 import {
   wxAuthorization
 } from 'api';
+
 App({
   globalData: {
     userInfo: null,
@@ -49,8 +50,8 @@ App({
     }).then(res => {
       if (res.data.error == '0') {
         this.globalData.openid = res.data.result.openid
+        wx.setStorageSync('openid', this.globalData.openid)
       }
-      wx.setStorageSync('openid', this.globalData.openid)
     })
     
 

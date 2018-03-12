@@ -16,10 +16,31 @@ Page({
       url: '../loginRegister/loginregister'
     })
   },
+  linkMyCourse() {
+    if (!!app.globalData.student_id) {
+      wx.navigateTo({
+        url: '../resumeCenter/center'
+      })
+    } else {
+      wx.showToast({
+        title: "请先登录",
+        icon: "none",
+        duration: 1000
+      });
+    }
+  },
   linkResumeCenter() {
-    wx.navigateTo({
-      url: '../resumeCenter/center'
-    })
+    if (!!app.globalData.student_id) {
+      wx.navigateTo({
+        url: '../resumeCenter/center'
+      })
+    } else {
+      wx.showToast({
+        title: "请先登录",
+        icon: "none",
+        duration: 1000
+      });
+    }
   },
   editUserInfor() {
     wx.navigateTo({

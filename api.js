@@ -1,6 +1,7 @@
 const basicUrl = "https://stu.dazhao100.cn/api";
 
 module.exports = {
+  judgeStu: `${basicUrl}/judgeStu`,//判断微信用户是否存在
   wxAuthorization: `${basicUrl}/wxAuthorization`, // 获取openid
   getIndexCRecommend: `${basicUrl}/recommendLesson`, // 首页课程推荐列表
   getCRecommend: `${basicUrl}/recommendLessonList?p=`, // 课程推荐列表
@@ -33,4 +34,5 @@ module.exports = {
   studentEduEdit: `${basicUrl}/StudentEduEdit`,//学生信息修改
   getStuAuthCode: `${basicUrl}/getStuAuthCode`, //修改手机号密码 获取短信验证码
   valiCode: `${basicUrl}/StudentCodePwdEdit`, //验证 手机号 验证码匹配
+  feedback: `${basicUrl}/Feedback`, //建议反馈
 };

@@ -25,7 +25,7 @@
   </view>
 
   <view class="me-setting bg-f">
-    <view class="me-row">
+    <view class="me-row" bindtap="linkMyCourse">
       <image class="icon rourse" src="../../images/me/course.png"></image>我的课程
       <view class="arrow-icon">
         <view class="inner"></view>
