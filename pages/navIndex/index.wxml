@@ -44,7 +44,7 @@
     </swiper>
   </view>
 
-  <view class="recommend mt20 bg-f">
+  <view class="recommend mt20 bg-f" wx:if="{{ jobList.length > 0 }}">
     <view class="tc"><text class="title lh-normal">职位推荐</text></view>
     <view class="r-list">
       <view class="r-list-item" wx:for="{{ jobList }}" wx:key="key" wx:for-item="item" bindtap="linkJobDetail">
@@ -67,7 +67,7 @@
     </view>
   </view>
 
-  <view class="recommend mt20 bg-f">
+  <view class="recommend mt20 bg-f" wx:if="{{ companyList.length > 0 }}">
     <view class="tc"><text class="title lh-normal">名企推荐</text></view>
     <view class="r-list">
       <view class="r-list-item" wx:for="{{ companyList }}" wx:key="key" wx:for-item="item"  bindtap="linkCompanyDetail">

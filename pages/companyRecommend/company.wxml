@@ -35,19 +35,10 @@
           <text class="{{ filterType == '4'?'active':'' }}" bindtap="filterData" data-type="4">博士后招聘</text>
         </view>
       </swiper-item>
-       <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '5'?'active':'' }}" bindtap="filterData" data-type="5">sadfd</text>
-        </view>
-      </swiper-item> 
-      <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '6'?'active':'' }}" bindtap="filterData" data-type="6">fkdla</text>
-        </view>
-      </swiper-item>
     </swiper>
   </view>
-  <view class="sort-box" catchtap="tabFilter">
+  <!-- <view class="sort-box" catchtap="tabFilter"> -->
+  <view class="sort-box">
     <view class="sort-item" data-id="1">
       招聘职位类型
       <view class="arrow-icon {{ active=='1'?'active':'' }}" data-id="1">
@@ -131,7 +122,8 @@
   </view>
 </view>
 <view class="recommend bg-f">
-  <scroll-view scroll-y style="height: 100%;" bindscrolltolower="lower" scroll-top="{{scrollTop}}">
+  <tip content="暂无企业信息"></tip>
+  <scroll-view hidden='true' scroll-y style="height: 100%;" bindscrolltolower="lower" scroll-top="{{scrollTop}}">
     <view class="r-list">
       <view class="r-list-item" wx:for="{{ companyList }}" wx:key="key" wx:for-item="item">
         <image class="pic" src="{{ item.pic_url }}"></image>

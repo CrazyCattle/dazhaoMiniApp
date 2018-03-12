@@ -1,6 +1,7 @@
 .page-setting {
   padding-top: 30rpx;
 }
+
 .switch-box {
   display: flex;
   height: 88rpx;
@@ -17,12 +18,13 @@
   margin-left: 10rpx;
   border: 10rpx solid transparent;
   border-top-color: #b7bcce;
-  transition: transform .3s linear;
+  transition: transform 0.3s linear;
   transform-origin: 50% 25%;
   position: relative;
   right: 20rpx;
   top: 6rpx;
 }
+
 .arrow-icon .inner {
   position: absolute;
   width: 0;
@@ -34,17 +36,17 @@
   transform: translate(-50%, 0);
 }
 
-
-
 .filter {
   padding-left: 40rpx;
 }
+
 .c-g {
   width: 100%;
   display: flex;
   border-top: 1rpx solid #e6e9f3;
 }
-.c-g .checkbox {
+
+.filter .checkbox {
   flex: 1;
   height: 104rpx;
   display: flex;
@@ -52,6 +54,38 @@
   font-size: 26rpx;
   color: #313148;
   position: relative;
+}
+
+.type-selection {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 16rpx;
+  border-radius: 50%;
+  border: 1rpx solid #c9c9c9;
+}
+
+.type-selection.active {
+  border-color: #51d3d9;
+}
+.type-selection .s-img {
+  width: 100%;
+  height: 100%;
+}
+
+.type-step {
+  width: 32rpx;
+  height: 32rpx;
+  padding: 4rpx;
+  margin-right: 16rpx;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-clip: content-box;
+  border: 1rpx solid #c9c9c9;
+}
+
+.type-step.active {
+  border-color: #51d3d9;
+  background-color: #51d3d9;
 }
 
 /*.c-g .checkbox {

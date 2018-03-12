@@ -1,4 +1,4 @@
-<view class="infor-list">
+<view class="infor-list" hidden='true'>
   <view class="infor-item active infor-status bg-f">
     <view class="item-title">
       <text class="tit">投递进度更新投递进度更新投递进度更新投递进度更新</text>
@@ -24,3 +24,5 @@
     <view class="desc">职位：企业服务部实习生</view>
   </view>
 </view>
+
+<tip content="暂无消息"></tip>

@@ -36,6 +36,11 @@ Page({
       url: '../inforSetting/setting'
     })
   },
+  editPwd () {
+    wx.navigateTo({
+      url: `../editUserPwd/pwd`,
+    })
+  },
   loginOut() {
     wx.removeStorageSync('schoolInfo')
     wx.removeStorageSync('stud_info')
@@ -55,9 +60,6 @@ Page({
       })
     }, 300)
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     if (!!app.globalData.student_id) {
       this.setData({
@@ -95,60 +97,14 @@ Page({
       })
     }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     console.log(app.globalData.student_id, '0000')
     console.log(app.globalData.stud_info, '1111')
     console.log(app.globalData.student_img, '2222')
     this.setData({
-      stud_info: app.globalData.stud_info,
+      stud_info: wx.getStorageSync('stud_info'),
       stud_img: app.globalData.student_img,
       stud_id: app.globalData.student_id
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

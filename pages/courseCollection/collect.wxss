@@ -77,3 +77,9 @@
   font-size: 24rpx;
   color: #848ca1;
 }
+
+.noKeyWord {
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #848ca1;
+}

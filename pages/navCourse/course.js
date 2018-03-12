@@ -36,13 +36,22 @@ Page({
 
     // page 3
     courseCollected: [],
-    courseHistory: []
+    courseHistory: [],
+
+    taped: false
   },
   iptFocus(e) {
     this.setData({
-      focus: !this.data.focus
+      focus: !this.data.focus,
+      taped: !this.data.taped
     })
     console.log(this.data.focus)
+  },
+  cc () {
+    this.setData({
+      focus: !this.data.focus,
+      taped: !this.data.taped
+    })
   },
   searchChange (e) {
     console.log(e.detail.value)
@@ -211,9 +220,11 @@ Page({
         this.getHistoryCourse()
       }
 
-      this.setData({
-        focus: !this.data.focus
-      })
+      if (this.data.taped) {
+        this.setData({
+          focus: !this.data.focus
+        })
+      }
     }
     console.log(this.data.page == '3')
     this.setData({

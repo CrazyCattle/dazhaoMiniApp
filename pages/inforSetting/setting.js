@@ -1,49 +1,46 @@
-// pages/inforSetting/setting.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    items: [
-      { name: '短信推送', id: 0, checked: false },
-      { name: '邮件推送', id: 1, checked: false },
-      { name: '站内消息推送', id: 2, checked: false},
-    ],
+    dxts: false,
+    yjts: false,
+    znxts: false,
     noticeStep: [
-      { name: '实时推送', id: '1', checked: false },
+      { name: '实时推送', id: '1', checked: true },
       { name: '每日一次', id: '2', checked: false },
       { name: '每周一次', id: '3', checked: false }
     ],
-    id: 0,
-    ids: []
+    curId: ''
   },
   switchChange (e) {
     console.log(e.detail.value)
   },
-  checkboxChange (e) {
-    console.log(e.detail.value)
-    // let ids = []
-    // this.data.items.forEach((el1, i1) => {
-    //   e.detail.value.forEach((el2, i2) => {
-    //     if (el2 == el1.name) {
-    //       ids.push(i1 + 1)
-    //     }
-    //   })
-    // })
-    // this.setData({
-    //   ids: ids.join('')
-    // })
+  cType (e) {
+    let type = e.currentTarget.dataset.type
+    switch(type) {
+      case 'dxts':
+        this.setData({
+          dxts: !this.data.dxts
+        })
+        break;
+      case 'yjts':
+        this.setData({
+          yjts: !this.data.yjts
+        })
+        break;
+      case 'znxts':
+        this.setData({
+          znxts: !this.data.znxts
+        })  
+        break;
+      default:
+        break;
+    }
+    console.log(this.data.dxts, this.data.yjts, this.data.znxts)
   },
-  radioChange (e) {
-    console.log(e.detail.value)
-    // this.data.noticeStep.forEach((el, i) => {
-    //   if (el.name == e.detail.value) {
-    //     this.setData({
-    //       id: i+1
-    //     })
-    //   }
-    // })
+  cStep (e) {
+    let id = e.target.dataset.id
+    this.setData({
+      curId: id
+    })
   },
   /**
    * 生命周期函数--监听页面加载

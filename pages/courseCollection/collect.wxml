@@ -1,4 +1,4 @@
-<view class="recommend bg-f">
+<view class="recommend bg-f" wx:if="{{ courseList.length > 0 }}">
   <scroll-view scroll-y style="height: 100%;" bindscrolltolower="lower" scroll-top="{{scrollTop}}">
     <view class="r-list">
       <view class="r-list-item" wx:for="{{ courseList }}" wx:key="key" wx:for-item="item" data-id="{{ item.lesson_id }}" bindtap="linCourse">
@@ -18,4 +18,7 @@
     </view>
     <loading wx:if="{{ showLoading }}"></loading>
   </scroll-view>
+</view>
+<view class="noKeyWord" wx:if="{{ fromKeyword &&  courseList.length == 0 }}">
+  没有搜索到关于'{{ keyword }}'的数据
 </view>

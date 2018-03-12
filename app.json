@@ -1,10 +1,9 @@
 {
   "pages": [
-    "pages/navMe/me",
     "pages/navIndex/index",
+    "pages/navMe/me",
     "pages/navCourse/course",
     "pages/navInformation/infor",
-    
     "pages/login/login",
     "pages/companyDetail/detail",
     "pages/companyRecommend/company",
@@ -31,7 +30,8 @@
     "pages/enrollmentRecommend/recommend",
     "pages/inforNotice/notice",
     "pages/inforSetting/setting",
-    "pages/inforNoticeDetail/detail"
+    "pages/inforNoticeDetail/detail",
+    "pages/editUserPwd/pwd"
   ],
   "window": {
     "backgroundTextStyle": "light",

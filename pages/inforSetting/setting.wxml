@@ -1,5 +1,4 @@
 <view class="page-setting">
-
   <view class="switch-box bg-f">
     <text>推送开关</text>
     <view>
@@ -16,21 +15,30 @@
         <view class="inner"></view>
       </view>
     </view>
-    <!--<view class="filter">
-      <checkbox-group class="c-g" bindchange="checkboxChange">
-        <label class="checkbox" wx:for="{{items}}" wx:key="key">
-          <checkbox class="radio" data-id="{{ item.id }}" value="{{item.name}}" checked="{{item.checked}}" />
-          <view class="box {{ ids[item.id]  == (item.id + 1) ?'active':''}}"></view>{{ item.name }}
-        </label>
-      </checkbox-group>
-    </view>-->
-    <view class="filter">
-      <checkbox-group class="c-g" bindchange="checkboxChange">
-        <label class="checkbox" wx:for="{{items}}" wx:key="key">
-          <checkbox class="radio" color="#51d3d9" data-id="{{ item.id }}" value="{{item.name}}" checked="{{item.checked}}" />
-          <view class="box {{ ids[item.id]  == (item.id + 1) ?'active':''}}"></view>{{ item.name }}
-        </label>
-      </checkbox-group>
+    <view class="filter filter-type">
+      <view class="c-g">
+        <view class="checkbox">
+          <view class="type-selection {{ dxts?'active':'' }}" data-id="1" data-type="dxts" bindtap="cType">
+            <block wx:if="{{ dxts }}">
+              <image class="s-img" src="../../images/selected.png"></image>
+            </block>
+          </view>短信推送
+        </view>
+        <view class="checkbox">
+          <view class="type-selection {{ yjts?'active':'' }}" data-id="2" data-type="yjts" bindtap="cType">
+            <block wx:if="{{ yjts }}">
+              <image class="s-img" src="../../images/selected.png"></image>
+            </block>
+          </view>邮件推送
+        </view>
+        <view class="checkbox">
+          <view class="type-selection {{ znxts?'active':'' }}" data-id="3" data-type="znxts" bindtap="cType">
+            <block wx:if="{{ znxts }}">
+              <image class="s-img" src="../../images/selected.png"></image>
+            </block>
+          </view>站内消息推送
+        </view>
+      </view>
     </view>
   </view>
 
@@ -42,13 +50,12 @@
       </view>
     </view>
     <view class="filter">
-      <radio-group class="c-g" bindchange="radioChange">
-        <label class="checkbox" wx:for="{{ noticeStep }}" wx:key="key">
-          <radio class="radio" color="#51d3d9" data-id="{{ item.id }}" value="{{item.name}}" checked="{{item.checked}}" />
-          <view class="box {{id == item.id?'active':''}}"></view>{{item.name}}
-        </label>
-      </radio-group>
+      <view class="c-g">
+        <view class="checkbox" wx:for="{{noticeStep}}" wx:key="key">
+          <view class="type-step {{ item.id == curId ?'active':'' }}" data-id="{{item.id}}" bindtap="cStep">
+          </view>{{item.name}}
+        </view>
+      </view>
     </view>
   </view>
-
 </view>

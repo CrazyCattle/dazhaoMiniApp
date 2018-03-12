@@ -1,4 +1,4 @@
-<view class="infor-list">
+<view class="infor-list" hidden='true'>
   <view class="infor-item active infor-xztj bg-f">
     <view class="item-title">
       <text class="tit">投递进度更新</text>
@@ -32,3 +32,5 @@
     <view class="desc">截止日期：2018/01/26</view>
   </view>
 </view>
+
+<tip content="暂无消息"></tip>

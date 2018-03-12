@@ -13,7 +13,10 @@ Page({
     dataExsit: false,
     showLoading: false,
     // 职位推荐
-    courseList: []
+    courseList: [],
+
+    fromKeyword: false,
+    keyword: ''
   },
   linCourse(e) {
     let id = e.currentTarget.dataset.id;
@@ -33,7 +36,9 @@ Page({
           if (res.data.error == "0") {
             this.setData({
               courseList: res.data.result,
-              dataExsit: res.data.dataExsit
+              dataExsit: res.data.dataExsit,
+              fromKeyword: true,
+              keyword: options.keyword
             });
           }
           if (res.data.dataExsit) {
@@ -57,11 +62,11 @@ Page({
               courseList: res.data.result,
               dataExsit: res.data.dataExsit
             });
-          }
-          if (res.data.dataExsit) {
-            this.setData({
-              curPage: this.data.curPage++
-            });
+            if (res.data.dataExsit) {
+              this.setData({
+                curPage: ++this.data.curPage
+              });
+            }
           }
         },
         fail: res => { },
@@ -82,9 +87,7 @@ Page({
       }
       self.timer = setTimeout(() => {
         wx.request({
-          url: `${getCollect}?stu_id=${app.globalData.student_id}&p=${
-            this.data.curPage
-          }`,
+          url: `${getCollect}?stu_id=${app.globalData.student_id}&p=${this.data.curPage}`,
           method: "GET",
           success: res => {
             console.log(res);
@@ -94,12 +97,12 @@ Page({
                 dataExsit: res.data.dataExsit,
                 showLoading: false
               });
+              if (res.data.dataExsit) {
+                this.setData({
+                  curPage: ++this.data.curPage
+                });
+              }
               wx.hideNavigationBarLoading();
-            }
-            if (res.data.dataExsit) {
-              this.setData({
-                curPage: this.data.curPage++
-              });
             }
           },
           fail: res => {},

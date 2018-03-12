@@ -20,9 +20,7 @@ Page({
   },
   onLoad: function(options) {
     wx.request({
-      url: `${getHistory}?stu_id=${app.globalData.student_id}&p=${
-        this.data.curPage
-      }`,
+      url: `${getHistory}?stu_id=${app.globalData.student_id}&p=${this.data.curPage}`,
       method: "GET",
       success: res => {
         console.log(res);
@@ -31,11 +29,11 @@ Page({
             courseList: res.data.result,
             dataExsit: res.data.dataExsit
           });
-        }
-        if (res.data.dataExsit) {
-          this.setData({
-            curPage: this.data.curPage++
-          });
+          if (res.data.dataExsit) {
+            this.setData({
+              curPage: ++this.data.curPage
+            });
+          }
         }
       },
       fail: res => {},
@@ -54,9 +52,7 @@ Page({
       }
       self.timer = setTimeout(() => {
         wx.request({
-          url: `${getHistory}?stu_id=${app.globalData.student_id}&p=${
-            this.data.curPage
-          }`,
+          url: `${getHistory}?stu_id=${app.globalData.student_id}&p=${this.data.curPage}`,
           method: "GET",
           success: res => {
             console.log(res);
@@ -66,12 +62,12 @@ Page({
                 dataExsit: res.data.dataExsit,
                 showLoading: false
               });
+              if (res.data.dataExsit) {
+                this.setData({
+                  curPage: ++this.data.curPage
+                });
+              }
               wx.hideNavigationBarLoading();
-            }
-            if (res.data.dataExsit) {
-              this.setData({
-                curPage: this.data.curPage++
-              });
             }
           },
           fail: res => {},
