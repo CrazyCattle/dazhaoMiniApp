@@ -9,7 +9,7 @@
 
 .form-box .row .row-tit {
   display: flex;
-  width: 120rpx;
+  width: 135rpx;
   align-items: center;
   font-size: 26rpx;
   color: #313148;
@@ -61,4 +61,28 @@ button.getCode {
 button[disabled][type=default] {
   color: #fff;
   background:#47dbe2;
+}
+
+.repwd-success {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  border-top: 1rpx solid #f3f4f8;
+}
+.repwd-success .form-box {
+  padding-top: 100rpx;
+  padding-left: 0;
+}
+.repwd-success .success-icon {
+  display: block;
+  width: 84rpx;
+  height: 84rpx;
+  margin: 0 auto 38rpx;
+}
+.repwd-success .success-tip {
+  font-size: 26rpx;
+  color: #848ca1;
 }

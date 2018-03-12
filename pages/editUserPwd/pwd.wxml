@@ -17,33 +17,33 @@
           </view>
         </view>
       </view>
-      <button bindtap="register" class="baseBtn mt100">下一步</button>
+      <button bindtap="nextToPwd" class="baseBtn mt100">下一步</button>
     </view>
 
     <view class="container mt20" wx:if="{{ step == '2' }}">
       <view class="form-box bg-f">
         <view class="row">
-          <view class="row-tit">姓名：</view>
+          <view class="row-tit">新密码：</view>
           <view class="rot-ipt">
-            <input class="input" confirm-type="done" bindblur="iptName" bindinput="iptName" type="text" placeholder='请填写姓名'></input>
+            <input class="input" password confirm-type="done" bindblur="iptNewPwd" bindinput="iptNewPwd" type="text" placeholder='请输入新密码'></input>
           </view>
         </view>
         <view class="row">
-          <view class="row-tit">学号：</view>
+          <view class="row-tit">确认密码：</view>
           <view class="rot-ipt">
-            <input class="input" confirm-type="done" bindblur="iptCard" bindinput="iptCard" type="number" placeholder='请填写学号'></input>
+            <input class="input" password confirm-type="done" bindblur="iptRepeatPwd" bindinput="iptRepeatPwd" type="text" placeholder='请再次输入新密码'></input>
           </view>
         </view>
       </view>
-      <button bindtap="register" class="baseBtn mt100">下一步</button>
+      <button bindtap="nextToIndex" class="baseBtn mt100">下一步</button>
     </view>
 
-    <view class="container bg-f" wx:if="{{ step == '3' }}">
+    <view class="repwd-success container bg-f" wx:if="{{ step == '3' }}">
       <view class="form-box">
-        <image src="../../images/success.png"></image>
-        <view>重置密码成功！</view>
+        <image class="success-icon" src="../../images/success.png"></image>
+        <view class="success-tip">重置密码成功！</view>
       </view>
-      <button bindtap="register" class="baseBtn mt100">回首页</button>
+      <button bindtap="gotoIndex" class="baseBtn mt100">回首页</button>
     </view>
   </form>
 </view>

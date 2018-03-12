@@ -31,4 +31,6 @@ module.exports = {
   getfacultyArray: `${basicUrl}/getfacultyArray`,//获取院系 university_id
   getMajorsArray: `${basicUrl}/getMajorsArray`,//获取专业 faculty_id
   studentEduEdit: `${basicUrl}/StudentEduEdit`,//学生信息修改
+  getStuAuthCode: `${basicUrl}/getStuAuthCode`, //修改手机号密码 获取短信验证码
+  valiCode: `${basicUrl}/StudentCodePwdEdit`, //验证 手机号 验证码匹配
 };

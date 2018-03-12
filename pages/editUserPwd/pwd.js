@@ -1,11 +1,14 @@
 
 import {
   register,
-  getAuthCode
+  getAuthCode,
+  getStuAuthCode,
+  valiCode
 } from "../../api";
 
 
 const app = getApp();
+const pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/
 const mobileReg = /^13(\d{9})$|^15(\d{9})$|^14(\d{9})$|^17(\d{9})$|^18(\d{9})$/;
 Page({
   data: {
@@ -14,16 +17,30 @@ Page({
     timeLimit: "60s后,重新获取",
     schoolName: '',
     mobilecode: "",
-    student_truename: "",
-    student_name: "",
     student_passwd: "",
+    student_rpasswd: "",
     mobile: ""
+  },
+  iptPhone(e) {
+    console.log(e)
+    if (e.detail.value !== undefined) {
+      this.setData({
+        mobile: e.detail.value.trim()
+      });
+    }
+  },
+  iptCode(e) {
+    if (e.detail.value !== undefined) {
+      this.setData({
+        mobilecode: e.detail.value.trim()
+      });
+    }
   },
   getCode() {
     if (mobileReg.test(this.data.mobile)) {
       let time = 60;
       wx.request({
-        url: `${getAuthCode}${this.data.mobile}`,
+        url: `${getStuAuthCode}?mobile=${this.data.mobile}&stu_id=${app.globalData.student_id}`,
         method: 'GET',
         success: res => {
           console.log(res)
@@ -74,28 +91,10 @@ Page({
       }
     }
   },
-  register() {
-    if (!this.data.student_truename) {
+  nextToPwd () {
+    if (!mobileReg.test(this.data.mobile)) {
       wx.showToast({
-        title: "姓名不能为空",
-        icon: "none",
-        duration: 1000
-      });
-    } else if (!this.data.student_name) {
-      wx.showToast({
-        title: "学号不能为空",
-        icon: "none",
-        duration: 1000
-      });
-    } else if (!this.data.student_passwd) {
-      wx.showToast({
-        title: "密码不能为空",
-        icon: "none",
-        duration: 1000
-      });
-    } else if (!this.data.mobile) {
-      wx.showToast({
-        title: "手机号码不能为空",
+        title: "手机号不正确",
         icon: "none",
         duration: 1000
       });
@@ -106,77 +105,101 @@ Page({
         duration: 1000
       });
     } else {
-      console.log(
-        this.data.student_truename,
-        this.data.student_name,
-        this.data.student_passwd,
-        this.data.mobile,
-        this.data.mobilecode
-      );
       wx.request({
-        url: `${register}`,
+        url: `${valiCode}`,
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
         method: 'POST',
         data: {
           mobilecode: this.data.mobilecode,
-          student_truename: this.data.student_truename,
-          student_name: this.data.student_name,
-          student_passwd: this.data.student_passwd,
           mobile: this.data.mobile
         },
         success: res => {
-          console.log(res)
-          wx.showToast({
-            title: res.data.errortip,
-            icon: "none",
-            duration: 1000
-          });
-          if (res.data.error == '0') {
-            console.log(res.data)
+          const { data } = res
+          if (data.error == '0') {
+            this.setData({
+              step: '2'
+            })
+          } else {
+            wx.showToast({
+              title: data.errortip,
+              icon: "none",
+              duration: 1000
+            });
           }
-        },
-        fail: res => { },
-        complete: res => { }
+        }
       })
     }
   },
-  iptName(e) {
-    if (e.detail.value !== undefined) {
-      this.setData({
-        student_truename: e.detail.value.trim()
-      });
-    }
-  },
-  iptCard(e) {
-    if (e.detail.value !== undefined) {
-      this.setData({
-        student_name: e.detail.value.trim()
-      });
-    }
-  },
-  iptPwd(e) {
+  iptNewPwd(e) {
     if (e.detail.value !== undefined) {
       this.setData({
         student_passwd: e.detail.value.trim()
       });
     }
   },
-  iptPhone(e) {
-    console.log(e)
+  iptRepeatPwd(e) {
     if (e.detail.value !== undefined) {
       this.setData({
-        mobile: e.detail.value.trim()
+        student_rpasswd: e.detail.value.trim()
       });
     }
   },
-  iptCode(e) {
-    if (e.detail.value !== undefined) {
-      this.setData({
-        mobilecode: e.detail.value.trim()
+  nextToIndex () {
+    if (this.data.student_passwd !== this.data.student_rpasswd) {
+      wx.showToast({
+        title: "两次密码输入不一致",
+        icon: "none",
+        duration: 1000
       });
+    } else if (!pwdReg.test(this.data.student_passwd) || !pwdReg.test(this.data.student_rpasswd)) {
+      wx.showToast({
+        title: "请输入由字母、数字组成的6-18位密码",
+        icon: "none",
+        duration: 1000
+      });
+    } else {
+      wx.request({
+        url: `${valiCode}`,
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: 'POST',
+        data: {
+          stu_id: app.globalData.student_id,
+          mobilecode: this.data.mobilecode,
+          mobile: this.data.mobile,
+          newone: this.data.student_passwd,
+          newtwo: this.data.student_rpasswd
+        },
+        success: res => {
+          const { data } = res
+          console.log(data)
+          if (data.error == '0') {
+            wx.showToast({
+              title: data.errortip,
+              icon: "none",
+              duration: 1000
+            });
+            this.setData({
+              step: '3'
+            })
+          } else {
+            wx.showToast({
+              title: data.errortip,
+              icon: "none",
+              duration: 1000
+            });
+          }
+        }
+      })
     }
+  },
+  gotoIndex () {
+    wx.reLaunch({
+      url: '../navIndex/index',
+    })
   },
   /**
    * 生命周期函数--监听页面加载
