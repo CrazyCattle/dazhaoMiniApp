@@ -19,6 +19,15 @@ Page({
     });
   },
   onLoad: function(options) {
+    if (options.from == 'me') {
+      wx.setNavigationBarTitle({
+        title: '我的课程',
+      })
+    } else {
+      wx.setNavigationBarTitle({
+        title: '听课记录',
+      })
+    }
     wx.request({
       url: `${getHistory}?stu_id=${app.globalData.student_id}&p=${this.data.curPage}`,
       method: "GET",

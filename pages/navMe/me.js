@@ -2,10 +2,15 @@ import {
   getUserInfor
 } from '../../api';
 
+import {
+  setNewToken
+} from '../../utils/util';
+
 const app = getApp()
 
 Page({
   data: {
+    token: '',
     stud_info: {},
     stud_id: '',
     stud_img: '',
@@ -19,7 +24,7 @@ Page({
   linkMyCourse() {
     if (!!app.globalData.student_id) {
       wx.navigateTo({
-        url: '../resumeCenter/center'
+        url: '../courseRecord/record?from=me'
       })
     } else {
       wx.showToast({
@@ -57,7 +62,7 @@ Page({
       url: '../inforSetting/setting'
     })
   },
-  editPwd () {
+  editPwd() {
     wx.navigateTo({
       url: `../editUserPwd/pwd`,
     })
@@ -67,9 +72,13 @@ Page({
     wx.removeStorageSync('stud_info')
     wx.removeStorageSync('student_id')
     wx.removeStorageSync('stud_img')
+    wx.removeStorageSync('token')
+
     app.globalData.stud_info = ''
     app.globalData.student_id = ''
     app.globalData.student_img = ''
+    app.globalData.token = ''
+
     wx.showToast({
       title: "退出成功",
       icon: "none",
@@ -81,11 +90,8 @@ Page({
       })
     }, 300)
   },
-  onLoad: function (options) {
-    if (!!app.globalData.student_id) {
-      this.setData({
-        schoolInfor: wx.getStorageSync('schoolInfo')
-      })
+  getUserData() {
+    return new Promise(resolve => {
       wx.request({
         url: getUserInfor,
         method: 'POST',
@@ -93,10 +99,66 @@ Page({
           "Content-Type": "application/x-www-form-urlencoded"
         },
         data: {
-          stu_id: app.globalData.student_id
+          stu_id: app.globalData.student_id,
+          token: app.globalData.token
         },
         success: res => {
-          console.log(res)
+          resolve(res)
+        }
+      })
+    })
+  },
+  updateUserData() {
+    wx.request({
+      url: getUserInfor,
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token
+      },
+      success: res => {
+        console.log(res)
+        if (res.data.error == '0') {
+          const { listjson } = res.data
+          wx.setStorageSync(
+            "stud_info",
+            (app.globalData.stud_info = listjson)
+          );
+          wx.setStorageSync(
+            "stud_img",
+            (app.globalData.student_img = listjson.student_img)
+          );
+
+          this.setData({
+            stud_info: listjson,
+            stud_img: listjson.student_img,
+            stud_id: app.globalData.student_id
+          })
+        }
+      }
+    })
+  },
+  onLoad: function (options) {
+    let schoolInfo = wx.getStorageSync('schoolInfo')
+    let _self = this
+    if (schoolInfo) {
+      _self.setData({
+        schoolInfor: wx.getStorageSync('schoolInfo') || ''
+      })
+    }
+    if (!!app.globalData.student_id && !!app.globalData.token) {
+      _self.getUserData().then(res => {
+        console.log(res)
+        if (res.data.tokeninc == '0') {
+          setNewToken().then(res => {
+            if (res == 'ok') {
+              _self.updateUserData()
+            }
+          })
+        } else {
           if (res.data.error == '0') {
             const { listjson } = res.data
             wx.setStorageSync(
@@ -119,9 +181,6 @@ Page({
     }
   },
   onShow: function () {
-    console.log(app.globalData.student_id, '0000')
-    console.log(app.globalData.stud_info, '1111')
-    console.log(app.globalData.student_img, '2222')
     this.setData({
       stud_info: wx.getStorageSync('stud_info'),
       stud_img: app.globalData.student_img,

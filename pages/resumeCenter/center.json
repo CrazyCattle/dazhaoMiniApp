@@ -4,6 +4,7 @@
   "navigationBarTextStyle": "black",
   "disableScroll": true,
   "usingComponents": {
-    "loading": "/components/loading/loading"
+    "loading": "/components/loading/loading",
+    "tip": "/components/tips/tip"
   }
 }

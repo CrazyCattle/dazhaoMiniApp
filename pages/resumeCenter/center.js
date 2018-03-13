@@ -7,6 +7,9 @@ const app = getApp()
 
 Page({
   data: {
+    curShow: false,
+    noResumeList: false,
+
     isBack: false,
     student_id: '',
 
@@ -140,7 +143,7 @@ Page({
     })
   },
   tabPage(e) {
-    let page = e.target.dataset.page
+    let page = e.currentTarget.dataset.page
     this.setData({
       page: page
     })
@@ -228,9 +231,15 @@ Page({
           this.setData({
             resumeList: res.data.listjson
           })
+          if (res.data.listjson.length == '0') {
+            this.setData({
+              noResumeList: !this.data.noResumeList
+            })
+          }
         } else if (error == '1') {
           this.setData({
-            resumeList: []
+            resumeList: [],
+            noResumeList: !this.data.noResumeList
           })
         }
       },
@@ -249,6 +258,10 @@ Page({
         student_id: app.globalData.student_id
       })
       this.getResume()
+    } else {
+      this.setData({
+        noResumeList: !this.data.noResumeList
+      })
     }
   },
   onShow () {

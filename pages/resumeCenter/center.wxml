@@ -3,14 +3,15 @@
     <view class="center-tab-item {{page=='1'?'active':''}}" data-page="1" bindtap="tabPage">在线简历</view>
     <view class="center-tab-item {{page=='2'?'active':''}}" data-page="2" bindtap="tabPage">
       投递箱
-      <view class="notice tc ml20" data-page="2" bindtap="tabPage">15</view>
+      <!-- <view class="notice tc ml20">15</view> -->
     </view>
     <view class="center-tab-item {{page=='3'?'active':''}}" data-page="3" bindtap="tabPage">邀请函</view>
     <view class="center-tab-item {{page=='4'?'active':''}}" data-page="4" bindtap="tabPage">收藏夹</view>
   </view>
 
-  <view class="resume-list" wx:if="{{ page == '1' }}">
-    <scroll-view scroll-y style="height: 100%;" wx:if="{{ resumeList.length > 0 }}">
+  <tip content="暂无信息" wx:if="{{page == '1' && noResumeList}}"></tip>
+  <view class="resume-list" wx:if="{{ page == '1' && resumeList.length > 0 }}">
+    <scroll-view scroll-y style="height: 100%;">
       <view class="resume-item active bg-f" bindtap='linkResume' wx:for="{{ resumeList }}" wx:key="key">
         <view class="item-lf">
           <view class="title ellipsis">{{ item.title }}</view>
@@ -24,7 +25,8 @@
     </scroll-view>
   </view>
 
-  <view class="fliter-tab bg-f tc" wx:if="{{ page == '2' }}">
+  <tip content="暂无信息" wx:if="{{ page == '2'}}"></tip>
+  <view class="fliter-tab bg-f tc" wx:if="{{ page == '2' && curShow}}">
     <view class="item">全部</view>
     <view class="item">投递成功</view>
     <view class="item">被查看</view>
@@ -32,7 +34,7 @@
     <view class="item">面试邀请</view>
     <view class="item">面试结果</view>
   </view>
-  <view class="invi-list send-list" wx:if="{{ page == '2' }}">
+  <view class="invi-list send-list" wx:if="{{ page == '2' && curShow}}">
     <scroll-view scroll-y style="height: 100%;">
       <view class="invi-item bg-f">
         <view class="main">
@@ -173,7 +175,8 @@
     </scroll-view>
   </view>
 
-  <view class="invi-list" wx:if="{{ page == '3' }}">
+  <tip content="暂无信息" wx:if="{{ page == '3'}}"></tip>
+  <view class="invi-list" wx:if="{{ page == '3' && curShow }}">
     <scroll-view scroll-y style="height: 100%;">
 
       <view class="invi-item mt20 bg-f">
@@ -325,11 +328,12 @@
     </scroll-view>
   </view>
 
-  <view class="collect-filter bg-f" wx:if="{{ page == '4' }}">
+  <tip content="暂无信息" wx:if="{{ page == '4'}}"></tip>
+  <view class="collect-filter bg-f" wx:if="{{ page == '4' && curShow }}">
     <view class="filter-tab {{fliterType=='job'?'acitve':''}}" bindtap="changeCokllectFilter" data-type="job">收藏职位</view>
     <view class="filter-tab {{fliterType=='company'?'acitve':''}}" bindtap="changeCokllectFilter" data-type="company">收藏企业</view>
   </view>
-  <view class="scroll-list-box pt20" wx:if="{{ page == '4' }}">
+  <view class="scroll-list-box pt20" wx:if="{{ page == '4' && curShow }}">
     <view class="scroll-list-box bg-f" wx:if="{{ fliterType == 'job' }}">
       <scroll-view scroll-y style="height: 100%;">
         <view class="r-list">

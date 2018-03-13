@@ -25,13 +25,26 @@ Page({
         wxtoken: wx.getStorageSync('openid')
       },
       success: res => {
-        console.log(res)
-        if (res.data.error == '1') {
+        console.log(res,32132132)
+        const { error } = res.data
+        if (error == '1') {
           wx.navigateTo({
             url: "../bindAccount/account"
           });
-        } else {
-        
+        } else if (error == '0') {
+          wx.setStorageSync('token', (app.globalData.token = res.data.listjson.token))
+          wx.setStorageSync('student_id', (app.globalData.student_id = res.data.listjson.student_id))
+          wx.showToast({
+            title: '登录成功',
+            icon: 'none',
+            duration: 1000
+          })
+          let timer = setTimeout(() => {
+            wx.reLaunch({
+              url: '../navMe/me',
+            })
+            clearTimeout(timer)
+          }, 300)
         }
       }
     })

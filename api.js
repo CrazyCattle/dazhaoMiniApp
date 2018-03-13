@@ -35,4 +35,7 @@ module.exports = {
   getStuAuthCode: `${basicUrl}/getStuAuthCode`, //修改手机号密码 获取短信验证码
   valiCode: `${basicUrl}/StudentCodePwdEdit`, //验证 手机号 验证码匹配
   feedback: `${basicUrl}/Feedback`, //建议反馈
+
+  wxLogin: `${basicUrl}/WxLogin`,//微信登录
+  getUserToken: `${basicUrl}/getUserToken?wxtoken=`, //获取id & token
 };

@@ -1,4 +1,6 @@
-import { loginIn } from "../../api";
+import { 
+  wxLogin
+} from "../../api";
 
 const app = getApp()
 
@@ -38,13 +40,15 @@ Page({
         duration: 1000
       });
     } else {
+      console.log(app.globalData.openid)
       wx.request({
-        url: `${loginIn}`,
+        url: `${wxLogin}`,
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
         method: "POST",
         data: {
+          wxtoken: app.globalData.openid,
           username: this.data.username.trim(),
           password: this.data.password.trim()
         },
@@ -58,18 +62,8 @@ Page({
             duration: 1000
           });
           if (error == "0") {
-            // wx.setStorageSync(
-            //   "stud_info",
-            //   (app.globalData.stud_info = res.data.listjson)
-            // );
-            // wx.setStorageSync(
-            //   "stud_img",
-            //   (app.globalData.stud_img = res.data.listjson.student_img)
-            // );
-            wx.setStorageSync(
-              "student_id",
-              (app.globalData.student_id = res.data.listjson.student_id)
-            );
+            wx.setStorageSync("student_id", (app.globalData.student_id = res.data.listjson.student_id));
+            wx.setStorageSync("token", (app.globalData.token = res.data.listjson.token));
             wx.reLaunch({
               url: "../navMe/me"
             });

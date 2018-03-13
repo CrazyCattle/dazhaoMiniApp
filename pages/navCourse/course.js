@@ -11,6 +11,8 @@ const app = getApp()
 Page({
   data: {
     isBack: false,
+    page2Show: false,
+    page3Show: false,
 
     showCollectMore: false,
     showHistoryMore: false,
@@ -123,6 +125,18 @@ Page({
       if (page == 3) {
         this.getCollectCourse()
         this.getHistoryCourse()
+      }
+    } else {
+      if (page == 2) {
+        this.setData({
+          page2Show: !this.data.page2Show,
+          page3Show: false
+        })
+      } else if (page == 3) {
+        this.setData({
+          page2Show: false,
+          page3Show: !this.data.page3Show
+        })
       }
     }
   },

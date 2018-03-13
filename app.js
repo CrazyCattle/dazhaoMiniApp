@@ -1,5 +1,6 @@
 import {
-  wxAuthorization
+  wxAuthorization,
+  getUserToken
 } from 'api';
 
 App({
@@ -10,17 +11,28 @@ App({
     student_img: wx.getStorageSync('stud_img') || '',
     student_id: wx.getStorageSync('student_id') || '',
     openid: wx.getStorageSync("openid") || '',
-    schoolInfor: wx.getStorageSync('schoolInfor') || ''
+    schoolInfor: wx.getStorageSync('schoolInfor') || '',
+    token: wx.getStorageSync('token') || '',
+    // 获取 用户的id和token
+    wxGetUserToken: (_self) => {
+      
+    },
   },
-  onLaunch: function() {
+  
+  onLaunch: function () {
+    // this.wxGetUserToken().then(res => {
+    //   if (res == 'ok') {
+    //     console.log(1)
+    //   }
+    // })
 
     console.log(this.globalData.student_id)
+
     let self = this;
+
     wx.showShareMenu({
       withShareTicket: true
     });
-
-    
 
     let promise = new Promise((resolve, reject) => {
       wx.login({
@@ -53,8 +65,6 @@ App({
         wx.setStorageSync('openid', this.globalData.openid)
       }
     })
-    
-
     // // 登录
     // new Promise((resolve, reject) => {
     //   wx.login({

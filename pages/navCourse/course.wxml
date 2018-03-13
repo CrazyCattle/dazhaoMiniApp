@@ -28,6 +28,7 @@
   </view>
 
   <view class="page-2 bg" wx:if="{{ page == '2' }}">
+    <tip content="暂无信息" wx:if="{{page == '2' && page2Show}}"></tip>
     <view class="scroll-box bg-f" wx:if="{{ imgUrls.length > 0 }}">
       <view class="scroll-title">
         课程推荐
@@ -71,6 +72,7 @@
   </view>
 
   <view class="page-3 bg" wx:if="{{ page == '3' }}">
+    <tip content="暂无信息" wx:if="{{page == '3' && page3Show}}"></tip>
     <view class="fliter-box mt20 bg-f tc" wx:if="{{ courseCollected.length > 0 }}">
       <view class="tc">
         <view class="title">收藏夹</view>
