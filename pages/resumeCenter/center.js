@@ -233,9 +233,10 @@ Page({
       }
     })
   },
-  linkResume() {
+  linkResume(e) {
+    let resumes_id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../resume/resume?id=1',
+      url: `../resume/resume?resumes_id=${resumes_id}`,
     })
   },
   getResume() {

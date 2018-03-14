@@ -1,5 +1,5 @@
-<view class="infor-center">
-  <view class="center-tab mt20 bg-f">
+<view class="infor-center pt20">
+  <view class="center-tab bg-f">
     <view class="center-tab-item" bindtap="linkStatus">
       <image class="icon" src="../../images/infor/item-1.png"></image>
       <text>投递状态</text>

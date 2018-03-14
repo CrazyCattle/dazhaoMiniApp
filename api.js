@@ -38,4 +38,5 @@ module.exports = {
 
   wxLogin: `${basicUrl}/WxLogin`,//微信登录
   getUserToken: `${basicUrl}/getUserToken?wxtoken=`, //获取id & token
+  sendEmail: `${basicUrl}/SendEmail`, //简历投递
 };
