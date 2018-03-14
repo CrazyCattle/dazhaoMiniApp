@@ -6,28 +6,16 @@ import {
 App({
   globalData: {
     userInfo: null,
-    openid: wx.getStorageSync('openid') || {},
-    stud_info: wx.getStorageSync('stud_info') || {},
-    student_img: wx.getStorageSync('stud_img') || '',
-    student_id: wx.getStorageSync('student_id') || '',
-    openid: wx.getStorageSync("openid") || '',
-    schoolInfor: wx.getStorageSync('schoolInfor') || '',
-    token: wx.getStorageSync('token') || '',
-    // 获取 用户的id和token
-    wxGetUserToken: (_self) => {
-      
-    },
+    openid: wx.getStorageSync('openid') || '', //微信openid
+    stud_info: wx.getStorageSync('stud_info') || '', //学生信息
+    student_img: wx.getStorageSync('stud_img') || '',//学生图片
+    student_id: wx.getStorageSync('student_id') || '',//学生id
+    schoolInfor: wx.getStorageSync('schoolInfor') || '', //学校信息
+    token: wx.getStorageSync('token') || '',//后台登陆token
+    loginType: ''  //登陆类型
   },
   
   onLaunch: function () {
-    // this.wxGetUserToken().then(res => {
-    //   if (res == 'ok') {
-    //     console.log(1)
-    //   }
-    // })
-
-    console.log(this.globalData.student_id)
-
     let self = this;
 
     wx.showShareMenu({
@@ -37,7 +25,6 @@ App({
     let promise = new Promise((resolve, reject) => {
       wx.login({
         success: res => {
-          console.log(res);
           resolve(res)
         }
       });
@@ -54,7 +41,6 @@ App({
             code: res.code
           },
           success: res => {
-            console.log(res)
             resolve(res)
           }
         })

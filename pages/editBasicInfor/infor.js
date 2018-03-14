@@ -4,7 +4,9 @@ import {
 } from '../../api';
 
 import {
-  formatTime
+  formatTime,
+  setNewToken,
+  initLoginStatus
 } from '../../utils/util'
 
 const app = getApp()
@@ -54,33 +56,36 @@ Page({
     })
   },
   saveUserInfo() {
-    console.log(this.data.user_name, this.data.user_email, this.data.user_phone, this.data.user_birthday, this.data.user_sex)
-    if (!this.data.user_name) {
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
+
+    console.log(_self.data.user_name, _self.data.user_email, _self.data.user_phone, _self.data.user_birthday, _self.data.user_sex)
+    if (!_self.data.user_name) {
       wx.showToast({
         title: "姓名不能为空",
         icon: "none",
         duration: 1000
       });
-    } else if (!this.data.user_email) {
+    } else if (!_self.data.user_email) {
       wx.showToast({
         title: "邮箱不能为空",
         icon: "none",
         duration: 1000
       });
-    } else if (!this.data.user_phone) {
+    } else if (!_self.data.user_phone) {
       wx.showToast({
         title: "手机号码不能为空",
         icon: "none",
         duration: 1000
       });
     } else {
-      if (!mobileReg.test(this.data.user_phone)) {
+      if (!mobileReg.test(_self.data.user_phone)) {
         wx.showToast({
           title: "手机号码格式不正确",
           icon: "none",
           duration: 1000
         })
-      } else if (!emailReg.test(this.data.user_email)) {
+      } else if (!emailReg.test(_self.data.user_email)) {
         wx.showToast({
           title: "邮箱格式不正确",
           icon: "none",
@@ -95,29 +100,42 @@ Page({
           method: 'POST',
           data: {
             stu_id: app.globalData.student_id,
-            student_truename: this.data.user_name,
-            student_sex: this.data.user_sex,
-            student_birthday: this.data.user_birthday,
-            student_mobile: this.data.user_phone,
-            student_email: this.data.user_email
+            student_truename: _self.data.user_name,
+            student_sex: _self.data.user_sex,
+            student_birthday: _self.data.user_birthday,
+            student_mobile: _self.data.user_phone,
+            student_email: _self.data.user_email,
+            token: app.globalData.token
           },
           success: res => {
             console.log(res)
-            if (res.data.error == '0') {
-              wx.showToast({
-                title: res.data.errortip,
-                icon: "none",
-                duration: 1000
-              })
-              const { listjson } = res.data
-              for (var key in listjson) {
-                stud_info[key] = listjson[key]
+            if (res.data.tokeninc == '0') {
+              if (loginType == 'wxlogin') {
+                setNewToken().then(res => {
+                  if (res == 'ok') {
+                    _self.saveUserInfo()
+                  }
+                })
+              } else {
+                initLoginStatus()
               }
-              wx.setStorageSync('stud_info', stud_info)
-              let timer = setTimeout(() => {
-                wx.navigateBack()
-                clearTimeout(timer)
-              }, 300)
+            } else {
+              if (res.data.error == '0') {
+                wx.showToast({
+                  title: res.data.errortip,
+                  icon: "none",
+                  duration: 1000
+                })
+                const { listjson } = res.data
+                for (var key in listjson) {
+                  stud_info[key] = listjson[key]
+                }
+                wx.setStorageSync('stud_info', stud_info)
+                let timer = setTimeout(() => {
+                  wx.navigateBack()
+                  clearTimeout(timer)
+                }, 300)
+              }
             }
           }
         })

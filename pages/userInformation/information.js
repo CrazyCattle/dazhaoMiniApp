@@ -3,6 +3,11 @@ import {
   getUserInfor
 } from '../../api';
 
+import {
+  setNewToken,
+  initLoginStatus
+} from '../../utils/util';
+
 const app = getApp()
 
 Page({
@@ -29,6 +34,9 @@ Page({
     })
   },
   chooseImg() {
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
+
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
@@ -36,37 +44,11 @@ Page({
       success: res => {
         console.log(res)
         if (res.errMsg == "chooseImage:ok") {
-          this.setData({
+          _self.setData({
             user_pic: res.tempFilePaths[0],
             userImgPath: res.tempFiles
           })
-
-          wx.uploadFile({
-            url: `${uploadUserImg}`,
-            header: {
-              "Content-Type": "multipart/form-data"
-            },
-            method: 'POST',
-            filePath: this.data.user_pic,
-            name: 'image',
-            formData: {
-              'file': this.data.userImgPath,
-              'stu_id': app.globalData.student_id
-            },
-            success: res => {
-              const data = JSON.parse(res.data)
-              console.log(data)
-              if (data.error == '0') {
-                app.globalData.student_img = data.originalimg
-                wx.setStorageSync('stud_img', data.originalimg)
-                wx.showToast({
-                  title: data.errortip,
-                  icon: "none",
-                  duration: 1000
-                });
-              }
-            }
-          })
+          _self.uploadImg()
         }
       },
       fail: res => {
@@ -74,6 +56,50 @@ Page({
       },
       complete: res => {
         // console.log(res)
+      }
+    })
+  },
+  uploadImg() {
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
+
+    wx.uploadFile({
+      url: `${uploadUserImg}`,
+      header: {
+        "Content-Type": "multipart/form-data"
+      },
+      method: 'POST',
+      filePath: _self.data.user_pic,
+      name: 'image',
+      formData: {
+        'file': _self.data.userImgPath,
+        'stu_id': app.globalData.student_id,
+        'token': app.globalData.token
+      },
+      success: res => {
+        const data = JSON.parse(res.data)
+
+        if (data.tokeninc == '0') {
+          if (loginType == 'wxlogin') {
+            setNewToken().then(res => {
+              if (res == 'ok') {
+                _self.uploadImg()
+              }
+            })
+          } else {
+            initLoginStatus()
+          }
+        } else {
+          if (data.error == '0') {
+            app.globalData.student_img = data.originalimg
+            wx.setStorageSync('stud_img', data.originalimg)
+            wx.showToast({
+              title: data.errortip,
+              icon: "none",
+              duration: 1000
+            });
+          }
+        }
       }
     })
   },

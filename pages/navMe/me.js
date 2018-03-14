@@ -3,7 +3,8 @@ import {
 } from '../../api';
 
 import {
-  setNewToken
+  setNewToken,
+  initLoginStatus
 } from '../../utils/util';
 
 const app = getApp()
@@ -123,14 +124,8 @@ Page({
         console.log(res)
         if (res.data.error == '0') {
           const { listjson } = res.data
-          wx.setStorageSync(
-            "stud_info",
-            (app.globalData.stud_info = listjson)
-          );
-          wx.setStorageSync(
-            "stud_img",
-            (app.globalData.student_img = listjson.student_img)
-          );
+          wx.setStorageSync("stud_info", (app.globalData.stud_info = listjson));
+          wx.setStorageSync("stud_img", (app.globalData.student_img = listjson.student_img));
 
           this.setData({
             stud_info: listjson,
@@ -149,26 +144,26 @@ Page({
         schoolInfor: wx.getStorageSync('schoolInfo') || ''
       })
     }
+    let loginType = wx.getStorageSync('loginType')
+
     if (!!app.globalData.student_id && !!app.globalData.token) {
       _self.getUserData().then(res => {
         console.log(res)
         if (res.data.tokeninc == '0') {
-          setNewToken().then(res => {
-            if (res == 'ok') {
-              _self.updateUserData()
-            }
-          })
+          if (loginType == 'wxlogin') {
+            setNewToken().then(res => {
+              if (res == 'ok') {
+                _self.updateUserData()
+              }
+            })
+          } else {
+            initLoginStatus()
+          }
         } else {
           if (res.data.error == '0') {
             const { listjson } = res.data
-            wx.setStorageSync(
-              "stud_info",
-              (app.globalData.stud_info = listjson)
-            );
-            wx.setStorageSync(
-              "stud_img",
-              (app.globalData.student_img = listjson.student_img)
-            );
+            wx.setStorageSync("stud_info", (app.globalData.stud_info = listjson));
+            wx.setStorageSync("stud_img", (app.globalData.student_img = listjson.student_img));
 
             this.setData({
               stud_info: listjson,

@@ -1,13 +1,15 @@
 import {
-  formatTime
-} from '../../utils/util';
-
-import {
   getUnvDegree,
   getMajorsArray,
   getfacultyArray,
   studentEduEdit
 } from '../../api';
+
+import {
+  formatTime,
+  setNewToken,
+  initLoginStatus
+} from '../../utils/util';
 
 const app = getApp()
 var stud_info = {}
@@ -134,7 +136,10 @@ Page({
     })
   },
   modifyEduc() {
-    if (!this.data.student_name) {
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
+
+    if (!_self.data.student_name) {
       wx.showToast({
         title: "学号不能为空",
         icon: "none",
@@ -142,12 +147,12 @@ Page({
       });
     } else {
       console.log(
-        this.data.degreeId,
-        this.data.departmentId,
-        this.data.majorId,
-        this.data.student_name,
-        this.data.student_stgraduatetwo,
-        this.data.student_edgraduate
+        _self.data.degreeId,
+        _self.data.departmentId,
+        _self.data.majorId,
+        _self.data.student_name,
+        _self.data.student_stgraduatetwo,
+        _self.data.student_edgraduate
       )
       wx.request({
         url: studentEduEdit,
@@ -156,31 +161,44 @@ Page({
         },
         method: 'POST',
         data: {
-          university_id: this.data.university_id,
+          university_id: _self.data.university_id,
           stu_id: app.globalData.student_id,
-          student_degree: this.data.degreeId,
-          faculty_id: this.data.departmentId,
-          major_id: this.data.majorId,
-          student_name: this.data.student_name,
-          student_stgraduatetwo: this.data.student_stgraduatetwo,
-          student_edgraduate: this.data.student_edgraduate
+          student_degree: _self.data.degreeId,
+          faculty_id: _self.data.departmentId,
+          major_id: _self.data.majorId,
+          student_name: _self.data.student_name,
+          student_stgraduatetwo: _self.data.student_stgraduatetwo,
+          student_edgraduate: _self.data.student_edgraduate,
+          token: app.globalData.token
         },
         success: res => {
           console.log(res)
-
-          if (res.data.error == '0') {
-            const { listjson } = res.data
-            wx.showToast({
-              title: res.data.errortip,
-              icon: "none",
-              duration: 1000
-            })
-            for (let k in listjson) {
-              stud_info[k] = listjson[k]
+          if (res.data.tokeninc == '0') {
+            if (loginType == 'wxlogin') {
+              setNewToken().then(res => {
+                if (res == 'ok') {
+                  _self.modifyEduc()
+                }
+              })
+            } else {
+              initLoginStatus()
             }
-            wx.setStorageSync('stud_info', stud_info)
-            wx.navigateBack()
+          } else {
+            if (res.data.error == '0') {
+              const { listjson } = res.data
+              wx.showToast({
+                title: res.data.errortip,
+                icon: "none",
+                duration: 1000
+              })
+              for (let k in listjson) {
+                stud_info[k] = listjson[k]
+              }
+              wx.setStorageSync('stud_info', stud_info)
+              wx.navigateBack()
+            }
           }
+          
         }
       })
     }

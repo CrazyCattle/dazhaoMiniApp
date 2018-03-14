@@ -6,6 +6,11 @@ import {
   uploadImg
 } from '../../api';
 
+import {
+  setNewToken,
+  initLoginStatus
+} from '../../utils/util';
+
 const app = getApp()
 
 Page({
@@ -28,6 +33,8 @@ Page({
     multiArray: [[], []],
     expectOne: [],
     expectOneC: [],
+    //中英文
+    lan: ''
   },
   chooseImg() {
     wx.chooseImage({
@@ -58,11 +65,12 @@ Page({
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
     let c = e.detail.column
     let v = e.detail.value
+    let _self = this
     if (c == '0') {
-      this.data.expectOne.forEach((val, i) => {
-        if (val.tilte == this.data.multiArray[0][v]) {
+      _self.data.expectOne.forEach((val, i) => {
+        if (val.tilte == _self.data.multiArray[0][v]) {
           wx.request({
-            url: `${jobExpectChild}&parameter=${val.parameter}`,
+            url: `${jobExpectChild}&language=${_self.data.lan}&parameter=${val.parameter}`,
             success: res => {
               console.log(res)
               if (res.data.error == '0') {
@@ -71,8 +79,8 @@ Page({
                 res.data.listjson.forEach((v, i) => {
                   arr.push(v.section)
                 })
-                this.setData({
-                  multiArray: [this.data.expectOneC, arr]
+                _self.setData({
+                  multiArray: [_self.data.expectOneC, arr]
                 })
               }
             }
@@ -107,32 +115,36 @@ Page({
       user_exprect: e.detail.value.trim()
     })
   },
+
   submitResumeInfo() {
-    if (!this.data.resumeTitle) {
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
+
+    if (!_self.data.resumeTitle) {
       wx.showToast({
         title: "简历名称不能为空",
         icon: "none",
         duration: 1000
       });
-    } else if (!this.data.user_name) {
+    } else if (!_self.data.user_name) {
       wx.showToast({
         title: "姓名不能为空",
         icon: "none",
         duration: 1000
       });
-    } else if (!this.data.user_phone) {
+    } else if (!_self.data.user_phone) {
       wx.showToast({
         title: "手机号码不能为空",
         icon: "none",
         duration: 1000
       });
-    } else if (!this.data.user_email) {
+    } else if (!_self.data.user_email) {
       wx.showToast({
         title: "邮箱不能为空",
         icon: "none",
         duration: 1000
       });
-    } else if (!this.data.user_exprect) {
+    } else if (!_self.data.user_exprect) {
       wx.showToast({
         title: "求职期望不能为空",
         icon: "none",
@@ -140,13 +152,14 @@ Page({
       });
     } else {
       console.log(
-        this.data.resume_id,
+        _self.data.resume_id,
         app.globalData.student_id,
-        this.data.resumeTitle,
-        this.data.user_name,
-        this.data.user_phone,
-        this.data.user_email,
-        this.data.user_exprect
+        _self.data.resumeTitle,
+        _self.data.user_name,
+        _self.data.user_phone,
+        _self.data.user_email,
+        _self.data.user_exprect,
+        app.globalData.token
       );
       wx.request({
         url: `${resumeBasicEdit}`,
@@ -155,30 +168,39 @@ Page({
         },
         method: 'POST',
         data: {
-          resumes_id: this.data.resume_id,
+          resumes_id: _self.data.resume_id,
           student_id: app.globalData.student_id,
-          title: this.data.resumeTitle,
-          truename: this.data.user_name,
-          mobile: this.data.user_phone,
-          email: this.data.user_email,
-          expectwork: this.data.user_exprect
+          title: _self.data.resumeTitle,
+          truename: _self.data.user_name,
+          mobile: _self.data.user_phone,
+          email: _self.data.user_email,
+          expectwork: _self.data.user_exprect,
+          token: app.globalData.token
         },
         success: res => {
           console.log(res)
-          wx.showToast({
-            title: res.data.errortip,
-            icon: "none",
-            duration: 1000
-          });
-          if (res.data.error == '0') {
-            console.log(res.data)
-            console.log(getCurrentPages())
+          if (res.data.tokeninc == '0') {
+            if (loginType == 'wxlogin') {
+              setNewToken().then(res => {
+                if (res == 'ok') {
+                  _self.submitResumeInfo()
+                }
+              })
+            } else {
+              initLoginStatus()
+            }
+          } else {
             if (res.data.error == '0') {
               let timer = setTimeout(() => {
-                wx.navigateBack() 
+                wx.navigateBack()
                 clearTimeout(timer)
               }, 300)
             }
+            wx.showToast({
+              title: res.data.errortip,
+              icon: "none",
+              duration: 1000
+            });
           }
         },
         fail: res => { },
@@ -186,31 +208,47 @@ Page({
       })
     }
   },
-  uploadUserImg () {
-    console.log(app.globalData.student_id, this.data.resume_id)
-    if (!!this.data.user_pic && (this.data.origin_user_pic !== this.data.user_pic)) {
+  uploadUserImg() {
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
+
+    console.log(app.globalData.student_id, _self.data.resume_id)
+    if (!!_self.data.user_pic && (_self.data.origin_user_pic !== _self.data.user_pic)) {
       wx.uploadFile({
         url: `${uploadImg}`,
         header: {
-          "Content-Type": "multipart/form-data"  
+          "Content-Type": "multipart/form-data"
         },
         method: 'POST',
-        filePath: this.data.user_pic,
+        filePath: _self.data.user_pic,
         name: 'image',
         formData: {
-          'file': this.data.userImgPath,
+          'file': _self.data.userImgPath,
           'stu_id': app.globalData.student_id,
-          'resumes_id': this.data.resume_id
+          'resumes_id': _self.data.resume_id,
+          'token': app.globalData.token
         },
         success: res => {
           const data = JSON.parse(res.data)
           console.log(res)
-          if (data.error == '0') {
-            wx.showToast({
-              title: data.errortip,
-              icon: "none",
-              duration: 1000
-            });
+          if (data.tokeninc == '0') {
+            if (loginType == 'wxlogin') {
+              setNewToken().then(res => {
+                if (res == 'ok') {
+                  _self.uploadUserImg()
+                }
+              })
+            } else {
+              initLoginStatus()
+            }
+          } else {
+            if (data.error == '0') {
+              wx.showToast({
+                title: data.errortip,
+                icon: "none",
+                duration: 1000
+              });
+            }
           }
         }
       })
@@ -222,13 +260,10 @@ Page({
       });
     }
   },
-  onLoad: function (options) {
-    let id = options.id
-    console.log(id)
-    this.setData({
-      resume_id: id,
-      user_exprect: this.data.jobExpect[this.data.jobExpectIndex]
-    })
+
+  getResumeDetail(id) {
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
 
     wx.request({
       url: `${getResumeOne}`,
@@ -238,28 +273,54 @@ Page({
       },
       data: {
         resumes_id: id,
-        stu_id: app.globalData.student_id
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token
       },
       success: res => {
         console.log(res)
-        if (res.data.error == '0') {
-          const { listjson } = res.data
-          this.setData({
-            user_pic: listjson.img,
-            origin_user_pic: listjson.img,
-            resumeTitle: listjson.title,
-            user_name: listjson.truename,
-            user_phone: listjson.mobile,
-            user_email: listjson.email,
-            user_exprect: listjson.expectwork,
-          })
+        if (res.data.tokeninc == '0') {
+          if (loginType == 'wxlogin') {
+            setNewToken().then(res => {
+              if (res == 'ok') {
+                _self.getResumeDetail(id)
+              }
+            })
+          } else {
+            initLoginStatus()
+          }
+        } else {
+          if (res.data.error == '0') {
+            const { listjson } = res.data
+            this.setData({
+              user_pic: listjson.img,
+              origin_user_pic: listjson.img,
+              resumeTitle: listjson.title,
+              user_name: listjson.truename,
+              user_phone: listjson.mobile,
+              user_email: listjson.email,
+              user_exprect: listjson.expectwork,
+            })
+          }
         }
       }
     })
+  },
+  onLoad: function (options) {
+    let id = options.id
+    let lan = options.lan
+
+
+    this.setData({
+      lan: options.lan,
+      resume_id: id,
+      user_exprect: this.data.jobExpect[this.data.jobExpectIndex]
+    })
+
+    this.getResumeDetail(id)
 
     new Promise((resolve, reject) => {
       wx.request({
-        url: `${jobExpect}`,
+        url: `${jobExpect}?language=${lan}`,
         success: res => {
           if (res.data.error == '0') {
             const { listjson } = res.data
@@ -277,7 +338,7 @@ Page({
       })
     }).then(res => {
       wx.request({
-        url: `${jobExpectChild}&parameter=${res[0].parameter}`,
+        url: `${jobExpectChild}&language=${lan}&parameter=${res[0].parameter}`,
         success: res => {
           if (res.data.error == '0') {
             const arr = []

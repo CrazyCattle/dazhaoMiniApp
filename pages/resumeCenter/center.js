@@ -1,7 +1,13 @@
-import { 
+import {
   resumeList,
   delResume
- } from '../../api';
+} from '../../api';
+
+import {
+  setNewToken,
+  initLoginStatus
+} from '../../utils/util';
+
 
 const app = getApp()
 
@@ -130,13 +136,13 @@ Page({
       }
     ]
   },
-  showDetail (e) {
+  showDetail(e) {
     let id = e.target.dataset.id
     this.setData({
       id: id
     })
   },
-  showStatus (e) {
+  showStatus(e) {
     let ids = e.target.dataset.ids
     this.setData({
       ids: ids
@@ -148,19 +154,66 @@ Page({
       page: page
     })
   },
-  changeCokllectFilter (e) {
+  changeCokllectFilter(e) {
     let type = e.target.dataset.type
     this.setData({
       fliterType: type
     })
   },
-  editResumeBasicInfor (e) {
+  editResumeBasicInfor(e) {
     let id = e.target.dataset.id
+    let lan = (e.target.dataset.lan=='1'?'en':'cn')
     wx.navigateTo({
-      url: `../editResumeBasicInfor/infor?id=${id}`,
+      url: `../editResumeBasicInfor/infor?id=${id}&lan=${lan}`,
     })
   },
-  delResume (e) {
+  delResumeVail(resumes_id) {
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
+    wx.request({
+      url: `${delResume}`,
+      data: {
+        resumes_id,
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: res => {
+        console.log(res)
+        if (res.data.tokeninc == '0') {
+          if (loginType == 'wxlogin') {
+            setNewToken().then(res => {
+              if (res == 'ok') {
+                _self.delResumeVail(resumes_id)
+              }
+            })
+          } else {
+            initLoginStatus()
+          }
+        } else {
+          if (res.data.error == '0') {
+            _self.getResume()
+            wx.showToast({
+              title: res.data.errortip,
+              icon: "none",
+              duration: 1000
+            });
+          }
+        }
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
+    })
+  },
+  delResume(e) {
+    let _self = this
     new Promise((resolve, reject) => {
       wx.showModal({
         title: '确定删除此简历吗？',
@@ -176,50 +229,25 @@ Page({
     }).then(res => {
       if (res) {
         let resumes_id = e.target.dataset.id
-        wx.request({
-          url: `${delResume}`,
-          data: {
-            resumes_id,
-            stu_id: app.globalData.student_id
-          },
-          method: 'POST',
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          success: res => {
-            console.log(res)
-            if (res.data.error == '0') {
-              this.getResume()
-              wx.showToast({
-                title: res.data.errortip,
-                icon: "none",
-                duration: 1000
-              });
-            }
-          },
-          fail: function () {
-            // fail
-          },
-          complete: function () {
-            // complete
-          }
-        })
+        _self.delResumeVail(resumes_id)
       }
     })
-    
-    
   },
-  linkResume () {
+  linkResume() {
     wx.navigateTo({
       url: '../resume/resume?id=1',
     })
   },
-  getResume () {
+  getResume() {
+    let loginType = wx.getStorageSync('loginType')
+    let _self = this
+
     wx.request({
       url: `${resumeList}`,
       method: 'POST',
       data: {
-        stu_id: app.globalData.student_id
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token
       },
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -227,20 +255,33 @@ Page({
       success: res => {
         console.log(res)
         const { error } = res.data
-        if (error == '0') {
-          this.setData({
-            resumeList: res.data.listjson
-          })
-          if (res.data.listjson.length == '0') {
+
+        if (res.data.tokeninc == '0') {
+          if (loginType == 'wxlogin') {
+            setNewToken().then(res => {
+              if (res == 'ok') {
+                _self.getResume()
+              }
+            })
+          } else {
+            initLoginStatus()
+          }
+        } else {
+          if (error == '0') {
             this.setData({
+              resumeList: res.data.listjson
+            })
+            if (res.data.listjson.length == '0') {
+              this.setData({
+                noResumeList: !this.data.noResumeList
+              })
+            }
+          } else if (error == '1') {
+            this.setData({
+              resumeList: [],
               noResumeList: !this.data.noResumeList
             })
           }
-        } else if (error == '1') {
-          this.setData({
-            resumeList: [],
-            noResumeList: !this.data.noResumeList
-          })
         }
       },
       fail: res => {
@@ -264,7 +305,7 @@ Page({
       })
     }
   },
-  onShow () {
+  onShow() {
     console.log(this.data.isBack)
     if (this.data.isBack) {
       this.getResume()

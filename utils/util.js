@@ -20,10 +20,8 @@ const setNewToken = () => {
         console.log(res)
         if (res.data.error == '0') {
           const { listjson } = res.data
-          wx.setStorageSync(
-            "token",
-            (app.globalData.token = listjson.token)
-          );
+          wx.setStorageSync("token", listjson.token);
+          app.globalData.token = listjson.token
         }
         resolve('ok')
       }
@@ -31,7 +29,33 @@ const setNewToken = () => {
   })
 }
 
+const initLoginStatus = () => {
+  wx.removeStorageSync('schoolInfo')
+  wx.removeStorageSync('stud_info')
+  wx.removeStorageSync('student_id')
+  wx.removeStorageSync('stud_img')
+  wx.removeStorageSync('token')
+
+  app.globalData.stud_info = ''
+  app.globalData.student_id = ''
+  app.globalData.student_img = ''
+  app.globalData.token = ''
+  app.globalData.loginType = ''
+
+  wx.showToast({
+    title: "请先登录",
+    icon: "none",
+    duration: 1000
+  });
+  let timer = setTimeout(() => {
+    wx.navigateTo({
+      url: '../login/login'
+    })
+  }, 300)
+}
+
 module.exports = {
-  formatTime: formatTime,
-  setNewToken
+  formatTime,
+  setNewToken,
+  initLoginStatus
 }
