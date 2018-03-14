@@ -51,13 +51,7 @@ Page({
     })
   },
   sendresume() {
-    console.log(
-      this.data.SendTitle,
-      this.data.truename,
-      this.data.sendEmail,
-      this.data.fromEmail,
-      this.data.sendTxt
-    )
+    
 
     if (!this.data.SendTitle) {
       wx.showToast({
@@ -114,23 +108,21 @@ Page({
     wx.request({
       url: `${sendEmail}`,
       header: {
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       method: 'POST',
       data: {
         stu_id: app.globalData.student_id,
-        resumes_id: this.data.resumes_id,
-        SendTitle: this.data.SendTitle,
-        truename: this.data.truename,
-        sendEmail: this.data.sendEmail,
-        fromEmail: this.data.fromEmail,
-        sendTxt: this.data.sendTxt,
+        resumes_id: _self.data.resumes_id,
+        SendTitle: _self.data.SendTitle,
+        truename: _self.data.truename,
+        sendEmail: _self.data.sendEmail,
+        fromEmail: _self.data.fromEmail,
+        sendTxt: _self.data.sendTxt,
         token: app.globalData.token
       },
       success: res => {
-        console.log(res)
-        const data = JSON.parse(res.data)
-
+        const data = res.data
         if (data.tokeninc == '0') {
           if (loginType == 'wxlogin') {
             setNewToken().then(res => {
@@ -149,10 +141,10 @@ Page({
               duration: 1000
             });
             let timer = setTimeout(() => {
-              this.setData({
-                sendResumeBox: !this.data.sendResumeBox
+              _self.setData({
+                sendResumeBox: !_self.data.sendResumeBox
               })
-            }, 300)
+            }, 500)
           }
         }
       }
