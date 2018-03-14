@@ -31,7 +31,9 @@
     "pages/inforNotice/notice",
     "pages/inforSetting/setting",
     "pages/inforNoticeDetail/detail",
-    "pages/editUserPwd/pwd"
+    "pages/editUserPwd/pwd",
+    "pages/resumeSend/send",
+    "pages/resumeReview/review"
   ],
   "window": {
     "backgroundTextStyle": "light",

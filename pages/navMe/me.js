@@ -17,6 +17,32 @@ Page({
     stud_img: '',
     schoolInfor: ''
   },
+  linkSend() {
+    if (!!app.globalData.student_id) {
+      wx.navigateTo({
+        url: '../resumeSend/send'
+      })
+    } else {
+      wx.showToast({
+        title: "请先登录",
+        icon: "none",
+        duration: 1000
+      });
+    }
+  },
+  linkView() {
+    if (!!app.globalData.student_id) {
+      wx.navigateTo({
+        url: '../resumeReview/review'
+      })
+    } else {
+      wx.showToast({
+        title: "请先登录",
+        icon: "none",
+        duration: 1000
+      });
+    }
+  },
   linkLR() {
     wx.navigateTo({
       url: '../loginRegister/loginregister'
