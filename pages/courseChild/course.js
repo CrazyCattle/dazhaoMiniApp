@@ -1,4 +1,7 @@
 import { getSClass } from '../../api.js';
+
+const WxParse = require('../../wxParse/wxParse.js');
+
 Page({
   data: {
     class_intro: {},
@@ -38,6 +41,7 @@ Page({
   },
   onLoad: function (options) {
     let id = options.id
+    let _self = this
 
     wx.request({
       url: `${getSClass}${id}`,
@@ -47,8 +51,11 @@ Page({
         const { error } = res.data
         if (error == '0') {
           const { class_intro, classThree } = res.data.result
+          const article = class_intro.class_intro
+
+          WxParse.wxParse('article', 'html', article, _self, 5);
+
           this.setData({
-            class_intro,
             classThree
           })
         }

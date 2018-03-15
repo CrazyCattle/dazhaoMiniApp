@@ -1,3 +1,5 @@
+@import "../../wxParse/wxParse.wxss";
+
 .course-raiders-head  {
   padding: 20rpx 0;
   font-family: 'PingFangSC-Medium';
