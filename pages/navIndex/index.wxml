@@ -35,7 +35,7 @@
         </view> 
       </view>
     </view>
-    <swiper class="scroll-swiper" indicator-dots="{{ indicatorDots }}" autoplay="{{ canautoplay }}" duration="160" display-multiple-items="2" previous-margin="35rpx" next-margin="35rpx" skip-hidden-item-layout="true">
+    <swiper class="scroll-swiper" indicator-dots="{{ indicatorDots }}" autoplay="{{ canautoplay }}" duration="160" display-multiple-items="2" previous-margin="35rpx" next-margin="17.5rpx" skip-hidden-item-layout="true">
       <block wx:for="{{imgUrls}}" wx:key="key">
         <swiper-item class="swiper-item">
           <image data-id="{{ item.lesson_id }}" bindtap="linkCoursePlay" src="{{ item.lesson_img }}" class="slide-image"></image>

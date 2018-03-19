@@ -4,6 +4,7 @@ const WxParse = require('../../wxParse/wxParse.js');
 
 Page({
   data: {
+    showMore: false,
     class_intro: {},
     classThree: [],
     courseList: [
@@ -33,6 +34,11 @@ Page({
       }
     ],
   },
+  showMore () {
+    this.setData({
+      showMore: !this.data.showMore
+    })
+  },
   linkCoursePlay (e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
@@ -50,11 +56,14 @@ Page({
         console.log(res)
         const { error } = res.data
         if (error == '0') {
+          console.log(res.data.result)
           const { class_intro, classThree } = res.data.result
           const article = class_intro.class_intro
-
+          const { class_name } = class_intro
+          wx.setNavigationBarTitle({
+            title: `${class_name}系列课程`
+          })
           WxParse.wxParse('article', 'html', article, _self, 5);
-
           this.setData({
             classThree
           })

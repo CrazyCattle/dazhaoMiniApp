@@ -5,6 +5,7 @@
   "onReachBottomDistance": "0",
   "usingComponents": {
     "loading": "/components/loading/loading",
-    "tip": "/components/tips/tip"
+    "tip": "/components/tips/tip",
+    "tipnormal": "/components/tipnormals/tipnormal"
   }
 }

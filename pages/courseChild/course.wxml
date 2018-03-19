@@ -1,8 +1,14 @@
-<import src="../../wxParse/wxParse.wxml"/> 
+<import src="../../wxParse/wxParse.wxml" />
 <view class="course-raiders bg-f">
   <view class="course-raiders-head tc">{{ class_intro.class_name }}</view>
-  <view class="course-raiders-desc wxParse">
-    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+  <view class="course-raiders-desc">
+    <view class="wxParse {{ showMore?'active':''}}" bindtap="showMore">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+
+    <view class="arrow-icon-more {{ showMore?'active':'' }}" bindtap="more">
+      <view class="inner"></view>
+    </view>
   </view>
 </view>
 

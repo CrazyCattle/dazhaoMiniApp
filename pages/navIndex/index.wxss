@@ -63,7 +63,7 @@
   padding-right: 20rpx;
 }
 .scroll-box swiper-item:last-child {
-  padding-right: 0;
+  padding-right: 20rpx;
 }
 .recommend > .tc {
   padding-top: 35rpx;

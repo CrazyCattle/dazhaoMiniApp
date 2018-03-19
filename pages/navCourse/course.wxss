@@ -58,7 +58,7 @@
 }
 .page-tab .tab-item.active {
   color: #47dbe2;
-  border-bottom: 2rpx solid #51d3d9;
+  border-bottom: 4rpx solid #51d3d9;
 }
 /* page 2 */
 .fliter-box {
