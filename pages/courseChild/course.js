@@ -5,6 +5,7 @@ const WxParse = require('../../wxParse/wxParse.js');
 Page({
   data: {
     showMore: false,
+    class_name: '',
     class_intro: {},
     classThree: [],
     courseList: [
@@ -60,8 +61,11 @@ Page({
           const { class_intro, classThree } = res.data.result
           const article = class_intro.class_intro
           const { class_name } = class_intro
+          _self.setData({
+            class_name: `${class_name}系列课程`
+          })
           wx.setNavigationBarTitle({
-            title: `${class_name}系列课程`
+            title: this.data.class_name
           })
           WxParse.wxParse('article', 'html', article, _self, 5);
           this.setData({

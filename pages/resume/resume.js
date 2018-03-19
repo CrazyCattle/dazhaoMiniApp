@@ -1,11 +1,12 @@
 import {
+  getResumeOne,
   sendEmail
 } from '../../api';
 
 import {
   setNewToken,
   initLoginStatus
-} from '../../utils/util'
+} from '../../utils/util';
 
 const app = getApp()
 const emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
@@ -18,7 +19,8 @@ Page({
     truename: '',
     sendEmail: '',
     fromEmail: '',
-    sendTxt: '脚步网络科技有限公司HR，您好！我是应聘贵公司房地产招商专员的求职者招妹。我曾做过大招世纪广场投资有限公司的招商招商专员，同同时也做过大招企业发展有限公司的销'
+    sendTxt: '脚步网络科技有限公司HR，您好！我是应聘贵公司房地产招商专员的求职者招妹。我曾做过大招世纪广场投资有限公司的招商招商专员，同同时也做过大招企业发展有限公司的销',
+    imgurl: ''
   },
   iptTitle(e) {
     let SendTitle = e.detail.value.trim()
@@ -155,24 +157,55 @@ Page({
       sendResumeBox: !this.data.sendResumeBox
     })
   },
-  onLoad: function (options) {
-    this.setData({
-      resumes_id: options.resumes_id
+  getResumeDetail(id) {
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
+
+    wx.request({
+      url: `${getResumeOne}`,
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        resumes_id: id,
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token
+      },
+      success: res => {
+        console.log(res)
+        if (res.data.tokeninc == '0') {
+          if (loginType == 'wxlogin') {
+            setNewToken().then(res => {
+              if (res == 'ok') {
+                _self.getResumeDetail(id)
+              }
+            })
+          } else {
+            initLoginStatus()
+          }
+        } else {
+          if (res.data.error == '0') {
+            const { imgurl } = res.data.listjson
+            _self.setData({
+              imgurl
+            })
+          }
+        }
+      }
     })
-    // wx.downloadFile({
-    //   url: 'https://static.dazhao100.cn/resume/download?resumes_id=31151',
-    //   success: res => {
-    //     console.log(res)
-    //     if (res.errMsg = "downloadFile:ok" && res.statusCode == 200) {
-    //       wx.openDocument({
-    //         filePath: res.tempFilePath,
-    //         success: res => {
-    //           console.log('打开文档成功')
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
+  },
+  prewResumeImg() {
+    wx.previewImage({
+      urls: [this.data.imgurl]
+    })
+  },
+  onLoad: function (options) {
+    let id = options.resumes_id
+    this.setData({
+      resumes_id: id
+    })
+    this.getResumeDetail(id)
   },
   onReady: function () { },
   onShow: function () { }

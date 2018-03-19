@@ -1,5 +1,7 @@
 <view class="resume">
-  <view class="resume-box bg-f"></view>
+  <view class="resume-box">
+    <image bindtap="prewResumeImg" mode="widthFix" style="display;block;width: 100%;" src="{{ imgurl }}"></image>
+  </view>
   <view class="send-box bg-f">
     <button class="baseBtn" bindtap="close">邮件投递</button>
   </view>

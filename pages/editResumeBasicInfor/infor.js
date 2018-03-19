@@ -309,7 +309,6 @@ Page({
     let id = options.id
     let lan = options.lan
 
-
     this.setData({
       lan: options.lan,
       resume_id: id,

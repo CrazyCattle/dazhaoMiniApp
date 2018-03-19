@@ -2,6 +2,7 @@
   width: 700rpx;
   height: 994rpx;
   margin: 52rpx auto 0;
+  overflow-y: scroll;
 }
 .send-box {
   position: fixed;

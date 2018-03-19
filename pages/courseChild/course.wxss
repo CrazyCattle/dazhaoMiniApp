@@ -17,7 +17,7 @@
 }
 
 .course-raiders-desc .wxParse {
-  max-height: 300rpx;
+  max-height: 200rpx;
   overflow: hidden;
 }
 
