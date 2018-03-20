@@ -1,4 +1,4 @@
-const basicUrl = "https://stu.dazhao100.cn/api";
+const basicUrl = "xxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 module.exports = {
   judgeStu: `${basicUrl}/judgeStu`,//判断微信用户是否存在
