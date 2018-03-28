@@ -100,9 +100,17 @@ Page({
     })
   },
   linkCourse () {
-    wx.navigateTo({
-      url: '../moreCourse/course'
-    })
+    if (!!app.globalData.student_id) {
+      wx.navigateTo({
+        url: '../moreCourse/course'
+      })
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none',
+        duration: 1000
+      })
+    }
   },
   linkJobDetail () {
     wx.navigateTo({
@@ -154,18 +162,16 @@ Page({
       }
     })
 
-    if (!!app.globalData.student_id) {
-      wx.request({
-        url: `${getIndexCRecommend}?stu_id=${app.globalData.student_id}`,
-        success: res => {
-          console.log(res)
-          const { result } = res.data
-          this.setData({
-            imgUrls: result
-          })
-        }
-      })
-    }
+    wx.request({
+      url: `${getIndexCRecommend}`+(!!app.globalData.student_id?`?stu_id=${app.globalData.student_id}`:''),
+      success: res => {
+        console.log(res)
+        const { result } = res.data
+        this.setData({
+          imgUrls: result
+        })
+      }
+    })
   },
 
   /**

@@ -1,6 +1,6 @@
 <view class="page-userinfor">
   <view class="me-head-infor bg-f">
-    <image class="me-pic" src="{{ user_pic?user_pic:'../../images/user_pic.png' }}" bindtap="chooseImg"></image>
+    <image class="me-pic" src="{{ user_pic }}" bindtap="chooseImg"></image>
     <view class="me-desc">
       <view class="me-name" bindtap="chooseImg">点击修改头像</view>
     </view>

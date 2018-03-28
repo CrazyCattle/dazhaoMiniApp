@@ -105,20 +105,20 @@ Page({
   },
   prewImg() {
     wx.previewImage({
-      current: this.data.user_pic ? this.data.user_pic : '../../images/user_pic.png',
+      current: this.data.user_pic,
       urls: [this.data.user_pic],
     })
   },
   onLoad: function (options) {
     this.setData({
-      user_pic: wx.getStorageSync('stud_img'),
+      user_pic: app.globalData.student_img || wx.getStorageSync('stud_img'),
       stud_info: wx.getStorageSync('stud_info'),
       schoolInfor: wx.getStorageSync('schoolInfo')
     })
   },
   onShow: function () {
     this.setData({
-      user_pic: wx.getStorageSync('stud_img'),
+      user_pic: app.globalData.student_img || wx.getStorageSync('stud_img'),
       stud_info: wx.getStorageSync('stud_info'),
       schoolInfor: wx.getStorageSync('schoolInfo')
     })

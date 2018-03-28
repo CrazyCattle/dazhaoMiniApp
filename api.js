@@ -1,4 +1,4 @@
-const basicUrl = "xxxxxxxxxxxxxxxxxxxxxxxxxx";
+const basicUrl = "xxxxx";
 
 module.exports = {
   judgeStu: `${basicUrl}/judgeStu`,//判断微信用户是否存在

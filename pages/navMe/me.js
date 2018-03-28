@@ -103,7 +103,7 @@ Page({
 
     app.globalData.stud_info = ''
     app.globalData.student_id = ''
-    app.globalData.student_img = ''
+    app.globalData.student_img = '../../images/user_pic.png'
     app.globalData.token = ''
 
     wx.showToast({
@@ -196,6 +196,8 @@ Page({
               stud_img: listjson.student_img,
               stud_id: app.globalData.student_id
             })
+
+            console.log(this.data.stud_img)
           }
         }
       })
@@ -204,8 +206,11 @@ Page({
   onShow: function () {
     this.setData({
       stud_info: wx.getStorageSync('stud_info'),
-      stud_img: app.globalData.student_img,
+      stud_img: app.globalData.student_img || wx.getStorageSync('stud_img') || '../../images/user_pic.png',
       stud_id: app.globalData.student_id
     })
+    if (!app.globalData.student_img && wx.getStorageSync('stud_img')) {
+      app.globalData.student_img = wx.getStorageSync('stud_img')
+    }
   }
 })
