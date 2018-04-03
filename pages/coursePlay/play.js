@@ -28,6 +28,13 @@ Page({
       menuActive: !this.data.menuActive
     })
   },
+  hideCourseList () {
+    if (this.data.menuActive) {
+      this.setData({
+        menuActive: false
+      })
+    }
+  },
   linkCoursePlay (e) {
     let curid = e.target.dataset.curid
     let id = e.target.dataset.id

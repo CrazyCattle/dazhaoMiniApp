@@ -197,18 +197,19 @@
   left: -9rpx;
   top: 50%;
   transform: translateY(-50%);
-  border: 8rpx solid transparent;
+  border: 10rpx solid transparent;
   border-left-color: #fff;
 }
 
 .arrow-icon-more {
   position: absolute;
   bottom: 30rpx;
-  right: 20rpx;
+  right: 50%;
+  transform: translateX(50%);
   width: 0;
   height: 0;
   margin-top: 5rpx;
-  border: 10rpx solid transparent;
+  border: 12rpx solid transparent;
   border-top-color: #47dbe2;
   transform-origin: 25% 25%;
   transition: transform .2s linear;
@@ -217,7 +218,7 @@
   position: absolute;
   width: 0;
   height: 0;
-  top: -9rpx;
+  top: -10rpx;
   left: 50%;
   transform: translateX(-50%);
   border: 8rpx solid transparent;

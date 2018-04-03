@@ -1,4 +1,4 @@
-<view class="page-play">
+<view class="page-play" bindtap="hideCourseList">
   <video class="course-video" src="{{ playInfor.lesson_code }}" controls="{{ controls }}" autoplay="{{ autoplay }}" show-play-btn="{{ showPlayBtn }}" poster="{{ playInfor.lesson_img }}" show-center-play-btn="showCenterPlayBtn"></video>
   <view class="course-info bg-f">
     <view class="row">
@@ -10,7 +10,7 @@
         <view class="item {{ collected?'active':'' }}" bindtap="collectCourse" data-id="{{ playInfor.lesson_id }}">
           <image class="icon icon-1" src="{{ collected?'../../images/collected.png':'../../images/collect.png' }}"></image>收藏
         </view>
-        <view class="item {{ menuActive?'active':'' }}" bindtap="showMenu">
+        <view class="item {{ menuActive?'active':'' }}" catchtap="showMenu">
           <image class="icon icon-2" src="{{ menuActive?'../../images/menu-active.png':'../../images/menu.png' }}"></image>目录
           <view class="courst-list {{ menuActive?'active':'' }}">
             <view class="courst-play-item {{ playInfor.lesson_id==sitem.lesson_id?'active':'' }}" data-id="{{ sitem.lesson_id }}" data-curid="{{ playInfor.lesson_id }}" bindtap="linkCoursePlay" wx:for="{{ playInfor.other }}" wx:key="key" wx:for-item="sitem" wx:key>{{ sitem.lesson_name }}</view>

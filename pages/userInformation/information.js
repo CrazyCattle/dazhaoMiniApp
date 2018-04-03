@@ -111,7 +111,7 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      user_pic: app.globalData.student_img || wx.getStorageSync('stud_img'),
+      user_pic: app.globalData.student_img || wx.getStorageSync('stud_img') || '../../images/head_mian_pic.png',
       stud_info: wx.getStorageSync('stud_info'),
       schoolInfor: wx.getStorageSync('schoolInfo')
     })
