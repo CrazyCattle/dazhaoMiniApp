@@ -19,74 +19,74 @@ Page({
     duration: 300,
     // 职位推荐
     jobList: [
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   job: 'JAVA研发工程师',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // },
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   job: 'JAVA研发工程师',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // },
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   job: 'JAVA研发工程师',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // },
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   job: 'JAVA研发工程师',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // }
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        job: 'JAVA研发工程师',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        job: 'JAVA研发工程师',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        job: 'JAVA研发工程师',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        job: 'JAVA研发工程师',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      }
     ],
 
     // 名企推荐
     companyList: [
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // },
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // },
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // },
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // }
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      },
+      {
+        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+        company: '上海脚步网络科技有限公司',
+        address: '上海',
+        educ: '本科',
+        data: '2018.01.24'
+      }
     ]
   },
   linkCompany () {

@@ -72,11 +72,11 @@
     <view class="tab-lf">
       <view class="fun-btn" bindtap="share">
         <image class="img" src="../../images/share.png"></image>
-        分享
+        <text>分享</text>
       </view>
       <view class="fun-btn {{ collected?'active':'' }}" bindtap="collect">
         <image class="img" src="{{ collected?'../../images/collected.png':'../../images/collect.png' }}"></image>
-        收藏
+        <text>收藏</text>
       </view>
     </view>
   </view>

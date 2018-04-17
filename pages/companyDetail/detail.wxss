@@ -159,22 +159,22 @@
   color: #47dbe2;
 }
 .tab-fun--bottom .tab-lf .fun-btn:first-child {
-  padding-right: 120rpx;
-  align-items: flex-end;
+  padding-left: 120rpx;
+  /* align-items: flex-end; */
 }
 .tab-fun--bottom .tab-lf .fun-btn:last-child {
-  padding-left: 120rpx;
-  align-items: flex-start;
+  padding-right: 120rpx;
+  /* align-items: flex-start; */
 }
-.tab-fun--bottom .tab-lf .fun-btn .img:first-child {
+.tab-fun--bottom .tab-lf .fun-btn .img {
   width: 34rpx;
   height: 40rpx;
-  margin-bottom: 4rpx;
+  margin-bottom: 6rpx;
 }
-.tab-fun--bottom .tab-lf .fun-btn .img:last-child {
+.tab-fun--bottom .tab-lf .fun-btn:last-child .img {
   width: 36rpx;
   height: 36rpx;
-  margin-bottom: 8rpx;
+  margin-bottom: 10rpx;
 }
 
 

@@ -25,7 +25,7 @@
     </scroll-view>
   </view>
 
-  <tip content="暂无信息" wx:if="{{ page == '2'}}"></tip>
+  <!-- <tip content="暂无信息" wx:if="{{ page == '2'}}"></tip> -->
   <view class="fliter-tab bg-f tc" wx:if="{{ page == '2' && curShow}}">
     <view class="item">全部</view>
     <view class="item">投递成功</view>
@@ -175,7 +175,7 @@
     </scroll-view>
   </view>
 
-  <tip content="暂无信息" wx:if="{{ page == '3'}}"></tip>
+  <!-- <tip content="暂无信息" wx:if="{{ page == '3'}}"></tip> -->
   <view class="invi-list" wx:if="{{ page == '3' && curShow }}">
     <scroll-view scroll-y style="height: 100%;">
 
@@ -328,7 +328,7 @@
     </scroll-view>
   </view>
 
-  <tip content="暂无信息" wx:if="{{ page == '4'}}"></tip>
+  <!-- <tip content="暂无信息" wx:if="{{ page == '4'}}"></tip> -->
   <view class="collect-filter bg-f" wx:if="{{ page == '4' && curShow }}">
     <view class="filter-tab {{fliterType=='job'?'acitve':''}}" bindtap="changeCokllectFilter" data-type="job">收藏职位</view>
     <view class="filter-tab {{fliterType=='company'?'acitve':''}}" bindtap="changeCokllectFilter" data-type="company">收藏企业</view>

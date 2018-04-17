@@ -18,9 +18,9 @@
     </view>
   </view>
 
-  <tip content="暂无消息"></tip>
+  <!-- <tip content="暂无消息"></tip> -->
 
-  <view class="infor-list" hidden='true'>
+  <view class="infor-list">
     <view class="infor-item active infor-status bg-f mt20">
       <view class="item-title">
         <text class="tit">投递进度更新投递进度更新投递进度更新投递进度更新</text>

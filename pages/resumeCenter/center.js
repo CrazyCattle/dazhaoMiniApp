@@ -13,7 +13,7 @@ const app = getApp()
 
 Page({
   data: {
-    curShow: false,
+    curShow: true,
     noResumeList: false,
 
     isBack: false,
