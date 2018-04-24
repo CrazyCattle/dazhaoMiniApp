@@ -1,10 +1,17 @@
+<import src="../../wxParse/wxParse.wxml" />
 <view class="jobDetail bg">
   <view class="r-list jobDetail-title bg-f">
     <view class="r-list-item">
       <view class="cont">
-        <view class="job lh-normal">JAVA研发工程师 <text class="salary">[8k-12k]</text></view>
-        <view class="infor lh-normal">上海 | 本科 | 计算机软硬件/互联网/…</view>
-        <view class="infor lh-normal">截止日期：2018.01.24</view>
+        <view class="job lh-normal">
+          {{ list.position_name }} 
+          <text class="salary" wx:if="{{ list.position_salarymin && list.position_salarymax }}">[{{list.position_salarymin}}k-{{list.position_salarymax}}k]</text>
+          <text class="salary" wx:else>[不限]</text>
+        </view>
+        <view class="infor lh-normal">
+          {{list.city_name}} | {{list.education_name}} | {{list.positiontype_name}}
+        </view>
+        <view class="infor lh-normal">截止日期：{{list.position_stoptime}}</view>
       </view>
     </view>
   </view>
@@ -12,11 +19,11 @@
     <view class="r-list-item">
       <image class="pic" src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
       <view class="cont">
-        <view class="job lh-normal">上海脚步网络科技有限公司</view>
-        <view class="company">[1个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds</view>
+        <view class="job lh-normal">{{ list.cominfo.company_name }}</view>
+        <view class="company">[{{ list.cominfo.positionnums }}个]{{ list.cominfo.positionnames }}</view>
         <view class="s-desc"> 
-          <text class="infor lh-normal">上海 | 本科</text>
-          <text class="infor lh-normal">截止日期：2018.01.24</text>
+          <text class="infor lh-normal">{{ list.cominfo.city_name }} | {{ list.cominfo.education_name }}</text>
+          <text class="infor lh-normal">截止日期：{{list.cominfo.position_stoptime}}</text>
         </view>
       </view>
     </view>
@@ -25,32 +32,14 @@
   <view class="j-row mt20 bg-f">
     <view class="inner-row">
       <view class="tit">职位描述：</view>
-      <view class="job-desc">
-        1、搜索广告、品牌广告、展示广告相关业务平台的设计和研发工作；
-      </view>
-      <view class="job-desc">
-        2、负责UC头条产品的日志处理和分析，为业务发展提供数据报表支持 ；
-      </view>
-      <view class="job-desc">
-        3、持续改进商业系统平台的服务架构、核心算法或核心技术等，保证系统高性能、高可用性和高可扩展性。
+      <view class="job-desc wxParse">
+        <template is="wxParse" data="{{wxParseData:article1.nodes}}" />
       </view>
     </view>
     <view class="inner-row">
       <view class="tit">任职要求：</view>
-      <view class="job-desc">
-        1、本科及以上学历，计算机相关专业； 
-      </view>
-      <view class="job-desc">
-        2、具有互联网公司大型企业软件成功的设计开发经验。有大型商业平台web系统研发经验优先；熟悉性能优化、对架构设计有一定理解者优先； 
-      </view>
-      <view class="job-desc">
-        3、对Java面向对象软件结构有深入理解以及很强的应用能力，理解常用的设计模式；
-      </view>
-      <view class="job-desc">
-        4、能熟练使用MySQL数据库，对数据库表有独立的设计能力。对数据库内部实现机制有比较深刻的理解者优先；
-      </view>
-      <view class="job-desc">
-        5、有责任心、学习能力、执行力、业务理解能力。
+      <view class="job-desc wxParse">
+        <template is="wxParse" data="{{wxParseData:article2.nodes}}" />
       </view>
     </view>
   </view>
@@ -58,12 +47,12 @@
   <view class="j-row mt20 bg-f">
     <view class="inner-row">
       <view class="tit">工作地点：</view>
-      <view class="job-desc">
+      <view class="job-desc location">
         <image class="icon" src="../../images/address.png"></image>
-        {{ companyAddress }}
+        {{ list.position_addresss?list.position_addresss:'该公司尚未填写地址' }}
       </view>
       <view class="map">
-        <view class="linkMap" data-name="{{ companyAddress }}" bindtap="linkMap">
+        <view class="linkMap" data-name="{{ list.position_addresss }}" bindtap="linkMap">
           查看地图
           <view class="arrow-icon">
             <view class="inner"></view>

@@ -101,12 +101,14 @@
   color:#313148;
 }
 .inner-row .job-desc {
-  display: flex;
-  align-items: center;
   font-size: 24rpx;
   color: #848ca1;
   letter-spacing: 0.04rpx;
   line-height: 50rpx;
+}
+.inner-row .location {
+  display: flex;
+  align-items: center;
 }
 .inner-row .job-desc .icon {
   width: 20rpx;

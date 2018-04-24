@@ -54,8 +54,26 @@ const initLoginStatus = () => {
   }, 300)
 }
 
+
+const getUserState = () => {
+  const loginType = wx.getStorageSync('loginType')
+  const id = wx.getStorageSync('student_id')
+
+  if (!loginType || !id) {
+    return false;
+  } 
+  return true;
+}
+const navToLogin = () => {
+  wx.navigateTo({
+    url: '../loginRegister/loginregister'
+  })
+}
+
 module.exports = {
   formatTime,
   setNewToken,
-  initLoginStatus
+  initLoginStatus,
+  getUserState,
+  navToLogin
 }

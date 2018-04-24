@@ -39,4 +39,10 @@ module.exports = {
   wxLogin: `${basicUrl}/WxLogin`,//微信登录
   getUserToken: `${basicUrl}/getUserToken?wxtoken=`, //获取id & token
   sendEmail: `${basicUrl}/SendEmail`, //简历投递
+
+  getPositionList: `${basicUrl}/getPositionList`, //获取职位(相似职位接口+企业职位)
+  getPositionOne: `${basicUrl}/getPositionOne`, //获取职位详情 token stu_id position_id
+  getCompanyList: `${basicUrl}/getCompanyList`, //获取企业(推荐企业+企业职位)
+
+  getStudentMis: `${basicUrl}/getStudentMis`, //获取消息通知
 };

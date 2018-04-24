@@ -1,22 +1,30 @@
-// pages/companyRecommend/company.js
+import {
+  getPositionOne,
+  getPositionList
+} from '../../api'
+
+import {
+  initLoginStatus,
+  getDetails,
+  getUserState
+} from '../../utils/util'
 
 // 引入SDK核心类
 var QQMapWX = require('../../libs/qqmap-wx-jssdk.min.js');
 var map;
 
-Page({
+const app = getApp()
+const WxParse = require('../../wxParse/wxParse.js');
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
     collected: false,
     // 位置 经纬度
     address: '',
     lat: undefined,
     lng: undefined,
-    // 公司地址
-    companyAddress: '上海市杨浦区长阳路1687号1408优客工场',
+    // 职位详情
+    list: {},
     // 名企推荐
     companyList: [
       {
@@ -57,39 +65,46 @@ Page({
     console.log(e.target.dataset.name)
     let address = e.target.dataset.name
 
-    // 实例化API核心类
-    this.setData({
-      address: address
-    })
-    map = new QQMapWX({
-      key: 'LSXBZ-ACULK-KVFJZ-AFI56-KPMJF-PLFIP'
-    });
-
-    // 调用接口
-    new Promise((resolve, reject) => {
-      map.geocoder({
-        address: this.data.address,
-        success: (res) => {
-          if (res.status == '0') {
-            this.setData({
-              lat: res.result.location.lat,
-              lng: res.result.location.lng,
-            })
-            resolve({
-              lat: this.data.lat,
-              lng: this.data.lng
-            })
+    if (address) {
+      // 实例化API核心类
+      this.setData({
+        address: address
+      })
+      map = new QQMapWX({
+        key: 'LSXBZ-ACULK-KVFJZ-AFI56-KPMJF-PLFIP'
+      });
+      // 调用接口
+      new Promise((resolve, reject) => {
+        map.geocoder({
+          address: this.data.address,
+          success: (res) => {
+            if (res.status == '0') {
+              this.setData({
+                lat: res.result.location.lat,
+                lng: res.result.location.lng,
+              })
+              resolve({
+                lat: this.data.lat,
+                lng: this.data.lng
+              })
+            }
           }
-        }
+        })
+      }).then((res) => {
+        wx.openLocation({
+          latitude: res.lat,
+          longitude: res.lng,
+          scale: 18,
+          address: this.data.address
+        })
       })
-    }).then((res) => {
-      wx.openLocation({
-        latitude: res.lat,
-        longitude: res.lng,
-        scale: 18,
-        address: this.data.address
+    } else {
+      wx.showToast({
+        icon: "none",
+        title: '该公司尚未填写地址',
+        duration: 1000
       })
-    })
+    }
   },
   collect () {
     this.setData({
@@ -101,59 +116,65 @@ Page({
       duration: 2000
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  getDetails (id) {
+    const _self = this
+    wx.request({
+      url: `${getPositionOne}`,
+      data: {
+        token: app.globalData.token,
+        stu_id: app.globalData.student_id,
+        position_id: id
+      },
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        if (res.data.tokeninc == '0') {
+          if (loginType == 'wxlogin') {
+            setNewToken().then(res => {
+              if (res == 'ok') {
+                _self.getDetails()
+              }
+            })
+          } else {
+            initLoginStatus()
+          }
+        } else {
+          if (res.data.error == '0') {
+            const { list } = res.data.result
+            this.setData({ list })
+            console.log(this.data.list)
+            const { position_demand,position_description } = res.data.result.list
+            WxParse.wxParse('article1', 'html', position_demand, _self, 5);
+            WxParse.wxParse('article2', 'html', position_description, _self, 5);
+          }
+        }
+      }
+    })
+  },
+  getSameCompany(pId) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: `${getPositionList}`,
+        data: {
+          p: 1,
+          isrom: 1,
+          nums: 4,
+          positiontype_id: pId
+        },
+        success: res => {
+          console.log(res,1111)
+          resolve(res.data.list)
+        }
+      })
+    })
+  },
   onLoad: function (options) {
-    console.log(options.id)
+    const id = options.id
+    this.getDetails(id)
+    this.getSameCompany(id).then( res => {
+      console.log(res,222)
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
+  onReady: function () {},
+  onShareAppMessage: function () {}
 })

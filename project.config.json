@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.1",
+	"libVersion": "1.9.0",
 	"appid": "wx945ab499fbf3c175",
 	"projectname": "dazhao-app",
 	"condition": {

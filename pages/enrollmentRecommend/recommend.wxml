@@ -1,4 +1,4 @@
-<view class="infor-list" hidden='true'>
+<view class="infor-list">
   <view class="infor-item active infor-xztj bg-f">
     <view class="item-title">
       <text class="tit">投递进度更新</text>
