@@ -1,13 +1,14 @@
 import {
   resumeList,
-  delResume
+  delResume,
+  getPositionCollect,
+  getCompanyCollect
 } from '../../api';
 
 import {
   setNewToken,
   initLoginStatus
 } from '../../utils/util';
-
 
 const app = getApp()
 
@@ -35,107 +36,12 @@ Page({
     // page 3
     id: 0,
     ids: 1,
-    mockData: [
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      }
-    ],
-    // 职位推荐
-    jobList: [
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        job: 'JAVA研发工程师',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      }
-    ]
+    showPos: false,
+    showCompany: false,
+    // 收藏职位列表
+    jobList: [],
+    // 收藏公司列表
+    companyList: []
   },
   // 投递箱 切换过滤
   changeTab (e) {
@@ -156,18 +62,82 @@ Page({
       ids: ids
     })
   },
+  linkToJobDetail(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../jobDetail/detail?id=${id}`
+    })
+  },
+  //获取收藏的职位
+  getPositionCollectFun() {
+    wx.request({
+      url: `${getPositionCollect}?stu_id=${app.globalData.student_id}&token=${app.globalData.token}&p=1&nums=10`,
+      method: 'GET',
+      success: res => {
+        console.log(res,11231)
+        if (res.data.error == '0') {
+          const { list } = res.data.result
+          this.setData({
+            showPos: true,
+            jobList: this.data.jobList.concat(list)
+          })
+        }
+      }
+    })
+  },
+  //获取收藏的公司
+  getCompanyCollectFun() {
+    wx.request({
+      url: `${getCompanyCollect}?stu_id=${app.globalData.student_id}&token=${app.globalData.token}&p=1&nums=10`,
+      method: 'GET',
+      success: res => {
+        console.log(res,5436436)
+        if (res.data.error == '0') {
+          const { list } = res.data.result
+          this.setData({
+            showCompany: true,
+            companyList: this.data.companyList.concat(list)
+          })
+        }
+      }
+    })
+  },
   tabPage(e) {
     let page = e.currentTarget.dataset.page
     this.setData({
       page: page
     })
+    if (page == 4) {
+      if (this.data.fliterType == 'job') {
+        if (this.data.jobList.length == 0) {
+          console.log(this.data.jobList.length)
+          this.getPositionCollectFun()
+        }
+      } else if (this.data.fliterType == 'company') {
+        console.log(this.data.companyList.length)
+        if (this.data.companyList.length == 0) {
+          this.getCompanyCollectFun()
+        }
+      }
+    }
   },
   changeCokllectFilter(e) {
     let type = e.target.dataset.type
     this.setData({
       fliterType: type
     })
+    if (this.data.fliterType == 'job') {
+      if (this.data.jobList.length == 0) {
+        this.getPositionCollectFun()
+      }
+    } else if (this.data.fliterType == 'company') {
+      if (this.data.companyList.length == 0) {
+        this.getCompanyCollectFun()
+      }
+    }
   },
+  positionLower(){},
+  companyLower(){},
   editResumeBasicInfor(e) {
     let id = e.target.dataset.id
     let lan = (e.target.dataset.lan=='1'?'en':'cn')

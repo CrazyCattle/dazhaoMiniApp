@@ -1,12 +1,13 @@
+<import src="../../wxParse/wxParse.wxml" />
 <view class="qyDetail bg {{ showMask?'hidden':'' }}">
   <view class="company-detail bg-f">
-    <image class="logo" src="{{ logo }}"></image>
-    <view class="company-name">{{ company_name }}</view>
+    <image class="logo" src="{{ list.company_logo }}"></image>
+    <view class="company-name">{{ list.company_name }}</view>
     <view class="expection">
-      <image class="address" src="../../images/address.png"></image>上海
-      <image class="internet" src="../../images/internet.png"></image>互联网
+      <image class="address" src="../../images/address.png"></image>{{list.city_name}}
+      <image class="internet" src="../../images/internet.png"></image>{{list.industry_name}}
     </view>
-    <view class="range">外商独资  |  上市  |  1000人以上</view>
+    <view class="range">{{list.unittype_name}}  |  {{list.company_stage}}  |  {{list.unitsize_name}}</view>
   </view>
   <view class="company-infor">
     <view class="infor-tab--box bg-f">
@@ -15,23 +16,16 @@
     </view>
 
     <view class="j-row j-row-1 bg-f" wx:if="{{ active==1 }}">
-      <view class="inner-row {{ more?'':'active' }}">
+      <view class="inner-row {{ more?'':'active' }}" style="max-height: {{more?'430rpx':'auto'}};">
         <view class="tit">企业介绍：</view>
-        <view class="job-desc">
-          阿里巴巴网络技术有限公司（简称：阿里巴巴集团）是以曾担任英语教师的马云为首的18人，于1999年在中国杭州创立，他们相信互联网能够创造公平的竞争环境，让小企业通过创新与科技扩展业务，并在参与国内或全球市场竞争时处于更有利的位置。
+        <view class="job-desc wxParse">
+          <template is="wxParse" data="{{wxParseData:article.nodes}}" />
         </view>
-        <view class="job-desc">
-          阿里巴巴集团经营多项业务，另外也从关联公司的业务和服务中取得经营商业生态系统上的支援。业务和关联公司的业务包括：淘宝网、天猫、聚划算、全球速卖通、阿里巴巴国际交易市场、1688、阿里妈妈、阿里云、蚂蚁金服、菜鸟网络等。2014年9月19日，阿里巴巴集团在纽约证券交易所正式挂牌上市，股票代码“BABA”，创始人和董事局主席为马云。2015年全年，阿里巴巴总营收943.84亿元人民币，净利润688.44亿元人民币。
-        </view>
-        <view class="job-desc">2016年4月6日，阿里巴巴正式宣布已经成为全球最大的零售交易平台。</view>
-        <view class="job-desc">2016年5月，阿里巴巴集团成为国务院首批双创“企业示范基地”。</view>
-        <view class="job-desc">2016年5月，阿里巴巴被国际反假联盟暂停会员资格。</view>
       </view>
       <view class="more extend-all {{ more?'':'active' }}" bindtap="extendAll">
         <view class="txt-mask" wx:if="{{more}}"></view>
         <block wx:if="{{more}}">展开全部</block>
-        <block wx:if="{{!more}}">收起部分</block>
-        <view class="arrow-icon">
+        <view wx:if="{{more}}" class="arrow-icon">
           <view class="inner"></view>
         </view> 
       </view>
@@ -39,12 +33,12 @@
     <view class="j-row mt20 bg-f" wx:if="{{ active==1 }}">
       <view class="inner-row">
         <view class="tit">企业基本信息：</view>
-        <view class="job-desc">企业性质：外商独资</view>
-        <view class="job-desc">发展阶段：上市</view>
-        <view class="job-desc">企业领域：互联网</view>
-        <view class="job-desc">企业规模：1000人以上</view>
-        <view class="job-desc">企业网址：www.dazhao100.com</view>
-        <view class="job-desc">公司地址：广州</view>
+        <view class="job-desc">企业性质：{{list.unittype_name}}</view>
+        <view class="job-desc">发展阶段：{{list.company_stage}}</view>
+        <view class="job-desc">企业领域：{{list.industry_name}}</view>
+        <view class="job-desc">企业规模：{{list.unitsize_name}}</view>
+        <view class="job-desc">企业网址：{{list.company_url}}</view>
+        <view class="job-desc">公司地址：{{list.city_name}}</view>
       </view>
     </view>
 
@@ -74,7 +68,7 @@
         <image class="img" src="../../images/share.png"></image>
         <text>分享</text>
       </view>
-      <view class="fun-btn {{ collected?'active':'' }}" bindtap="collect">
+      <view class="fun-btn {{ collected?'active':'' }}" data-collected="{{ collected }}" bindtap="collectCompany">
         <image class="img" src="{{ collected?'../../images/collected.png':'../../images/collect.png' }}"></image>
         <text>收藏</text>
       </view>

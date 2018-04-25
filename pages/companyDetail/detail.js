@@ -1,14 +1,21 @@
-// pages/companyDetail/detail.js
+import {
+  getCompanyOne,
+  sendComCollect
+} from '../../api'
+import {
+  initLoginStatus,
+  getDetails,
+  getUserState
+} from '../../utils/util'
+const WxParse = require('../../wxParse/wxParse.js');
+const app =getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    companyId: undefined,
     showMask: false,
     collected: false,
-    logo: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-    company_name: '上海脚步网络科技有限公司',
+
+    list: {},
     active: 1,
     more: true,
     // 职位列表
@@ -33,37 +40,9 @@ Page({
         address: '上海',
         education: '本科',
         endTime: '2018/01/25'
-      },
-      {
-        job: '推荐算法实习生',
-        salary: '10k～12K',
-        address: '上海',
-        education: '本科',
-        endTime: '2018/01/25'
-      },
-      {
-        job: '推荐算法实习生',
-        salary: '10k～12K',
-        address: '上海',
-        education: '本科',
-        endTime: '2018/01/25'
-      },
-      {
-        job: '推荐算法实习生',
-        salary: '10k～12K',
-        address: '上海',
-        education: '本科',
-        endTime: '2018/01/25'
-      },
-      {
-        job: '推荐算法实习生',
-        salary: '10k～12K',
-        address: '上海',
-        education: '本科',
-        endTime: '2018/01/25'
       }
     ]
-  },
+  }, 
   tabInfor (e) {
     this.setData({
       active: e.target.dataset.tab
@@ -71,7 +50,7 @@ Page({
   },
   extendAll () {
     this.setData({
-      more: !this.data.more
+      more: false
     })
   },
   share () {
@@ -79,65 +58,89 @@ Page({
       showMask: !this.data.showMask
     })
   },
-  collect () {
-    this.setData({
-      collected: !this.data.collected
-    })
-    wx.showToast({
-      title: this.data.collected?'收藏成功':'取消成功',
-      icon: 'none',
-      duration: 2000
+  sendCollectCompany() {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: `${sendComCollect}`,
+        data: {
+          stu_id: app.globalData.student_id,
+          token: app.globalData.token,
+          company_id: this.data.companyId
+        },
+        method: 'GET',
+        success: res => {
+          if (res.data.error == '0') {
+            resolve(res.data.result)
+          }
+        }
+      })
     })
   },
-  productImg () {
-    
+  collectCompany (e) {
+    let collected = e.currentTarget.dataset.collected
+    if(!collected) {
+      this.sendCollectCompany().then(res => console.log(res))
+    }
+    console.log(collected)
+    // this.setData({
+    //   collected: !this.data.collected
+    // })
+    // wx.showToast({
+    //   title: this.data.collected?'收藏成功':'取消成功',
+    //   icon: 'none',
+    //   duration: 2000
+    // })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  productImg () {},
+  getCompanyInformation(cId) {
+    const _self = this
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: `${getCompanyOne}`,
+        data: {
+          stu_id: app.globalData.student_id,
+          token: app.globalData.token,
+          company_id: cId
+        },
+        method: 'GET',
+        success: res => {
+          console.log(res)
+          if (res.data.tokeninc == '0') {
+            if (loginType == 'wxlogin') {
+              setNewToken().then(res => {
+                if (res == 'ok') {
+                  _self.getDetails()
+                }
+              })
+            } else {
+              initLoginStatus()
+            }
+          } else {
+            if (res.data.error == '0') {
+              const { list } = res.data.result
+              this.setData({ list })
+              const article = list.company_introduce
+              console.log(list.collectinc)
+              if (list.collectinc != 0) {
+                this.setData({
+                  collected: true
+                })
+              }
+              WxParse.wxParse('article', 'html', article, _self, 5);
+              console.log(this.data.list)
+            }
+          }
+        }
+      })
+    })
+  },
   onLoad: function (options) {
-    console.log(options.id)
+    this.setData({
+      companyId: options.id
+    })
+    this.getCompanyInformation(options.id)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
   }
 })

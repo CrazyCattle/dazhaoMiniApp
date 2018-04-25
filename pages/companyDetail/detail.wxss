@@ -108,11 +108,11 @@
   line-height: 50rpx;
 }
 .j-row-1 .inner-row {
-  height: 430rpx;
   overflow: hidden;
+  transition: all .2s ease-in-out;
 }
 .j-row-1 .inner-row.active {
-  height: auto;
+  max-height: auto;
 }
 .j-row-1 .inner-row .job-desc {
   text-indent: 2em;

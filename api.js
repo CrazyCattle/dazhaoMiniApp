@@ -43,7 +43,13 @@ module.exports = {
   getPositionList: `${basicUrl}/getPositionList`, //获取职位(相似职位接口+企业职位)
   getPositionOne: `${basicUrl}/getPositionOne`, //获取职位详情 token stu_id position_id
   getCompanyList: `${basicUrl}/getCompanyList`, //获取企业(推荐企业+企业职位)
-
+  getCompanyOne: `${basicUrl}/getCompanyOne`,// 获取企业详情
   getStudentMis: `${basicUrl}/getStudentMis`, //获取消息通知
   getUnivNotice: `${basicUrl}/getUnivNotice`, //获取通知公告
+
+  getPositionCollect: `${basicUrl}/getPositionCollect`, //用户职位 收藏夹
+  getCompanyCollect: `${basicUrl}/getCompanyCollect`, //用户企业 收藏夹
+
+  sendPosCollect: `${basicUrl}/SendPositionCollect`,//收藏职位
+  sendComCollect: `${basicUrl}/SendCompanyCollect`//收藏公司
 };
