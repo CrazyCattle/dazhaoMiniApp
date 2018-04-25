@@ -27,38 +27,38 @@ Page({
     list: {},
     // 名企推荐
     companyList: [
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      }
+      // {
+      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+      //   company: '上海脚步网络科技有限公司',
+      //   address: '上海',
+      //   educ: '本科',
+      //   data: '2018.01.24'
+      // },
+      // {
+      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+      //   company: '上海脚步网络科技有限公司',
+      //   address: '上海',
+      //   educ: '本科',
+      //   data: '2018.01.24'
+      // },
+      // {
+      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+      //   company: '上海脚步网络科技有限公司',
+      //   address: '上海',
+      //   educ: '本科',
+      //   data: '2018.01.24'
+      // },
+      // {
+      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
+      //   company: '上海脚步网络科技有限公司',
+      //   address: '上海',
+      //   educ: '本科',
+      //   data: '2018.01.24'
+      // }
     ]
   },
   linkMap (e) {
@@ -118,37 +118,40 @@ Page({
   },
   getDetails (id) {
     const _self = this
-    wx.request({
-      url: `${getPositionOne}`,
-      data: {
-        token: app.globalData.token,
-        stu_id: app.globalData.student_id,
-        position_id: id
-      },
-      method: 'GET',
-      success: res => {
-        console.log(res)
-        if (res.data.tokeninc == '0') {
-          if (loginType == 'wxlogin') {
-            setNewToken().then(res => {
-              if (res == 'ok') {
-                _self.getDetails()
-              }
-            })
+    return new Promise((resolve,reject) => {
+      wx.request({
+        url: `${getPositionOne}`,
+        data: {
+          token: app.globalData.token,
+          stu_id: app.globalData.student_id,
+          position_id: id
+        },
+        method: 'GET',
+        success: res => {
+          console.log(res)
+          if (res.data.tokeninc == '0') {
+            if (loginType == 'wxlogin') {
+              setNewToken().then(res => {
+                if (res == 'ok') {
+                  _self.getDetails()
+                }
+              })
+            } else {
+              initLoginStatus()
+            }
           } else {
-            initLoginStatus()
-          }
-        } else {
-          if (res.data.error == '0') {
-            const { list } = res.data.result
-            this.setData({ list })
-            console.log(this.data.list)
-            const { position_demand,position_description } = res.data.result.list
-            WxParse.wxParse('article1', 'html', position_demand, _self, 5);
-            WxParse.wxParse('article2', 'html', position_description, _self, 5);
+            if (res.data.error == '0') {
+              const { list } = res.data.result
+              this.setData({ list })
+              console.log(this.data.list)
+              const { position_demand,position_description } = res.data.result.list
+              WxParse.wxParse('article1', 'html', position_demand, _self, 5);
+              WxParse.wxParse('article2', 'html', position_description, _self, 5);
+              resolve(this.data.list.positiontype_id)
+            }
           }
         }
-      }
+      })
     })
   },
   getSameCompany(pId) {
@@ -157,22 +160,24 @@ Page({
         url: `${getPositionList}`,
         data: {
           p: 1,
-          isrom: 1,
           nums: 4,
           positiontype_id: pId
         },
         success: res => {
-          console.log(res,1111)
-          resolve(res.data.list)
+          resolve(res.data.result.list)
         }
       })
     })
   },
   onLoad: function (options) {
     const id = options.id
-    this.getDetails(id)
-    this.getSameCompany(id).then( res => {
-      console.log(res,222)
+    this.getDetails(id).then(res => {
+      this.getSameCompany(res).then(res => {
+        this.setData({
+          companyList: this.data.companyList.concat(res)
+        })
+        console.log(this.data.companyList)
+      })
     })
   },
   onReady: function () {},

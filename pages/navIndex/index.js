@@ -120,7 +120,7 @@ Page({
   // 获取职位推荐
   getPositionListFun() {
     wx.request({
-      url: `${getPositionList}?p=1&isrom=0&nums=4`,
+      url: `${getPositionList}?p=1&isrom=1&nums=4`,
       method: 'GET',
       success: (res) => {
         if (res.data.error == '0') {
@@ -135,7 +135,7 @@ Page({
   // 获取企业推荐
   getCompanyListFun() {
     wx.request({
-      url: `${getCompanyList}?p=1&nums=4`,
+      url: `${getCompanyList}?p=1&nums=4&isrom=1`,
       method: 'GET',
       success: (res) => {
         if (res.data.error == '0') {

@@ -45,4 +45,5 @@ module.exports = {
   getCompanyList: `${basicUrl}/getCompanyList`, //获取企业(推荐企业+企业职位)
 
   getStudentMis: `${basicUrl}/getStudentMis`, //获取消息通知
+  getUnivNotice: `${basicUrl}/getUnivNotice`, //获取通知公告
 };

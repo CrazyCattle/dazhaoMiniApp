@@ -1,4 +1,5 @@
 .infor-list {
+  min-height: 100%;
   padding: 20rpx 14rpx 20rpx;
 }
 .infor-item {
