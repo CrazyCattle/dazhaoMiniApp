@@ -18,12 +18,29 @@ Page({
     showLoading: true,
     timer: null,
     curpage: 1,
-    canLoadMore: true
+    canLoadMore: true,
+    content: {}
   },
-  linkDetail () {
-    wx.navigateTo({
-      url: '../inforNoticeDetail/detail'
+  linkDetail (e) {
+    const id = e.currentTarget.dataset.id
+
+    this.data.messageArr.forEach(e => {
+      if (e.notice_id == id) {
+        console.log(e)
+        wx.navigateTo({
+          url: `../inforNoticeDetail/detail?content=${JSON.stringify(e)}`
+        })
+      }
     })
+  },
+  lower() {
+    const _self = this
+    if (_self.timer) {
+      clearTimeout(_self.timer)
+    }
+    _self.timer = setTimeout(() => {
+      _self.getAllMess()
+    }, 500)
   },
   getAllMess () {
     const _self = this

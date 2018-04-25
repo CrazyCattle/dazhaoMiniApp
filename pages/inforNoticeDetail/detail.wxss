@@ -1,4 +1,6 @@
 .page-detail {
+  box-sizing: border-box;
+  min-height: 100%;
   padding: 28rpx 30rpx;
   border-top: 1rpx solid #e6e9f3;
 }

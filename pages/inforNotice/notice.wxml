@@ -1,12 +1,12 @@
 <view class="infor-list">
   <scroll-view  wx:if="{{ !showTips }}" scroll-y style="height: 100%;" bindscrolltolower="lower" scroll-top="{{scrollTop}}">
-    <view class="infor-item active infor-status bg-f" bindtap="linkDetail">
+    <view class="infor-item {{index==0?'active':''}} infor-status bg-f" data-id="{{ item.notice_id }}" bindtap="linkDetail" wx:for="{{messageArr}}" wx:for-item="item" wx:key wx:for-index="index">
       <view class="item-title">
-        <text class="tit">投递进度更新投递进度更新投递进度更新投递进度更新</text>
-        <text class="time">14:30</text>
+        <text class="tit">{{ item.notice_title }}</text>
+        <text class="time">{{ item.notice_releasetime }}</text>
       </view>
-      <view class="desc">摘要文本摘要文本摘要文本摘要文本摘要文本摘要摘要文本摘要文本摘要文本摘要文本摘要文本摘要文…</view>
-      <view class="desc">来源：华中科技大学</view>
+      <view class="desc">{{ item.notice_intro }}</view>
+      <view class="desc">来源：{{ item.notice_author }}</view>
     </view>
     <loading wx:if="{{ showLoading }}"></loading>
     <!-- <view class="infor-item infor-status bg-f" bindtap="linkDetail">
