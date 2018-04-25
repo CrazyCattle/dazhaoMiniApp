@@ -41,16 +41,17 @@ Page({
     })
   },
   linkCourse () {
-    if (!!app.globalData.student_id) {
+    if (getUserState()) {
       wx.navigateTo({
         url: '../moreCourse/course'
       })
     } else {
-      wx.showToast({
-        title: '请先登录',
-        icon: 'none',
-        duration: 1000
-      })
+      // wx.showToast({
+      //   title: '请先登录',
+      //   icon: 'none',
+      //   duration: 1000
+      // })
+      navToLogin()
     }
   },
   linkJobDetail (e) {

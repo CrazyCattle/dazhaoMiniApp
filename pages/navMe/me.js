@@ -4,7 +4,9 @@ import {
 
 import {
   setNewToken,
-  initLoginStatus
+  initLoginStatus,
+  getUserState,
+  navToLogin
 } from '../../utils/util';
 
 const app = getApp()
@@ -18,29 +20,31 @@ Page({
     schoolInfor: ''
   },
   linkSend() {
-    if (!!app.globalData.student_id) {
+    if (getUserState()) {
       wx.navigateTo({
         url: '../resumeSend/send'
       })
     } else {
-      wx.showToast({
-        title: "请先登录",
-        icon: "none",
-        duration: 1000
-      });
+      // wx.showToast({
+      //   title: "请先登录",
+      //   icon: "none",
+      //   duration: 1000
+      // });
+      navToLogin()
     }
   },
   linkView() {
-    if (!!app.globalData.student_id) {
+    if (getUserState()) {
       wx.navigateTo({
         url: '../resumeReview/review'
       })
     } else {
-      wx.showToast({
-        title: "请先登录",
-        icon: "none",
-        duration: 1000
-      });
+      // wx.showToast({
+      //   title: "请先登录",
+      //   icon: "none",
+      //   duration: 1000
+      // });
+      navToLogin()
     }
   },
   linkLR() {
@@ -49,29 +53,31 @@ Page({
     })
   },
   linkMyCourse() {
-    if (!!app.globalData.student_id) {
+    if (getUserState()) {
       wx.navigateTo({
         url: '../courseRecord/record?from=me'
       })
     } else {
-      wx.showToast({
-        title: "请先登录",
-        icon: "none",
-        duration: 1000
-      });
+      // wx.showToast({
+      //   title: "请先登录",
+      //   icon: "none",
+      //   duration: 1000
+      // });
+      navToLogin()
     }
   },
   linkResumeCenter() {
-    if (!!app.globalData.student_id) {
+    if (getUserState()) {
       wx.navigateTo({
         url: '../resumeCenter/center'
       })
     } else {
-      wx.showToast({
-        title: "请先登录",
-        icon: "none",
-        duration: 1000
-      });
+      // wx.showToast({
+      //   title: "请先登录",
+      //   icon: "none",
+      //   duration: 1000
+      // });
+      navToLogin()
     }
   },
   editUserInfor() {

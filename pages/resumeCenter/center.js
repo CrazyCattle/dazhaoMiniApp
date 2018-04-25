@@ -24,6 +24,7 @@ Page({
     // page 1
     resumeList: [],
     // page 2
+    tabActive: 1,
     status: {
       sending: '0',
       seeing: '25%',
@@ -135,6 +136,13 @@ Page({
         data: '2018.01.24'
       }
     ]
+  },
+  // 投递箱 切换过滤
+  changeTab (e) {
+    let tabActive = e.currentTarget.dataset.tab
+    this.setData({
+      tabActive
+    })
   },
   showDetail(e) {
     let id = e.target.dataset.id

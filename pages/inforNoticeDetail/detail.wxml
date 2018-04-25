@@ -1,7 +1,6 @@
 <view class="page-detail bg-f">
   <view class="d-title tc">{{ content.notice_title }}</view>
   <view class="time tc">发布时间：{{ content.notice_releasetime }}</view>
-
   <view class="d-content">
     <view class="main">
       {{ content.notice_content }}

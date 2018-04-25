@@ -27,15 +27,16 @@
 
   <!-- <tip content="暂无信息" wx:if="{{ page == '2'}}"></tip> -->
   <view class="fliter-tab bg-f tc" wx:if="{{ page == '2' && curShow}}">
-    <view class="item">全部</view>
-    <view class="item">投递成功</view>
-    <view class="item">被查看</view>
-    <view class="item">通过筛选</view>
-    <view class="item">面试邀请</view>
-    <view class="item">面试结果</view>
-  </view>
+    <view class="item {{tabActive==1?'active':''}}" bindtap="changeTab" data-tab="1">全部</view>
+    <view class="item {{tabActive==2?'active':''}}" bindtap="changeTab" data-tab="2">投递成功</view>
+    <view class="item {{tabActive==3?'active':''}}" bindtap="changeTab" data-tab="3">被查看</view>
+    <view class="item {{tabActive==4?'active':''}}" bindtap="changeTab" data-tab="4">通过筛选</view>
+    <view class="item {{tabActive==5?'active':''}}" bindtap="changeTab" data-tab="5">面试邀请</view>
+    <view class="item {{tabActive==6?'active':''}}" bindtap="changeTab" data-tab="6">面试结果</view>
+  </view> 
   <view class="invi-list send-list" wx:if="{{ page == '2' && curShow}}">
-    <scroll-view scroll-y style="height: 100%;">
+    <tip content="暂无信息" wx:if="{{ page == '2'}}"></tip>
+    <scroll-view scroll-y style="height: 100%;" hidden='true'>
       <view class="invi-item bg-f">
         <view class="main">
           <view class="row">
@@ -177,7 +178,8 @@
 
   <!-- <tip content="暂无信息" wx:if="{{ page == '3'}}"></tip> -->
   <view class="invi-list" wx:if="{{ page == '3' && curShow }}">
-    <scroll-view scroll-y style="height: 100%;">
+    <tip content="暂无信息" wx:if="{{ page == '3'}}"></tip>
+    <scroll-view scroll-y style="height: 100%;" hidden='true'>
 
       <view class="invi-item mt20 bg-f">
         <view class="main">

@@ -71,7 +71,7 @@ Page({
         address: address
       })
       map = new QQMapWX({
-        key: 'LSXBZ-ACULK-KVFJZ-AFI56-KPMJF-PLFIP'
+        key: 'AXZBZ-EX6K6-Z2CSQ-EPFR4-EEDYK-7QBIY'
       });
       // 调用接口
       new Promise((resolve, reject) => {

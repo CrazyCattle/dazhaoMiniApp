@@ -325,6 +325,10 @@
   border-radius: 28rpx;
   background: #f3f4f8;
 }
+.fliter-tab .item.active {
+  color: #fff;
+  background-color: #47dbe2;
+}
 
 .fliter-tab .item:nth-child(3n) {
   margin-right: 0;
