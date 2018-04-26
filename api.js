@@ -51,5 +51,7 @@ module.exports = {
   getCompanyCollect: `${basicUrl}/getCompanyCollect`, //用户企业 收藏夹
 
   sendPosCollect: `${basicUrl}/SendPositionCollect`,//收藏职位
-  sendComCollect: `${basicUrl}/SendCompanyCollect`//收藏公司
+  sendComCollect: `${basicUrl}/SendCompanyCollect`,//收藏公司
+
+  getZPType: `${basicUrl}/IndBase`, //获取单位职位招聘类型
 };

@@ -10,39 +10,9 @@
   <view class="typefilter-box bg-f">
     <view class="filter-head">招聘单位类型</view>
     <swiper class="typefilter" display-multiple-items="4">
-      <swiper-item>
+      <swiper-item wx:for="{{ recruitType }}" wx:for-item="item" wx:for-index="index" wx:key>
         <view class="filter-item">
-          <text class="{{ filterType == '0'?'active':'' }}" bindtap="filterData" data-type="0">不限</text>
-        </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '1'?'active':'' }}" bindtap="filterData" data-type="1">事业单位</text>
-        </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '2'?'active':'' }}" bindtap="filterData" data-type="2">央企</text>
-        </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '3'?'active':'' }}" bindtap="filterData" data-type="3">高校招聘</text>
-        </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '4'?'active':'' }}" bindtap="filterData" data-type="4">博士后招聘</text>
-        </view>
-      </swiper-item>
-       <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '5'?'active':'' }}" bindtap="filterData" data-type="5">sadfd</text>
-        </view>
-      </swiper-item> 
-      <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '6'?'active':'' }}" bindtap="filterData" data-type="6">fkdla</text>
+          <text class="content {{ filterType == index?'active':'' }}" data-id="{{item.parameter}}" bindtap="filterData" data-type="{{ index }}">{{ item.tilte }}</text>
         </view>
       </swiper-item>
     </swiper>

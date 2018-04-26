@@ -58,7 +58,7 @@
           </view>
         </view>
       </view>
-      <view class="more" bindtap="linkJob">
+      <view class="more" bindtap="linkMoreJob">
         查看更多
         <view class="arrow-icon">
           <view class="inner"></view>
@@ -81,7 +81,7 @@
           </view>
         </view>
       </view>
-      <view class="more" bindtap="linkCompany">
+      <view class="more" bindtap="linkMoreCompany">
         查看更多
         <view class="arrow-icon">
           <view class="inner"></view>

@@ -44,13 +44,12 @@
 }
 .typefilter-box .filter-head {
   width: 200rpx;
-  
   position: relative;
 }
 .typefilter-box .filter-head::after {
   content: '';
   position: absolute;
-  right: -3rpx;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   width: 0;
@@ -59,14 +58,19 @@
 }
 .typefilter-box .filter-head,
 .typefilter-box .filter-item {
-  line-height: 80rpx;
+  height: 100%;
   font-size: 24rpx;
   color: #313148;
+  overflow: hidden;
 }
-
+.typefilter-box .filter-head,
+.typefilter-box .content {
+  height: 100%;
+  line-height: 80rpx;
+  overflow: hidden;
+}
 .typefilter-box .filter-item .active {
   display: inline-block;
-  line-height: 80rpx;
   color: #21c6cd;
   position: relative;
 }
@@ -79,6 +83,17 @@
   left: 0;
   border-bottom: 4rpx solid #21c6cd;  
 }
+
+
+.swiper-content {
+  flex: 1;
+  height: 100%;
+  overflow-y: scroll;
+}
+.swiper-content  .item {
+  display: inline-block;
+}
+
 
 .sort-box {
   display: flex;

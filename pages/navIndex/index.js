@@ -30,12 +30,12 @@ Page({
     // 名企推荐
     companyList: []
   },
-  linkCompany () {
+  linkMoreCompany () {
     wx.navigateTo({
       url: '../companyRecommend/company'
     })
   },
-  linkJob () {
+  linkMoreJob () {
     wx.navigateTo({
       url: '../jobRecommend/work'
     })
@@ -46,11 +46,6 @@ Page({
         url: '../moreCourse/course'
       })
     } else {
-      // wx.showToast({
-      //   title: '请先登录',
-      //   icon: 'none',
-      //   duration: 1000
-      // })
       navToLogin()
     }
   },
