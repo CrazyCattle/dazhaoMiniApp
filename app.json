@@ -33,7 +33,8 @@
     "pages/inforNoticeDetail/detail",
     "pages/editUserPwd/pwd",
     "pages/resumeSend/send",
-    "pages/resumeReview/review"
+    "pages/resumeReview/review",
+    "pages/moreSameJob/job"
   ],
   "window": {
     "backgroundTextStyle": "light",

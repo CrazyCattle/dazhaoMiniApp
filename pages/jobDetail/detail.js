@@ -26,40 +26,19 @@ Page({
     // 职位详情
     list: {},
     // 名企推荐
-    companyList: [
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // },
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // },
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // },
-      // {
-      //   pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-      //   desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-      //   company: '上海脚步网络科技有限公司',
-      //   address: '上海',
-      //   educ: '本科',
-      //   data: '2018.01.24'
-      // }
-    ]
+    companyList: [],
+    positionId: undefined
+  },
+  linkToJobDetail (e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../jobDetail/detail?id=${id}`
+    })
+  },
+  linkMoreSameJob() {
+    wx.navigateTo({
+      url: `../moreSameJob/job?id=${this.data.positionId}`
+    })
   },
   linkMap (e) {
     console.log(e.target.dataset.name)
@@ -172,6 +151,9 @@ Page({
   onLoad: function (options) {
     const id = options.id
     this.getDetails(id).then(res => {
+      this.setData({
+        positionId: res
+      })
       this.getSameCompany(res).then(res => {
         this.setData({
           companyList: this.data.companyList.concat(res)

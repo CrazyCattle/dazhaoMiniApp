@@ -12,15 +12,14 @@
     <view class="tit">二、选聘条件</view>
     <view class="main">
       1.“985”高校应届全日制本科及以上学历毕业生，学习成绩优良，具备授予学士及以上学位条件。定向培养生、委托培养生以及二级学院、独立学院、网络学院、成人教育学院毕业生不列入选聘范围。2.本科生年龄一般在25周岁以下（1990年3月以后出生），硕士研究生年龄一般在28周岁以下（1987年3月以后出生），博士研究生年龄一般在30周岁以下（1985年3月以后出生）。3.身心健康，适应农村工作需要。4.在校学习期间未受过处分。
-    </view>
-    <view class="fj">
+    </view>-->
+    <view class="fj" wx:if="{{ content.notice_filelist.length > 0 }}">
       <view class="fj-content">附件：</view>
       <view class="fj-content">
-        <view class="row">1.河北省2016年免试选聘大学生村官报名登记表 </view>
-        <view class="row">2.河北省2016年大学生村官选聘工作各市联系方式</view> 
-        <view class="row">3.中共党员证明信</view>
-        <view class="row">4.河北省2016年大学生村官选聘工作各市相关信息</view>
+        <view class="row" wx:for="{{ content.notice_filelist }}" wx:for-item="item" wx:for-index="index" wx:key data-url="{{ item.tb_fileurl }}" bindtap="downFiles">
+          {{ index + 1 }}. {{ item.tb_name }}
+        </view>
       </view>
-    </view> -->
+    </view> 
   </view>
 </view>

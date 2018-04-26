@@ -4,8 +4,9 @@ import {
 } from '../../api'
 import {
   initLoginStatus,
+  setNewToken,
   getDetails,
-  getUserState
+  getUserState,
 } from '../../utils/util'
 const WxParse = require('../../wxParse/wxParse.js');
 const app =getApp()
@@ -59,6 +60,8 @@ Page({
     })
   },
   sendCollectCompany() {
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
     return new Promise((resolve, reject) => {
       wx.request({
         url: `${sendComCollect}`,
@@ -67,11 +70,25 @@ Page({
           token: app.globalData.token,
           company_id: this.data.companyId
         },
-        method: 'GET',
+        method: 'POST',
         success: res => {
-          if (res.data.error == '0') {
-            resolve(res.data.result)
-          }
+          console.log(res)
+          // if (res.data.tokeninc == '0') {
+          //   if (loginType == 'wxlogin') {
+          //     setNewToken().then(res => {
+          //       if (res == 'ok') {
+          //         _self.sendCollectCompany()
+          //       }
+          //     })
+          //   } else {
+          //     initLoginStatus()
+          //   }
+          // } else {
+          //   console.log(res)
+          //   if (res.data.error == '0') {
+          //     resolve(res.data.result)
+          //   }
+          // }
         }
       })
     })
@@ -93,7 +110,8 @@ Page({
   },
   productImg () {},
   getCompanyInformation(cId) {
-    const _self = this
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
     return new Promise((resolve, reject) => {
       wx.request({
         url: `${getCompanyOne}`,
@@ -109,7 +127,7 @@ Page({
             if (loginType == 'wxlogin') {
               setNewToken().then(res => {
                 if (res == 'ok') {
-                  _self.getDetails()
+                  _self.getCompanyInformation(cId)
                 }
               })
             } else {
@@ -140,7 +158,5 @@ Page({
     })
     this.getCompanyInformation(options.id)
   },
-  onShow: function () {
-    
-  }
+  onShow: function () {}
 })
