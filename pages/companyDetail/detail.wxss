@@ -66,6 +66,9 @@
   padding: 30rpx 0;
   border-bottom: 1rpx solid #e6e9f3;
 }
+.recruit-item:last-child {
+  border: none;
+}
 .recruit-item .row {
   display: flex;
   justify-content: space-between;

@@ -1,53 +1,82 @@
 import {
   getCompanyOne,
-  sendComCollect
+  sendComCollect,
+  getPositionList
 } from '../../api'
+
 import {
   initLoginStatus,
   setNewToken,
   getDetails,
   getUserState,
+  navToLogin
 } from '../../utils/util'
+
 const WxParse = require('../../wxParse/wxParse.js');
 const app =getApp()
+
 Page({
   data: {
     companyId: undefined,
     showMask: false,
     collected: false,
-
     list: {},
     active: 1,
     more: true,
+
+    showMore: false,
     // 职位列表
-    recruitList: [
-      {
-        job: '推荐算法实习生',
-        salary: '10k～12K',
-        address: '上海',
-        education: '本科',
-        endTime: '2018/01/25'
-      },
-      {
-        job: '推荐算法实习生',
-        salary: '10k～12K',
-        address: '上海',
-        education: '本科',
-        endTime: '2018/01/25'
-      },
-      {
-        job: '推荐算法实习生',
-        salary: '10k～12K',
-        address: '上海',
-        education: '本科',
-        endTime: '2018/01/25'
-      }
-    ]
+    recruitList: []
   }, 
+
+  linkJobDetail (e) {
+    if (getUserState()) {
+      const id = e.currentTarget.dataset.id
+      wx.navigateTo({
+        url: `../jobDetail/detail?id=${id}`
+      })
+    } else {
+      navToLogin()
+    }
+  },
+  linkJobList() {
+    wx.navigateTo({
+      url: `../companyJobList/list?id=${this.data.companyId}`
+    })
+  },
   tabInfor (e) {
     this.setData({
       active: e.target.dataset.tab
     })
+    if (this.data.active == '2'){
+      if (this.data.recruitList.length == 0) {
+        wx.request({
+          url: `${getPositionList}`,
+          data: {
+            p: 1,
+            nums: 10,
+            company_id: this.data.companyId
+          },
+          method: 'GET',
+          success: res => {
+            if (res.data.error == '0') {
+              this.setData({
+                recruitList: res.data.result.list
+              })
+              if(this.data.recruitList.length >= 6) {
+                this.setData({
+                  showMore: true
+                })
+              } else {
+                this.setData({
+                  showMore: false
+                })
+              }
+            }
+          }
+        })
+      }
+    }
   },
   extendAll () {
     this.setData({
@@ -71,8 +100,12 @@ Page({
           company_id: this.data.companyId
         },
         method: 'POST',
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
         success: res => {
           console.log(res)
+          resolve(res)
           // if (res.data.tokeninc == '0') {
           //   if (loginType == 'wxlogin') {
           //     setNewToken().then(res => {
@@ -95,9 +128,9 @@ Page({
   },
   collectCompany (e) {
     let collected = e.currentTarget.dataset.collected
-    if(!collected) {
+    // if(!collected) {
       this.sendCollectCompany().then(res => console.log(res))
-    }
+    // }
     console.log(collected)
     // this.setData({
     //   collected: !this.data.collected

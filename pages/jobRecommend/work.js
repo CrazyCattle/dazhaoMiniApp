@@ -5,7 +5,11 @@ import {
   getProvinceList,
   getCityList
 } from '../../api'
-
+import {
+  getUserState,
+  navToLogin
+} from '../../utils/util'
+const app = getApp()
 Page({
   data: {
     chooseType: 1, //选中的过滤类型 1：招聘职位类型 2：城市 3：学历
@@ -38,6 +42,39 @@ Page({
     timer: null,
     // 职位推荐
     jobList: []
+  },
+  
+  iptFocus(e) {
+    this.setData({
+      focus: !this.data.focus,
+      taped: !this.data.taped
+    })
+    console.log(this.data.focus)
+  },
+  cc() {
+    this.setData({
+      focus: !this.data.focus,
+      taped: !this.data.taped
+    })
+  },
+  searchChange(e) {
+    console.log(e.detail.value)
+  },
+  iptConfirm(e) {
+    let keyword = e.detail.value
+    wx.navigateTo({
+      url: `../jobRecommendSearch/search?keyword=${keyword}`
+    })
+  },
+  linkJobDetail (e) {
+    if (getUserState()) {
+      const id = e.currentTarget.dataset.id
+      wx.navigateTo({
+        url: `../jobDetail/detail?id=${id}`
+      })
+    } else {
+      navToLogin()
+    }
   },
   // 招聘单位类型切换
   filterData (e) {
@@ -86,16 +123,6 @@ Page({
         })
       }
     }
-  },
- 
-  iptFocus (e) {
-    this.setData({
-      focus: !this.data.focus
-    })
-  },
-  iptConfirm (e) {
-    // 确定搜索
-    console.log(e.detail.value)
   },
   // 获取职位推荐
   getPositionListFun() {
@@ -177,6 +204,16 @@ Page({
   // 通过单位类型和职位类型获取数据
   chooseChildType(e) {
     let id = e.currentTarget.dataset.id
+    let txt = e.target.dataset.txt
+    if (txt != '不限') {
+      this.setData({
+        positionTXT: txt,
+      })
+    } else {
+      this.setData({
+        positionTXT: '招聘职位类型',
+      })
+    }
     this.setData({
       jobList: [],
       canLoadingMore: true,
@@ -184,7 +221,9 @@ Page({
       positionTypeId: id,
       cityTypeId: 0,
       educTypeId: 0,
-      chooseType: 1
+      chooseType: 1,
+      cityTXT: '城市',
+      educTXT: '学历',
     })
     this.getJobData()
   },
@@ -220,6 +259,16 @@ Page({
  // 通过单位类型和城市获取数据
   chooseCity(e) {
     let id =  e.currentTarget.dataset.id
+    let txt = e.target.dataset.txt
+    if (txt != '不限') {
+      this.setData({
+        cityTXT: txt,
+      })
+    } else {
+      this.setData({
+        cityTXT: '城市',
+      })
+    }
     this.setData({
       jobList: [],
       canLoadingMore: true,
@@ -227,7 +276,9 @@ Page({
       cityTypeId: id,
       positionTypeId: 0,
       educTypeId: 0,
-      chooseType: 2
+      chooseType: 2,
+      positionTXT: '招聘职位类型',
+      educTXT: '学历'
     })
     this.getJobData()
   },
@@ -240,6 +291,17 @@ Page({
   chooseEduId(e){
     // 学历过滤 获取id
     let id = e.target.dataset.id
+    let txt = e.target.dataset.txt
+    console.log(txt)
+    if (txt != '不限') {
+      this.setData({
+        educTXT: txt,
+      })
+    } else {
+      this.setData({
+        educTXT: '学历',
+      })
+    }
     this.setData({
       jobList: [],
       canLoadingMore: true,
@@ -247,7 +309,9 @@ Page({
       educTypeId: id,
       positionTypeId: 0,
       cityTypeId: 0,
-      chooseType: 3
+      chooseType: 3,
+      positionTXT: '招聘职位类型',
+      cityTXT: '城市'
     })
     this.getJobData()
   },

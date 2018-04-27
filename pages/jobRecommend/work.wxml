@@ -1,12 +1,13 @@
 <view class="recommend-head">
   <view class="search-box bg">
-    <view class="search-input bg-f">
-      <block wx:if="{{ !focus }}">
-        <image class="search" src="../../images/search.png"></image>{{ placeholderTxt}}
-      </block>
-      <input class="ipt" type="text" confirm-type="search" bindfocus="iptFocus" bindblur="iptFocus" bindconfirm="iptConfirm"/>
+    <view class="search-input bg-f" wx:if="{{ !focus }}" bindtap="iptFocus">
+      <image class="search" src="../../images/search.png"></image>{{ placeholderTxt}}
+    </view>
+    <view class="search-input bg-f" wx:if="{{ focus }}">
+      <input class="ipt" type="text" confirm-type="search" focus='{{ focus }}' bindblur="cc" bindconfirm="iptConfirm" bindinput="searchChange" catchtap='iptFocus'></input>
     </view>
   </view>
+
   <view class="typefilter-box bg-f">
     <view class="filter-head">招聘单位类型</view>
     <swiper class="typefilter" display-multiple-items="4">
@@ -70,10 +71,10 @@
 <view class="recommend bg-f">
   <scroll-view scroll-y style="height: 100%;" bindscrolltolower="lower" scroll-top="{{scrollTop}}">
     <view class="r-list" wx:if="{{ jobList.length > 0 }}">
-      <view class="r-list-item" wx:for="{{ jobList }}" wx:key="key" wx:for-item="item">
+      <view class="r-list-item" wx:for="{{ jobList }}" wx:key="key" wx:for-item="item" bindtap="linkJobDetail" data-id="{{ item.position_id }}">
         <image class="pic" src="{{ item.company_logo }}"></image>
         <view class="cont">
-          <view class="job lh-normal">{{ item.position_name }}</view>
+          <view class="job ellipsis lh-normal ">{{ item.position_name }}</view>
           <view class="company">{{ item.company_name }}</view>
           <view class="s-desc"> 
             <text class="infor lh-normal">{{ item.city_name }} | {{ item.education_name }} </text>

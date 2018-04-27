@@ -43,17 +43,17 @@
     </view>
 
     <view class="recruit bg-f"  wx:if="{{ active==2 }}">
-      <view class="recruit-item bg-f" wx:for="{{ recruitList }}" wx:for-item="item" wx:key="key">
+      <view class="recruit-item bg-f" wx:for="{{ recruitList }}" wx:for-item="item" wx:key="key" data-id="{{item.position_id}}" bindtap="linkJobDetail">
         <view class="row">
-          <view class="txt">{{ item.job }}</view>
-          <view class="txt">{{ item.salary }}</view>
+          <view class="txt">{{ item.position_name }}</view>
+          <view class="txt">{{ item.position_salarymin }}K ~ {{ item.position_salarymax }}K </view>
         </view>
         <view class="row">
-          <view class="txt">{{ item.address }} | {{ item.education }}</view>
-          <view class="txt">截止日期：{{ item.endTime }}</view>
+          <view class="txt">{{ item.city_name }} | {{ item.education_name }}</view>
+          <view class="txt">截止日期：{{ item.position_stoptime }}</view>
         </view>
       </view>
-      <view class="more">
+      <view class="more" wx:if="{{showMore}}" bindtap="linkJobList">
         查看更多
         <view class="arrow-icon">
           <view class="inner"></view>
@@ -69,7 +69,7 @@
         <text>分享</text>
       </view>
       <view class="fun-btn {{ collected?'active':'' }}" data-collected="{{ collected }}" bindtap="collectCompany">
-        <image class="img" src="{{ collected?'../../images/collected.png':'../../images/collect.png' }}"></image>
+        <image class="img" src="{{ collected?'../../images/collected.png':'../../images/collect.png' }}"></image> 
         <text>收藏</text>
       </view>
     </view>

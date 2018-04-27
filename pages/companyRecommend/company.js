@@ -1,143 +1,117 @@
-// pages/companyRecommend/company.js
+import {
+  getCompanyList,
+  getZPType,
+  getPositionType,
+  getProvinceList,
+  getCityList
+} from '../../api'
+import {
+  getUserState,
+  navToLogin
+} from '../../utils/util'
+const app = getApp()
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    chooseType: 1, //选中的过滤类型 1：招聘职位类型 2：城市 3：学历
+
+    recruitType: [],//招聘单位类型数组
+    eduType: [],//学历类型数组
+    posiTypeParent: [], //招聘职位类型一级
+    posiTypeChild: [],//招聘职位类型二级
+    curPage: 1,
+    showLoading: false,
+    canLoadingMore: true,
+
+    provinceList: [],
+    cityList: [],
+
+    recruitTypeId: 0, // 初始招聘单位 为不限
+    positionTypeId: 0,
+    cityTypeId: 0,
+    educTypeId: 0,
+
+    positionTXT: '招聘职位类型',
+    cityTXT: '城市',
+    educTXT: '学历',
+
     active: 0,
     placeholderTxt: '搜索公司或职位名称',
     focus: false,
     filterType: 0,
     scrollTop: 0,
     timer: null,
-    mockData: [
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[1个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[2个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[3个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[4个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[5个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      }
-    ],
-    // 名企推荐
-    companyList: [
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[1个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[2个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[3个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[4个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[5个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[6个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[7个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[8个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      },
-      {
-        pic_url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        desc: '[9个]管培生、客户经理、Java研发工程师、 fdasfdsfdsafdsfds',
-        company: '上海脚步网络科技有限公司',
-        address: '上海',
-        educ: '本科',
-        data: '2018.01.24'
-      }
-    ]
+    // 职位推荐
+    jobList: []
   },
-  filterData (e) {
-    let type = e.target.dataset.type
+  
+  iptFocus(e) {
     this.setData({
-      filterType: type
+      focus: !this.data.focus,
+      taped: !this.data.taped
+    })
+    console.log(this.data.focus)
+  },
+  cc() {
+    this.setData({
+      focus: !this.data.focus,
+      taped: !this.data.taped
     })
   },
+  searchChange(e) {
+    console.log(e.detail.value)
+  },
+  iptConfirm(e) {
+    let keyword = e.detail.value
+    wx.navigateTo({
+      url: `../companyRecommendSearch/search?keyword=${keyword}`
+    })
+  },
+  linkCompanyDetail (e) {
+    if (getUserState()) {
+      const id = e.currentTarget.dataset.id
+      wx.navigateTo({
+        url: `../companyDetail/detail?id=${id}`
+      })
+    } else {
+      navToLogin()
+    }
+  },
+  // 招聘单位类型切换
+  filterData (e) {
+    let type = e.target.dataset.type
+    let id = e.currentTarget.dataset.id
+    if (this.data.filterType != type) {
+      this.setData({
+        filterType: type,
+        jobList: [],
+        recruitTypeId: id,
+        canLoadingMore: true,
+        curPage: 1
+      })
+      if (this.data.chooseType == 1) {
+        this.setData({
+          city_id: 0,
+          education: 0,
+        })
+      } else if (this.data.chooseType == 2) {
+        this.setData({
+          positiontype_id: 0,
+          education: 0
+        })
+      } else if (this.data.chooseType == 3) {
+        this.setData({
+          positiontype_id: 0,
+          city_id: 0
+        })
+      }
+      this.getJobData()
+    }
+  },
+  // 过滤下拉切换
   tabFilter (e) {
-    console.log(e.target.dataset.id)
-    let id = e.target.dataset.id 
+    console.log(e)
+    console.log(this.data.active, e.currentTarget.dataset.id)
+    let id = e.currentTarget.dataset.id
     if (this.data.active == id) {
       this.setData({
         active: 0
@@ -150,88 +124,278 @@ Page({
       }
     }
   },
+  // 获取职位推荐
+  getPositionListFun() {
+    wx.request({
+      url: `${getCompanyList}?p=1&isrom=1&nums=4`,
+      method: 'GET',
+      success: (res) => {
+        if (res.data.error == '0') {
+          console.log(res.data)
+          this.setData({
+            jobList: res.data.result.list
+          })
+        }
+      }
+    })
+  },
+  //获取招聘单位类型
+  getRecruitTypeFun() {
+    let _self = this
+    wx.request({
+      url: `${getZPType}?module=ComUnitType`,
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        if (res.data.error == '0') {
+          _self.setData({
+            recruitType: this.data.recruitType.concat(res.data.listjson)
+          })
+        }
+      }
+    })
+  },
+  //获取招聘职位类型
+  getPosiParentTypeFun() {
+    let _self = this
+    wx.request({
+      url: `${getPositionType}?father_id=0&level=1`,
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        if (res.data.error == '0') {
+          _self.setData({
+            posiTypeParent: res.data.listjson
+          })
+        }
+      }
+    })
+  },
+  getPosiChildTypeFun(id) {
+    let _self = this
+    wx.request({
+      url: `${getPositionType}?father_id=${id}&level=2`,
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        if (res.data.error == '0') {
+          _self.setData({
+            posiTypeChild: res.data.listjson
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.errortip,
+            duration: 1000
+          })
+          _self.setData({
+            posiTypeChild: []
+          })
+        }
+      }
+    })
+  },
+
+  //招聘职位类型过滤
+  chooseParentType(e){
+    let id = e.currentTarget.dataset.id
+    this.getPosiChildTypeFun(id)
+  },
+  // 通过单位类型和职位类型获取数据
+  chooseChildType(e) {
+    let id = e.currentTarget.dataset.id
+    let txt = e.target.dataset.txt
+    if (txt != '不限') {
+      this.setData({
+        positionTXT: txt,
+      })
+    } else {
+      this.setData({
+        positionTXT: '招聘职位类型',
+      })
+    }
+    this.setData({
+      jobList: [],
+      canLoadingMore: true,
+      curPage: 1,
+      positionTypeId: id,
+      cityTypeId: 0,
+      educTypeId: 0,
+      chooseType: 1,
+      cityTXT: '城市',
+      educTXT: '学历',
+    })
+    this.getJobData()
+  },
+  //获取城市
+  getProvinceListFun() {
+    wx.request({
+      url: `${getProvinceList}`,
+      method: 'GET',
+      success: res => {
+        console.log(res.data,'城市')
+        this.setData({
+          provinceList: res.data.listjson
+        })
+      }
+    })
+  },
+  chooseProvince(e) {
+    let id =  e.currentTarget.dataset.id
+    this.getCityListFun(id)
+  },
+  getCityListFun(id) {
+    wx.request({
+      url: `${getCityList}?father_id=${id}`,
+      method: 'GET',
+      success: res => {
+        console.log(res.data, '城市')
+        this.setData({
+          cityList: res.data.listjson
+        })
+      }
+    })
+  },
+ // 通过单位类型和城市获取数据
+  chooseCity(e) {
+    let id =  e.currentTarget.dataset.id
+    let txt = e.target.dataset.txt
+    if (txt != '不限') {
+      this.setData({
+        cityTXT: txt,
+      })
+    } else {
+      this.setData({
+        cityTXT: '城市',
+      })
+    }
+    this.setData({
+      jobList: [],
+      canLoadingMore: true,
+      curPage: 1,
+      cityTypeId: id,
+      positionTypeId: 0,
+      educTypeId: 0,
+      chooseType: 2,
+      positionTXT: '招聘职位类型',
+      educTXT: '学历'
+    })
+    this.getJobData()
+  },
+  // 学历类型过滤
   filterEduc (e) {
-    // 学历过滤
     this.setData({
       active: 0
     })
-    console.log(this.data.active)
   },
-  iptFocus (e) {
+  chooseEduId(e){
+    // 学历过滤 获取id
+    let id = e.target.dataset.id
+    let txt = e.target.dataset.txt
+    console.log(txt)
+    if (txt != '不限') {
+      this.setData({
+        educTXT: txt,
+      })
+    } else {
+      this.setData({
+        educTXT: '学历',
+      })
+    }
     this.setData({
-      focus: !this.data.focus
+      jobList: [],
+      canLoadingMore: true,
+      curPage: 1,
+      educTypeId: id,
+      positionTypeId: 0,
+      cityTypeId: 0,
+      chooseType: 3,
+      positionTXT: '招聘职位类型',
+      cityTXT: '城市'
+    })
+    this.getJobData()
+  },
+  //获取学历类型
+  getEduTypeFun(){
+    let _self = this
+    wx.request({
+      url: `${getZPType}?module=Degree`,
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        if (res.data.error == '0') {
+          _self.setData({
+            eduType: this.data.eduType.concat(res.data.listjson)
+          })
+        }
+      }
     })
   },
-  iptConfirm (e) {
-    // 确定搜索
-    console.log(e.detail.value)
+  // 获取职位数据
+  getJobData() {
+    let _self = this
+    if (this.data.canLoadingMore) {
+      wx.request({
+        url: `${getCompanyList}`,
+        data: {
+          p: _self.data.curPage,
+          unittype: this.data.recruitTypeId,
+          positiontype_id: this.data.positionTypeId,
+          city_id: this.data.cityTypeId,
+          education: this.data.educTypeId,
+          nums: 10
+        },
+        type: 'GET',
+        success: res => {
+          console.log(res.data,123213)
+          if (res.data.error == '0') {
+            const { list } = res.data.result
+            if (list.length >= 1) {
+              _self.setData({
+                jobList: this.data.jobList.concat(list)
+              })
+            }
+            if ( list.length >= 10) {
+              _self.setData({
+                curPage: ++_self.data.curPage
+              })
+            } else {
+              _self.setData({
+                canLoadingMore: false
+              })
+            }
+            _self.setData({
+              showLoading: false
+            })
+          }
+        }
+      })
+    } else {
+      _self.setData({
+        showLoading: false
+      })
+    }
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-  
-  },
+    this.getRecruitTypeFun()
+    this.getEduTypeFun()
+    this.getPosiParentTypeFun()
+    this.getJobData()  //获取职位
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    this.getProvinceListFun()
+    this.getCityListFun(0)
   },
   lower (e) {
-    console.log(e)
     wx.showNavigationBarLoading();
-    const self = this
-    if (self.timer) {
-      clearTimeout(self.timer)
+    const _self = this
+    if (_self.timer) {
+      clearTimeout(_self.timer)
     }
-    self.timer = setTimeout(() => {
-      self.setData({
-        companyList: self.data.companyList.concat(self.data.mockData)
-      })
+    _self.setData({
+      showLoading: true
+    })
+    _self.timer = setTimeout(() => {
+      this.getJobData()
       wx.hideNavigationBarLoading()
     }, 1000)
   }

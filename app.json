@@ -34,7 +34,10 @@
     "pages/editUserPwd/pwd",
     "pages/resumeSend/send",
     "pages/resumeReview/review",
-    "pages/moreSameJob/job"
+    "pages/moreSameJob/job",
+    "pages/jobRecommendSearch/search",
+    "pages/companyRecommendSearch/search",
+    "pages/companyJobList/list"
   ],
   "window": {
     "backgroundTextStyle": "light",

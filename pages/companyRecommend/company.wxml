@@ -1,143 +1,88 @@
 <view class="recommend-head">
   <view class="search-box bg">
-    <view class="search-input bg-f">
-      <block wx:if="{{ !focus }}">
-        <image class="search" src="../../images/search.png"></image>{{ placeholderTxt}}
-      </block>
-      <input class="ipt" type="text" confirm-type="search" bindfocus="iptFocus" bindblur="iptFocus" bindconfirm="iptConfirm"/>
+    <view class="search-input bg-f" wx:if="{{ !focus }}" bindtap="iptFocus">
+      <image class="search" src="../../images/search.png"></image>{{ placeholderTxt}}
+    </view>
+    <view class="search-input bg-f" wx:if="{{ focus }}">
+      <input class="ipt" type="text" confirm-type="search" focus='{{ focus }}' bindblur="cc" bindconfirm="iptConfirm" bindinput="searchChange" catchtap='iptFocus'></input>
     </view>
   </view>
+
   <view class="typefilter-box bg-f">
     <view class="filter-head">招聘单位类型</view>
     <swiper class="typefilter" display-multiple-items="4">
-      <swiper-item>
+      <swiper-item wx:for="{{ recruitType }}" wx:for-item="item" wx:for-index="index" wx:key>
         <view class="filter-item">
-          <text class="{{ filterType == '0'?'active':'' }}" bindtap="filterData" data-type="0">不限</text>
-        </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '1'?'active':'' }}" bindtap="filterData" data-type="1">事业单位</text>
-        </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '2'?'active':'' }}" bindtap="filterData" data-type="2">央企</text>
-        </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '3'?'active':'' }}" bindtap="filterData" data-type="3">高校招聘</text>
-        </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="filter-item">
-          <text class="{{ filterType == '4'?'active':'' }}" bindtap="filterData" data-type="4">博士后招聘</text>
+          <text class="content {{ filterType == index?'active':'' }}" data-id="{{item.parameter}}" bindtap="filterData" data-type="{{ index }}">{{ item.tilte }}</text>
         </view>
       </swiper-item>
     </swiper>
   </view>
-  <!-- <view class="sort-box" catchtap="tabFilter"> -->
   <view class="sort-box">
-    <view class="sort-item" data-id="1">
-      招聘职位类型
-      <view class="arrow-icon {{ active=='1'?'active':'' }}" data-id="1">
-        <view class="inner"></view>
-      </view> 
-
-      <view class="type-filter-box tl {{ active=='1'?'active':'' }}" style="{{ active=='1'?'z-index: 1;':'' }}" catchtap="filterEduc">
-        <scroll-view style="height: 100%;" scroll-y>
-          <view class="type-filter-item" data-edcuc="all">不限</view>
-          <view class="type-filter-item" data-edcuc="zk">市场商务</view>
-          <view class="type-filter-item" data-edcuc="bk">电子电气</view>
-          <view class="type-filter-item" data-edcuc="ss">人事行政</view>
-          <view class="type-filter-item" data-edcuc="bs">外语外贸</view>
-          <view class="type-filter-item" data-edcuc="bs">教育咨询</view>
-          <view class="type-filter-item" data-edcuc="bs">计算机软硬件/互联网/IT</view>
-          <view class="type-filter-item" data-edcuc="ss">人事行政</view>
-          <view class="type-filter-item" data-edcuc="bs">外语外贸</view>
-          <view class="type-filter-item" data-edcuc="bs">教育咨询</view>
-          <view class="type-filter-item" data-edcuc="bs">计算机软硬件/互联网/IT</view> 
-        </scroll-view>
-      </view>
-    </view>
-    <view class="sort-item" data-id="2">
-      城市
-      <view class="arrow-icon {{ active=='2'?'active':'' }}" data-id="2">
+    <view class="sort-item" data-id="1" catchtap="tabFilter">
+      {{ positionTXT }}
+      <view class="arrow-icon {{ active=='1'?'active':'' }}">
         <view class="inner"></view>
       </view> 
     </view>
-    <view class="sort-item sort-educ-item" data-id="3">
-      学历
-      <view class="arrow-icon {{ active=='3'?'active':'' }}" data-id="3">
+    <view class="sort-item" data-id="2" catchtap="tabFilter">
+      {{ cityTXT }}
+      <view class="arrow-icon {{ active=='2'?'active':'' }}">
+        <view class="inner"></view>
+      </view> 
+    </view>
+    <view class="sort-item sort-educ-item" data-id="3" catchtap="tabFilter">
+      {{ educTXT }}
+      <view class="arrow-icon {{ active=='3'?'active':'' }}">
         <view class="inner"></view>
       </view> 
       <view class="educ-filter-box tl {{ active=='3'?'active':'' }}" style="{{ active=='3'?'z-index: 1;':'' }}" catchtap="filterEduc">
-        <view class="educ-filter-item" data-edcuc="all">不限</view>
-        <view class="educ-filter-item" data-edcuc="zk">专科及以上</view>
-        <view class="educ-filter-item" data-edcuc="bk">本科及以上</view>
-        <view class="educ-filter-item" data-edcuc="ss">硕士及以上</view>
-        <view class="educ-filter-item" data-edcuc="bs">博士及以上</view>
+        <view class="educ-filter-item" wx:for="{{eduType}}" data-id="{{item.parameter}}" wx:key bindtap="chooseEduId" data-txt="{{item.tilte}}">
+          {{item.tilte}}
+        </view>
       </view>
     </view>
-    <view class="city-filter-box tl {{ active=='2'?'active':'' }}" style="{{ active=='2'?'z-index: 1;':'' }}">
+
+    <view class="type-filter-box tl {{ active=='1'?'active':'' }}" style="{{ active=='1'?'z-index: 1;':'' }}" catchtap="filterEduc">
+      <scroll-view style="height: 100%;" scroll-y class="lf-filter">
+        <view class="type-filter-item" wx:for="{{posiTypeParent}}" catchtap="chooseParentType" wx:key data-id="{{item.positiontype_id}}">
+          {{item.positiontype_name}}
+        </view>
+      </scroll-view>
+      <scroll-view style="height: 100%;" scroll-y class="rt-filter" wx:if="{{posiTypeChild.length > 0}}">
+        <view class="type-filter-item" wx:for="{{posiTypeChild}}" wx:key data-id="{{item.positiontype_id}}" data-txt="{{item.positiontype_name}}" bindtap="chooseChildType">
+          {{item.positiontype_name}}
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="city-filter-box tl {{ active=='2'?'active':'' }}" style="{{ active=='2'?'z-index: 1;':'' }}" catchtap="filterEduc">
       <scroll-view class="prov" scroll-y style="height: 100%;">
         <view class="prov-box">
-          <view class="prov-item">不限</view>
-          <view class="prov-item">北京市</view>
-          <view class="prov-item">上海市</view>
-          <view class="prov-item">江苏省</view>
-          <view class="prov-item">浙江省</view>
-          <view class="prov-item">广东省</view>
-          <view class="prov-item">贵州省</view>
-          <view class="prov-item">湖北省</view>
-          <view class="prov-item">湖南省</view>
-          <view class="prov-item">安徽省</view>
-          <view class="prov-item">天津市</view>
-          <view class="prov-item">广东省</view>
-          <view class="prov-item">贵州省</view>
-          <view class="prov-item">湖北省</view>
-          <view class="prov-item">湖南省</view>
-          <view class="prov-item">安徽省</view>
-          <view class="prov-item">天津市</view>
+          <view class="prov-item" wx:for="{{ provinceList }}" data-id="{{item.province_code}}" wx:key catchtap="chooseProvince">{{ item.province_name }}</view>
         </view>
       </scroll-view>
       <scroll-view class="city" scroll-y style="height: 100%;">
-        <view class="city-item">不限</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
+        <view class="city-item" wx:for="{{cityList}}" wx:key data-id="{{item.city_id}}" bindtap="chooseCity" data-txt="{{item.city_name}}">{{item.city_name}}</view>
       </scroll-view>
     </view>
   </view>
 </view>
 <view class="recommend bg-f">
-  <tip content="暂无企业信息" wx:if="{{companyList.length == 0}}"></tip>
   <scroll-view scroll-y style="height: 100%;" bindscrolltolower="lower" scroll-top="{{scrollTop}}">
-    <view class="r-list">
-      <view class="r-list-item" wx:for="{{ companyList }}" wx:key="key" wx:for-item="item">
-        <image class="pic" src="{{ item.pic_url }}"></image>
+    <view class="r-list" wx:if="{{ jobList.length > 0 }}">
+      <view class="r-list-item" wx:for="{{ jobList }}" wx:key="key" wx:for-item="item" bindtap="linkCompanyDetail" data-id="{{ item.company_id }}">
+        <image class="pic" src="{{ item.company_logo }}"></image>
         <view class="cont">
-          <view class="job lh-normal">{{ item.company }}</view>
-          <view class="company">{{ item.desc }}</view>
+          <view class="job ellipsis lh-normal ">{{ item.company_name }}</view>
+          <view class="company">[{{item.positionnums}}个]{{ item.positionnames }}</view>
           <view class="s-desc"> 
-            <text class="infor lh-normal">{{ item.address }} | {{ item.educ }} </text>
-            <text class="infor lh-normal">截止日期：{{ item.data }}</text>
+            <text class="infor lh-normal">{{ item.city_name }} | {{ item.education_name }} </text>
+            <text class="infor lh-normal">截止日期：{{ item.position_stoptime }}</text>
           </view>
         </view>
       </view>
     </view>
-    <loading></loading>
+    <loading wx:if="{{ showLoading }}"></loading>
   </scroll-view>
 </view>
-

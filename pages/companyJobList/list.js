@@ -1,25 +1,25 @@
-import { 
-  getCRecommend,
+import {
   getPositionList
- } from "../../api.js";
+} from '../../api'
 
 import {
+  initLoginStatus,
+  setNewToken,
+  getDetails,
   getUserState,
   navToLogin
 } from '../../utils/util'
 
-let app = getApp()
-
 Page({
   data: {
-    student_id: app.globalData.student_id || wx.getStorageSync("student_id") || '',
+    id: undefined,
     curpage: 1,
     canLoadMore: true,
     showLoading: false,
     scrollTop: 0,
     timer: null,
-    jobList: [],
-    id: undefined
+
+    recruitList: []
   },
   linkJobDetail (e) {
     if (getUserState()) {
@@ -31,28 +31,32 @@ Page({
       navToLogin()
     }
   },
-  getSameCompany(pId) {
+  getData() {
     if (this.data.canLoadMore) {
       wx.request({
         url: `${getPositionList}`,
         data: {
           p: this.data.curpage,
           nums: 10,
-          positiontype_id: pId
+          company_id: this.data.id
         },
+        method: 'GET',
         success: res => {
+          console.log(res,'aaaa')
           if (res.data.error == '0') {
-            const { list } = res.data.result
+            const { list } =  res.data.result
             this.setData({
-              jobList: this.data.jobList.concat(list)
+              recruitList: this.data.recruitList.concat(list)
             })
-            if (list.length >= 10) {
+            if(this.data.recruitList.length >= 6) {
               this.setData({
+                showMore: true,
                 canLoadMore: true,
                 curpage: ++this.data.curpage
               })
             } else {
               this.setData({
+                showMore: false,
                 canLoadMore: false
               })
             }
@@ -65,11 +69,10 @@ Page({
       })
     }
   },
-  onLoad: function(options) {
-    this.setData({
-      id: options.id
-    })
-    this.getSameCompany(this.data.id)
+  onLoad: function (options) {
+    let id = options.id
+    this.setData({ id })
+    this.getData()
   },
   lower(e) {
     const self = this;
@@ -81,8 +84,8 @@ Page({
       clearTimeout(self.timer);
     }
     self.timer = setTimeout(() => {
-      this.getSameCompany(this.data.id)
+      this.getData()
       wx.hideNavigationBarLoading();
     }, 500);
   }
-});
+})
