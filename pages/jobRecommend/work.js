@@ -1,11 +1,15 @@
 import {
   getPositionList,
   getZPType,
-  getPositionType
+  getPositionType,
+  getProvinceList,
+  getCityList
 } from '../../api'
 
 Page({
   data: {
+    chooseType: 1, //选中的过滤类型 1：招聘职位类型 2：城市 3：学历
+
     recruitType: [],//招聘单位类型数组
     eduType: [],//学历类型数组
     posiTypeParent: [], //招聘职位类型一级
@@ -14,8 +18,17 @@ Page({
     showLoading: false,
     canLoadingMore: true,
 
-    recruitTypeId: 0,
-    positionTypeId: undefined,
+    provinceList: [],
+    cityList: [],
+
+    recruitTypeId: 0, // 初始招聘单位 为不限
+    positionTypeId: 0,
+    cityTypeId: 0,
+    educTypeId: 0,
+
+    positionTXT: '招聘职位类型',
+    cityTXT: '城市',
+    educTXT: '学历',
 
     active: 0,
     placeholderTxt: '搜索公司或职位名称',
@@ -30,16 +43,31 @@ Page({
   filterData (e) {
     let type = e.target.dataset.type
     let id = e.currentTarget.dataset.id
-
     if (this.data.filterType != type) {
       this.setData({
-        filterType: type
+        filterType: type,
+        jobList: [],
+        recruitTypeId: id,
+        canLoadingMore: true,
+        curPage: 1
       })
-      console.log(type, id)
-      this.setData({
-        recruitTypeId: id
-      })
-      console.log(this.data.recruitTypeId, 12321321312)
+      if (this.data.chooseType == 1) {
+        this.setData({
+          city_id: 0,
+          education: 0,
+        })
+      } else if (this.data.chooseType == 2) {
+        this.setData({
+          positiontype_id: 0,
+          education: 0
+        })
+      } else if (this.data.chooseType == 3) {
+        this.setData({
+          positiontype_id: 0,
+          city_id: 0
+        })
+      }
+      this.getJobData()
     }
   },
   // 过滤下拉切换
@@ -60,29 +88,6 @@ Page({
     }
   },
  
-  // 学历类型过滤
-  filterEduc (e) {
-    this.setData({
-      active: 0
-    })
-    // console.log(this.data.active)
-  },
-  chooseEduId(e){
-    // 学历过滤 获取id
-    let id = e.target.dataset.id
-  },
-
-  //招聘职位类型过滤
-  chooseParentType(e){
-    let id = e.currentTarget.dataset.id
-    this.getPosiChildTypeFun(id)
-  },
-  chooseChildType(e) {
-    let id = e.currentTarget.dataset.id
-    console.log(this.data.recruitTypeId, id)
-    this.getData(this.data.recruitTypeId, id)
-  },
-
   iptFocus (e) {
     this.setData({
       focus: !this.data.focus
@@ -163,26 +168,88 @@ Page({
       }
     })
   },
-  //通过单位类型和职位类型获取数据
-  getData(rId, pId) {
+
+  //招聘职位类型过滤
+  chooseParentType(e){
+    let id = e.currentTarget.dataset.id
+    this.getPosiChildTypeFun(id)
+  },
+  // 通过单位类型和职位类型获取数据
+  chooseChildType(e) {
+    let id = e.currentTarget.dataset.id
+    this.setData({
+      jobList: [],
+      canLoadingMore: true,
+      curPage: 1,
+      positionTypeId: id,
+      cityTypeId: 0,
+      educTypeId: 0,
+      chooseType: 1
+    })
+    this.getJobData()
+  },
+  //获取城市
+  getProvinceListFun() {
     wx.request({
-      url: `${getPositionList}`,
-      data: {
-        p: 1,
-        unittype: rId,
-        positiontype_id: pId,
-        nums: 10
-      },
+      url: `${getProvinceList}`,
       method: 'GET',
       success: res => {
-        if (res.data.error == '0') {
-          console.log(res.data.result.list)
-          this.setData({
-            jobList: res.data.result.list
-          })
-        }
+        console.log(res.data,'城市')
+        this.setData({
+          provinceList: res.data.listjson
+        })
       }
     })
+  },
+  chooseProvince(e) {
+    let id =  e.currentTarget.dataset.id
+    this.getCityListFun(id)
+  },
+  getCityListFun(id) {
+    wx.request({
+      url: `${getCityList}?father_id=${id}`,
+      method: 'GET',
+      success: res => {
+        console.log(res.data, '城市')
+        this.setData({
+          cityList: res.data.listjson
+        })
+      }
+    })
+  },
+ // 通过单位类型和城市获取数据
+  chooseCity(e) {
+    let id =  e.currentTarget.dataset.id
+    this.setData({
+      jobList: [],
+      canLoadingMore: true,
+      curPage: 1,
+      cityTypeId: id,
+      positionTypeId: 0,
+      educTypeId: 0,
+      chooseType: 2
+    })
+    this.getJobData()
+  },
+  // 学历类型过滤
+  filterEduc (e) {
+    this.setData({
+      active: 0
+    })
+  },
+  chooseEduId(e){
+    // 学历过滤 获取id
+    let id = e.target.dataset.id
+    this.setData({
+      jobList: [],
+      canLoadingMore: true,
+      curPage: 1,
+      educTypeId: id,
+      positionTypeId: 0,
+      cityTypeId: 0,
+      chooseType: 3
+    })
+    this.getJobData()
   },
   //获取学历类型
   getEduTypeFun(){
@@ -204,13 +271,14 @@ Page({
   getJobData() {
     let _self = this
     if (this.data.canLoadingMore) {
-      _self.setData({
-        showLoading: true
-      })
       wx.request({
         url: `${getPositionList}`,
         data: {
           p: _self.data.curPage,
+          unittype: this.data.recruitTypeId,
+          positiontype_id: this.data.positionTypeId,
+          city_id: this.data.cityTypeId,
+          education: this.data.educTypeId,
           nums: 10
         },
         type: 'GET',
@@ -237,6 +305,10 @@ Page({
           }
         }
       })
+    } else {
+      _self.setData({
+        showLoading: false
+      })
     }
   },
   onLoad: function (options) {
@@ -244,19 +316,22 @@ Page({
     this.getEduTypeFun()
     this.getPosiParentTypeFun()
     this.getJobData()  //获取职位
-  },
-  onShow: function () {
-  
+
+    this.getProvinceListFun()
+    this.getCityListFun(0)
   },
   lower (e) {
     wx.showNavigationBarLoading();
-    const self = this
-    if (self.timer) {
-      clearTimeout(self.timer)
+    const _self = this
+    if (_self.timer) {
+      clearTimeout(_self.timer)
     }
-    self.timer = setTimeout(() => {
+    _self.setData({
+      showLoading: true
+    })
+    _self.timer = setTimeout(() => {
       this.getJobData()
       wx.hideNavigationBarLoading()
-    }, 500)
+    }, 1000)
   }
 })

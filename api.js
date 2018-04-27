@@ -55,4 +55,7 @@ module.exports = {
 
   getZPType: `${basicUrl}/IndBase`, //职位推荐 获取单位类型 学历类型
   getPositionType: `${basicUrl}/getPositionType`,//获取招聘职位类型
+
+  getProvinceList: `${basicUrl}/getProvinceList`, //获取省份列表
+  getCityList: `${basicUrl}/getCityList`, //获取城市列表
 };

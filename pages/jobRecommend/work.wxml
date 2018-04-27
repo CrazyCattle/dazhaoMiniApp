@@ -19,24 +19,24 @@
   </view>
   <view class="sort-box">
     <view class="sort-item" data-id="1" catchtap="tabFilter">
-      招聘职位类型
+      {{ positionTXT }}
       <view class="arrow-icon {{ active=='1'?'active':'' }}">
         <view class="inner"></view>
       </view> 
     </view>
     <view class="sort-item" data-id="2" catchtap="tabFilter">
-      城市
+      {{ cityTXT }}
       <view class="arrow-icon {{ active=='2'?'active':'' }}">
         <view class="inner"></view>
       </view> 
     </view>
     <view class="sort-item sort-educ-item" data-id="3" catchtap="tabFilter">
-      学历
+      {{ educTXT }}
       <view class="arrow-icon {{ active=='3'?'active':'' }}">
         <view class="inner"></view>
       </view> 
       <view class="educ-filter-box tl {{ active=='3'?'active':'' }}" style="{{ active=='3'?'z-index: 1;':'' }}" catchtap="filterEduc">
-        <view class="educ-filter-item" wx:for="{{eduType}}" data-id="{{item.parameter}}" wx:key bindtap="chooseEduId">
+        <view class="educ-filter-item" wx:for="{{eduType}}" data-id="{{item.parameter}}" wx:key bindtap="chooseEduId" data-txt="{{item.tilte}}">
           {{item.tilte}}
         </view>
       </view>
@@ -49,49 +49,20 @@
         </view>
       </scroll-view>
       <scroll-view style="height: 100%;" scroll-y class="rt-filter" wx:if="{{posiTypeChild.length > 0}}">
-        <view class="type-filter-item" wx:for="{{posiTypeChild}}" wx:key data-id="{{item.positiontype_id}}" bindtap="chooseChildType">
+        <view class="type-filter-item" wx:for="{{posiTypeChild}}" wx:key data-id="{{item.positiontype_id}}" data-txt="{{item.positiontype_name}}" bindtap="chooseChildType">
           {{item.positiontype_name}}
         </view>
       </scroll-view>
     </view>
 
-    <view class="city-filter-box tl {{ active=='2'?'active':'' }}" style="{{ active=='2'?'z-index: 1;':'' }}">
+    <view class="city-filter-box tl {{ active=='2'?'active':'' }}" style="{{ active=='2'?'z-index: 1;':'' }}" catchtap="filterEduc">
       <scroll-view class="prov" scroll-y style="height: 100%;">
         <view class="prov-box">
-          <view class="prov-item">不限</view>
-          <view class="prov-item">北京市</view>
-          <view class="prov-item">上海市</view>
-          <view class="prov-item">江苏省</view>
-          <view class="prov-item">浙江省</view>
-          <view class="prov-item">广东省</view>
-          <view class="prov-item">贵州省</view>
-          <view class="prov-item">湖北省</view>
-          <view class="prov-item">湖南省</view>
-          <view class="prov-item">安徽省</view>
-          <view class="prov-item">天津市</view>
-          <view class="prov-item">广东省</view>
-          <view class="prov-item">贵州省</view>
-          <view class="prov-item">湖北省</view>
-          <view class="prov-item">湖南省</view>
-          <view class="prov-item">安徽省</view>
-          <view class="prov-item">天津市</view>
+          <view class="prov-item" wx:for="{{ provinceList }}" data-id="{{item.province_code}}" wx:key catchtap="chooseProvince">{{ item.province_name }}</view>
         </view>
       </scroll-view>
       <scroll-view class="city" scroll-y style="height: 100%;">
-        <view class="city-item">不限</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
-        <view class="city-item">杭州市</view>
+        <view class="city-item" wx:for="{{cityList}}" wx:key data-id="{{item.city_id}}" bindtap="chooseCity" data-txt="{{item.city_name}}">{{item.city_name}}</view>
       </scroll-view>
     </view>
   </view>
