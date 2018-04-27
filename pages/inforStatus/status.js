@@ -21,7 +21,6 @@ Page({
     canLoadMore: true
   },
   getAllMess () {
-    console.log(1)
     const _self = this
     if (_self.data.canLoadMore) {
       _self.setData({
@@ -69,6 +68,10 @@ Page({
           }
         }
       })
+    } else {
+      _self.setData({
+        showLoading: false
+      })
     }
   },
   onLoad: function (options) {
@@ -82,9 +85,6 @@ Page({
   },
   lower() {
     const self = this;
-    self.setData({
-      showLoading: true
-    })
     wx.showNavigationBarLoading();
     if (self.timer) {
       clearTimeout(self.timer);
@@ -92,6 +92,6 @@ Page({
     self.timer = setTimeout(() => {
       self.getAllMess()
       wx.hideNavigationBarLoading();
-    }, 500);
+    }, 300);
   }
 })

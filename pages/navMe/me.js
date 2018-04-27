@@ -195,14 +195,21 @@ Page({
           if (res.data.error == '0') {
             const { listjson } = res.data
             wx.setStorageSync("stud_info", (app.globalData.stud_info = listjson));
-            wx.setStorageSync("stud_img", (app.globalData.student_img = listjson.student_img));
-
+            if (!listjson.student_img) {
+              wx.setStorageSync("stud_img", (app.globalData.student_img = '../../images/head_mian_pic.png'));
+              this.setData({
+                stud_img: '../../images/head_mian_pic.png'
+              })
+            } else {
+              wx.setStorageSync("stud_img", (app.globalData.student_img = listjson.student_img));
+              this.setData({
+                stud_img: listjson.student_img
+              })
+            }
             this.setData({
               stud_info: listjson,
-              stud_img: listjson.student_img,
               stud_id: app.globalData.student_id
             })
-
             console.log(this.data.stud_img)
           }
         }
@@ -215,7 +222,7 @@ Page({
       stud_img: app.globalData.student_img || wx.getStorageSync('stud_img') || '../../images/user_pic.png',
       stud_id: app.globalData.student_id
     })
-    if (!app.globalData.student_img && wx.getStorageSync('stud_img')) {
+    if (!app.globalData.student_img && !!wx.getStorageSync('stud_img')) {
       app.globalData.student_img = wx.getStorageSync('stud_img')
     }
   }

@@ -126,18 +126,19 @@ Page({
           mobile: this.data.mobile
         },
         success: res => {
-          console.log(res)
           wx.showToast({
             title: res.data.errortip,
             icon: "none",
             duration: 1000
           });
           if (res.data.error == '0') {
-            console.log(res.data)
+            setTimeout(() => {
+              wx.reLaunch({
+                url: '../navIndex/index'
+              })
+            },150)
           }
-        },
-        fail: res => {},
-        complete: res => {}
+        }
       })
     }
   },

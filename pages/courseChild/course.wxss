@@ -218,7 +218,7 @@
   position: absolute;
   width: 0;
   height: 0;
-  top: -10rpx;
+  top: -11rpx;
   left: 50%;
   transform: translateX(-50%);
   border: 8rpx solid transparent;

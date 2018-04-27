@@ -34,22 +34,24 @@ Page({
     })
   },
   lower() {
-    const _self = this
-    if (_self.timer) {
-      clearTimeout(_self.timer)
+    const self = this;
+    wx.showNavigationBarLoading();
+    if (self.timer) {
+      clearTimeout(self.timer);
     }
-    _self.timer = setTimeout(() => {
-      _self.getAllMess()
-    }, 500)
+    self.timer = setTimeout(() => {
+      self.getAllMess()
+      wx.hideNavigationBarLoading();
+    }, 300);
   },
   getAllMess () {
     const _self = this
-    if (this.data.canLoadMore) {
-      this.setData({
+    if (_self.data.canLoadMore) {
+      _self.setData({
         showLoading: true
       })
       wx.request({
-        url: `${getUnivNotice}?stu_id=${app.globalData.student_id}&token=${app.globalData.token}&p=${this.data.curpage}&nums=10`,
+        url: `${getUnivNotice}?stu_id=${app.globalData.student_id}&token=${app.globalData.token}&p=${_self.data.curpage}&nums=10`,
         success: res => {
           console.log(res)
           if (res.data.tokeninc == '0') {
@@ -68,27 +70,31 @@ Page({
               if (data.length > 0) {
                 console.log(data)
                 if (data.length == 10) {
-                  this.setData({
-                    curpage: ++this.data.curpage,
+                  _self.setData({
+                    curpage: ++_self.data.curpage,
                     canLoadMore: true
                   })
                 } else {
-                  this.setData({
+                  _self.setData({
                     canLoadMore: false
                   })
                 }
-                this.setData({
+                _self.setData({
                   showLoading: false,
-                  messageArr: this.data.messageArr.concat(data)
+                  messageArr: _self.data.messageArr.concat(data)
                 })
               } else {
-                this.setData({
-                  showTips: !this.data.showTips
+                _self.setData({
+                  showTips: !_self.data.showTips
                 })
               }
             }
           }
         }
+      })
+    } else {
+      _self.setData({
+        showLoading: false
       })
     }
   },
