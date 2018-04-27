@@ -124,9 +124,12 @@
   right: 0;
   transform: scaleY(0);
   transition: transform .2s ease-in-out;
-  background-color: #f8f8fa;
   box-shadow: 0 2rpx 2rpx 2rpx rgba(0,0,0,.1);
   transform-origin: 50% 0;
+}
+.educ-filter-box,
+.city-filter-box {
+  background-color: #f8f8fa;
 }
 .type-filter-box.active,
 .city-filter-box.active,
@@ -134,12 +137,26 @@
   transform: scaleY(1);
 }
 .type-filter-box {
-  width: 330rpx;
+  /* width: 330rpx; */
+  width: 100%;
   height: 680rpx;
+  display: flex;
 }
+.type-filter-box .lf-filter {
+  width: 40%;
+  border-right:1rpx solid #e6e9f3;
+}
+.type-filter-box .rt-filter {
+  width: 60%;
+}
+.type-filter-box .lf-filter,
+.type-filter-box .rt-filter {
+  background-color: #f8f8fa;
+}
+
 .educ-filter-box {
   width: 100%;
-  height: 375rpx;
+  max-height: 375rpx;
   overflow: hidden;
 }
 .city-filter-box {

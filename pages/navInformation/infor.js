@@ -52,7 +52,8 @@ Page({
     }, 500)
   },
   getAllMess () {
-    const _self = this
+    let _self = this
+    let loginType = wx.getStorageSync('loginType')
     if (this.data.canLoadMore) {
       this.setData({
         showLoading: true
