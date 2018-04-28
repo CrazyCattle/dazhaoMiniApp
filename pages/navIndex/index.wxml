@@ -47,10 +47,16 @@
   <view class="recommend mt20 bg-f" wx:if="{{ jobList.length > 0 }}">
     <view class="tc"><text class="title lh-normal">职位推荐</text></view>
     <view class="r-list">
-      <view class="r-list-item" wx:for="{{ jobList }}" wx:key="key" wx:for-item="item" bindtap="linkJobDetail" data-id="{{ item.position_id }}">
+      <view class="r-list-item" wx:for="{{ jobList }}" wx:key="key" wx:for-index="index" wx:for-item="item" bindtap="linkJobDetail" data-id="{{ item.position_id }}">
         <image class="pic" src="{{ item.company_logo }}"></image>
         <view class="cont">
-          <view class="job lh-normal">{{ item.position_name }}</view>
+          <view class="tit">
+            <view class="job lh-normal">{{ item.position_name }}</view>
+            <view class="dot" catchtap="showTip" data-key="{{index}}" data-clicked="{{clicked}}">
+              <image src='../../images/dot.png' class="dotImg"></image>
+              <view wx:if="{{ index == key && clicked }}" data-key="{{index}}" class="noInterest" data-id="{{item.position_id}}" catchtap='noInterest'>不感兴趣</view>
+            </view>
+          </view>
           <view class="company">{{ item.company_name }}</view>
           <view class="s-desc"> 
             <text class="infor lh-normal">{{ item.city_name }} | {{ item.education_name }} </text>

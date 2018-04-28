@@ -17,6 +17,9 @@ Page({
     company_size: '',
     company_type: '',
 
+
+    
+
     // 目标行业
     industryIndex: [0, 0],
     industryArray: [[], []],

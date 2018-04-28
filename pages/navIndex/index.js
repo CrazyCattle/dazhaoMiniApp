@@ -2,7 +2,8 @@ import {
   getIndexCRecommend,
   banner,
   getPositionList,
-  getCompanyList
+  getCompanyList,
+  sendPositionHate
 } from '../../api.js';
 
 import {
@@ -15,6 +16,8 @@ const app = getApp()
 
 Page({
   data: {
+    key: -1,
+    clicked: false,
     student_id: app.globalData.student_id || wx.getStorageSync("student_id") || '',
     // 轮播
     banner: [],
@@ -29,6 +32,62 @@ Page({
     jobList: [],
     // 名企推荐
     companyList: []
+  },
+  showTip(e) {
+    let key = e.currentTarget.dataset.key
+    let clicked = e.currentTarget.dataset.clicked
+    if (clicked) {
+      this.setData({
+        clicked: false
+      })
+    } else {
+      this.setData({
+        key,
+        clicked: true
+      })
+    }
+  },
+  noInterest (e) {
+    let id = e.currentTarget.dataset.id
+    if (getUserState()) {
+      new Promise((resolve, reject) => {
+        wx.request({
+          url: `${sendPositionHate}`,
+          data: {
+            stu_id: app.globalData.student_id,
+            token: app.globalData.token,
+            position_id: id
+          },
+          method: 'POST',
+          header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          success: res => {
+            console.log(res)
+            if (res.data.error == '0') {
+              wx.showToast({
+                title: res.data.errortip,
+                icon: 'none',
+                duration: 1000
+              })
+              setTimeout(() => {
+                resolve('OK')
+              }, 500)
+            }
+          }
+        })
+      }).then(res => {
+        if (res == 'OK') {
+          this.getPositionListFun()
+          this.setData({
+            key: -1,
+            clicked: false,
+          })
+        }
+      })
+    } else {
+      navToLogin()
+    }
   },
   linkMoreCompany () {
     wx.navigateTo({
