@@ -1,0 +1,61 @@
+.resume-list {
+  box-sizing: border-box;
+  height: calc(100% - 91rpx);
+  padding: 0 16rpx 20rpx;
+}
+.resume-item {
+  height: 180rpx;
+  margin-bottom: 20rpx;
+  padding: 40rpx;
+  box-sizing: border-box;
+  display: flex;
+  border-left: 12rpx solid transparent;
+  border-radius: 4rpx;
+}
+.resume-item.active {
+  border-left-color: #47dbe2;
+}
+.resume-item .item-lf {
+  /* flex: 1; */
+  display: flex;
+  width: 430rpx;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.resume-item .item-lf .title {
+  box-sizing: border-box;
+  width: 100%;
+  padding-right: 25rpx;
+  font-size: 30rpx;
+  color: #313148;
+}
+.resume-item .item-lf .desc {
+  font-size: 26rpx;
+  color: #848ca1;
+}
+.resume-item .item-rt {
+  width: 196rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.editBtn {
+  width: 88rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff;
+  border-radius: 22rpx;
+}
+.editBtn:first-child {
+  margin-right: 20rpx;
+  background: #b7bcce;
+}
+.editBtn:last-child {
+  background: #47dbe2;
+}
+.resume-list {
+  padding-top: 40rpx;
+}

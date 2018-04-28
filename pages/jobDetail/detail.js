@@ -6,7 +6,8 @@ import {
 import {
   initLoginStatus,
   getDetails,
-  getUserState
+  getUserState,
+  navToLogin
 } from '../../utils/util'
 
 // 引入SDK核心类
@@ -18,6 +19,7 @@ const WxParse = require('../../wxParse/wxParse.js');
 
 Page({
   data: {
+    jobId: undefined,
     collected: false,
     // 位置 经纬度
     address: '',
@@ -95,6 +97,15 @@ Page({
       duration: 2000
     })
   },
+  delivery() {
+    if (getUserState()) {
+      wx.navigateTo({
+        url: '../deliveryResume/resume?id=${this.data.jobId}'
+      })
+    } else {
+      navToLogin()
+    }
+  },
   getDetails (id) {
     const _self = this
     return new Promise((resolve,reject) => {
@@ -150,6 +161,9 @@ Page({
   },
   onLoad: function (options) {
     const id = options.id
+    this.setData({
+      jobId: id 
+    })
     this.getDetails(id).then(res => {
       this.setData({
         positionId: res
@@ -163,5 +177,16 @@ Page({
     })
   },
   onReady: function () {},
-  onShareAppMessage: function () {}
+  onShareAppMessage: function(res) {
+    if (res.from === 'button') {
+      console.log(res.target)
+    }
+    return {
+      title: '职位详情',
+      path: `pages/jobDetail/detail?id=${this.data.jobId}`,
+      success: function(res) {
+        console.log(res)
+      }
+    }
+  }
 })

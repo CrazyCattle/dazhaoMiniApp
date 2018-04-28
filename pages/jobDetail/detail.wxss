@@ -185,6 +185,7 @@
   justify-content: center;
   line-height: 100%;
   box-sizing: border-box;
+  background-color: #fff;
 }
 .tab-fun--bottom .tab-lf .fun-btn.active {
   color: #47dbe2;

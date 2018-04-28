@@ -13,7 +13,8 @@ Page({
     showPlayBtn: true,
     showCenterPlayBtn: false,
     playInfor: {},
-
+    
+    courseId: undefined,
     active: false,
     menuActive: false,
     collected: false
@@ -73,6 +74,9 @@ Page({
   },
   onLoad: function (options) {
     let id = options.id
+    this.setData({
+      courseId: id
+    })
     wx.request({
       url: `${getPlayUrl}${id}`+(app.globalData.student_id?`&stu_id=${app.globalData.student_id}`:''),
       method: 'GET',
@@ -96,8 +100,16 @@ Page({
       }
     })
   },
-  onReady: function () {},
-  onShow: function () {},
-  onHide: function () {},
-  onUnload: function () {}
+  onShareAppMessage: function(res) {
+    if (res.from === 'button') {
+      console.log(res.target)
+    }
+    return {
+      title: '简历择业',
+      path: `pages/coursePlay/play?id=${this.data.courseId}`,
+      success: function(res) {
+        console.log(res)
+      }
+    }
+  }
 })

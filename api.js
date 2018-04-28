@@ -58,4 +58,5 @@ module.exports = {
 
   getProvinceList: `${basicUrl}/getProvinceList`, //获取省份列表
   getCityList: `${basicUrl}/getCityList`, //获取城市列表
+  deliveryResume: `${basicUrl}/SendPositionApply`,//投递简历 position_id resumes_id token stu_id
 };

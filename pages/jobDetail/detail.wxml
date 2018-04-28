@@ -87,16 +87,16 @@
 
   <view class="tab-fun--bottom bg-f">
     <view class="tab-lf">
-      <view class="fun-btn">
+      <button class="fun-btn" open-type="share">
         <image class="img" src="../../images/share.png"></image>
         <text>分享</text>
-      </view>
+      </button>
       <view class="fun-btn {{ collected?'active':'' }}" bindtap="collect">
         <image class="img" src="{{ collected?'../../images/collected.png':'../../images/collect.png' }}"></image>
         <text>收藏</text>
       </view>
     </view>
-    <view class="tab-rt send-resume">
+    <view class="tab-rt send-resume" bindtap="delivery">
       投递简历
     </view>
   </view>

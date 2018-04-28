@@ -37,7 +37,8 @@
     "pages/moreSameJob/job",
     "pages/jobRecommendSearch/search",
     "pages/companyRecommendSearch/search",
-    "pages/companyJobList/list"
+    "pages/companyJobList/list",
+    "pages/deliveryResume/resume"
   ],
   "window": {
     "backgroundTextStyle": "light",

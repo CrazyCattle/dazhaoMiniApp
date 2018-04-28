@@ -191,5 +191,17 @@ Page({
     })
     this.getCompanyInformation(options.id)
   },
-  onShow: function () {}
+  onShow: function () {},
+  onShareAppMessage: function(res) {
+    if (res.from === 'button') {
+      console.log(res.target)
+    }
+    return {
+      title: '企业详情',
+      path: `pages/companyDetail/detail?id=${this.data.companyId}`,
+      success: function(res) {
+        console.log(res)
+      }
+    }
+  }
 })
