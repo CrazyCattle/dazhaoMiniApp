@@ -109,6 +109,9 @@ Page({
       urls: [this.data.user_pic],
     })
   },
+  getExpect() {
+
+  },
   onLoad: function (options) {
     this.setData({
       user_pic: app.globalData.student_img || wx.getStorageSync('stud_img') || '../../images/head_mian_pic.png',

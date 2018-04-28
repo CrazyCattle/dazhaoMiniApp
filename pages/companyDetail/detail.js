@@ -126,13 +126,20 @@ Page({
   collectCompany (e) {
     let collected = e.currentTarget.dataset.collected
     this.sendCollectCompany().then(res => {
-      if (res.errortip == '企业成功收藏') {
-        this.setData({
-          collected: true
-        })
-      } else {
-        this.setData({
-          collected: false
+      if (res.error == '0') {
+        if (res.errortip == '企业成功收藏') {
+          this.setData({
+            collected: true
+          })
+        } else {
+          this.setData({
+            collected: false
+          })
+        }
+        wx.showToast({
+          icon: 'none',
+          title: res.errortip,
+          duration: 1000
         })
       }
     })
