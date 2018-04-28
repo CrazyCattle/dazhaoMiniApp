@@ -6,7 +6,11 @@ import {
   getPositionType,
   getProvinceList, //省份
   getCityList, //father_id 城市
+  delExpect,
+  sendExpect
 } from '../../api';
+
+const app = getApp()
 
 Page({
   data: {
@@ -151,10 +155,11 @@ Page({
 
   // 监听目标行业
   listenerIndustry(e) {
-    console.log(e)
     this.setData({
-      industry: this.data.industryArray[1][e.detail.value[1]]
+      industry: this.data.industryArray[1][e.detail.value[1]],
+      industry_id: this.data.industryIndex[e.detail.value[1]]
     })
+    console.log(this.data.industry_id)
   },
   listenerIndustryChange(e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
@@ -173,9 +178,11 @@ Page({
                 const arr = []
                 res.data.result.forEach((v, i) => {
                   arr.push(v.industry_name)
+                  arr1.push(v.industry_id)
                 })
                 _self.setData({
-                  industryArray: [_self.data.industryOneC, arr]
+                  industryArray: [_self.data.industryOneC, arr],
+                  industryIndex: arr1
                 })
               }
             }
@@ -220,7 +227,8 @@ Page({
             arr.push(v.positiontype_name)
           })
           this.setData({
-            jobArray: [this.data.jobOneC, arr]
+            jobArray: [this.data.jobOneC, arr],
+            father_id: id
           })
         }
       }
@@ -254,7 +262,8 @@ Page({
                   arr.push(v.positiontype_name)
                 })
                 _self.setData({
-                  jobArray: [_self.data.jobOneC, arr]
+                  jobArray: [_self.data.jobOneC, arr],
+                  // father_id: val.positiontype_id
                 })
               } else {
                 wx.showToast({
@@ -307,6 +316,76 @@ Page({
         }
       })
     }
+  },
+
+  // 删除 求职期望
+  deleteExpect() {
+    wx.request({
+      url: `${delExpect}`,
+      data: {
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token,
+        expect_id: this.data.expect_id
+      },
+      method: 'GET',
+      success: res => {
+        console.log(res)
+        wx.showToast({
+          title: res.data.errortip,
+          icon: 'none',
+          duration: 1000
+        })
+        if (res.data.error == '0'){
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      }
+    })
+  },
+  saveExpect() {
+    console.log(111)
+    wx.request({
+      url: `${sendExpect}`,
+      data: {
+        token: app.globalData.token,
+        stu_id: app.globalData.student_id,
+        expect_id: this.data.expect_id,
+        industry_id: this.data.industry_id,  
+        father_id: this.data.father_id,  
+        positiontype_id: this.data.positiontype_id,  
+        province_id: this.data.province_id,  
+        city_id: this.data.city_id,  
+        expect_pay: this.data.expect_pay,  
+        expect_unittype: this.data.expect_unittype,  
+        expect_unitsize: this.data.expect_unitsize
+      },
+      method: 'POST', 
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function(res){
+        console.log(res)
+        wx.showToast({
+          icon: 'none',
+          title: res.data.errortip,
+          duration: 1000
+        })
+        if (res.data.error=='0') {
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1000)
+        }
+      },
+      fail: function() {
+        // fail
+      },
+      complete: function() {
+        // complete
+      }
+    })
   },
 
   onLoad: function (options) {
@@ -368,11 +447,14 @@ Page({
           console.log(res,1000)
           if (res.data.error == '0') {
             const arr = []
+            const arr1 = []
             res.data.result.forEach((v, i) => {
               arr.push(v.industry_name)
+              arr1.push(v.industry_id)
             })
             this.setData({
-              industryArray: [this.data.industryOneC, arr]
+              industryArray: [this.data.industryOneC, arr],
+              industryIndex: arr1
             })
           }
         }

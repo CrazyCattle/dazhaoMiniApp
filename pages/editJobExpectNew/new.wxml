@@ -81,9 +81,9 @@
         </view>
       </view>
     </view>
-    <button formType="submit" placeholder-class="placeholder" class="baseBtn mt60">保存</button>
+    <button placeholder-class="placeholder" class="baseBtn mt60" bindtap="saveExpect">保存</button>
     <view class="delete-box tc" wx:if="{{ expect_id != -9999 }}">
-      <text class="delete">删除此条</text>
+      <text class="delete" bindtap="deleteExpect">删除此条</text>
     </view>
   </form>
 </view>

@@ -13,6 +13,7 @@ const app = getApp()
 
 Page({
   data: {
+    isBack: false,
     user_pic: '',
     stud_info: '',
     userImgPath: '',
@@ -58,6 +59,9 @@ Page({
         url: `../editJobExpectNew/new?data=${JSON.stringify(mr)}`
       })
     }
+    this.setData({
+      isBack: true
+    })
   },
   chooseImg() {
     let _self = this
@@ -147,7 +151,7 @@ Page({
        console.log(res)
        if (res.data.error == '0') {
           this.setData({
-            expectList: this.data.expectList.concat(res.data.result)
+            expectList: res.data.result
           })
        }
       }
@@ -167,5 +171,8 @@ Page({
       stud_info: wx.getStorageSync('stud_info'),
       schoolInfor: wx.getStorageSync('schoolInfo')
     })
+    if (this.data.isBack) {
+      this.getExpect()
+    }
   }
 })

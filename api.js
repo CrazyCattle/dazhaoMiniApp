@@ -65,4 +65,6 @@ module.exports = {
   getSalaryBase: `${basicUrl}/getSalaryBase`, //薪资水平
   getunitsizeType: `${basicUrl}/getunitsizeType`,//公司规模
   sendPositionHate: `${basicUrl}/SendPositionHate`, //隐藏职位
+  delExpect: `${basicUrl}/DelExpect`,// 删除求职期望
+  sendExpect: `${basicUrl}/SendExpect`, // 添加求职期望
 };
