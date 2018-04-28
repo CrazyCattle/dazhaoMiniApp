@@ -10,18 +10,12 @@ import {
 
 Page({
   data: {
-   
-    address: ['请选择求职地点', '互联网/IT425', '金融'],
-    addressIndex: 0,
-
-    resumeTitle: '',
-    user_name: '',
-    user_phone: '',
-    user_email: '',
-
     user_exprect: '',
     industry: '',
     city: '',
+    salary: undefined,
+    company_size: '',
+    company_type: '',
 
     // 目标行业
     industryIndex: [0, 0],
@@ -81,6 +75,9 @@ Page({
     this.setData({
       salaryIndex: e.detail.value
     });
+    this.setData({
+      salary: this.data.salaryArr[this.data.salaryIndex]
+    })
   },
 
   //获取公司规模
@@ -106,8 +103,11 @@ Page({
   },
   listenerSize(e) {
     this.setData({
-      sizeIndex: e.detail.value
+      sizeIndex: e.detail.value,
     });
+    this.setData({
+      company_size: this.data.sizeArr[this.data.sizeIndex]
+    })
   },
 
   //获取公司性质
@@ -135,6 +135,9 @@ Page({
     this.setData({
       xzIndex: e.detail.value
     });
+    this.setData({
+      company_type: this.data.xzArr[this.data.xzIndex]
+    })
   },
 
   // 监听目标行业
@@ -300,10 +303,16 @@ Page({
   onLoad: function (options) {
     console.log(options.id)
     console.log(JSON.parse(options.data))
+
+    let id = options.id
+    let data = JSON.parse(options.data)
     this.setData({
-      user_exprect: '测试',
-      industry: '测试',
-      city: '测试'
+      user_exprect: data.industry_name,
+      industry: data.positiontype_name,
+      city: data.city_name,
+      salary: data.expect_payname,
+      company_size: data.expect_unitsizename,
+      company_type: data.expect_unittypename,
     })
 
     this.getSalaryBaseFun()

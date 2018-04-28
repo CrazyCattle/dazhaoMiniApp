@@ -49,7 +49,7 @@
         <view class="row-tit">薪资：</view>
         <view class="rot-ipt">
           <picker class="picker" bindchange="listenerSalary" mode="selector" range="{{salaryArr}}"  value="{{ salaryIndex }}">
-            <view class="inner-picker">{{ salaryArr[salaryIndex] }}</view>
+            <view class="inner-picker">{{ salary }}</view>
           </picker>
           <view class="arrow-icon">
             <view class="inner"></view>
@@ -61,7 +61,7 @@
         <view class="row-tit">公司规模：</view>
         <view class="rot-ipt">
           <picker class="picker" bindchange="listenerSize" mode="selector" range="{{ sizeArr }}"  value="{{ sizeIndex }}">
-            <view class="inner-picker">{{ sizeArr[sizeIndex] }}</view>
+            <view class="inner-picker">{{ company_size }}</view>
           </picker>
           <view class="arrow-icon">
             <view class="inner"></view>
@@ -73,7 +73,7 @@
         <view class="row-tit">公司性质：</view>
         <view class="rot-ipt">
           <picker class="picker" mode="selector" range="{{ xzArr }}" value="{{ xzIndex }}" bindchange="listenerNature">
-            <view class="inner-picker">{{ xzArr[xzIndex] }}</view>
+            <view class="inner-picker">{{ company_type }}</view>
           </picker>
           <view class="arrow-icon">
             <view class="inner"></view>
