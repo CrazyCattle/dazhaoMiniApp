@@ -38,7 +38,8 @@
     "pages/jobRecommendSearch/search",
     "pages/companyRecommendSearch/search",
     "pages/companyJobList/list",
-    "pages/deliveryResume/resume"
+    "pages/deliveryResume/resume",
+    "pages/editJobExpectNew/new"
   ],
   "window": {
     "backgroundTextStyle": "light",

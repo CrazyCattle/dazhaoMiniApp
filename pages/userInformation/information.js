@@ -1,6 +1,7 @@
 import {
   uploadUserImg,
-  getUserInfor
+  getUserInfor,
+  getExpectList
 } from '../../api';
 
 import {
@@ -15,7 +16,8 @@ Page({
     user_pic: '',
     stud_info: '',
     userImgPath: '',
-    schoolInfor: ''
+    schoolInfor: '',
+    expectList: []
   },
   linkEditBasic() {
     wx.navigateTo({
@@ -29,8 +31,9 @@ Page({
   },
   linkJobExpect(e) {
     let id = e.target.dataset.id
+    let key = e.currentTarget.dataset.key
     wx.navigateTo({
-      url: `../editJobExpectation/expect?id=${id}`
+      url: `../editJobExpectNew/new?id=${id}&data=${JSON.stringify(this.data.expectList[key])}`
     })
   },
   chooseImg() {
@@ -110,7 +113,22 @@ Page({
     })
   },
   getExpect() {
-
+    wx.request({
+      url: `${getExpectList}`,
+      data: {
+        token: app.globalData.token,
+        stu_id: app.globalData.student_id
+      },
+      method: 'GET', 
+      success: res => {
+       console.log(res)
+       if (res.data.error == '0') {
+          this.setData({
+            expectList: this.data.expectList.concat(res.data.result)
+          })
+       }
+      }
+    })
   },
   onLoad: function (options) {
     this.setData({
@@ -118,6 +136,7 @@ Page({
       stud_info: wx.getStorageSync('stud_info'),
       schoolInfor: wx.getStorageSync('schoolInfo')
     })
+    this.getExpect()
   },
   onShow: function () {
     this.setData({

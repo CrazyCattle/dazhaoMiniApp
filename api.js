@@ -55,8 +55,13 @@ module.exports = {
 
   getZPType: `${basicUrl}/IndBase`, //职位推荐 获取单位类型 学历类型
   getPositionType: `${basicUrl}/getPositionType`,//获取招聘职位类型
+  getIndustryList: `${basicUrl}/getIndustryList`, //目标行业小类
 
   getProvinceList: `${basicUrl}/getProvinceList`, //获取省份列表
   getCityList: `${basicUrl}/getCityList`, //获取城市列表
   deliveryResume: `${basicUrl}/SendPositionApply`,//投递简历 position_id resumes_id token stu_id
+  getExpectList: `${basicUrl}/getExpectList`, //获取用户期望
+
+  getSalaryBase: `${basicUrl}/getSalaryBase`, //薪资水平
+  getunitsizeType: `${basicUrl}/getunitsizeType`,//公司规模
 };

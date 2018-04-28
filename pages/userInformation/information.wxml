@@ -32,23 +32,14 @@
   </view>
   <view class="edit-row expect bg-f mt20">
     <view class="edit-title">求职期望</view>
-    <view class="edit-content">
-      <view class="editBtn" data-id="1" bindtap='linkJobExpect'>编辑</view>
-      <view class="row">目标行业： 互联网</view>
-      <view class="row">目标职位： IT / Java研发工程师</view>
-      <view class="row">地点： 上海</view>
-      <view class="row">薪资： 8k-10k</view>
-      <view class="row">公司规模：不限</view>
-      <view class="row">公司性质：不限</view>
-    </view>
-    <view class="edit-content">
-      <view class="editBtn" data-id="2" bindtap='linkJobExpect'>编辑</view>
-      <view class="row">目标行业： 互联网</view>
-      <view class="row">目标职位： IT / Java研发工程师</view>
-      <view class="row">地点： 上海</view>
-      <view class="row">薪资： 8k-10k</view>
-      <view class="row">公司规模：不限</view>
-      <view class="row">公司性质：不限</view>
+    <view class="edit-content" wx:for="{{expectList}}" wx:for-item="item" wx:key wx:for-index="index">
+      <view class="editBtn" data-id="1" bindtap='linkJobExpect' data-id="{{item.expect_id}}" data-key="{{ index }}">编辑</view>
+      <view class="row">目标行业： {{item.industry_name}}</view>
+      <view class="row">目标职位： {{item.positiontype_name}}</view>
+      <view class="row">地点： {{item.city_name}}</view>
+      <view class="row">薪资： {{item.expect_payname}}</view>
+      <view class="row">公司规模：{{item.expect_unitsizename}}</view>
+      <view class="row">公司性质：{{item.expect_unittypename}}</view>
     </view>
     <view class="addExpectBtn">+ 添加求职期望</view>
   </view>

@@ -1,16 +1,22 @@
-// pages/editBasicInfor/infor.js
-Page({
+import {
+  getZPType, //行业大类
+  getIndustryList,//行业小类
+  getSalaryBase,//薪资
+  getunitsizeType,//公司规模
+  getPositionType,
+} from '../../api';
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
     // 行业
-    industry: ['请选择目标行业', '互联网/IT4325', '金融'],
+    industry: [],
     industryIndex: 0,
+    industryIndexArr: [],
+    
     // 职位类别
     job: ['请选择职位类别', '互联网/IT23432', '金融'],
     jobIndex: 0,
+    
     //职位
     address: ['请选择求职地点', '互联网/IT425', '金融'],
     addressIndex: 0,
@@ -63,52 +69,60 @@ Page({
   addMoreAddress () {
     console.log(1)
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  getIndustryParent() {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: `${getZPType}?module=inc_industry`,
+        success: res => {
+          console.log(res)
+          if (res.data.error == '0') {
+            const { listjson } = res.data
+            const arr1 = []
+            const arr2 = []
+            listjson.forEach((v, i) => {
+              arr1.push(v.tilte)
+              arr2.push(v.parameter)
+            })
+            this.setData({
+              industry: arr1,
+              industryIndexArr: arr2
+            })
+            resolve(arr2[0])
+          }
+        }
+      })
+    })
+  },
+  getIndustryChild(id) {
+    wx.request({
+      url: `${getIndustryList}?tb_type=${id}`,
+      success: res => {
+        console.log(res,1000)
+        if (res.data.error == '0') {
+          const arr1 = []
+          const arr2 = []
+          listjson.forEach((v, i) => {
+            arr1.push(v.tilte)
+            arr2.push(v.parameter)
+          })
+          this.setData({
+            industry: arr1,
+            industryIndexArr: arr2
+          })
+          this.setData({
+            jobArray: [this.data.jobOneC, arr]
+          })
+        }
+      }
+    })
+  },
   onLoad: function (options) {
     console.log(options.id)
-  },  
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+    this.getIndustryParent().then(res => {
+      this.getIndustryChild(res)
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
 
   }
 })
