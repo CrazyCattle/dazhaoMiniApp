@@ -76,6 +76,7 @@
 }
 .row:first-child {
   margin-bottom: 22rpx;
+  background-color: #fff;
 }
 .row:first-child .txt:first-child {
   font-family:PingFangSC-Semibold;

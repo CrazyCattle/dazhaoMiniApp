@@ -76,7 +76,7 @@
   </view>
   <mask wx:if="{{ showMask }}" bindtap="share"></mask>
   <view class="share-box bg-f {{ showMask?'active':'' }}">
-    <view class="row row-1"> <image class="icon" src="../../images/f-share.png"></image> 转发给好友或群聊</view>
+    <button class="row row-1" open-type="share"> <image class="icon" src="../../images/f-share.png"></image> 转发给好友或群聊</button>
     <view class="row" bindtap="productImg"><image class="icon" src="../../images/f-pic.png"></image> 生成长图</view>
     <view class="close" bindtap="share">取消</view>
   </view>

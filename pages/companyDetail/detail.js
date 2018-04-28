@@ -104,42 +104,38 @@ Page({
           "Content-Type": "application/x-www-form-urlencoded"
         },
         success: res => {
-          console.log(res)
-          resolve(res)
-          // if (res.data.tokeninc == '0') {
-          //   if (loginType == 'wxlogin') {
-          //     setNewToken().then(res => {
-          //       if (res == 'ok') {
-          //         _self.sendCollectCompany()
-          //       }
-          //     })
-          //   } else {
-          //     initLoginStatus()
-          //   }
-          // } else {
-          //   console.log(res)
-          //   if (res.data.error == '0') {
-          //     resolve(res.data.result)
-          //   }
-          // }
+          if (res.data.tokeninc == '0') {
+            if (loginType == 'wxlogin') {
+              setNewToken().then(res => {
+                if (res == 'ok') {
+                  _self.sendCollectCompany()
+                }
+              })
+            } else {
+              initLoginStatus()
+            }
+          } else {
+            if (res.data.error == '0') {
+              resolve(res.data)
+            }
+          }
         }
       })
     })
   },
   collectCompany (e) {
     let collected = e.currentTarget.dataset.collected
-    // if(!collected) {
-      this.sendCollectCompany().then(res => console.log(res))
-    // }
-    console.log(collected)
-    // this.setData({
-    //   collected: !this.data.collected
-    // })
-    // wx.showToast({
-    //   title: this.data.collected?'收藏成功':'取消成功',
-    //   icon: 'none',
-    //   duration: 2000
-    // })
+    this.sendCollectCompany().then(res => {
+      if (res.errortip == '企业成功收藏') {
+        this.setData({
+          collected: true
+        })
+      } else {
+        this.setData({
+          collected: false
+        })
+      }
+    })
   },
   productImg () {},
   getCompanyInformation(cId) {

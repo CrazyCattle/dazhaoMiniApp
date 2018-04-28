@@ -1,6 +1,7 @@
 import {
   getPositionOne,
-  getPositionList
+  getPositionList,
+  sendPosCollect
 } from '../../api'
 
 import {
@@ -89,19 +90,42 @@ Page({
     }
   },
   collect () {
-    this.setData({
-      collected: !this.data.collected
-    })
-    wx.showToast({
-      title: this.data.collected?'收藏成功':'取消成功',
-      icon: 'none',
-      duration: 2000
+    wx.request({
+      url: `${sendPosCollect}`,
+      data: {
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token,
+        position_id: this.data.jobId
+      },
+      method: 'POST', 
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: res => {
+        console.log(res)
+        if (res.data.error == '0') {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.errortip,
+            duration: 1000
+          })
+          if (res.data.errortip == '成功收藏职位') {
+            this.setData({
+              collected: true
+            })
+          } else {
+            this.setData({
+              collected: false
+            })
+          }
+        }
+      }
     })
   },
   delivery() {
     if (getUserState()) {
       wx.navigateTo({
-        url: '../deliveryResume/resume?id=${this.data.jobId}'
+        url: `../deliveryResume/resume?id=${this.data.jobId}`
       })
     } else {
       navToLogin()
@@ -134,6 +158,16 @@ Page({
           } else {
             if (res.data.error == '0') {
               const { list } = res.data.result
+              console.log(list.collectinc,'ttttt')
+              if (list.collectinc == '1') {
+                _self.setData({
+                  collected: true
+                })
+              } else {
+                _self.setData({
+                  collected: false
+                })
+              }
               this.setData({ list })
               console.log(this.data.list)
               const { position_demand,position_description } = res.data.result.list
@@ -163,6 +197,7 @@ Page({
   },
   onLoad: function (options) {
     const id = options.id
+    console.log(id)
     this.setData({
       jobId: id 
     })

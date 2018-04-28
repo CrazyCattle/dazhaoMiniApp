@@ -1,7 +1,9 @@
 .resume-list {
   box-sizing: border-box;
-  height: calc(100% - 91rpx);
-  padding: 0 16rpx 20rpx;
+  height: 100%;
+}
+.resume-list  .list-content{
+  height: calc(100% - 140rpx);
 }
 .resume-item {
   height: 180rpx;
@@ -11,6 +13,9 @@
   display: flex;
   border-left: 12rpx solid transparent;
   border-radius: 4rpx;
+}
+.srcoll-box {
+  padding: 0 16rpx 20rpx;
 }
 .resume-item.active {
   border-left-color: #47dbe2;
@@ -56,6 +61,15 @@
 .editBtn:last-child {
   background: #47dbe2;
 }
-.resume-list {
-  padding-top: 40rpx;
+
+.resume-list .tit {
+  height: 100rpx;
+  margin-bottom: 40rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-family:PingFangSC-Semibold;
+  font-size: 28rpx;
+  color: #313148;
+  background-color: #fff;
+  border-top: 1rpx solid #eaecf3
 }

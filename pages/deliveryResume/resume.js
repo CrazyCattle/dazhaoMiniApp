@@ -17,6 +17,8 @@ Page({
 
     isBack: false,
     student_id: '',
+    resumes_id: undefined,
+    jobId: undefined,
 
     page: 1,
     fliterType: 'job',
@@ -30,13 +32,40 @@ Page({
       url: `../resume/resume?resumes_id=${resumes_id}`,
     })
   },
-  deliveryResume() {
+  deliveryResume(e) {
+    let resumes_id = e.currentTarget.dataset.id
     wx.request({
       url: `${deliveryResume}`,
-      data: {},
-      method: 'GET',
+      data: {
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token,
+        resumes_id: resumes_id,
+        position_id: this.data.jobId
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'POST',
       success: res => {
         console.log(res)
+        if (res.data.error == '0') {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.errortip,
+            duration: 1000
+          })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1000)
+        } else if (res.data.error == '1') {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.errortip,
+            duration: 1000
+          })
+        }
       }
     })
   },
@@ -95,6 +124,9 @@ Page({
     })
   },
   onLoad: function (options) {
+    this.setData({
+      jobId: options.id
+    })
     if (!!app.globalData.student_id) {
       this.setData({
         student_id: app.globalData.student_id
