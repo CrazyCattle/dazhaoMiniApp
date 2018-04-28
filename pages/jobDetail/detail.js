@@ -7,6 +7,7 @@ import {
   initLoginStatus,
   getDetails,
   getUserState,
+  setNewToken,
   navToLogin
 } from '../../utils/util'
 
@@ -108,6 +109,7 @@ Page({
   },
   getDetails (id) {
     const _self = this
+    let loginType = wx.getStorageSync('loginType')
     return new Promise((resolve,reject) => {
       wx.request({
         url: `${getPositionOne}`,
