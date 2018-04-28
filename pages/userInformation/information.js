@@ -31,10 +31,33 @@ Page({
   },
   linkJobExpect(e) {
     let id = e.target.dataset.id
-    let key = e.currentTarget.dataset.key
-    wx.navigateTo({
-      url: `../editJobExpectNew/new?id=${id}&data=${JSON.stringify(this.data.expectList[key])}`
-    })
+    let key = parseInt(e.currentTarget.dataset.key)
+    let mr = {
+      city_id: 1,
+      city_name:"北京市",
+      expect_id: -9999,
+      expect_pay: 6,
+      expect_payname:"8-12k",
+      expect_unitsize: 3,
+      expect_unitsizename:"100-499人",
+      expect_unittype: 3,
+      expect_unittypename:"央企",
+      father_id: 1,
+      industry_id: 44,
+      industry_name:"计算机软件",
+      positiontype_id: 22,
+      positiontype_name:"软件开发",
+      province_id: 1
+    }
+    if (key >= 0 ) {
+      wx.navigateTo({
+        url: `../editJobExpectNew/new?id=${id}&data=${JSON.stringify(this.data.expectList[key])}`
+      })
+    } else {
+      wx.navigateTo({
+        url: `../editJobExpectNew/new?data=${JSON.stringify(mr)}`
+      })
+    }
   },
   chooseImg() {
     let _self = this

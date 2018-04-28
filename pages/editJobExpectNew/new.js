@@ -16,9 +16,15 @@ Page({
     salary: undefined,
     company_size: '',
     company_type: '',
-
-
-    
+    industry_id: undefined,  
+    father_id: undefined,  
+    positiontype_id: undefined,  
+    province_id: undefined,  
+    city_id: undefined,  
+    expect_pay: undefined,  
+    expect_unittype: undefined,  
+    expect_unitsize: undefined,  
+    expect_id: undefined,  
 
     // 目标行业
     industryIndex: [0, 0],
@@ -304,10 +310,7 @@ Page({
   },
 
   onLoad: function (options) {
-    console.log(options.id)
     console.log(JSON.parse(options.data))
-
-    let id = options.id
     let data = JSON.parse(options.data)
     this.setData({
       user_exprect: data.industry_name,
@@ -316,7 +319,19 @@ Page({
       salary: data.expect_payname,
       company_size: data.expect_unitsizename,
       company_type: data.expect_unittypename,
+      industry_id: data.industry_id,  
+      father_id: data.father_id,  
+      positiontype_id: data.positiontype_id,  
+      province_id: data.province_id,  
+      city_id: data.city_id,  
+      expect_pay: data.expect_pay,  
+      expect_unittype: data.expect_unittype,  
+      expect_unitsize: data.expect_unitsize,  
+      expect_id: data.expect_id
     })
+
+    console.log(this.data.expect_id)
+    console.log(this.data.expect_id != -9999)
 
     this.getSalaryBaseFun()
     this.getunitsizeTypeFun()
