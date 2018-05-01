@@ -32,21 +32,26 @@ Page({
 
     // 目标行业
     industryIndex: [0, 0],
+    industryIndexArr: [],
     industryArray: [[], []],
     industryOne: [],
     industryOneC: [],
 
     //职位类别
     jobIndex: [0, 0],
+    jobIndexArr: [],
     jobArray: [[], []],
     jobOne: [],
     jobOneC: [],
+    father_changeId: undefined,
 
     // 地点
     addressIndex: [0, 0],
+    addressIndexArr: [],
     addressArray: [[], []],
     addressOne: [],
     addressOneC: [],
+    city_changeId: undefined,
     
     // 薪资数据
     salaryArr: [],
@@ -157,7 +162,7 @@ Page({
   listenerIndustry(e) {
     this.setData({
       industry: this.data.industryArray[1][e.detail.value[1]],
-      industry_id: this.data.industryIndex[e.detail.value[1]]
+      industry_id: this.data.industryIndexArr[e.detail.value[1]]
     })
     console.log(this.data.industry_id)
   },
@@ -172,17 +177,18 @@ Page({
           wx.request({
             url: `${getIndustryList}?tb_type=${val.parameter}`,
             success: res => {
-              console.log(res)
+              // console.log(res)
               if (res.data.error == '0') {
-                console.log(res.data,12321)
+                // console.log(res.data,12321)
                 const arr = []
+                const arr1 = []
                 res.data.result.forEach((v, i) => {
                   arr.push(v.industry_name)
                   arr1.push(v.industry_id)
                 })
                 _self.setData({
                   industryArray: [_self.data.industryOneC, arr],
-                  industryIndex: arr1
+                  industryIndexArr: arr1
                 })
               }
             }
@@ -221,14 +227,18 @@ Page({
       url: `${getPositionType}?father_id=${id}&level=2`,
       method: 'GET',
       success: res => {
+        console.log(res.data, 'aaa')
         if (res.data.error == '0') {
           const arr = []
+          const arr1 = []
           res.data.listjson.forEach((v, i) => {
             arr.push(v.positiontype_name)
+            arr1.push(v.positiontype_id)
           })
           this.setData({
             jobArray: [this.data.jobOneC, arr],
-            father_id: id
+            father_id: id,
+            jobIndexArr: arr1
           })
         }
       }
@@ -237,10 +247,13 @@ Page({
 
   // 监听职位类别
   listenerJobList(e) {
-    console.log(1)
+    // console.log(1)
     this.setData({
-      user_exprect: this.data.jobArray[1][e.detail.value[1]]
+      user_exprect: this.data.jobArray[1][e.detail.value[1]],
+      father_id: this.data.father_changeId,
+      positiontype_id: this.data.jobIndexArr[e.detail.value[1]]
     })
+    console.log(this.data.father_changeId, this.data.father_id, this.data.positiontype_id, e.detail.value[1], this.data.jobIndexArr)
   },
   listenerJobChange(e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
@@ -254,16 +267,19 @@ Page({
           wx.request({
             url: `${getPositionType}?father_id=${val.positiontype_id}&level=2`,
             success: res => {
-              console.log(res)
+              console.log(res,'bbb')
               if (res.data.error == '0') {
                 console.log(res.data,12321)
                 const arr = []
+                const arr1 = []
                 res.data.listjson.forEach((v, i) => {
                   arr.push(v.positiontype_name)
+                  arr1.push(v.positiontype_id)
                 })
                 _self.setData({
                   jobArray: [_self.data.jobOneC, arr],
-                  // father_id: val.positiontype_id
+                  jobIndexArr: arr1,
+                  father_changeId: val.positiontype_id
                 })
               } else {
                 wx.showToast({
@@ -329,7 +345,7 @@ Page({
       },
       method: 'GET',
       success: res => {
-        console.log(res)
+        // console.log(res)
         wx.showToast({
           title: res.data.errortip,
           icon: 'none',
@@ -350,7 +366,7 @@ Page({
       data: {
         token: app.globalData.token,
         stu_id: app.globalData.student_id,
-        expect_id: this.data.expect_id,
+        expect_id: this.data.expect_id == '-9999' ? 0 : this.data.expect_id,
         industry_id: this.data.industry_id,  
         father_id: this.data.father_id,  
         positiontype_id: this.data.positiontype_id,  
@@ -365,7 +381,7 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res){
-        console.log(res)
+        // console.log(res)
         wx.showToast({
           icon: 'none',
           title: res.data.errortip,
@@ -389,7 +405,7 @@ Page({
   },
 
   onLoad: function (options) {
-    console.log(JSON.parse(options.data))
+    // console.log(JSON.parse(options.data))
     let data = JSON.parse(options.data)
     this.setData({
       user_exprect: data.industry_name,
@@ -409,8 +425,8 @@ Page({
       expect_id: data.expect_id
     })
 
-    console.log(this.data.expect_id)
-    console.log(this.data.expect_id != -9999)
+    // console.log(this.data.expect_id)
+    // console.log(this.data.expect_id != -9999)
 
     this.getSalaryBaseFun()
     this.getunitsizeTypeFun()
@@ -426,6 +442,7 @@ Page({
       wx.request({
         url: `${getZPType}?module=inc_industry`,
         success: res => {
+          console.log(res, 12321)
           if (res.data.error == '0') {
             const { listjson } = res.data
             const jobOne = []
@@ -454,7 +471,7 @@ Page({
             })
             this.setData({
               industryArray: [this.data.industryOneC, arr],
-              industryIndex: arr1
+              industryIndexArr: arr1
             })
           }
         }
@@ -477,7 +494,7 @@ Page({
               addressOne: listjson,
               addressOneC: jobOne
             })
-            console.log(this.data.addressOne,this.data.addressOneC,11)
+            // console.log(this.data.addressOne,this.data.addressOneC,11)
             resolve(listjson)
           }
         }
@@ -485,16 +502,22 @@ Page({
     }).then(res => {
       wx.request({
         url: `${getCityList}?father_id=${res[0].province_code}`,
-        success: res => {
-          console.log(res, 'city')
-          if (res.data.error == '0') {
+        success: data => {
+          console.log(data, 'city')
+          if (data.data.error == '0') {
             const arr = []
-            res.data.listjson.forEach((v, i) => {
+            const arr1 = []
+            data.data.listjson.forEach((v, i) => {
               arr.push(v.city_name)
+              arr1.push(v.city_id)
             })
             this.setData({
-              addressArray: [this.data.addressOneC, arr]
+              addressArray: [this.data.addressOneC, arr],
+              province_id: res[0].province_code,
+              addressIndexArr: arr1
             })
+
+            console.log(this.data.province_id, this.data.addressIndexArr, 'ttt')
           }
         }
       })
