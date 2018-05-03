@@ -34,11 +34,11 @@
       <view class="inner-row">
         <view class="tit">企业基本信息：</view>
         <view class="job-desc">企业性质：{{list.unittype_name}}</view>
-        <view class="job-desc">发展阶段：{{list.company_stage}}</view>
-        <view class="job-desc">企业领域：{{list.industry_name}}</view>
+        <view class="job-desc" wx:if="{{ list.company_stage != '' }}">发展阶段：{{list.company_stage}}</view>
+        <view class="job-desc" wx:if="{{ list.industry_name != '' && list.industry_name != null }}">企业领域：{{list.industry_name}}</view>
         <view class="job-desc">企业规模：{{list.unitsize_name}}</view>
-        <view class="job-desc">企业网址：{{list.company_url}}</view>
-        <view class="job-desc">公司地址：{{list.city_name}}</view>
+        <view class="job-desc" wx:if="{{ list.company_url != null }}">企业网址：{{list.company_url}}</view>
+        <view class="job-desc" wx:if="{{ list.company_addresss != null }}">公司地址：{{list.company_addresss}}</view>
       </view>
     </view>
 

@@ -68,6 +68,12 @@ Page({
       url: `../jobDetail/detail?id=${id}`
     })
   },
+  linkCompanyDetail(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../companyDetail/detail?id=${id}`
+    })
+  },
   //获取收藏的职位
   getPositionCollectFun() {
     wx.request({
@@ -127,13 +133,21 @@ Page({
       fliterType: type
     })
     if (this.data.fliterType == 'job') {
-      if (this.data.jobList.length == 0) {
+      //if (this.data.jobList.length == 0) {
+      this.setData({
+        showPos: true,
+        jobList:[]
+      })
         this.getPositionCollectFun()
-      }
+      //}
     } else if (this.data.fliterType == 'company') {
-      if (this.data.companyList.length == 0) {
+      //if (this.data.companyList.length == 0) {
+        this.setData({
+          showCompany: true,
+          companyList: []
+        })
         this.getCompanyCollectFun()
-      }
+      //}
     }
   },
   positionLower(){},
@@ -287,7 +301,27 @@ Page({
   onShow() {
     console.log(this.data.isBack)
     if (this.data.isBack) {
-      this.getResume()
+      if (this.data.page == '1'){
+        this.getResume()
+      }else if (this.data.page == '4'){
+        if (this.data.fliterType == 'job') {
+          //if (this.data.jobList.length == 0) {
+          this.setData({
+            showPos: true,
+            jobList: []
+          })
+          this.getPositionCollectFun()
+          //}
+        } else if (this.data.fliterType == 'company') {
+          //if (this.data.companyList.length == 0) {
+          this.setData({
+            showCompany: true,
+            companyList: []
+          })
+          this.getCompanyCollectFun()
+          //}
+        }
+      }
     }
     this.setData({
       isBack: true

@@ -73,3 +73,31 @@
   background-color: #fff;
   border-top: 1rpx solid #eaecf3
 }
+
+
+.resume-tips {
+  padding-top: 150rpx;
+}
+.resume-tips .tip-icon {
+  display: block;
+  width: 202rpx;
+  height: 262rpx;
+  margin: 0 auto 28rpx;
+}
+.resume-tips .tip {
+  font-size: 28rpx;
+  color: #9da3b4;
+  text-align: center;
+  margin-top: 42rpx
+}
+.resume-tips .tipfooter {
+  margin-top: 88rpx;
+  font-size: 28rpx;
+  color: #9da3b4;
+  text-align: center;
+}
+.resume-tips .tipfooter text{
+  color: #47dbe2;
+  margin-left: 12rpx;
+  margin-right: 12rpx;
+}
