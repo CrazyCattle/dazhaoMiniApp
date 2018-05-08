@@ -90,6 +90,9 @@ Page({
             playInfor: result,
             collected: result.collect
           })
+          wx.setNavigationBarTitle({
+            title: result.lesson_name
+          })
         }
       },
       fail: err => {

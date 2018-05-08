@@ -104,12 +104,18 @@
   color:#313148;
 }
 .inner-row .job-desc {
-  display: flex;
+  /*display: flex;*/
   align-items: center;
   font-size: 24rpx;
   color: #848ca1;
   letter-spacing: 0.04rpx;
   line-height: 50rpx;
+}
+.inner-row .job-desc text{
+  display: none;
+}
+.inner-row .job-desc .WxEmojiView{
+  margin-top: 1px;
 }
 .j-row-1 .inner-row {
   overflow: hidden;

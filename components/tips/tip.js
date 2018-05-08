@@ -4,7 +4,8 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    content: String
+    content: String,
+    height:String
   },
 
   /**
@@ -15,7 +16,8 @@ Component({
   },
   attached () {
     this.setData({
-      tips: this.data.content
+      tips: this.data.content,
+      height: this.data.height
     })
   },
   /**

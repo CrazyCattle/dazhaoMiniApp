@@ -66,6 +66,15 @@ Page({
       navToLogin()
     }
   },
+  linkCourseCollect(){
+    if (getUserState()) {
+      wx.reLaunch({
+        url: '../navCourse/course?page=3',
+      })
+    } else {
+      navToLogin()
+    }
+  },
   linkResumeCenter() {
     if (getUserState()) {
       wx.navigateTo({

@@ -8,8 +8,15 @@
     <view class="center-tab-item {{page=='3'?'active':''}}" data-page="3" bindtap="tabPage">邀请函</view>
     <view class="center-tab-item {{page=='4'?'active':''}}" data-page="4" bindtap="tabPage">收藏夹</view>
   </view>
-
-  <tip content="暂无信息" wx:if="{{page == '1' && noResumeList}}"></tip>
+  <view class="resume-list" wx:if="{{page == '1' && noResumeList}}">
+    <view class="list-content">
+      <view class="resume-tips">
+        <image class="tip-icon" src="../../images/noresume.png"></image>
+        <view class="tip">还没有写简历，快去写一封吧~</view>
+        <view class="tipfooter">电脑登陆<text>stu.dazhao100.cn</text>写简历</view>
+      </view>
+    </view>
+  </view>
   <view class="resume-list" wx:if="{{ page == '1' && resumeList.length > 0 }}">
     <scroll-view scroll-y style="height: 100%;">
       <view class="resume-item active bg-f" bindtap='linkResume' data-id="{{item.resumes_id}}" wx:for="{{ resumeList }}" wx:key="key">
@@ -330,12 +337,12 @@
     </scroll-view>
   </view>
 
-  <!-- <tip content="暂无信息" wx:if="{{ page == '4'}}"></tip> -->
   <view class="collect-filter bg-f" wx:if="{{ page == '4' && curShow }}">
     <view class="filter-tab {{fliterType=='job'?'acitve':''}}" bindtap="changeCokllectFilter" data-type="job">收藏职位</view>
     <view class="filter-tab {{fliterType=='company'?'acitve':''}}" bindtap="changeCokllectFilter" data-type="company">收藏企业</view>
   </view>
   <view class="scroll-list-box pt20" wx:if="{{ page == '4' && curShow }}">
+    <tip content="您未收藏任何职业" height="100%" wx:if="{{ page == '4' && fliterType == 'job' && jobList.length == 0 }}"></tip>
     <view class="scroll-list-box bg-f" wx:if="{{ fliterType == 'job' }}">
       <scroll-view scroll-y style="height: 100%;" bindscrolltolower="positionLower">
         <view class="r-list" wx:if="{{ showPos }}">
@@ -354,10 +361,11 @@
         <loading wx:if="{{ !showPos }}"></loading>
       </scroll-view>
     </view>
+    <tip content="您未收藏任何企业" height="100%" wx:if="{{ page == '4' && fliterType == 'company' && companyList.length == 0 }}"></tip>
     <view class="scroll-list-box bg-f" wx:if="{{ fliterType == 'company' }}">
       <scroll-view scroll-y style="height: 100%;" bindscrolltolower="companyLower">
         <view class="r-list" wx:if="{{ showCompany }}">
-          <view class="r-list-item" wx:for="{{ companyList }}" wx:key wx:for-item="item">
+          <view class="r-list-item" wx:for="{{ companyList }}" bindtap="linkCompanyDetail" data-id="{{ item.company_id }}" wx:key wx:for-item="item" >
             <image class="pic" src="{{ item.company_logo }}"></image>
             <view class="cont">
               <view class="job lh-normal">{{ item.company_name }}</view>

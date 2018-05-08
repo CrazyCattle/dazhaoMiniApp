@@ -237,6 +237,7 @@ Page({
           })
           this.setData({
             jobArray: [this.data.jobOneC, arr],
+            father_changeId: id,
             father_id: id,
             jobIndexArr: arr1
           })

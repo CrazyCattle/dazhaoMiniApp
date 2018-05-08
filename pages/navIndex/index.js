@@ -175,7 +175,13 @@ Page({
   // 获取职位推荐
   getPositionListFun() {
     wx.request({
-      url: `${getPositionList}?p=1&isrom=1&nums=4`,
+      url: `${getPositionList}`,
+      data: {
+        p: '1',
+        isrom: '1',
+        nums: '4',
+        stu_id: getUserState() ? `${app.globalData.student_id}` : '0'
+      },
       method: 'GET',
       success: (res) => {
         if (res.data.error == '0') {
@@ -190,7 +196,13 @@ Page({
   // 获取企业推荐
   getCompanyListFun() {
     wx.request({
-      url: `${getCompanyList}?p=1&nums=4&isrom=1`,
+      url: `${getCompanyList}`,
+      data: {
+        p: '1',
+        isrom: '1',
+        nums: '4',
+        stu_id: getUserState() ? `${app.globalData.student_id}` : '0'
+      },
       method: 'GET',
       success: (res) => {
         if (res.data.error == '0') {

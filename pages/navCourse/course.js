@@ -39,7 +39,7 @@ Page({
     // page 3
     courseCollected: [],
     courseHistory: [],
-
+    page3RecordShow: false,
     taped: false
   },
   iptFocus(e) {
@@ -89,69 +89,14 @@ Page({
     this.setData({
       page: page
     })
-    // if (!!app.globalData.student_id) {
-    //   if (page == 2) {
-    //     if (this.data.imgUrls.length == 0) {
-    //       wx.request({
-    //         url: `${getIndexCRecommend}?stu_id=${app.globalData.student_id}`,
-    //         success: res => {
-    //           console.log(res)
-    //           const { result } = res.data
-    //           this.setData({
-    //             imgUrls: result
-    //           })
-    //         }
-    //       })
-    //     }
-
-    //     if (this.data.courseList.length == 0) {
-    //       wx.request({
-    //         url: `${getNewCourse}${this.data.curCoursePage}&stu_id=${app.globalData.student_id}`,
-    //         data: {},
-    //         method: 'GET',
-    //         success: res => {
-    //           console.log(res, '1111111111')
-    //           const { error } = res.data
-    //           if (error == '0') {
-    //             this.setData({
-    //               courseList: res.data.result,
-    //               curCoursePage: ++this.data.curCoursePage,
-    //               dataExsit: res.data.dataExsit
-    //             })
-    //           }
-    //         },
-    //         fail: res => {
-    //           throw Error(res)
-    //         },
-    //         complete: res => {
-    //           // complete
-    //         }
-    //       })
-    //     }
-    //   }
-
-    //   if (page == 3) {
-    //     this.getCollectCourse()
-    //     this.getHistoryCourse()
-    //   }
-    // } else {
-    //   if (page == 2) {
-    //     this.setData({
-    //       page2Show: !this.data.page2Show,
-    //       page3Show: false
-    //     })
-    //   } else if (page == 3) {
-    //     this.setData({
-    //       page2Show: false,
-    //       page3Show: !this.data.page3Show
-    //     })
-    //   }
-    // }
 
     if (page == 1) {
       this.setData({
         page3Show: false
       })
+      if (this.data.typeArr.length == 0) {
+        this.getTypeClass()
+      }
     }
 
     if (page == 2) {
@@ -204,7 +149,7 @@ Page({
       } else {
         this.setData({
           page2Show: false,
-          page3Show: !this.data.page3Show
+          page3Show: true
         })
       }
     }
@@ -217,10 +162,18 @@ Page({
       success: res => {
         console.log(res)
         if (res.data.error == '0') {
-          this.setData({
-            courseCollected: res.data.result,
-            showCollectMore: res.data.dataExsit
-          })
+          if (res.data.result.length > 0) {
+            this.setData({
+              courseCollected: res.data.result,
+              showCollectMore: res.data.dataExsit,
+              page3Show: false
+            })
+          } else {
+            this.setData({
+              courseCollected: [],
+              page3Show: true
+            })
+          }
         }
       },
       fail: res => {
@@ -238,17 +191,18 @@ Page({
       success: res => {
         console.log(res)
         if (res.data.error == '0') {
-          this.setData({
-            courseHistory: res.data.result,
-            showHistoryMore: res.data.dataExsit
-          })
+          if (res.data.result.length > 0) {
+            this.setData({
+              courseHistory: res.data.result,
+              showHistoryMore: res.data.dataExsit,
+              page3RecordShow: false
+            })
+          } else {
+            this.setData({
+              page3RecordShow: true
+            })
+          }
         }
-      },
-      fail: res => {
-        throw Error(res)
-      },
-      complete: res => {
-        // complete
       }
     })
   },
@@ -274,7 +228,7 @@ Page({
       url: `../coursePlay/play?id=${id}`
     })
   },
-  onLoad: function (options) {
+  getTypeClass() {
     wx.request({
       url: `${getCClass}`,
       method: 'GET',
@@ -287,14 +241,19 @@ Page({
           })
         }
         console.log(res)
-      },
-      fail: err => {
-        throw Error(err);
-      },
-      complete: res => {
-        // console.log(res)
       }
     })
+  },
+  onLoad: function (options) {
+    if (options.page && options.page == '3') {
+      this.setData({
+        page: 3
+      })
+      this.getCollectCourse()
+      this.getHistoryCourse()
+    } else {
+      this.getTypeClass()
+    }
   },
   onShow() {
     console.log(this.data.isBack, this.data.page == '3')
@@ -302,6 +261,7 @@ Page({
       if (this.data.page == '3') {
         this.getCollectCourse()
         this.getHistoryCourse()
+        console.log(this.data.page, this.data.page3Show)
       }
 
       if (this.data.taped) {
