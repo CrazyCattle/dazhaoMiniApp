@@ -310,16 +310,22 @@ Page({
     if (c == '0') {
       _self.data.addressOne.forEach((val, i) => {
         if (val.province_name == _self.data.addressArray[0][v]) {
+          // console.log(val.province_code, 'aalll')
           wx.request({
             url: `${getCityList}?father_id=${val.province_code}`,
             success: res => {
+              console.log(res, 'aalll')
+              
               if (res.data.error == '0') {
                 const arr = []
+                const arr1 = []
                 res.data.listjson.forEach((v, i) => {
                   arr.push(v.city_name)
+                  arr1.push(v.city_id)
                 })
                 _self.setData({
-                  addressArray: [_self.data.addressOneC, arr]
+                  addressArray: [_self.data.addressOneC, arr],
+                  addressIndexArr: arr1
                 })
               } else {  
                 wx.showToast({
@@ -406,7 +412,7 @@ Page({
   },
 
   onLoad: function (options) {
-    // console.log(JSON.parse(options.data))
+    console.log(JSON.parse(options.data),11122323)
     let data = JSON.parse(options.data)
     this.setData({
       user_exprect: data.industry_name,
@@ -514,7 +520,7 @@ Page({
             })
             this.setData({
               addressArray: [this.data.addressOneC, arr],
-              province_id: res[0].province_code,
+              // province_id: res[0].province_code,
               addressIndexArr: arr1
             })
 

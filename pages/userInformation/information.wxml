@@ -41,6 +41,6 @@
       <view class="row">公司规模：{{item.expect_unitsizename}}</view>
       <view class="row">公司性质：{{item.expect_unittypename}}</view>
     </view>
-    <view class="addExpectBtn" bindtap="linkJobExpect" data-key="-1">+ 添加求职期望</view>
+    <view class="addExpectBtn" wx:if="{{expectList.length < 3}}" bindtap="linkJobExpect" data-key="-1">+ 添加求职期望</view>
   </view>
 </view>
