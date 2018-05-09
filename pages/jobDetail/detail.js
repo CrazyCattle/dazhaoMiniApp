@@ -33,6 +33,12 @@ Page({
     companyList: [],
     positionId: undefined
   },
+  linkToCompany (e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `../companyDetail/detail?id=${id}`
+    })
+  },
   linkToJobDetail (e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({

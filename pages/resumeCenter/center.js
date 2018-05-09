@@ -14,6 +14,7 @@ const app = getApp()
 
 Page({
   data: {
+    website: '',
     curShow: true,
     noResumeList: false,
 
@@ -286,7 +287,9 @@ Page({
     })
   },
   onLoad: function (options) {
-    console.log(app.globalData.student_id)
+    this.setData({
+      website: wx.getStorageSync('schoolInfo').enter_stu_url
+    })
     if (!!app.globalData.student_id) {
       this.setData({
         student_id: app.globalData.student_id

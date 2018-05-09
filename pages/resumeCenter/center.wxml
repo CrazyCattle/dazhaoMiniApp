@@ -13,7 +13,7 @@
       <view class="resume-tips">
         <image class="tip-icon" src="../../images/noresume.png"></image>
         <view class="tip">还没有写简历，快去写一封吧~</view>
-        <view class="tipfooter">电脑登陆<text>stu.dazhao100.cn</text>写简历</view>
+        <view class="tipfooter">电脑登陆<text>{{ website }}</text>写简历</view>
       </view>
     </view>
   </view>

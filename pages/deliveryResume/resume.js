@@ -12,6 +12,7 @@ const app = getApp()
 
 Page({
   data: {
+    website: '',
     curShow: true,
     noResumeList: false,
 
@@ -125,7 +126,8 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      jobId: options.id
+      jobId: options.id,
+      website: wx.getStorageSync('schoolInfo').enter_stu_url
     })
     if (!!app.globalData.student_id) {
       this.setData({

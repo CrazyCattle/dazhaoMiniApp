@@ -51,7 +51,7 @@ Page({
     addressArray: [[], []],
     addressOne: [],
     addressOneC: [],
-    city_changeId: undefined,
+    prov_changeId: undefined,
     
     // 薪资数据
     salaryArr: [],
@@ -91,7 +91,8 @@ Page({
   },
   listenerSalary(e) {
     this.setData({
-      salaryIndex: e.detail.value
+      salaryIndex: e.detail.value,
+      expect_pay: this.data.salaryIndexArr[e.detail.value]
     });
     this.setData({
       salary: this.data.salaryArr[this.data.salaryIndex]
@@ -122,6 +123,7 @@ Page({
   listenerSize(e) {
     this.setData({
       sizeIndex: e.detail.value,
+      expect_unitsize: this.data.sizeIndexArr[e.detail.value]
     });
     this.setData({
       company_size: this.data.sizeArr[this.data.sizeIndex]
@@ -151,7 +153,8 @@ Page({
   },
   listenerNature(e) {
     this.setData({
-      xzIndex: e.detail.value
+      xzIndex: e.detail.value,
+      expect_unittype: this.data.xzIndexArr[e.detail.value]
     });
     this.setData({
       company_type: this.data.xzArr[this.data.xzIndex]
@@ -164,10 +167,8 @@ Page({
       industry: this.data.industryArray[1][e.detail.value[1]],
       industry_id: this.data.industryIndexArr[e.detail.value[1]]
     })
-    console.log(this.data.industry_id)
   },
   listenerIndustryChange(e) {
-    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
     let c = e.detail.column
     let v = e.detail.value
     let _self = this
@@ -177,9 +178,7 @@ Page({
           wx.request({
             url: `${getIndustryList}?tb_type=${val.parameter}`,
             success: res => {
-              // console.log(res)
               if (res.data.error == '0') {
-                // console.log(res.data,12321)
                 const arr = []
                 const arr1 = []
                 res.data.result.forEach((v, i) => {
@@ -227,7 +226,6 @@ Page({
       url: `${getPositionType}?father_id=${id}&level=2`,
       method: 'GET',
       success: res => {
-        console.log(res.data, 'aaa')
         if (res.data.error == '0') {
           const arr = []
           const arr1 = []
@@ -248,29 +246,23 @@ Page({
 
   // 监听职位类别
   listenerJobList(e) {
-    // console.log(1)
     this.setData({
       user_exprect: this.data.jobArray[1][e.detail.value[1]],
       father_id: this.data.father_changeId,
       positiontype_id: this.data.jobIndexArr[e.detail.value[1]]
     })
-    console.log(this.data.father_changeId, this.data.father_id, this.data.positiontype_id, e.detail.value[1], this.data.jobIndexArr)
   },
   listenerJobChange(e) {
-    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
     let c = e.detail.column
     let v = e.detail.value
     let _self = this
     if (c == '0') {
-      console.log( _self.data.jobOne,_self.data.jobArray)
       _self.data.jobOne.forEach((val, i) => {
         if (val.positiontype_name == _self.data.jobArray[0][v]) {
           wx.request({
             url: `${getPositionType}?father_id=${val.positiontype_id}&level=2`,
             success: res => {
-              console.log(res,'bbb')
               if (res.data.error == '0') {
-                console.log(res.data,12321)
                 const arr = []
                 const arr1 = []
                 res.data.listjson.forEach((v, i) => {
@@ -299,23 +291,22 @@ Page({
   // 地点监听
   listenerCity(e) {
     this.setData({
-      city: this.data.addressArray[1][e.detail.value[1]]
+      city: this.data.addressArray[1][e.detail.value[1]],
+      province_id: this.data.prov_changeId,
+      city_id: this.data.addressIndexArr[e.detail.value[1]]
     })
   },
   listenerCityChange(e) {
-    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+    // console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
     let c = e.detail.column
     let v = e.detail.value
     let _self = this
     if (c == '0') {
       _self.data.addressOne.forEach((val, i) => {
         if (val.province_name == _self.data.addressArray[0][v]) {
-          // console.log(val.province_code, 'aalll')
           wx.request({
             url: `${getCityList}?father_id=${val.province_code}`,
             success: res => {
-              console.log(res, 'aalll')
-              
               if (res.data.error == '0') {
                 const arr = []
                 const arr1 = []
@@ -325,8 +316,10 @@ Page({
                 })
                 _self.setData({
                   addressArray: [_self.data.addressOneC, arr],
+                  prov_changeId: val.province_code,
                   addressIndexArr: arr1
                 })
+                
               } else {  
                 wx.showToast({
                   title: res.data.errortip,
@@ -352,7 +345,6 @@ Page({
       },
       method: 'GET',
       success: res => {
-        // console.log(res)
         wx.showToast({
           title: res.data.errortip,
           icon: 'none',
@@ -367,7 +359,6 @@ Page({
     })
   },
   saveExpect() {
-    console.log(111)
     wx.request({
       url: `${sendExpect}`,
       data: {
@@ -388,7 +379,6 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
       },
       success: function(res){
-        // console.log(res)
         wx.showToast({
           icon: 'none',
           title: res.data.errortip,
@@ -401,18 +391,11 @@ Page({
             })
           }, 1000)
         }
-      },
-      fail: function() {
-        // fail
-      },
-      complete: function() {
-        // complete
       }
     })
   },
 
   onLoad: function (options) {
-    console.log(JSON.parse(options.data),11122323)
     let data = JSON.parse(options.data)
     this.setData({
       user_exprect: data.industry_name,
@@ -432,15 +415,11 @@ Page({
       expect_id: data.expect_id
     })
 
-    // console.log(this.data.expect_id)
-    // console.log(this.data.expect_id != -9999)
-
     this.getSalaryBaseFun()
     this.getunitsizeTypeFun()
     this.getCompanyXZFun()
 
     this.getPosiParentTypeFun().then((res) => {
-      console.log(res[0].positiontype_id)
       this.getPosiChildTypeFun(res[0].positiontype_id)
     })
 
@@ -449,7 +428,6 @@ Page({
       wx.request({
         url: `${getZPType}?module=inc_industry`,
         success: res => {
-          console.log(res, 12321)
           if (res.data.error == '0') {
             const { listjson } = res.data
             const jobOne = []
@@ -468,7 +446,6 @@ Page({
       wx.request({
         url: `${getIndustryList}?tb_type=${res[0].parameter}`,
         success: res => {
-          console.log(res,1000)
           if (res.data.error == '0') {
             const arr = []
             const arr1 = []
@@ -490,7 +467,6 @@ Page({
       wx.request({
         url: `${getProvinceList}`,
         success: res => {
-          console.log(res, 'p')
           if (res.data.error == '0') {
             const { listjson } = res.data
             const jobOne = []
@@ -501,7 +477,6 @@ Page({
               addressOne: listjson,
               addressOneC: jobOne
             })
-            // console.log(this.data.addressOne,this.data.addressOneC,11)
             resolve(listjson)
           }
         }
@@ -510,7 +485,6 @@ Page({
       wx.request({
         url: `${getCityList}?father_id=${res[0].province_code}`,
         success: data => {
-          console.log(data, 'city')
           if (data.data.error == '0') {
             const arr = []
             const arr1 = []
@@ -520,11 +494,10 @@ Page({
             })
             this.setData({
               addressArray: [this.data.addressOneC, arr],
-              // province_id: res[0].province_code,
+              prov_changeId: res[0].province_code,
+              province_id: res[0].province_code,
               addressIndexArr: arr1
             })
-
-            console.log(this.data.province_id, this.data.addressIndexArr, 'ttt')
           }
         }
       })
