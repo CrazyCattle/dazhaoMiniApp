@@ -351,9 +351,11 @@ Page({
           duration: 1000
         })
         if (res.data.error == '0'){
-          wx.navigateBack({
-            delta: 1
-          })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1000)
         }
       }
     })
