@@ -31,7 +31,10 @@ Page({
     list: {},
     // 名企推荐
     companyList: [],
-    positionId: undefined
+    positionId: undefined,
+
+    hasDesc: false,
+    hasReq: false
   },
   linkToCompany (e) {
     let id = e.currentTarget.dataset.id
@@ -177,8 +180,18 @@ Page({
               this.setData({ list })
               console.log(this.data.list)
               const { position_demand,position_description } = res.data.result.list
-              WxParse.wxParse('article1', 'html', position_demand, _self, 5);
-              WxParse.wxParse('article2', 'html', position_description, _self, 5);
+              if (!!position_demand) {
+                _self.setData({
+                  hasDesc: true
+                })
+                WxParse.wxParse('article1', 'html', position_demand, _self, 5);
+              }
+              if (!!position_description) {
+                _self.setData({
+                  hasReq: true
+                })
+                WxParse.wxParse('article2', 'html', position_description, _self, 5);
+              }
               resolve(this.data.list.positiontype_id)
             }
           }

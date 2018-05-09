@@ -216,3 +216,9 @@
   text-align: center;
   background-color: #51d3d9;
 }
+
+.jobDetailTitle {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
