@@ -62,7 +62,7 @@
     </view>
   </view>
 
-  <view class="recommend mt20 bg-f">
+  <view class="recommend mt20 bg-f" wx:if="{{ companyList.length > 0 }}">
     <view class="tc"><text class="title lh-normal">相似职位</text></view>
     <view class="r-list">
       <view class="r-list-item" wx:for="{{ companyList }}" wx:key="key" wx:for-item="item" data-id="{{ item.position_id }}" bindtap="linkToJobDetail">
@@ -76,7 +76,7 @@
           </view>
         </view>
       </view>
-      <view class="more" bindtap="linkMoreSameJob">
+      <view class="more" bindtap="linkMoreSameJob"  wx:if="{{ companyList.length == 4 }}">
         查看更多
         <view class="arrow-icon">
           <view class="inner"></view>
