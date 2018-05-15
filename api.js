@@ -26,7 +26,6 @@ module.exports = {
   editUserBasicInfo: `${basicUrl}/StudentBasicsEdit`, // 修改用户基本信息 
   uploadImg: `${basicUrl}/UpdataResumesImg`, //上传单个简历图片
   uploadUserImg: `${basicUrl}/UpdataStudentImg`, // 上传头像
-
   getUserInfor: `${basicUrl}/UserDetails`, // 获取用户信息
   getUnvDegree: `${basicUrl}/getUnvDegree`, //获取学历 university_id
   getfacultyArray: `${basicUrl}/getfacultyArray`,//获取院系 university_id
@@ -35,36 +34,31 @@ module.exports = {
   getStuAuthCode: `${basicUrl}/getStuAuthCode`, //修改手机号密码 获取短信验证码
   valiCode: `${basicUrl}/StudentCodePwdEdit`, //验证 手机号 验证码匹配
   feedback: `${basicUrl}/Feedback`, //建议反馈
-
   wxLogin: `${basicUrl}/WxLogin`,//微信登录
   getUserToken: `${basicUrl}/getUserToken?wxtoken=`, //获取id & token
   sendEmail: `${basicUrl}/SendEmail`, //简历投递
-
   getPositionList: `${basicUrl}/getPositionList`, //获取职位(相似职位接口+企业职位)
   getPositionOne: `${basicUrl}/getPositionOne`, //获取职位详情 token stu_id position_id
   getCompanyList: `${basicUrl}/getCompanyList`, //获取企业(推荐企业+企业职位)
   getCompanyOne: `${basicUrl}/getCompanyOne`,// 获取企业详情
   getStudentMis: `${basicUrl}/getStudentMis`, //获取消息通知
   getUnivNotice: `${basicUrl}/getUnivNotice`, //获取通知公告
-
   getPositionCollect: `${basicUrl}/getPositionCollect`, //用户职位 收藏夹
   getCompanyCollect: `${basicUrl}/getCompanyCollect`, //用户企业 收藏夹
-
   sendPosCollect: `${basicUrl}/SendPositionCollect`,//收藏职位
   sendComCollect: `${basicUrl}/SendCompanyCollect`,//收藏公司
-
   getZPType: `${basicUrl}/IndBase`, //职位推荐 获取单位类型 学历类型
   getPositionType: `${basicUrl}/getPositionType`,//获取招聘职位类型
   getIndustryList: `${basicUrl}/getIndustryList`, //目标行业小类
-
   getProvinceList: `${basicUrl}/getProvinceList`, //获取省份列表
   getCityList: `${basicUrl}/getCityList`, //获取城市列表
   deliveryResume: `${basicUrl}/SendPositionApply`,//投递简历 position_id resumes_id token stu_id
   getExpectList: `${basicUrl}/getExpectList`, //获取用户期望
-
   getSalaryBase: `${basicUrl}/getSalaryBase`, //薪资水平
   getunitsizeType: `${basicUrl}/getunitsizeType`,//公司规模
   sendPositionHate: `${basicUrl}/SendPositionHate`, //隐藏职位
   delExpect: `${basicUrl}/DelExpect`,// 删除求职期望
   sendExpect: `${basicUrl}/SendExpect`, // 添加求职期望
+  getMydropinbox: `${basicUrl}/getMydropinbox`, //投递箱
+  getMyinvitation: `${basicUrl}/getMyinvitation` //邀请函
 };

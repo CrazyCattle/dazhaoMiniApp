@@ -54,6 +54,7 @@
   font-family: 'PingFangSC-Semibold';
   font-weight: bold;
   font-size: 30rpx;
+  line-height: 40rpx;
   color:#313148;
 }
 .r-list-item .cont .company {

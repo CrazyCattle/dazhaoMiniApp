@@ -2,12 +2,16 @@ import {
   resumeList,
   delResume,
   getPositionCollect,
-  getCompanyCollect
+  getCompanyCollect,
+  getMydropinbox,
+  getMyinvitation
 } from '../../api';
 
 import {
   setNewToken,
-  initLoginStatus
+  initLoginStatus,
+  getUserState,
+  navToLogin
 } from '../../utils/util';
 
 const app = getApp()
@@ -34,11 +38,23 @@ Page({
       inving: '75%',
       seeing: '100%',
     },
+    mydropinbox: [],
+    canGetDropinbox: true,
+    timer1: null,
+    dropinboxPage: 1,
+    showMore1: true,
+
     // page 3
-    id: 0,
-    ids: 1,
+    id: -1,
+    ids: -1,
     showPos: false,
     showCompany: false,
+    myinvitatio: [],
+    canGetinvitation: true,
+    timer2: null,
+    invitationPage: 1,
+    showMore2: true,
+
     // 收藏职位列表
     jobList: [],
     // 收藏公司列表
@@ -52,16 +68,21 @@ Page({
     })
   },
   showDetail(e) {
-    let id = e.target.dataset.id
-    this.setData({
-      id: id
-    })
+    let id = e.currentTarget.dataset.id
+    this.setData({ id })
+  },
+  showDetailNone() {
+    this.setData({ id: -1 })
   },
   showStatus(e) {
-    let ids = e.target.dataset.ids
-    this.setData({
-      ids: ids
-    })
+    let ids = e.currentTarget.dataset.ids
+    if ( ids != this.data.ids) {
+      this.setData({ ids })
+    } else {
+      this.setData({
+        ids: -1
+      })
+    }
   },
   linkToJobDetail(e) {
     let id = e.currentTarget.dataset.id
@@ -109,6 +130,136 @@ Page({
       }
     })
   },
+  //获取投递箱
+  getMydropinboxFun() {
+    let loginType = wx.getStorageSync('loginType')
+    let _self = this
+    wx.request({
+      url: `${getMydropinbox}`,
+      data: {
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token,
+        nums: 10,
+        p: _self.data.dropinboxPage
+      },
+      method: 'GET',
+      success: res => {
+        console.log(res, '投递箱')
+        if (res.data.tokeninc == '0') {
+          if (loginType == 'wxlogin') {
+            setNewToken().then(res => {
+              if (res == 'ok') {
+                _self.getMydropinboxFun()
+              }
+            })
+          } else {
+            initLoginStatus()
+          }
+        } else {
+          if (res.data.error == 0) {
+            const { list } = res.data.result
+            _self.setData({
+              mydropinbox: _self.data.mydropinbox.concat(list),
+              showMore1: false
+            })
+            console.log(list)
+            if (list.length < 10) {
+              _self.setData({
+                canGetDropinbox: false
+              })
+            } else {
+              _self.setData({
+                dropinboxPage: ++_self.data.dropinboxPage
+              })
+              console.log(_self.data.dropinboxPage)
+            }
+          }
+        }
+      }
+    })
+  },
+  lower1() {
+    if (this.data.canGetDropinbox) {
+      const self = this;
+      wx.showNavigationBarLoading();
+      self.setData({
+        showMore1: true
+      })
+      if (self.timer1) {
+        clearTimeout(self.timer1);
+      }
+      self.timer1 = setTimeout(() => {
+        self.getMydropinboxFun()
+        wx.hideNavigationBarLoading();
+      }, 500);
+    }
+    console.log('lower1')
+  },
+  //获取邀请函
+  getMyinvitationFun() {
+    let loginType = wx.getStorageSync('loginType')
+    let _self = this
+    wx.request({
+      url: `${getMyinvitation}`,
+      data: {
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token,
+        nums: 10,
+        p: _self.data.invitationPage
+      },
+      method: 'GET',
+      success: res => {
+        console.log(res, '投递箱')
+        if (res.data.tokeninc == '0') {
+          if (loginType == 'wxlogin') {
+            setNewToken().then(res => {
+              if (res == 'ok') {
+                _self.getMydropinboxFun()
+              }
+            })
+          } else {
+            initLoginStatus()
+          }
+        } else {
+          if (res.data.error == 0) {
+            const { list } = res.data.result
+            _self.setData({
+              myinvitatio: _self.data.myinvitatio.concat(list),
+              showMore2: false
+            })
+            console.log(list)
+            if (list.length < 10) {
+              _self.setData({
+                canGetinvitation: false
+              })
+            } else {
+              _self.setData({
+                invitationPage: ++_self.data.invitationPage
+              })
+              console.log(_self.data.invitationPage)
+            }
+          }
+        }
+      }
+    })
+  },
+  lower2() {
+    if (this.data.canGetinvitation) {
+      const self = this;
+      wx.showNavigationBarLoading();
+      self.setData({
+        showMore2: true
+      })
+      if (self.timer2) {
+        clearTimeout(self.timer2);
+      }
+      self.timer2 = setTimeout(() => {
+        self.getMyinvitationFun()
+        wx.hideNavigationBarLoading();
+      }, 500);
+    }
+    console.log('lower2')
+  },
   tabPage(e) {
     let page = e.currentTarget.dataset.page
     this.setData({
@@ -125,6 +276,14 @@ Page({
         if (this.data.companyList.length == 0) {
           this.getCompanyCollectFun()
         }
+      }
+    } else if (page == 2) {
+      if (this.data.mydropinbox.length == 0) {
+        this.getMydropinboxFun()
+      }
+    } else if (page == 3) {
+      if (this.data.myinvitatio) {
+        this.getMyinvitationFun()
       }
     }
   },
