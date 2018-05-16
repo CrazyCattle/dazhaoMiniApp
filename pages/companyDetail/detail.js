@@ -23,7 +23,7 @@ Page({
     list: {},
     active: 1,
     more: true,
-
+    c_name: '',
     showMore: false,
     // 职位列表
     recruitList: []
@@ -63,6 +63,7 @@ Page({
               this.setData({
                 recruitList: res.data.result.list
               })
+
               if(this.data.recruitList.length >= 6) {
                 this.setData({
                   showMore: true
@@ -172,7 +173,10 @@ Page({
           } else {
             if (res.data.error == '0') {
               const { list } = res.data.result
-              this.setData({ list })
+              this.setData({ 
+                list,
+                c_name: list.company_name
+              })
               const article = list.company_introduce
               console.log(list.collectinc)
               if (list.collectinc != 0) {
@@ -200,7 +204,8 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '企业详情',
+      title: this.data.c_name,
+      // imageUrl: '',
       path: `pages/companyDetail/detail?id=${this.data.companyId}`,
       success: function(res) {
         console.log(res)

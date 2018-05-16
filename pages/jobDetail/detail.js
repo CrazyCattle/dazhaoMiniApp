@@ -23,6 +23,7 @@ Page({
   data: {
     jobId: undefined,
     collected: false,
+    work_name: '',
     // 位置 经纬度
     address: '',
     lat: undefined,
@@ -167,6 +168,9 @@ Page({
           } else {
             if (res.data.error == '0') {
               const { list } = res.data.result
+              _self.setData({
+
+              })
               console.log(list.collectinc,'ttttt')
               if (list.collectinc == '1') {
                 _self.setData({
@@ -177,7 +181,10 @@ Page({
                   collected: false
                 })
               }
-              this.setData({ list })
+              this.setData({ 
+                list,
+                work_name: list.position_name
+              })
               console.log(this.data.list)
               const { position_demand,position_description } = res.data.result.list
               if (!!position_demand) {
@@ -238,7 +245,8 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '职位详情',
+      title: this.data.work_name,
+      // imageUrl: '',
       path: `pages/jobDetail/detail?id=${this.data.jobId}`,
       success: function(res) {
         console.log(res)
