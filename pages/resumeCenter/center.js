@@ -43,6 +43,7 @@ Page({
     timer1: null,
     dropinboxPage: 1,
     showMore1: true,
+    hasMoreInfor1: true,
 
     // page 3
     id: -1,
@@ -54,6 +55,7 @@ Page({
     timer2: null,
     invitationPage: 1,
     showMore2: true,
+    hasMoreInfor2: true,
 
     // 收藏职位列表
     jobList: [],
@@ -158,12 +160,13 @@ Page({
         } else {
           if (res.data.error == 0) {
             const { list } = res.data.result
-            _self.setData({
-              mydropinbox: _self.data.mydropinbox.concat(list),
-              showMore1: false
-            })
+           
             console.log(list)
-            if (list.length < 10) {
+            if (list.length == 0) {
+              _self.setData({
+                hasMoreInfor1: false
+              })
+            } else if (list.length < 10 & list.length > 0) {
               _self.setData({
                 canGetDropinbox: false
               })
@@ -171,8 +174,11 @@ Page({
               _self.setData({
                 dropinboxPage: ++_self.data.dropinboxPage
               })
-              console.log(_self.data.dropinboxPage)
             }
+            _self.setData({
+              mydropinbox: _self.data.mydropinbox.concat(list),
+              showMore1: false
+            })
           }
         }
       }
@@ -223,12 +229,11 @@ Page({
         } else {
           if (res.data.error == 0) {
             const { list } = res.data.result
-            _self.setData({
-              myinvitatio: _self.data.myinvitatio.concat(list),
-              showMore2: false
-            })
-            console.log(list)
-            if (list.length < 10) {
+            if (list.length == 0) {
+              _self.setData({
+                hasMoreInfor2: false
+              })
+            } else if (list.length < 10 & list.length > 0) {
               _self.setData({
                 canGetinvitation: false
               })
@@ -236,8 +241,11 @@ Page({
               _self.setData({
                 invitationPage: ++_self.data.invitationPage
               })
-              console.log(_self.data.invitationPage)
             }
+            _self.setData({
+              myinvitatio: _self.data.myinvitatio.concat(list),
+              showMore2: false
+            })
           }
         }
       }
@@ -282,7 +290,7 @@ Page({
         this.getMydropinboxFun()
       }
     } else if (page == 3) {
-      if (this.data.myinvitatio) {
+      if (this.data.myinvitatio.length == 0) {
         this.getMyinvitationFun()
       }
     }

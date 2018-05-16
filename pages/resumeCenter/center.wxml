@@ -41,7 +41,7 @@
     <view class="item {{tabActive==6?'active':''}}" bindtap="changeTab" data-tab="6">面试结果</view>
   </view> 
   <view class="invi-list send-list" wx:if="{{ page == '2' && curShow}}">
-    <tip content="暂无信息" wx:if="{{ mydropinbox.length == 0 }}"></tip>
+    <tip content="暂无信息" wx:if="{{ !hasMoreInfor1 }}"></tip>
     <scroll-view scroll-y style="height: 100%;" wx:if="{{ mydropinbox.length > 0 }}" bindscrolltolower="lower1">
       <view class="invi-item bg-f" wx:for="{{ mydropinbox }}" wx:for-item="item" wx:key wx:for-index="index">
         <view class="main">
@@ -82,7 +82,7 @@
 
   <!-- <tip content="暂无信息" wx:if="{{ page == '3'}}"></tip> -->
   <view class="invi-list" wx:if="{{ page == '3' && curShow }}">
-    <tip content="暂无信息" wx:if="{{ myinvitatio.length == 0 }}"></tip>
+    <tip content="暂无信息" wx:if="{{ !hasMoreInfor2 }}"></tip>
     <scroll-view scroll-y style="height: 100%;" wx:if="{{ myinvitatio.length > 0 }}" bindscrolltolower="lower2">
       <view class="invi-item mt20 bg-f" wx:for="{{ myinvitatio }}" wx:for-item="item" wx:key wx:for-index="index">
         <view class="main" data-id="{{ index }}" bindtap='showDetail'>

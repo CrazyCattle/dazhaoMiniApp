@@ -316,7 +316,7 @@ Page({
                 })
                 _self.setData({
                   addressArray: [_self.data.addressOneC, arr],
-                  prov_changeId: val.province_code,
+                  prov_changeId: val.province_id,
                   addressIndexArr: arr1
                 })
                 
@@ -496,8 +496,8 @@ Page({
             })
             this.setData({
               addressArray: [this.data.addressOneC, arr],
-              prov_changeId: res[0].province_code,
-              province_id: res[0].province_code,
+              prov_changeId: res[0].province_id,
+              province_id: res[0].province_id,
               addressIndexArr: arr1
             })
           }
