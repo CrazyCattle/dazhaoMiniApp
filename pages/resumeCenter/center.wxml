@@ -46,13 +46,19 @@
       <view class="invi-item bg-f" wx:for="{{ mydropinbox }}" wx:for-item="item" wx:key wx:for-index="index">
         <view class="main">
           <view class="row">
-            <view class="job">UI设计师</view>
+            <view class="job">{{ item.position_name }}</view>
             <view class="time">2016.12.30</view>
           </view>
           <view class="row">
-            <view class="company">上海脚步网络科技有限公司</view>
+            <view class="company">{{ item.company_name }}</view>
             <view class="status" data-ids="{{ index }}" bindtap='showStatus'>
-              <view class="tips {{ ids== index ?'active':'' }}">不合适</view>
+              <view class="tips {{ ids== index ?'active':'' }}">
+                <block wx:if="{{ item.apply_passstate == '-1'}}">不合适</block>
+                <block wx:if="{{ item.apply_passstate == '0'}}">待处理</block>
+                <block wx:if="{{ item.apply_passstate == '1'}}">待定</block>
+                <block wx:if="{{ item.apply_passstate == '2'}}">邀请面试</block>
+                <block wx:if="{{ item.apply_passstate == '3'}}">已面试</block>
+              </view>
               <view class="arrow-icon b-arrow-icon {{ ids == index ?'active':'' }}">
                 <view class="inner"></view>
               </view>
@@ -70,8 +76,8 @@
               <view class="innerline" style="width: {{ status.seeing }}"></view>
             </view>
           </view>
-          <view class="status-d-row active">
-            <view class="status-txt">通过查看，您的初选未通过</view>
+          <view class="status-d-row active" wx:for="{{ item.tracks }}" wx:for-item="iItem" wx:key>
+            <view class="status-txt">{{ iItem.tracks_information?iItem.tracks_information:'企业尚未留言' }}</view>
             <view class="status-time pt20">2016.12.30 10:54:01</view>
           </view>
         </view>
@@ -87,18 +93,18 @@
       <view class="invi-item mt20 bg-f" wx:for="{{ myinvitatio }}" wx:for-item="item" wx:key wx:for-index="index">
         <view class="main" data-id="{{ index }}" bindtap='showDetail'>
           <view class="row">
-            <view class="job">UI设计师</view>
-            <view class="time">2016.12.30</view>
+            <view class="job">{{ item.position_name }}</view>
+            <view class="time">{{ item.invitation_uptime }}</view>
           </view>
           <view class="row">
-            <view class="company">上海脚步网络科技有限公司</view>
+            <view class="company">{{ item.company_name }}</view>
             <view class="arrow-icon b-arrow-icon" wx:if = "{{ id != index }}">
               <view class="inner"></view>
             </view>
           </view>
         </view>
         <view class="row" wx:if="{{ id == index }}" bindtap="showDetailNone" data-id="{{ index }}">
-          <view class="information">你好Simon，欢迎你投递产品部管培生职位</view>
+          <view class="information">{{ item.invitation_txt }}</view>
           <view class="arrow-icon t-arrow-icon">
             <view class="inner"></view>
           </view>
