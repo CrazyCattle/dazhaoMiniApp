@@ -175,6 +175,7 @@
 }
 
 .invi-item .row .job {
+  max-width: 465rpx;
   padding-right: 30rpx;
   font-family: 'PingFangSC-Semibold';
   font-weight: bold;
