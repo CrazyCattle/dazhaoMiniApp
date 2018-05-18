@@ -71,7 +71,8 @@ Page({
         dropinboxPage: 1,
         mydropinbox: [],
         canGetDropinbox: true,
-        hasMoreInfor1: true
+        hasMoreInfor1: true,
+        ids: -1
       })
       this.getMydropinboxFun()
     }
