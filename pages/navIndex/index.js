@@ -128,6 +128,15 @@ Page({
       navToLogin()
     }
   },
+  linkJobRecommend () {
+    if (getUserState()) {
+      wx.navigateTo({
+        url: `../jobRecommend/work`
+      })
+    } else {
+      navToLogin()
+    }
+  },
   linkCoursePlay (e) {
     let id = e.target.dataset.id
     wx.navigateTo({

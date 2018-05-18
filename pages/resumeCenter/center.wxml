@@ -33,12 +33,12 @@
 
   <!-- <tip content="暂无信息" wx:if="{{ page == '2'}}"></tip> -->
   <view class="fliter-tab bg-f tc" wx:if="{{ page == '2' && curShow}}">
-    <view class="item {{tabActive==1?'active':''}}" bindtap="changeTab" data-tab="1">全部</view>
-    <view class="item {{tabActive==2?'active':''}}" bindtap="changeTab" data-tab="2">投递成功</view>
-    <view class="item {{tabActive==3?'active':''}}" bindtap="changeTab" data-tab="3">被查看</view>
-    <view class="item {{tabActive==4?'active':''}}" bindtap="changeTab" data-tab="4">通过筛选</view>
-    <view class="item {{tabActive==5?'active':''}}" bindtap="changeTab" data-tab="5">面试邀请</view>
-    <view class="item {{tabActive==6?'active':''}}" bindtap="changeTab" data-tab="6">面试结果</view>
+    <view class="item {{tabActive==0?'active':''}}" bindtap="changeTab" data-tab="0">全部</view>
+    <view class="item {{tabActive==1?'active':''}}" bindtap="changeTab" data-tab="1">投递成功</view>
+    <view class="item {{tabActive==2?'active':''}}" bindtap="changeTab" data-tab="2">被查看</view>
+    <view class="item {{tabActive==3?'active':''}}" bindtap="changeTab" data-tab="3">通过筛选</view>
+    <view class="item {{tabActive==4?'active':''}}" bindtap="changeTab" data-tab="4">面试邀请</view>
+    <view class="item {{tabActive==5?'active':''}}" bindtap="changeTab" data-tab="5">面试结果</view>
   </view> 
   <view class="invi-list send-list" wx:if="{{ page == '2' && curShow}}">
     <tip content="暂无信息" wx:if="{{ !hasMoreInfor1 }}"></tip>
@@ -47,7 +47,7 @@
         <view class="main">
           <view class="row">
             <view class="job">{{ item.position_name }}</view>
-            <view class="time">2016.12.30</view>
+            <view class="time">{{ item.apply_updatetime }}</view>
           </view>
           <view class="row">
             <view class="company">{{ item.company_name }}</view>
@@ -67,18 +67,18 @@
         </view>
         <view class="status-row" wx:if="{{ ids == index }}">
           <view class="status-detail">
-            <text class="status-item active">投递简历</text>
-            <text class="status-item">被查看</text>
-            <text class="status-item">通过筛选</text>
-            <text class="status-item">面试邀请</text>
-            <text class="status-item">面试结束</text>
+            <text class="status-item {{ item.apply_read == '1' || item.apply_passstate == '0' || item.apply_passstate == '1' || item.apply_passstate == '2' || item.apply_passstate == '3'?'active':'' }}">投递简历</text>
+            <text class="status-item {{ item.apply_read == '1'?'active':'' }}">被查看</text>
+            <text class="status-item {{ item.apply_passstate == '1' || item.apply_passstate == '2' || item.apply_passstate == '3'?'active':'' }}">通过筛选</text>
+            <text class="status-item {{ item.apply_passstate == '2' || item.apply_passstate == '3'?'active':'' }}">面试邀请</text>
+            <text class="status-item {{ item.apply_passstate == '3'?'active':'' }}">面试结束</text>
             <view class="line">
-              <view class="innerline" style="width: {{ status.seeing }}"></view>
+              <view class="innerline" style="width: {{item.apply_passstate=='2'||item.apply_passstate=='3'?'100%':item.apply_read=='1'?'50%':item.apply_passstate=='1'?'75%':item.apply_passstate == '0'?'25%':'0%'}}"></view>
             </view>
           </view>
           <view class="status-d-row active" wx:for="{{ item.tracks }}" wx:for-item="iItem" wx:key>
-            <view class="status-txt">{{ iItem.tracks_information?iItem.tracks_information:'企业尚未留言' }}</view>
-            <view class="status-time pt20">2016.12.30 10:54:01</view>
+            <text class="status-txt">{{iItem.tracks_information?iItem.tracks_information:'企业尚未留言'}}</text>
+            <view class="status-time pt20">{{ iItem.tracks_time }}</view>
           </view>
         </view>
       </view>

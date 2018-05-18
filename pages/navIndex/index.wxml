@@ -11,9 +11,9 @@
       <image class="img" src="../../images/index/nav/item_1.png"></image>
       <text class="txt">课程分类</text>
     </view>  
-    <view class="nav-item" bindtap="linkCompany">
+    <view class="nav-item" bindtap="linkJobRecommend">
       <image class="img" src="../../images/index/nav/item_2.png"></image>
-      <text class="txt">名企推荐</text>
+      <text class="txt">职位推荐</text>
     </view>  
     <view class="nav-item" bindtap="linkResumeCenter">
       <image class="img" src="../../images/index/nav/item_3.png"></image>

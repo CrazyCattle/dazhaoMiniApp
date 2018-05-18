@@ -24,13 +24,13 @@ Page({
 
     isBack: false,
     student_id: '',
-
+    type: 0,
     page: 1,
     fliterType: 'job',
     // page 1
     resumeList: [],
     // page 2
-    tabActive: 1,
+    tabActive: 0,
     status: {
       sending: '0',
       seeing: '25%',
@@ -65,9 +65,16 @@ Page({
   // 投递箱 切换过滤
   changeTab (e) {
     let tabActive = e.currentTarget.dataset.tab
-    this.setData({
-      tabActive
-    })
+    if (tabActive !== this.data.tabActive) {
+      this.setData({
+        tabActive,
+        dropinboxPage: 1,
+        mydropinbox: [],
+        canGetDropinbox: true,
+        hasMoreInfor1: true
+      })
+      this.getMydropinboxFun()
+    }
   },
   showDetail(e) {
     let id = e.currentTarget.dataset.id
@@ -142,7 +149,8 @@ Page({
         stu_id: app.globalData.student_id,
         token: app.globalData.token,
         nums: 10,
-        p: _self.data.dropinboxPage
+        p: _self.data.dropinboxPage,
+        type: this.data.tabActive
       },
       method: 'GET',
       success: res => {
@@ -162,11 +170,12 @@ Page({
             const { list } = res.data.result
            
             console.log(list)
-            if (list.length == 0) {
+            if (list.length == 0 && _self.data.mydropinbox.length == 0) {
               _self.setData({
                 hasMoreInfor1: false
               })
-            } else if (list.length < 10 & list.length > 0) {
+            } 
+            if (list.length < 10 & list.length > 0) {
               _self.setData({
                 canGetDropinbox: false
               })
@@ -246,6 +255,7 @@ Page({
               myinvitatio: _self.data.myinvitatio.concat(list),
               showMore2: false
             })
+            console.log(_self.data.myinvitatio)
           }
         }
       }
