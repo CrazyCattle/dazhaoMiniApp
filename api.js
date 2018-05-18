@@ -60,5 +60,7 @@ module.exports = {
   delExpect: `${basicUrl}/DelExpect`,// 删除求职期望
   sendExpect: `${basicUrl}/SendExpect`, // 添加求职期望
   getMydropinbox: `${basicUrl}/getMydropinbox`, //投递箱
-  getMyinvitation: `${basicUrl}/getMyinvitation` //邀请函
+  getMyinvitation: `${basicUrl}/getMyinvitation`, //邀请函
+  pushSetting: `${basicUrl}/PushSetting`, //学生推送设置
+  getPushSetting: `${basicUrl}/PushSetting`, //获取学生推送设置
 };
