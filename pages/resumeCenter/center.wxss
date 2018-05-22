@@ -102,6 +102,9 @@
 .resume-item .item-lf .desc {
   font-size: 26rpx;
   color: #848ca1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .resume-item .item-rt {

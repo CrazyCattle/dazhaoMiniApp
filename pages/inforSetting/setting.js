@@ -1,3 +1,8 @@
+import {
+  pushSetting,
+  getPushSetting
+} from '../../api';
+
 Page({
   data: {
     dxts: false,
