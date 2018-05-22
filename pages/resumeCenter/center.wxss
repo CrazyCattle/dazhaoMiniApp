@@ -97,6 +97,9 @@
   padding-right: 25rpx;
   font-size: 30rpx;
   color: #313148;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .resume-item .item-lf .desc {
