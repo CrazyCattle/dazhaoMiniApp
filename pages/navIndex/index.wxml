@@ -24,8 +24,26 @@
       <text class="txt">求职锦囊</text>
     </view>   -->
   </view>
-
   
+  <view class="scroll-box mt20 bg-f" wx:if="{{ imgUrls.length > 0 }}">
+    <view class="scroll-title">
+      课程推荐
+      <view class="c-more" bindtap="linkCourse">
+        查看更多
+        <view class="arrow-icon">
+          <view class="inner"></view>
+        </view> 
+      </view>
+    </view>
+    <swiper class="scroll-swiper" indicator-dots="{{ indicatorDots }}" autoplay="{{ canautoplay }}" duration="160" display-multiple-items="2" previous-margin="35rpx" next-margin="17.5rpx" skip-hidden-item-layout="true">
+      <block wx:for="{{imgUrls}}" wx:key="key">
+        <swiper-item class="swiper-item">
+          <image data-id="{{ item.lesson_id }}" bindtap="linkCoursePlay" src="{{ item.lesson_img }}" class="slide-image"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
   <view class="recommend mt20 bg-f">
     <view class="tc">
       <text class="title lh-normal">AI 管家</text>
@@ -50,25 +68,6 @@
         <view class="item">前端工程师</view>
       </view>
     </view>
-  </view>
-
-  <view class="scroll-box mt20 bg-f" wx:if="{{ imgUrls.length > 0 }}">
-    <view class="scroll-title">
-      课程推荐
-      <view class="c-more" bindtap="linkCourse">
-        查看更多
-        <view class="arrow-icon">
-          <view class="inner"></view>
-        </view> 
-      </view>
-    </view>
-    <swiper class="scroll-swiper" indicator-dots="{{ indicatorDots }}" autoplay="{{ canautoplay }}" duration="160" display-multiple-items="2" previous-margin="35rpx" next-margin="17.5rpx" skip-hidden-item-layout="true">
-      <block wx:for="{{imgUrls}}" wx:key="key">
-        <swiper-item class="swiper-item">
-          <image data-id="{{ item.lesson_id }}" bindtap="linkCoursePlay" src="{{ item.lesson_img }}" class="slide-image"></image>
-        </swiper-item>
-      </block>
-    </swiper>
   </view>
 
   <view class="recommend mt20 bg-f" wx:if="{{ jobList.length > 0 }}">

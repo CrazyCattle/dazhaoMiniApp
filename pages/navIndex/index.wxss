@@ -190,7 +190,7 @@
   font-size: 26rpx;
   padding: 15rpx 20rpx;
   color: #848ca1;
-  background-color: #f2f2f2;
+  background-color: #f8f9fc;
   border-radius: 3rpx;
   box-shadow: 0 0 0 5rpx rgba(0,0,0,.05);
 }
@@ -199,7 +199,7 @@
 .ai-tip {
   box-sizing: border-box;
   width: 666rpx;
-  margin: 20rpx auto;
+  margin: 20rpx auto 30rpx;
   padding: 22rpx 130rpx 22rpx 40rpx;
   border-radius: 20rpx;
   color:#848ca1;
@@ -236,6 +236,7 @@
   font-size: 26rpx;
   color: #313148;
   line-height: 44rpx;
+  font-weight: bold;
   font-family: PingFangSC-Semibold;
 }
 .resalary .salary {
