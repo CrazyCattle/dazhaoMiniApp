@@ -22,7 +22,7 @@ Page({
   linkSend() {
     if (getUserState()) {
       wx.navigateTo({
-        url: '../resumeSend/send'
+        url: '../resumeCenter/center?action=send'
       })
     } else {
       // wx.showToast({
@@ -36,7 +36,7 @@ Page({
   linkView() {
     if (getUserState()) {
       wx.navigateTo({
-        url: '../resumeReview/review'
+        url: '../resumeCenter/center?action=view'
       })
     } else {
       // wx.showToast({

@@ -25,7 +25,7 @@ Page({
     isBack: false,
     student_id: '',
     type: 0,
-    page: 1,
+    page: -1,
     fliterType: 'job',
     // page 1
     resumeList: [],
@@ -284,7 +284,9 @@ Page({
     this.setData({
       page: page
     })
-    if (page == 4) {
+    if (page == 1) {
+      this.getResume()
+    } else if (page == 4) {
       if (this.data.fliterType == 'job') {
         if (this.data.jobList.length == 0) {
           console.log(this.data.jobList.length)
@@ -469,10 +471,32 @@ Page({
       website: wx.getStorageSync('schoolInfo').enter_stu_url
     })
     if (!!app.globalData.student_id) {
-      this.setData({
-        student_id: app.globalData.student_id
-      })
-      this.getResume()
+      if (options.action) {
+        this.setData({
+          page: 2,
+          dropinboxPage: 1,
+          mydropinbox: [],
+          canGetDropinbox: true,
+          hasMoreInfor1: true,
+          ids: -1
+        })
+        if (options.action == 'send') {
+          this.setData({
+            tabActive: 1
+          })
+        } else if (options.action == 'view') {
+          this.setData({
+            tabActive: 4
+          })
+        }
+        this.getMydropinboxFun()
+      } else {
+        this.setData({
+          student_id: app.globalData.student_id,
+          page: 1
+        })
+        this.getResume()
+      }
     } else {
       this.setData({
         noResumeList: !this.data.noResumeList

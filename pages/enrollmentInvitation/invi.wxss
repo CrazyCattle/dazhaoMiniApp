@@ -38,12 +38,13 @@
   color: #848ca1;
 }
 .infor-item .desc {
+  display: block;
   width: 100%;
   font-size: 26rpx;
   color: #848ca1;
-  overflow: hidden;
+  /* overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
 }
 .infor-item .desc:last-child {
   padding-top: 10rpx;

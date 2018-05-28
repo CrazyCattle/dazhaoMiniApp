@@ -65,12 +65,13 @@
 }
 
 .infor-item .desc {
-  width: 100%;
+  display: block;
+  /* width: 642rpx; */
   font-size: 26rpx;
   color: #848ca1;
-  overflow: hidden;
+  /* overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
 }
 
 .infor-item .desc:last-child {
