@@ -3,16 +3,20 @@
   <view class="list-content">
     <scroll-view scroll-y style="height: 100%;">
       <view class="srcoll-box">
-        <view class="resume-item active bg-f" wx:for="{{ resumeList }}" wx:key="key">
-          <view class="item-lf">
-            <view class="title ellipsis">{{ item.title }}</view>
-            <view class="desc">{{item.city}} | {{ item.expectwork }}</view>
+        <form bindsubmit="formSubmit" report-submit='true' wx:for="{{ resumeList }}" wx:key="key">
+          <view class="resume-item active bg-f" >
+            <input type="hidden" name="id" value="{{ item.resumes_id }}"></input>
+            <view class="item-lf">
+              <view class="title ellipsis">{{ item.title }}</view>
+              <view class="desc">{{item.city}} | {{ item.expectwork }}</view>
+            </view>
+            <view class="item-rt">
+              <text class="editBtn" catchtap='linkResume' data-id="{{ item.resumes_id }}" data-lan="{{ item.language }}">预览</text>
+              <!-- <text class="editBtn" catchtap="deliveryResume" data-id="{{ item.resumes_id }}">投递</text> -->
+              <button class="editBtn" formType="submit" data-id="{{ item.resumes_id }}">投递</button>
+            </view>
           </view>
-          <view class="item-rt">
-            <text class="editBtn" catchtap='linkResume' data-id="{{ item.resumes_id }}" data-lan="{{ item.language }}">预览</text>
-            <text class="editBtn" catchtap="deliveryResume" data-id="{{ item.resumes_id }}">投递</text>
-          </view>
-        </view>
+        </form>
       </view>
     </scroll-view>
   </view>

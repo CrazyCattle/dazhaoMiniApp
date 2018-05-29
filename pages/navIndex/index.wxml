@@ -44,28 +44,24 @@
     </swiper>
   </view>
 
-  <view class="recommend mt20 bg-f">
+  <view class="recommend mt20 bg-f" wx:if="aiList.length !== 0">
     <view class="tc">
       <text class="title lh-normal">AI 管家</text>
     </view>
-    <view class="ai-tip">
+    <view class="ai-tip" bindtap="linkToEditInfor" wx:if="{{ showAiTip }}">
       修正您的<text class="notice">个人信息</text>，AI 管家 将为您匹配更精准的信息
-      <view class="icon">
+      <view class="icon" catchtap="closeTip">
         <image class="icon-close" src="../../images/close.png"></image>
       </view>
     </view>
     <view class="resalary">
       <view class="tit">大数据预测： </view>
-      <view class="salary">您的起薪应该是 <text class="salary-txt">8000元/月</text></view>
+      <view class="salary">您的起薪应该是 <text class="salary-txt">{{ aiList.payroll }}元/月</text></view>
     </view>
     <view class="rejob">
       <text class="tit">AI管家觉得您骨子里适合以下职位：</text>
       <view class="rejob-box">
-        <view class="item">前端工程师</view>
-        <view class="item">前端工程师</view>
-        <view class="item">前端工程师</view>
-        <view class="item">前端工程师</view>
-        <view class="item">前端工程师</view>
+        <view class="item" wx:for="{{ aiList.position_name }}" wx:for-item="item" wx:key>{{ item.position_name }}</view>
       </view>
     </view>
   </view>

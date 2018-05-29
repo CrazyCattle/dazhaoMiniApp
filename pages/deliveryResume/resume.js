@@ -26,7 +26,46 @@ Page({
     // page 1
     resumeList: [],
   },
-
+  formSubmit(e) {
+    console.log(e.detail.value, e.detail.formId)
+    const id = e.detail.value.id
+    const formId = e.detail.formId
+    wx.request({
+      url: `${deliveryResume}`,
+      data: {
+        stu_id: app.globalData.student_id,
+        token: app.globalData.token,
+        resumes_id: id,
+        position_id: this.data.jobId,
+        form_id: formId
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: 'POST',
+      success: res => {
+        console.log(res)
+        if (res.data.error == '0') {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.errortip,
+            duration: 1000
+          })
+          setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1000)
+        } else if (res.data.error == '1') {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.errortip,
+            duration: 1000
+          })
+        }
+      }
+    })
+  },
   linkResume(e) {
     let resumes_id = e.currentTarget.dataset.id
     wx.navigateTo({

@@ -3,7 +3,8 @@ import {
   banner,
   getPositionList,
   getCompanyList,
-  sendPositionHate
+  sendPositionHate,
+  getStuForecast
 } from '../../api.js';
 
 import {
@@ -28,6 +29,8 @@ Page({
     circular: true,
     interval: 2500,
     duration: 300,
+    aiList: [],
+    showAiTip: false,
     // 职位推荐
     jobList: [],
     // 名企推荐
@@ -98,6 +101,68 @@ Page({
     wx.navigateTo({
       url: '../jobRecommend/work'
     })
+  },
+  linkToEditInfor() {
+    if (getUserState()) {
+      wx.navigateTo({
+        url: '../userInformation/information'
+      })
+    } else {
+      navToLogin()
+    }
+  },
+  closeTip() {
+    if (getUserState()) {
+      this.setData({
+        showAiTip: false
+      })
+      wx.setStorageSync('showAiTip', false)
+    } else {
+      navToLogin()
+    }
+  },
+  getAI() {
+    if (getUserState()) {
+      wx.request({
+        url: `${getStuForecast}`,
+        data: {
+          stu_id: app.globalData.student_id,
+          token: app.globalData.token
+        },
+        success: res => {
+          console.log(res, 'ai')
+          const { result } = res.data
+          if (!result.hasOwnProperty('length')) {
+            const { list } = result
+            if (!list.hasOwnProperty('length')) {
+              console.log(wx.getStorageSync('showAiTip') === false)
+              if (wx.getStorageSync('showAiTip')==='') {
+                this.setData({
+                  showAiTip: true
+                })
+              } else if (wx.getStorageSync('showAiTip')===false) {
+                this.setData({
+                  showAiTip: false
+                })
+              }
+              this.setData({
+                aiList: list
+              })
+            } else {
+              this.setData({
+                aiList: []
+              })
+            }
+          } else {
+            this.setData({
+              aiList: []
+            })
+          }
+        }
+      })
+    } else {
+      navToLogin()
+    }
   },
   linkCourse () {
     if (getUserState()) {
@@ -226,6 +291,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '首页'
     })
+    this.getAI()
     this.getBannerFun()
     this.getIndexCRecommendFun()
     this.getPositionListFun()

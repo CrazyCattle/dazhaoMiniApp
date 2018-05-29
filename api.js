@@ -63,4 +63,5 @@ module.exports = {
   getMyinvitation: `${basicUrl}/getMyinvitation`, //邀请函
   pushSetting: `${basicUrl}/PushSetting`, //学生推送设置
   getPushSetting: `${basicUrl}/PushSetting`, //获取学生推送设置
+  getStuForecast: `${basicUrl}/getStuForecast`, //后去AI推荐
 };
