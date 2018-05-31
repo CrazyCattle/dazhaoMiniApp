@@ -54,7 +54,7 @@
 }
 
 .status-row {
-  padding: 40rpx;
+  padding: 40rpx 28rpx;
   margin-top: 20rpx;
   flex-direction: column;
 }
@@ -99,7 +99,7 @@
   background-color: #51d3d9;
 }
 .status-d-row {
-  padding-left: 30rpx;
+  padding-left: 37rpx;
   margin-top: 30rpx;
   color:#848ca1;
   font-size: 24rpx;
@@ -108,9 +108,9 @@
 .status-d-row::before {
   content: '';
   position: absolute;
-  left: 14rpx;
+  left: 18rpx;
   top: 12rpx;
-  transform: translateX(-50%); 
+  transform: translateX(1rpx); 
   width: 1rpx;
   height: calc(100% - 20rpx);
   background: #d6dae4;
@@ -121,7 +121,7 @@
 .status-d-row .status-txt::before {
   content: '';
   position: absolute;
-  left: -15rpx;
+  left: -18rpx;
   top: 10rpx;
   transform: translate(-50%, 0);
   width: 12rpx;
