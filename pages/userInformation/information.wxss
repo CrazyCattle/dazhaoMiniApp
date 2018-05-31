@@ -46,7 +46,7 @@
   text-align: center;
   font-size: 24rpx;
   color: #fff;
-  background: #47dbe2;
+  background: #618FEB;
   border-radius: 22rpx;
 }
 
@@ -86,5 +86,5 @@
   align-items: center;
   justify-content: center;
   font-size: 24rpx;
-  color: #51d3d9;
+  color: #618FEB;
 }

@@ -119,7 +119,7 @@
 .inner-row .map {
   margin-top: 10rpx;
   font-size: 24rpx;
-  color: #47dbe2;
+  color: #618FEB;
   text-align: right;
 }
 .linkMap {
@@ -132,7 +132,7 @@
   align-items: center;
   justify-content: center;
   font-size: 24rpx;
-  color:#47dbe2;
+  color:#618FEB;
   letter-spacing: 0;
 }
 .arrow-icon {
@@ -142,7 +142,7 @@
   margin-left: 5rpx;
   position: relative;
   border: 10rpx solid transparent;
-  border-left-color: #47dbe2;
+  border-left-color: #618FEB;
 }
 .arrow-icon .inner {
   position: absolute;
@@ -189,7 +189,7 @@
   background-color: #fff;
 }
 .tab-fun--bottom .tab-lf .fun-btn.active {
-  color: #47dbe2;
+  color: #618FEB;
 }
 .tab-fun--bottom .tab-lf .fun-btn:first-child {
   padding-left: 50rpx;
@@ -215,7 +215,7 @@
   color: #fff;
   line-height: 98rpx;
   text-align: center;
-  background-color: #51d3d9;
+  background-color: #618FEB;
 }
 
 .jobDetailTitle {

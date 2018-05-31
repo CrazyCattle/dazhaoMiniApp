@@ -71,7 +71,7 @@
 }
 .typefilter-box .filter-item .active {
   display: inline-block;
-  color: #21c6cd;
+  color: #618FEB;
   position: relative;
 }
 .typefilter-box .filter-item .active::after {
@@ -81,7 +81,7 @@
   height: 0;
   bottom: 0;
   left: 0;
-  border-bottom: 4rpx solid #21c6cd;  
+  border-bottom: 4rpx solid #618FEB;  
 }
 
 

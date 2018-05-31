@@ -51,7 +51,7 @@
   position: relative;
 }
 .v-fun .item.active {
-  color: #47dbe2;
+  color: #618FEB;
 }
 .v-fun .item:last-child {
   margin-left: 40rpx;
@@ -89,11 +89,11 @@
   transform: translateY(-50%);
   width: 12rpx;
   height: 12rpx;
-  background-color: #47dbe2;
+  background-color: #618FEB;
   border-radius: 50%;
 }
 .courst-list .courst-play-item.active {
-  color: #47dbe2;
+  color: #618FEB;
 }
 .courst-list .active::before {
   width: 0;
@@ -101,7 +101,7 @@
   left: -28rpx;
   border: 10rpx solid transparent;
   border-left-width: 13rpx;
-  border-left-color: #47dbe2;
+  border-left-color: #618FEB;
   border-radius: 0;
   background-color: #fff;
 }
@@ -205,7 +205,7 @@
   height: 0;
   margin-top: 5rpx;
   border: 10rpx solid transparent;
-  border-top-color: #47dbe2;
+  border-top-color: #618FEB;
   transform-origin: 25% 25%;
   transition: transform .2s linear;
 }

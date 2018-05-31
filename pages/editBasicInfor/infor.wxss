@@ -48,7 +48,7 @@
   height: 0;
   margin-left: 5rpx;
   border: 10rpx solid transparent;
-  border-left-color: #47dbe2;
+  border-left-color: #618FEB;
 }
 .arrow-icon .inner {
   position: absolute;

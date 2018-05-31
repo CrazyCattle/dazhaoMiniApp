@@ -33,7 +33,7 @@
 
 .register {
   font-size: 26rpx;
-  color: #51d3d9;
+  color: #618FEB;
 }
 
 .tip {

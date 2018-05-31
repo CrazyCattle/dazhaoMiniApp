@@ -70,7 +70,7 @@ html,body,page {
   font-family: 'PingFangSC-Medium';
   font-size: 26rpx;
   color:#fff;
-  background-color:#51d3d9;
+  background-color:#618FEB;
   border: 0;
 }
 button::after,

@@ -176,7 +176,7 @@
   align-items: center;
   justify-content: center;
   font-size: 24rpx;
-  color: #47dbe2;
+  color: #618FEB;
   letter-spacing: 0;
 }
 
@@ -187,7 +187,7 @@
   margin-left: 5rpx;
   position: relative;
   border: 10rpx solid transparent;
-  border-left-color: #47dbe2;
+  border-left-color: #618FEB;
 }
 
 .arrow-icon .inner {
@@ -210,7 +210,7 @@
   height: 0;
   margin-top: 5rpx;
   border: 12rpx solid transparent;
-  border-top-color: #47dbe2;
+  border-top-color: #618FEB;
   transform-origin: 25% 25%;
   transition: transform .2s linear;
 }

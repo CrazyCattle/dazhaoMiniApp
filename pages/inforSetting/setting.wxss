@@ -65,7 +65,7 @@
 }
 
 .type-selection.active {
-  border-color: #51d3d9;
+  border-color: #618FEB;
 }
 .type-selection .s-img {
   width: 100%;
@@ -84,8 +84,8 @@
 }
 
 .type-step.active {
-  border-color: #51d3d9;
-  background-color: #51d3d9;
+  border-color: #618FEB;
+  background-color: #618FEB;
 }
 
 /*.c-g .checkbox {
@@ -118,8 +118,8 @@
   box-sizing: border-box;
   padding: 4rpx;
   background-clip: content-box;
-  border: 1rpx solid #51d3d9;
+  border: 1rpx solid #618FEB;
 }
 .box.active {
-   background-color: #51d3d9;
+   background-color: #618FEB;
 } */

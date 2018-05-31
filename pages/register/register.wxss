@@ -38,7 +38,7 @@
   color:#828ca3;
 }
 .register {
-  color: #51d3d9;
+  color: #618FEB;
 }
 
 .getCode-ipt {
@@ -53,12 +53,12 @@ button.getCode {
   transform: translateY(-50%);
   line-height: 60rpx;
   border-radius: 30rpx;
-  background: #47dbe2;
+  background: #618FEB;
   font-size: 24rpx;
   color: #fff;
   z-index: 1;
 }
 button[disabled][type=default] {
   color: #fff;
-  background:#47dbe2;
+  background:#618FEB;
 }

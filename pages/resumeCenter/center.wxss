@@ -47,7 +47,7 @@
 }
 
 .center-tab-item.active {
-  color: #47dbe2;
+  color: #618FEB;
 }
 
 .center-tab-item.active::after {
@@ -57,7 +57,7 @@
   left: 0;
   width: 100%;
   height: 4rpx;
-  background-color: #47dbe2;
+  background-color: #618FEB;
 }
 
 /* page 1 */
@@ -79,7 +79,7 @@
 }
 
 .resume-item.active {
-  border-left-color: #47dbe2;
+  border-left-color: #618FEB;
 }
 
 .resume-item .item-lf {
@@ -129,7 +129,7 @@
 
 .editBtn:first-child {
   margin-right: 20rpx;
-  background: #47dbe2;
+  background: #618FEB;
 }
 
 .editBtn:last-child {
@@ -177,7 +177,7 @@
   flex: 1;
   padding-right: 60rpx;
   font-size: 26rpx;
-  color: #47dbe2;
+  color: #618FEB;
 }
 
 .invi-item .row .job {
@@ -228,7 +228,7 @@
   position: absolute;
   right: 40rpx;
   top: 45rpx;
-  border-bottom-color: #47dbe2;
+  border-bottom-color: #618FEB;
 }
 
 .t-arrow-icon .inner {
@@ -260,7 +260,7 @@
 
 .filter-tab.acitve {
   color: #fff;
-  background: #47dbe2;
+  background: #618FEB;
 }
 
 .scroll-list-box {
@@ -339,7 +339,7 @@
 }
 .fliter-tab .item.active {
   color: #fff;
-  background-color: #47dbe2;
+  background-color: #618FEB;
 }
 
 .fliter-tab .item:nth-child(3n) {
@@ -370,12 +370,12 @@
   top: 8rpx;
 }
 .status .tips.active {
-  color: #47dbe2;
+  color: #618FEB;
 }
 .status .arrow-icon.active {
   top: -4rpx;
   transform: rotate(180deg);
-  border-top-color: #47dbe2;
+  border-top-color: #618FEB;
 }
 .status-row {
   padding: 40rpx;
@@ -484,7 +484,7 @@
   text-align: center;
 }
 .resume-tips .tipfooter text{
-  color: #47dbe2;
+  color: #618FEB;
   margin-left: 12rpx;
   margin-right: 12rpx;
 }

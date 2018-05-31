@@ -57,8 +57,8 @@
   border-bottom: 1rpx solid #e6e9f3;
 }
 .page-tab .tab-item.active {
-  color: #47dbe2;
-  border-bottom: 4rpx solid #51d3d9;
+  color: #618FEB;
+  border-bottom: 4rpx solid #618FEB;
 }
 /* page 2 */
 .fliter-box {
@@ -159,7 +159,7 @@
   align-items: center;
   justify-content: center;
   font-size: 24rpx;
-  color:#47dbe2;
+  color:#618FEB;
   letter-spacing: 0;
 }
 .c-more {
@@ -177,7 +177,7 @@
   margin-left: 5rpx;
   position: relative;
   border: 10rpx solid transparent;
-  border-left-color: #47dbe2;
+  border-left-color: #618FEB;
 }
 .arrow-icon .inner {
   position: absolute;

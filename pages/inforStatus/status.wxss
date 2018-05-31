@@ -15,7 +15,7 @@
   border-radius: 4rpx;
 }
 .infor-item.active {
-  border-left-color: #47dbe2;
+  border-left-color: #618FEB;
 }
 .item-title {
   display: flex;
