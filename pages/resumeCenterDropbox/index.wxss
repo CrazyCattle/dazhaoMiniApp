@@ -31,7 +31,7 @@
   flex: 1;
   padding-right: 60rpx;
   font-size: 26rpx;
-  color: #47dbe2;
+  color: #618FEB;
 }
 
 .invi-item .row .job {
@@ -73,7 +73,7 @@
   z-index: 1;
 }
 .status-detail .status-item.active {
-  color: #51d3d9;
+  color: #618FEB;
 }
 .status-detail .line {
   position: absolute;
@@ -96,7 +96,7 @@
   top: 0;
   left: 0;
   height: 100%;
-  background-color: #51d3d9;
+  background-color: #618FEB;
 }
 .status-d-row {
   padding-left: 37rpx;
@@ -130,10 +130,10 @@
   border-radius: 50%;
 }
 .status-d-row.active::before {
-  background:#51d3d9;
+  background:#618FEB;
 }
 .status-d-row.active .status-txt::before {
-  background: #51d3d9;
+  background: #618FEB;
 } 
 
 .status {
@@ -146,5 +146,5 @@
   color: #848ca1;
 }
 .status .tips.active {
-  color: #47dbe2;
+  color: #618FEB;
 }
