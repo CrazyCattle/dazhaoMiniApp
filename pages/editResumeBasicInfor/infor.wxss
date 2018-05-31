@@ -28,7 +28,7 @@
   text-align: center;
   font-size: 24rpx;
   color: #fff;
-  background: #47dbe2;
+  background: #618FEB;
   border-radius: 22rpx;
 }
 
@@ -71,7 +71,7 @@
   height: 0;
   margin-left: 10rpx;
   border: 10rpx solid transparent;
-  border-left-color: #47dbe2;
+  border-left-color: #618FEB;
   position: relative;
 }
 .arrow-icon .inner {
@@ -92,7 +92,7 @@
   transform: translateY(-50%);  
   height: 68rpx;
   font-size: 24rpx;
-  color:#21c6cd;
+  color:#618FEB;
   display: flex;
   align-items: center;
   z-index: 10;

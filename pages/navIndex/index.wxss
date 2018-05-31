@@ -255,12 +255,11 @@
   padding-bottom: 50rpx;
 }
 .rejob-box .item {
-  width: 28%;
-  padding: 3rpx 2%;
+  padding: 3rpx 3%;
   min-height:50rpx;
   margin-top: 20rpx;
   text-align: center;
-  margin-right: 2%;
+  margin-right: 36rpx;
   font-family:PingFangSC-Regular;
   font-size:12px;
   color:#313148;
@@ -270,7 +269,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.rejob-box .item:nth-child(3n) {
-  margin-right: 0;
 }
