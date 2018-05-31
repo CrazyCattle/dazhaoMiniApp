@@ -32,7 +32,7 @@
   text-align: center;
   font-size:15px;
   color:#fff;
-  background:#47dbe2;
+  background:#618FEB;
   border-radius:6px 6px 0 0;
 }
 .send .tips {
@@ -104,5 +104,5 @@
   color: #848ca1;
 }
 .ok {
-  background: #47dbe2;
+  background: #618FEB;
 }

@@ -25,7 +25,7 @@
   padding: 0 16rpx 20rpx;
 }
 .resume-item.active {
-  border-left-color: #47dbe2;
+  border-left-color: #618FEB;
 }
 .resume-item .item-lf {
   flex: 1; 
@@ -67,7 +67,7 @@
 }
 .editBtn:last-child {
   padding: 0;
-  background: #47dbe2;
+  background: #618FEB;
 }
 
 .resume-list .tit {
@@ -105,7 +105,7 @@
   text-align: center;
 }
 .resume-tips .tipfooter text{
-  color: #47dbe2;
+  color: #618FEB;
   margin-left: 12rpx;
   margin-right: 12rpx;
 }
