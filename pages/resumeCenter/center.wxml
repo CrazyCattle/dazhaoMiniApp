@@ -43,7 +43,7 @@
   <view class="invi-list send-list" wx:if="{{ page == '2' && curShow}}">
     <tip content="暂无信息" wx:if="{{ !hasMoreInfor1 }}"></tip>
     <scroll-view scroll-y style="height: 100%;" wx:if="{{ mydropinbox.length > 0 }}" bindscrolltolower="lower1">
-      <view class="invi-item bg-f" wx:for="{{ mydropinbox }}" wx:for-item="item" wx:key wx:for-index="index">
+      <view class="invi-item bg-f" wx:for="{{ mydropinbox }}" bindtap='linkToDetail' data-index="{{ index }}" wx:for-item="item" wx:key wx:for-index="index">
         <view class="main">
           <view class="row">
             <view class="job">{{ item.position_name }}</view>
@@ -51,17 +51,19 @@
           </view>
           <view class="row">
             <view class="company">{{ item.company_name }}</view>
-            <view class="status" data-ids="{{ index }}" bindtap='showStatus'>
-              <view class="tips {{ ids== index ?'active':'' }}">
-                <block wx:if="{{ item.apply_passstate == '-1'}}">不合适</block>
-                <block wx:if="{{ item.apply_passstate == '0'}}">待处理</block>
-                <block wx:if="{{ item.apply_passstate == '1'}}">待定</block>
-                <block wx:if="{{ item.apply_passstate == '2'}}">邀请面试</block>
-                <block wx:if="{{ item.apply_passstate == '3'}}">已面试</block>
+            <!-- <view class="status" data-ids="{{ index }}" bindtap='showStatus'> -->
+            <view class="status">
+              <!-- <view class="tips {{ ids== index ?'active':'' }}"> -->
+              <view class="tips active">
+                <block wx:if="{{ item.apply_passstate == '-1'}}">【不合适】</block>
+                <block wx:if="{{ item.apply_passstate == '0'}}">【待处理】</block>
+                <block wx:if="{{ item.apply_passstate == '1'}}">【待定】</block>
+                <block wx:if="{{ item.apply_passstate == '2'}}">【邀请面试】</block>
+                <block wx:if="{{ item.apply_passstate == '3'}}">【已面试】</block>
               </view>
-              <view class="arrow-icon b-arrow-icon {{ ids == index ?'active':'' }}">
+              <!-- <view class="arrow-icon b-arrow-icon {{ ids == index ?'active':'' }}">
                 <view class="inner"></view>
-              </view>
+              </view> -->
             </view>
           </view>
         </view>

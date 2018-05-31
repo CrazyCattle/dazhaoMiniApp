@@ -44,7 +44,7 @@
     </swiper>
   </view>
 
-  <view class="recommend mt20 bg-f" wx:if="aiList.length !== 0">
+  <view class="recommend mt20 bg-f" wx:if="{{ aiList.length !== 0 }}">
     <view class="tc">
       <text class="title lh-normal">AI 管家</text>
     </view>

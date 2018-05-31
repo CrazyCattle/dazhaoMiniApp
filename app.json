@@ -39,7 +39,8 @@
     "pages/companyRecommendSearch/search",
     "pages/companyJobList/list",
     "pages/deliveryResume/resume",
-    "pages/editJobExpectNew/new"
+    "pages/editJobExpectNew/new",
+    "pages/resumeCenterDropbox/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

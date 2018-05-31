@@ -106,6 +106,14 @@ Page({
       url: `../companyDetail/detail?id=${id}`
     })
   },
+  linkToDetail(e) {
+    let index = e.currentTarget.dataset.index
+    console.log(this.data.mydropinbox[index])
+    let item = JSON.stringify(this.data.mydropinbox[index])
+    wx.navigateTo({
+      url: `../resumeCenterDropbox/index?item=${item}`
+    })
+  },
   //获取收藏的职位
   getPositionCollectFun() {
     wx.request({
