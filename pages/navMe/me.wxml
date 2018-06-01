@@ -16,11 +16,11 @@
     <view class="me-send-box">
       <view class="me-send" bindtap="linkSend">
         已投递：
-        <text class="num">{{ stud_info.applynums }}</text>
+        <text class="num">{{ stud_info.applynums || '0' }}</text>
       </view>
       <view class="me-review" bindtap="linkView">
         待面试：
-        <text class="num">{{ stud_info.interviewnums }}</text>
+        <text class="num">{{ stud_info.interviewnums || '0' }}</text>
       </view>
     </view>
   </view>
