@@ -198,7 +198,7 @@ Page({
               }
             })
           } else {
-            initLoginStatus()
+            initLoginStatus() 
           }
         } else {
           if (res.data.error == '0') {

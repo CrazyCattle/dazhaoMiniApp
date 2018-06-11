@@ -8,9 +8,12 @@ import {
 } from '../../api.js';
 
 import {
+  setNewToken,
+  initLoginStatus,
   getUserState,
   navToLogin
-} from '../../utils/util'
+} from '../../utils/util';
+
 
 
 const app = getApp()
@@ -122,6 +125,8 @@ Page({
     }
   },
   getAI() {
+    let loginType = wx.getStorageSync('loginType')
+    let _self = this
     if (getUserState()) {
       wx.request({
         url: `${getStuForecast}`,
@@ -132,31 +137,43 @@ Page({
         success: res => {
           console.log(res, 'ai')
           const { result } = res.data
-          if (!result.hasOwnProperty('length')) {
-            const { list } = result
-            if (!list.hasOwnProperty('length')) {
-              console.log(wx.getStorageSync('showAiTip') === false)
-              if (wx.getStorageSync('showAiTip')==='') {
+          if (res.data.tokeninc == '0') {
+            if (loginType == 'wxlogin') {
+              setNewToken().then(res => {
+                if (res == 'ok') {
+                  _self.getAI()
+                }
+              })
+            } else {
+              initLoginStatus()
+            }
+          } else {
+            if (!result.hasOwnProperty('length')) {
+              const { list } = result
+              if (!list.hasOwnProperty('length')) {
+                console.log(wx.getStorageSync('showAiTip') === false)
+                if (wx.getStorageSync('showAiTip') === '') {
+                  this.setData({
+                    showAiTip: true
+                  })
+                } else if (wx.getStorageSync('showAiTip') === false) {
+                  this.setData({
+                    showAiTip: false
+                  })
+                }
                 this.setData({
-                  showAiTip: true
+                  aiList: list
                 })
-              } else if (wx.getStorageSync('showAiTip')===false) {
+              } else {
                 this.setData({
-                  showAiTip: false
+                  aiList: []
                 })
               }
-              this.setData({
-                aiList: list
-              })
             } else {
               this.setData({
                 aiList: []
               })
             }
-          } else {
-            this.setData({
-              aiList: []
-            })
           }
         }
       })
@@ -251,6 +268,7 @@ Page({
     wx.request({
       url: `${getPositionList}`,
       data: {
+        isai: 1,
         p: '1',
         isrom: '1',
         nums: '4',

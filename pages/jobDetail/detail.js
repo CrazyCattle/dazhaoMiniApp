@@ -213,6 +213,7 @@ Page({
         data: {
           p: 1,
           nums: 4,
+          isai: 1,
           positiontype_id: pId
         },
         success: res => {
