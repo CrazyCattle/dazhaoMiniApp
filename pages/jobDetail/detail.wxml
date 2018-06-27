@@ -14,7 +14,7 @@
   </view>
   <view class="r-list jobDetail-title bg-f">
     <view class="r-list-item" data-id="{{ list.company_id }}" bindtap="linkToCompany">
-      <image class="pic" src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"></image>
+      <image class="pic" src="{{ list.cominfo.company_logo }}"></image>
       <view class="cont">
         <view class="job lh-normal">{{ list.cominfo.company_name }}</view>
         <view class="company">[{{ list.cominfo.positionnums }}个]{{ list.cominfo.positionnames }}</view>

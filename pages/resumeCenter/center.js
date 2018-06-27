@@ -233,7 +233,7 @@ Page({
       },
       method: 'GET',
       success: res => {
-        console.log(res, '投递箱')
+        console.log(res, '邀请函')
         if (res.data.tokeninc == '0') {
           if (loginType == 'wxlogin') {
             setNewToken().then(res => {
@@ -247,24 +247,26 @@ Page({
         } else {
           if (res.data.error == 0) {
             const { list } = res.data.result
-            if (list.length == 0) {
+            if (list === null || !list.hasOwnProperty['length'] || list.length == 0) {
               _self.setData({
+                myinvitatio: [],
                 hasMoreInfor2: false
               })
             } else if (list.length < 10 & list.length > 0) {
               _self.setData({
-                canGetinvitation: false
+                canGetinvitation: false,
+                myinvitatio: _self.data.myinvitatio.concat(list)
               })
             } else {
               _self.setData({
-                invitationPage: ++_self.data.invitationPage
+                invitationPage: ++_self.data.invitationPage,
+                myinvitatio: _self.data.myinvitatio.concat(list)
               })
             }
             _self.setData({
-              myinvitatio: _self.data.myinvitatio.concat(list),
               showMore2: false
             })
-            console.log(_self.data.myinvitatio)
+            // console.log(_self.data.myinvitatio)
           }
         }
       }
