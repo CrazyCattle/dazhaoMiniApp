@@ -8,6 +8,7 @@ Page({
     class_name: '',
     class_intro: {},
     classThree: [],
+    c_id: '',
     courseList: [
       {
         user_pic: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
@@ -49,6 +50,9 @@ Page({
   onLoad: function (options) {
     let id = options.id
     let _self = this
+    this.setData({
+      c_id: id
+    })
 
     wx.request({
       url: `${getSClass}${id}`,
@@ -80,5 +84,17 @@ Page({
         // console.log(res)
       }
     })
+  },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      console.log(res.target)
+    }
+    return {
+      title: `${this.data.class_name}系列课程`,
+      path: `pages/courseChild/course?id=${this.data.c_id}`,
+      success: function (res) {
+        console.log(res)
+      }
+    }
   }
 })
