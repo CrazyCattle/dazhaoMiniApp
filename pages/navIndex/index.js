@@ -221,9 +221,16 @@ Page({
   },
   linkCoursePlay (e) {
     let id = e.target.dataset.id
-    wx.navigateTo({
-      url: `../coursePlay/play?id=${id}`
-    })
+    // wx.navigateTo({
+    //   url: `../coursePlay/play?id=${id}`
+    // })
+    if (getUserState()) {
+      wx.navigateTo({
+        url: `../coursePlay/play?id=${id}`
+      })
+    } else {
+      navToLogin()
+    }
   },
   linkCourseType (e) {
     wx.switchTab({
@@ -231,9 +238,16 @@ Page({
     })
   },
   linkResumeCenter() {
-    wx.navigateTo({
-      url: '../resumeCenter/center'
-    })
+    // wx.navigateTo({
+    //   url: '../resumeCenter/center'
+    // })
+    if (getUserState()) {
+      wx.navigateTo({
+        url: '../resumeCenter/center'
+      })
+    } else {
+      navToLogin()
+    }
   },
   // 获取首页轮播
   getBannerFun() {
